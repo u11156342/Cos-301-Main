@@ -1,6 +1,6 @@
 package Wrapper;
 
-import DataBase.Converter;
+
 import QueryHandlers.QueryHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -63,7 +63,6 @@ public class Wrapper {
     @Produces("text/plain")
     public String retrieveDuchyList() throws IOException {
         return converter.ToUrl(handler.dqh.retrieveDuchyList());
-
     }
 
     //duchy end
