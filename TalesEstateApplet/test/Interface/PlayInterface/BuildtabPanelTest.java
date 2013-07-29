@@ -40,6 +40,5 @@ public class BuildtabPanelTest extends TestCase {
         JComponent expResult = null;
         JComponent result = instance.makeTextPanel(text, type, arr);
         assertFalse(expResult==result);
-
     }
 }
