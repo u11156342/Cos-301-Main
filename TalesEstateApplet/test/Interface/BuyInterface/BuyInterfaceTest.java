@@ -35,8 +35,6 @@ public class BuyInterfaceTest extends TestCase {
      */
     public void testInit() {
         System.out.println("init");
-
-
         String duchyName = "Thegnheim";
         int sizeValue = 3;
         String quality = "Fine";
