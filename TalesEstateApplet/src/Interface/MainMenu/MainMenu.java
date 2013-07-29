@@ -33,23 +33,17 @@ public class MainMenu extends BasePanel {
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
 
 
-        // container.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 25, JFXPANEL_HEIGHT_INT));
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
-        // MainMenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 50, JFXPANEL_HEIGHT_INT));
         MainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
-
         btn.setFont(f);
-
-
+        
         c.gridy = 1;
         c.insets = new Insets(20, 0, 0, 0);  //top padding
         c.gridx = 1;       //aligned with button 2
         c.gridwidth = 2;   //2 columns wide
 
         container.add(btn, c);
-
-
         btn2.setFont(f);
 
         c.gridy = 2;
@@ -58,15 +52,12 @@ public class MainMenu extends BasePanel {
         c.gridwidth = 2;   //2 columns wide
 
         container.add(btn2, c);
-
-
         btn3.setFont(f);
 
         c.gridy = 3;
         c.insets = new Insets(20, 0, 0, 0);  //top padding
         c.gridx = 1;       //aligned with button 2
         c.gridwidth = 2;   //2 columns wide
-
         container.add(btn3, c);
 
         add(MainMenuScrollPane, BorderLayout.CENTER);

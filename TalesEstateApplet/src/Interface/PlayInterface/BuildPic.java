@@ -14,7 +14,7 @@ public class BuildPic extends JPanel {
     RestFullAdapter adapter = new RestFullAdapter();
 
     public void set(int a) {
-        builpic = adapter.ImageAdapter(12);
+        builpic = adapter.ImageAdapter(5);
     }
 
     @Override

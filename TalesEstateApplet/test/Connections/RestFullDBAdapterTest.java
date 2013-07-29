@@ -6,7 +6,6 @@ package Connections;
 
 import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.fail;
 import junit.framework.TestCase;
 
 /**
