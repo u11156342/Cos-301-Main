@@ -2,16 +2,13 @@ package QueryHandlers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BuildingQueryHandler {
-
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     private String sql = "";
     private ArrayList<String> duchyList, industryList, qualityList;
         
@@ -20,6 +17,8 @@ public class BuildingQueryHandler {
         super();
         con = c;
 
+        //Create lists of descriptions/names of the following:
+        //(Used when resolving ID's)
         duchyList = new ArrayList();
         industryList = new ArrayList();
         qualityList = new ArrayList();
@@ -52,18 +51,25 @@ public class BuildingQueryHandler {
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Error in BuildingQueryHandler Constructor");
+            System.out.println(e.getMessage());
         }
     }
     
+    /* This function takes in a string, and capitalizes the first letter of that
+     * string.
+     */
     public String capitalizeFirst(String name)
     {
         String correction = Character.toString(name.charAt(0));
         correction = correction.toUpperCase();
         name = name.replaceFirst(Character.toString(name.charAt(0)), correction);
+        
         return name;
     }
     
+    /* This function retrieves a list of all the buildings, across all industries.
+     */
     public ArrayList<String> retrieveCompleteBuildingList()
     {
         ArrayList<String> values = null;
@@ -83,12 +89,16 @@ public class BuildingQueryHandler {
         catch(Exception e)
         {
             System.out.println("Unable to execute function retrieveBuildingList()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return values;
     }    
    
+    /* This function retrieves a list of all the buildings (buildingID, and 
+     * buildingName) of a certain industry that can only be built in the 
+     * provided duchy.
+     */
     public ArrayList<String[]> listBuildingBy(String duchy, String industry)
     {
         ArrayList<String[]> values = null;
@@ -193,7 +203,7 @@ public class BuildingQueryHandler {
             catch(Exception e)
             {
                 System.out.println("Unable to execute function listBuildingBy()");
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
 
             return values;
@@ -202,6 +212,9 @@ public class BuildingQueryHandler {
         return null;
     }
     
+    /* This function retrieves all the details of a specific building, which
+     * depends on the buildingID provided.
+     */ 
     public ArrayList<String[]> retrieveBuildingDetailsById(int id)
     {
         ArrayList<String[]> values;
@@ -330,7 +343,7 @@ public class BuildingQueryHandler {
         catch(Exception e)
         {
             System.out.println("Unable to execute function retrieveBuildingDetailsById()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         
         return null;

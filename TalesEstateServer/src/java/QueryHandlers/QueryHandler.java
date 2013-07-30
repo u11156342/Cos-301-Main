@@ -3,12 +3,10 @@ package QueryHandlers;
 import Connection.DatabaseConnection;
 import java.sql.Connection;
 
-
 public class QueryHandler {
-
     private DatabaseConnection db = null;
-    private Connection con1 = null;
-    private Connection con2 = null;
+    private Connection conEstate = null;    //Connection to Estate database
+    private Connection conProd = null;      //Connection to TalesProd database
     
     public BuildingQueryHandler bqh;
     public CharacterQueryHandler cqh;
@@ -20,18 +18,54 @@ public class QueryHandler {
 
     public QueryHandler() {
         db = new DatabaseConnection();
-        con1 =db.openConnectionEstate();
-        con2 =db.openConnectionProd();
+        conEstate = db.openConnectionEstate();
+        conProd = db.openConnectionProd();
         
-        bqh=new BuildingQueryHandler(con1);
-        cqh=new CharacterQueryHandler(con1);
-        dqh=new DuchyQueryHandler(con1);
-        pqh=new PlotQueryHandler(con1);
-        prqh=new PriceQueryHandler(con1);
-        Picqh=new PictureQueryHandler(con1);
-        uqh=new UserQueryHandler(con2);
+        bqh = new BuildingQueryHandler(conEstate);
+        cqh = new CharacterQueryHandler(conEstate);
+        dqh = new DuchyQueryHandler(conEstate);
+        pqh = new PlotQueryHandler(conEstate);
+        prqh = new PriceQueryHandler(conEstate);
+        Picqh = new PictureQueryHandler(conEstate);
+        uqh = new UserQueryHandler(conProd);
     }
-      public void closeConnection() {
+    
+    public void closeConnection() {
         db.closeConnection();
-    }    
+    }
+    
+    public BuildingQueryHandler getBuildingQH()
+    {
+        return bqh;
+    }
+    
+    public CharacterQueryHandler getCharacterQH()
+    {
+        return cqh;
+    }
+    
+    public DuchyQueryHandler getDuchyQH()
+    {
+        return dqh;
+    }
+    
+    public PlotQueryHandler getPlotQH()
+    {
+        return pqh;
+    }
+    
+    public PriceQueryHandler getPriceQH()
+    {
+        return prqh;
+    }
+    
+    public PictureQueryHandler getPictureQH()
+    {
+        return Picqh;
+    }
+    
+    public UserQueryHandler getUserQH()
+    {
+        return uqh;
+    }
 }

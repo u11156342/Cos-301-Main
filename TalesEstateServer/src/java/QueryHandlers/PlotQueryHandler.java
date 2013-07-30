@@ -2,7 +2,6 @@ package QueryHandlers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -12,13 +11,11 @@ public class PlotQueryHandler {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     private String sql = "";
     private ArrayList<String> duchyList, qualityList;
 
     public PlotQueryHandler(Connection c) {
         super();
-
         con = c;
 
         duchyList = new ArrayList();
@@ -39,10 +36,14 @@ public class PlotQueryHandler {
                 qualityList.add(rs.getString("QualityDescription"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error in PlotQueryHandler Constructor");
+            System.out.println(e.getMessage());
         }
     }
 
+     /**
+     * This function capitalizes the first letter of the word sent in.
+     */
     public String capitalizeFirst(String name) {
         String correction = Character.toString(name.charAt(0));
         correction = correction.toUpperCase();
@@ -50,6 +51,11 @@ public class PlotQueryHandler {
         return name;
     }
 
+    /**
+     * This function returns the price of a certain plot, and the amount needed
+     * for monthly upkeep - depending on the provided duchy, and quality of the
+     * plot.
+     */
     public ArrayList<String[]> queryPlotPrice(String duchy, String quality) {
         boolean correctDuchy = false, correctQuality = false;
         int duchyID, qualityID;
@@ -135,13 +141,17 @@ public class PlotQueryHandler {
 
                 return values;
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
 
         return null;
     }
 
+    /**
+     * This function will convert a 2D integer array, to make it suitable to
+     * store in the database.
+     */
     public String convertToArray(int[][] inArray) {
         String result = "";
 
@@ -159,6 +169,10 @@ public class PlotQueryHandler {
         return result;
     }
 
+    /**
+     * This function will convert the 1D integer array, that was stored in the
+     * database, back to a 2D integer array usable by the grid system.
+     */
     public int[][] convertFromArray(String inArray) {
         int[][] result;
         StringTokenizer str, stc;
@@ -182,6 +196,10 @@ public class PlotQueryHandler {
         return result;
     }
 
+    /**
+     * This function will add a certain plot to a character, as each character
+     * in the game system can own one or more plots.
+     */ 
     public boolean addPlotToCharacter(String characterName, String duchyName, int sizeValue,
             String quality, int[][] groundArray, int[][] buildingArray, double acresUsed,
             double acreMax, int workersUsed, int workerMax, int happiness, double monthlyIncome) {
@@ -230,12 +248,16 @@ public class PlotQueryHandler {
             return true;
         } catch (Exception e) {
             System.out.println("Could not execute function addPlotToCharacter()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return false;
     }
 
+    /**
+     * This function will retrieve a list of all the plots owned by the provided
+     * character.
+     */
     public ArrayList<String[]> retrievePlotsOwnedByCharacter(int characterID) {
         ArrayList<String[]> values;
         String[] line;
@@ -294,12 +316,15 @@ public class PlotQueryHandler {
             return values;
         } catch (Exception e) {
             System.out.println("Could not execute function retrievePlotsOwnedByCharacter()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return null;
     }
 
+    /**
+     * This function returns all details regarding the provided plotID.
+     */
     public ArrayList<String> retrievePlotDetails(int plotID) {
         ArrayList<String> value;
 
@@ -349,15 +374,18 @@ public class PlotQueryHandler {
             return value;
         } catch (Exception e) {
             System.out.println("Error, could not execute function retrievePlotDetails()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return null;
     }
 
+     /**
+     * This function changes plot details to the ones provided.
+     */ 
     public boolean modifyPlot(int plotID, String characterName, String duchyName, int sizeValue,
-            String quality, int[][] groundArray, int[][] buildingArray, double acresUsed,
-            double acreMax, int workersUsed, int workerMax, int happiness, double monthlyIncome) {
+        String quality, int[][] groundArray, int[][] buildingArray, double acresUsed,
+        double acreMax, int workersUsed, int workerMax, int happiness, double monthlyIncome) {
         int characterID, duchyID, qualityID;
         String ground, building;
 
@@ -409,15 +437,19 @@ public class PlotQueryHandler {
             return true;
         } catch (Exception e) {
             System.out.println("Could not execute function modifyPlot()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return false;
     }
 
+    /**
+     * This function acts as a search function, with multiple criteria, that
+     * returns a certain plot's details depending on the criteria provided.
+     * Empty fields will yield all results.
+     */
     public ArrayList<String[]> searchPlotBy(String characterName, String duchy, int size, String quality) {
         ArrayList<String[]> values = null;
-        boolean prev = false;
         int characterID = 0, duchyID = 0, qualityID = 0;
         String[] line;
 
@@ -499,15 +531,16 @@ public class PlotQueryHandler {
             return values;
         } catch (Exception e) {
             System.out.println("Could not execute function searchPlotBy()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return null;
     }
 
-    /*
-     * Returns true if deleted, false if failed
-     */
+    /**
+     * This function deletes a plot. Returns true if deleted successfully,
+     * and false if not.
+     */ 
     public boolean deletePlot(int plotID) {
         try {
             sql = "DELETE FROM Plot WHERE PlotID = " + plotID;
@@ -517,7 +550,7 @@ public class PlotQueryHandler {
             return true;
         } catch (Exception e) {
             System.out.println("Could not execute function deletePlot()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return false;

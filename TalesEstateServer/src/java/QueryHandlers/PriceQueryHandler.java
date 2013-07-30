@@ -2,26 +2,25 @@ package QueryHandlers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class PriceQueryHandler {
-
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     private String sql = "";
     
     public PriceQueryHandler(Connection c)
     {
         super();
-
         con = c;
     }
     
-        
+    /**
+     * This function retrieves the monthly upkeep costs of a certain quality
+     * plot, located in a certain duchy.
+     */
     public ArrayList<String> retrieveMonthlyUpkeep(String duchy, String quality)
     {
         ArrayList<String> values = null;
@@ -72,7 +71,7 @@ public class PriceQueryHandler {
         catch(Exception e)
         {
             System.out.println("Could not execute function retrieveMonthlyUpkeep()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         
         return values;

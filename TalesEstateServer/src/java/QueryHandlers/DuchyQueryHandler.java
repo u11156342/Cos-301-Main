@@ -2,7 +2,6 @@ package QueryHandlers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ public class DuchyQueryHandler {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     private String sql = "";
     
     public DuchyQueryHandler(Connection c)
@@ -19,6 +17,8 @@ public class DuchyQueryHandler {
         con =c;
     }
     
+    /* This function retrieves a list of all the duchies.
+     */
     public ArrayList<String> retrieveDuchyList()
     {
         ArrayList<String> values = null;
@@ -41,7 +41,7 @@ public class DuchyQueryHandler {
         catch(Exception e)
         {
             System.out.println("Could not execute function retrieveDuchyList()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         
         return null;

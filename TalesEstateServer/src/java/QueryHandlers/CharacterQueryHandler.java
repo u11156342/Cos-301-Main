@@ -18,6 +18,11 @@ public class CharacterQueryHandler {
         super();
         con = c;
     }    
+    
+    /* This function registers a certain character to the estate system database.
+     * The function returns true if a character has been successfully added, and
+     * false if not.
+     */
     public boolean registerEstateCharacter(String characterName)
     {
         try
@@ -46,12 +51,15 @@ public class CharacterQueryHandler {
         catch(Exception e)
         {
             System.out.println("Could not execute function registerEstateCharacter()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         
         return false;
     }
     
+    /* This function returns a certain character's ID based on the character
+     * name supplied.
+     */ 
     public int retrieveCharacterID(String characterName)
     {
         System.out.println(characterName);
@@ -67,12 +75,14 @@ public class CharacterQueryHandler {
         catch(Exception e)
         {
             System.out.println("Could not execute function retrieveCharacterID()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return 0;
     }
     
-   
+     /* This function returns a list of all the characters registered to the
+     * estate system database.
+     */ 
     public ArrayList<String[]> retrieveAllCharacters()
     {
         ArrayList<String[]> values = null;
@@ -99,7 +109,7 @@ public class CharacterQueryHandler {
         catch(Exception e)
         {
             System.out.println("Could not execute function retrieveAllCharacters()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         
         return null;

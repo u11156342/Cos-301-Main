@@ -1,20 +1,16 @@
 package QueryHandlers;
 
-
 import Connection.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UserQueryHandler {
-
     private DatabaseConnection db = null;
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     private String sql = "";
     private ArrayList<String> userList;
 
@@ -32,7 +28,8 @@ public class UserQueryHandler {
                 userList.add(rs.getString("UserId"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error in UserQueryHandler Constructor");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -40,9 +37,10 @@ public class UserQueryHandler {
         db.closeConnection();
     }
 
-    /*
-     * Temporary function
-     */
+    /**
+     * This function prints a list of all the users in the TalesProd database
+     * (not all of these users are relevant to the estate system).
+     */ 
     public void printUserList() {
         if (userList.size() > 0) {
             for (int a = 0; a < userList.size(); a++) {
@@ -51,8 +49,8 @@ public class UserQueryHandler {
         }
     }
 
-    /*
-     * Checks if the UserID exists
+    /**
+     * This function checks whether a certain userID exists.
      */
     public boolean checkLogin(String userID) {
         for (int a = 0; a < userList.size(); a++) {
@@ -64,9 +62,10 @@ public class UserQueryHandler {
         return false;
     }
 
-    /*
-     * Checks if the user has a character in the ToT system
-     */
+    /**
+     * This function checks whether a certain user has a character that is
+     * registered to the estate system.
+     */ 
     public boolean checkHasCharacter(String userID) {
         String id;
         ArrayList<String> ids;
@@ -111,12 +110,16 @@ public class UserQueryHandler {
             return go;
         } catch (Exception e) {
             System.out.println("Unable to execute function checkHasCharacter()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return false;
     }
 
+    /**
+     * This function retrieves a list of all the estate-ready characters owned
+     * by the provided user.
+     */
     public ArrayList<String> retrieveCharactersOwnedByUser(String userID) {
         ArrayList<String> values = null, check = null;
         String id;
@@ -158,7 +161,7 @@ public class UserQueryHandler {
             return values;
         } catch (Exception e) {
             System.out.println("Unable to execute function retrieveCharacterList()");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return null;
