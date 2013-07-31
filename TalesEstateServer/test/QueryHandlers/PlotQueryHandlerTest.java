@@ -153,17 +153,17 @@ public class PlotQueryHandlerTest extends TestCase {
         //This is one of the results that should be present.
         ArrayList<String[]> expResult = new ArrayList();
         String[] line = new String[13];
-        line[0] = "6";
-        line[1] = "Gilthana";
-        line[2] = "Svaerstein";
+        line[0] = "1";
+        line[1] = "QR Character";
+        line[2] = "Rotheim";
         line[3] = "3";
         line[4] = "Exquisite";
-        line[5] = "2,3,2;2,2,3;3,2,3;";
+        line[5] = "2,2,3;2,2,3;2,2,2;";
         line[6] = "0,0,0;0,0,0;0,0,0;";
         line[7] = "1.0";
         line[8] = "1";
         line[9] = "0";
-        line[10] = "-25.0";
+        line[10] = "-50.0";
         line[11] = "0";
         line[12] = "80";
         expResult.add(line);
@@ -196,21 +196,21 @@ public class PlotQueryHandlerTest extends TestCase {
     public void testRetrievePlotDetails() {
         System.out.println("Testing retrievePlotDetails()");
         PlotQueryHandler instance = new PlotQueryHandler(con);
-        int plotID = 6;
+        int plotID = 1;
         ArrayList<String> result = instance.retrievePlotDetails(plotID);
         
         ArrayList<String> expResult = new ArrayList();
-        expResult.add("6");
-        expResult.add("Gilthana");
-        expResult.add("Svaerstein");
+        expResult.add("1");
+        expResult.add("QR Character");
+        expResult.add("Rotheim");
         expResult.add("3");
         expResult.add("Exquisite");
-        expResult.add("2,3,2;2,2,3;3,2,3;");
+        expResult.add("2,2,3;2,2,3;2,2,2;");
         expResult.add("0,0,0;0,0,0;0,0,0;");
         expResult.add("1.0");
         expResult.add("1");
         expResult.add("0");
-        expResult.add("-25.0");
+        expResult.add("-50.0");
         expResult.add("0");
         expResult.add("80");
         
@@ -249,25 +249,25 @@ public class PlotQueryHandlerTest extends TestCase {
     public void testSearchPlotBy() {
         System.out.println("Testing searchPlotBy()");
         PlotQueryHandler instance = new PlotQueryHandler(con);
-        String characterName = "Fiorella de Luca";
-        String duchy = "Svaerstein";
-        int size = 9;
+        String characterName = "QR Character";
+        String duchy = "Rotheim";
+        int size = 3;
         String quality = "Exquisite";
         ArrayList<String[]> result = instance.searchPlotBy(characterName, duchy, size, quality);
         
         ArrayList<String[]> expResult = new ArrayList();
         String[] line = new String[13];
-        line[0] = "10";
-        line[1] = "4";
-        line[2] = "4";
-        line[3] = "9";
+        line[0] = "1";
+        line[1] = "3";
+        line[2] = "5";
+        line[3] = "3";
         line[4] = "3";
-        line[5] = "2,2,2,2,2,2,2,3,2;2,2,3,2,2,2,2,2,2;3,2,2,2,2,2,2,2,2;2,2,3,3,2,2,2,2,2;2,2,3,2,2,2,3,3,2;2,3,2,2,2,2,2,2,3;2,3,2,2,2,2,2,3,2;2,2,2,2,2,3,2,3,2;2,2,2,3,2,2,2,2,2;";
-        line[6] = "0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;";
+        line[5] = "2,2,3;2,2,3;2,2,2;";
+        line[6] = "0,0,0;0,0,0;0,0,0;";
         line[7] = "1.0";
         line[8] = "1";
         line[9] = "0";
-        line[10] = "-25.0";
+        line[10] = "-50.0";
         line[11] = "0";
         line[12] = "80";
         expResult.add(line);

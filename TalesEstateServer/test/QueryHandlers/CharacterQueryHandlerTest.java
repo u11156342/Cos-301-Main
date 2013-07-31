@@ -52,7 +52,7 @@ public class CharacterQueryHandlerTest extends TestCase {
         String characterName = "abcharacter";
         int result = instance.retrieveCharacterID(characterName);
         
-        int expResult = 2;
+        int expResult = 4;
         
         assertEquals(expResult, result);
     }

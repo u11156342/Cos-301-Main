@@ -555,4 +555,9 @@ public class PlotQueryHandler {
 
         return false;
     }
+    
+    public ArrayList<String[]> retrieveAllPlots()
+    {
+        return null;
+    }
 }
