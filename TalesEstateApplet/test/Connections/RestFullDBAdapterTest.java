@@ -141,52 +141,24 @@ public class RestFullDBAdapterTest extends TestCase {
      */
     public void testRetrievePlotsOwnedByCharacter() {
         System.out.println("retrievePlotsOwnedByCharacter");
-        int characterID = 1;
+        int characterID = 3;
         RestFullDBAdapter instance = new RestFullDBAdapter();
         ArrayList<String[]> expResult = new ArrayList();
 
         String[] temp = new String[13];
-        temp[0] = "12";
-        temp[1] = "QR Character";
-        temp[2] = "Thegnheim";
-        temp[3] = "3";
-        temp[4] = "Fine";
-        temp[5] = "0,0,0;0,0,0;-1,-1,-1;";
-        temp[6] = "0,0,0;0,0,0;0,0,0;";
-        temp[7] = "0.0";
-        temp[8] = "0";
-        temp[9] = "5";
-        temp[10] = "0.0";
-        temp[11] = "0";
-        temp[12] = "0";
+        temp[0] = "1";
+
         expResult.add(temp);
         String[] temp2 = new String[13];
-        temp2[0] = "14";
-        temp2[1] = "QR Character";
-        temp2[2] = "Thegnheim";
-        temp2[3] = "3";
-        temp2[4] = "Fine";
-        temp2[5] = "0,0,0;0,0,0;-1,-1,-1;";
-        temp2[6] = "0,0,0;0,0,0;0,0,0;";
-        temp2[7] = "0.0";
-        temp2[8] = "0";
-        temp2[9] = "5";
-        temp2[10] = "0.0";
-        temp2[11] = "0";
-        temp2[12] = "0";
+        temp2[0] = "2";
+
         expResult.add(temp2);
 
         ArrayList<String[]> result = instance.retrievePlotsOwnedByCharacter(characterID);
         assertEquals(expResult.get(0)[0], result.get(0)[0]);
-        assertEquals(expResult.get(0)[1], result.get(0)[1]);
-        assertEquals(expResult.get(0)[2], result.get(0)[2]);
-        assertEquals(expResult.get(0)[3], result.get(0)[3]);
-        assertEquals(expResult.get(0)[4], result.get(0)[4]);
+
         assertEquals(expResult.get(1)[0], result.get(1)[0]);
-        assertEquals(expResult.get(1)[1], result.get(1)[1]);
-        assertEquals(expResult.get(1)[2], result.get(1)[2]);
-        assertEquals(expResult.get(1)[3], result.get(1)[3]);
-        assertEquals(expResult.get(1)[4], result.get(1)[4]);
+
     }
 
     /**
@@ -218,9 +190,7 @@ public class RestFullDBAdapterTest extends TestCase {
         RestFullDBAdapter instance = new RestFullDBAdapter();
         ArrayList<String[]> result = instance.searchPlotBy(characterName, duchy, size, quality);
         assertEquals("12", result.get(0)[0]);
-        assertEquals("1", result.get(0)[1]);
-        assertEquals("14", result.get(1)[0]);
-        assertEquals("1", result.get(1)[1]);
+
     }
 
     /**
@@ -281,9 +251,7 @@ public class RestFullDBAdapterTest extends TestCase {
         RestFullDBAdapter instance = new RestFullDBAdapter();
         ArrayList<String[]> result = instance.retrieveAllCharacters();
         assertEquals("1", result.get(0)[0]);
-        assertEquals("QR Character", result.get(0)[1]);
-        assertEquals("2", result.get(1)[0]);
-        assertEquals("ABCharacter", result.get(1)[1]);
+        assertEquals("Gilthana", result.get(0)[1]);
     }
 
     /**
