@@ -568,6 +568,8 @@ public class PlotQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             
+            ResultSet lrs;
+            
             result = new ArrayList();
             while(rs.next())
             {
@@ -589,23 +591,23 @@ public class PlotQueryHandler {
                 sql = "SELECT UserCharacterName FROM UserCharacter "
                         + "WHERE UserCharacterID = " + line[1];
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                line[1] = rs.getString("UserCharacterName");
+                lrs = stmt.executeQuery(sql);
+                lrs.next();
+                line[1] = lrs.getString("UserCharacterName");
 
                 sql = "SELECT DuchyName FROM Duchy WHERE "
                         + "DuchyID = " + line[2];
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                line[2] = rs.getString("DuchyName");
+                lrs = stmt.executeQuery(sql);
+                lrs.next();
+                line[2] = lrs.getString("DuchyName");
 
                 sql = "SELECT QualityDescription FROM Quality WHERE "
                         + "QualityID = " + line[4];
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                line[4] = rs.getString("QualityDescription");
+                lrs = stmt.executeQuery(sql);
+                lrs.next();
+                line[4] = lrs.getString("QualityDescription");
                 
                 result.add(line);
             }
