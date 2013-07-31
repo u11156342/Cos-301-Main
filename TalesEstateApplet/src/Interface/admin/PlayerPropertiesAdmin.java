@@ -30,7 +30,7 @@ public class PlayerPropertiesAdmin extends JPanel {
         w = i;
 
 
-        ArrayList<String[]> result = wrapper.retrievePlotsOwnedByCharacter(user.CharacterID);
+        ArrayList<String[]> result = wrapper.retrieveAllPlots();
         playersCurrentProperties = new PlayerCurrentPropertiesAdmin[result.size()];
         amount = result.size();
 
