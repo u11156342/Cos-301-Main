@@ -1,6 +1,5 @@
 package Wrapper;
 
-
 import QueryHandlers.QueryHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,19 +12,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 /**
- * This class hosts the restfull web services that is used to connect to the database
+ * This class hosts the restfull web services that is used to connect to the
+ * database
+ *
  * @author NightFiyah
- * @version     1.0
- * @since      2013-07-26
+ * @version 1.0
+ * @since 2013-07-26
  */
-
-
-
 @Stateless
 @Path("/Wrapper")
 public class Wrapper {
 
-    QueryHandler handler = handler = new QueryHandler();   
+    QueryHandler handler = handler = new QueryHandler();
     Converter converter = new Converter();
 
     public Wrapper() {
@@ -229,6 +227,13 @@ public class Wrapper {
         return converter.ToUrl(handler.uqh.retrieveCharactersOwnedByUser(userID));
     }
 
+    @GET
+    @Path("retrieveAllPlots")
+    @Produces("text/plain")
+    public String retrieveAllPlots() {
+        return converter.ArrToUrl(handler.pqh.retrieveAllPlots());
+    }
+ 
     @GET
     @Path("getImageByID/{id}")
     @Produces("image/gif")

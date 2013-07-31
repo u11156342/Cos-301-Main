@@ -568,9 +568,11 @@ public class PlotQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             
+          
             result = new ArrayList();
             while(rs.next())
             {
+               
                 line = new String[13];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
@@ -610,6 +612,7 @@ public class PlotQueryHandler {
                 result.add(line);
             }
             
+           
             return result;
         }
         catch(Exception e) {
