@@ -303,4 +303,50 @@ public class PlotQueryHandlerTest extends TestCase {
     public void testDeletePlot() {
         //System.out.println("Testing deletePlot()");
     }
+
+    /**
+     * Test of retrieveAllPlots method, of class PlotQueryHandler.
+     */
+    public void testRetrieveAllPlots() {
+        System.out.println("Testing retrieveAllPlots()");
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        ArrayList<String[]> results = instance.retrieveAllPlots();
+        
+        //Check a single result
+        String[] result = new String[13];
+        result[0] = "1";
+        result[1] = "QR Character";
+        result[2] = "Rotheim";
+        result[3] = "3";
+        result[4] = "Exquisite";
+        result[5] = "2,2,3;2,2,3;2,2,2;";
+        result[6] = "0,0,0;0,0,0;0,0,0;";
+        result[7] = "1.0";
+        result[8] = "1";
+        result[9] = "0";
+        result[10] = "-50.0";
+        result[11] = "0";
+        result[12] = "80";
+        
+        boolean correct = false;
+        for(int a = 0; a < results.size(); a++)
+        {
+            if(results.get(a)[0].equals(result[0]) &&
+                    results.get(a)[1].equals(result[1]) &&
+                    results.get(a)[2].equals(result[2]) &&
+                    results.get(a)[3].equals(result[3]) &&
+                    results.get(a)[4].equals(result[4]) &&
+                    results.get(a)[5].equals(result[5]) &&
+                    results.get(a)[6].equals(result[6]) &&
+                    results.get(a)[7].equals(result[7]) &&
+                    results.get(a)[8].equals(result[8]) &&
+                    results.get(a)[9].equals(result[9]) &&
+                    results.get(a)[10].equals(result[10]) &&
+                    results.get(a)[11].equals(result[11]) &&
+                    results.get(a)[12].equals(result[12]))
+                correct = true;
+        }
+        
+        assertEquals(true, correct);
+    }
 }

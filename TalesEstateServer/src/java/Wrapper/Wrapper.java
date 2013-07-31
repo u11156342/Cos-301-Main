@@ -235,9 +235,9 @@ public class Wrapper {
     public Response getImageByID(@PathParam("id") int imageID) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            for (int a = 0; a < handler.Picqh.LoadedPictures.length; a++) {
+            for (int a = 0; a < handler.Picqh.loadedPictures.length; a++) {
                 if (a == imageID) {
-                    ImageIO.write(handler.Picqh.LoadedPictures[a], "gif", baos);
+                    ImageIO.write(handler.Picqh.loadedPictures[a], "gif", baos);
                 }
             }
             byte[] imageData = baos.toByteArray();

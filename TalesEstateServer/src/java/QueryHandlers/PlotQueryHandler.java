@@ -558,6 +558,64 @@ public class PlotQueryHandler {
     
     public ArrayList<String[]> retrieveAllPlots()
     {
+        String sql = "";
+        ArrayList<String[]> result = null;
+        String[] line = null;
+        
+        try
+        {
+            sql = "SELECT * FROM Plot";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+            result = new ArrayList();
+            while(rs.next())
+            {
+                line = new String[13];
+                line[0] = rs.getString("PlotID");
+                line[1] = rs.getString("PlotOwnedBy");
+                line[2] = rs.getString("PlotDuchy");
+                line[3] = rs.getString("PlotSize");
+                line[4] = rs.getString("PlotQuality");
+                line[5] = rs.getString("PlotGroundArray");
+                line[6] = rs.getString("PlotBuildingArray");
+                line[7] = rs.getString("PlotAcresUsed");
+                line[8] = rs.getString("PlotAcreMax");
+                line[9] = rs.getString("PlotHappiness");
+                line[10] = rs.getString("PlotMonthlyIncome");
+                line[11] = rs.getString("PlotWorkersUsed");
+                line[12] = rs.getString("PlotWorkerMax");
+                
+                sql = "SELECT UserCharacterName FROM UserCharacter "
+                        + "WHERE UserCharacterID = " + line[1];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                line[1] = rs.getString("UserCharacterName");
+
+                sql = "SELECT DuchyName FROM Duchy WHERE "
+                        + "DuchyID = " + line[2];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                line[2] = rs.getString("DuchyName");
+
+                sql = "SELECT QualityDescription FROM Quality WHERE "
+                        + "QualityID = " + line[4];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                line[4] = rs.getString("QualityDescription");
+                
+                result.add(line);
+            }
+            
+            return result;
+        }
+        catch(Exception e) {
+            System.out.println("Could not execute function retrieveAllPlots()");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 }
