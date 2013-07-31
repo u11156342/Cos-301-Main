@@ -159,6 +159,7 @@ public class RestFullDBAdapter {
 
     public ArrayList<String[]> retrievePlotsOwnedByCharacter(int characterID) {
         String temp = "";
+        
         try {
 
             URL url = new URL("http://" + serverURL + ":" + serverPort + server+"retrievePlotsOwnedByCharacter/" + characterID);
