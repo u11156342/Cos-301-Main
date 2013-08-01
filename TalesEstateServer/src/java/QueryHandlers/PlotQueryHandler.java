@@ -610,6 +610,7 @@ public class PlotQueryHandler {
                 line[4] = lrs.getString("QualityDescription");
                 
                 result.add(line);
+                
             }
             
             return result;
