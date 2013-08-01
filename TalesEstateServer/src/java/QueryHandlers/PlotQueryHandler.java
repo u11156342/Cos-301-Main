@@ -568,11 +568,16 @@ public class PlotQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             
+<<<<<<< HEAD
             ResultSet lrs;
             
+=======
+          
+>>>>>>> eb430fff9cc7b330f04c6c112cceb3811523262b
             result = new ArrayList();
             while(rs.next())
             {
+               
                 line = new String[13];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
@@ -613,6 +618,7 @@ public class PlotQueryHandler {
                 
             }
             
+           
             return result;
         }
         catch(Exception e) {

@@ -20,16 +20,16 @@ public class QueryHandler {
         db = new DatabaseConnection();
         conEstate = db.openConnectionEstate();
         conProd = db.openConnectionProd();
-        
+ 
         bqh = new BuildingQueryHandler(conEstate);
         cqh = new CharacterQueryHandler(conEstate);
         dqh = new DuchyQueryHandler(conEstate);
         pqh = new PlotQueryHandler(conEstate);
         prqh = new PriceQueryHandler(conEstate);
         Picqh = new PictureQueryHandler(conEstate);
-        uqh = new UserQueryHandler(conProd);
-    }
-    
+        uqh = new UserQueryHandler(conProd);      
+     
+    }    
     public void closeConnection() {
         db.closeConnection();
     }
