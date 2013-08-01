@@ -36,7 +36,8 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         if (amount == 0) {
             h = 300;
-            JOptionPane.showMessageDialog(contentPane, "There are currently no  properties");
+            JOptionPane.showMessageDialog(contentPane, "There are currently no  properties");    
+            
         }
 
         h = amount * 140;
