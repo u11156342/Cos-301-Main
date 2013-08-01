@@ -568,12 +568,7 @@ public class PlotQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             
-<<<<<<< HEAD
             ResultSet lrs;
-            
-=======
-          
->>>>>>> eb430fff9cc7b330f04c6c112cceb3811523262b
             result = new ArrayList();
             while(rs.next())
             {
