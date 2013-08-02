@@ -22,7 +22,7 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     RestFullAdapter ad = new RestFullAdapter();
-    JButton btn ;
+    JButton btn;
     String UserId = "474C675A-EFE9-47B8-9AF5-01CEB4E2B98A";
     public String UserChar;
     public String UserCharId;
@@ -30,17 +30,15 @@ public class CharSelectMenu extends BasePanel {
 
     public CharSelectMenu(String name) {
         super(name);
-        
-        
-        
-       BufferedImage tobeIcon=ad.ImageAdapter(6);       
-       ImageIcon water = new ImageIcon(tobeIcon); 
-       
-        btn=new JButton(water);
+
+        BufferedImage tobeIcon = ad.ImageAdapter(6);
+        ImageIcon water = new ImageIcon(tobeIcon);
+
+        btn = new JButton(water);
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
-      
-        
+
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         ArrayList<String> ch = wrapper.retrieveCharactersOwnedByUser(UserId);
@@ -50,10 +48,21 @@ public class CharSelectMenu extends BasePanel {
                 CharList[a] = ch.get(a);
             }
         }
+        c.gridy = 0;
+        c.gridx = 1;
+        JButton temp = new JButton(new ImageIcon(ad.ImageAdapter(11)));
+        temp.setContentAreaFilled(false);
+        temp.setBorderPainted(false);
+        add(temp, c);
+
         chars = new JComboBox(CharList);
-        c.gridy = 1;
+        c.gridy = 3;
+        c.gridx = 1;
+        c.insets = new Insets(100, 0, 0, 0);  //top padding
         add(chars, c);
-        c.gridy = 2;
+        c.insets = new Insets(10, 0, 0, 0);  //top padding
+        c.gridy = 4;
+        c.gridx = 1;
         add(btn, c);
     }
 

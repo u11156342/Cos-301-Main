@@ -75,7 +75,7 @@ public class TalesEstateApplet extends JApplet {
         Buy.addNextActionListener(buttonListener);
 
         MainMenu = new MainMenu("MainMenu", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT);
-        MainMenu.addNextActionListener(buttonListener, Pchar, this, this.cardlayout, this.getContentPane());
+        MainMenu.addNextActionListener(buttonListener, Pchar, this, this.cardlayout, this.getContentPane(),Pchar);
 
         CSelect.addNextActionListener(Pchar, cardlayout, this.getContentPane(), MainMenu);
 

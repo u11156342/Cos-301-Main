@@ -1,12 +1,15 @@
 package Interface.MainMenu;
 
 import Connections.RestFullAdapter;
+import Connections.RestFullDBAdapter;
 import Interface.ManageInterface.ManageInterface;
+import Interface.ManageInterface.PlayerOwnPanel;
 import Interface.admin.AdminMain;
 import talesestateapplet.BasePanel;
 import talesestateapplet.UserCharacter;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javafx.scene.SceneBuilder;
 import javax.swing.*;
 import talesestateapplet.TalesEstateApplet;
@@ -22,36 +25,34 @@ public class MainMenu extends BasePanel {
     JButton btn3 = new JButton("Search For a Property");
     JButton btn4 = new JButton("Admin interface");
     JMenuBar menu = new JMenuBar();
+    RestFullAdapter wrapper = new RestFullAdapter();
 
     public MainMenu(String name, int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
         super(name);
         init(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT);
+
     }
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
 
-        RestFullAdapter wrapper=new RestFullAdapter();
-        btn=new JButton(new ImageIcon(wrapper.ImageAdapter(7)));
+        btn = new JButton(new ImageIcon(wrapper.ImageAdapter(7)));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
-        btn2=new JButton(new ImageIcon(wrapper.ImageAdapter(8)));
+        btn2 = new JButton(new ImageIcon(wrapper.ImageAdapter(8)));
         btn2.setContentAreaFilled(false);
         btn2.setBorderPainted(false);
-        btn3=new JButton(new ImageIcon(wrapper.ImageAdapter(10)));
+        btn3 = new JButton(new ImageIcon(wrapper.ImageAdapter(10)));
         btn3.setContentAreaFilled(false);
         btn3.setBorderPainted(false);
-        btn4=new JButton(new ImageIcon(wrapper.ImageAdapter(9)));
+        btn4 = new JButton(new ImageIcon(wrapper.ImageAdapter(9)));
         btn4.setContentAreaFilled(false);
         btn4.setBorderPainted(false);
-        
+
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
-        
-       
-        
 
 
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
@@ -93,7 +94,7 @@ public class MainMenu extends BasePanel {
     }
     TalesEstateApplet a;
 
-    public void addNextActionListener(ActionListener buttonListener, final UserCharacter Pchar, final TalesEstateApplet applet, final CardLayout cardlayout, final Container contentPane) {
+    public void addNextActionListener(ActionListener buttonListener, final UserCharacter Pchar, final TalesEstateApplet applet, final CardLayout cardlayout, final Container contentPane, final UserCharacter user) {
 
         a = applet;
         btn.addActionListener(new ActionListener() {
@@ -107,10 +108,18 @@ public class MainMenu extends BasePanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                ManageInterface ManageI;
-                ManageI = new ManageInterface("Manage", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
-                applet.add(ManageI, ManageI.getName());
-                cardlayout.show(contentPane, "Manage");
+                RestFullDBAdapter ad = new RestFullDBAdapter();
+                ArrayList<String[]> result = ad.retrievePlotsOwnedByCharacter(user.CharacterID);
+                int amount = result.size();
+
+                if (amount != 0) {
+                    ManageInterface ManageI;
+                    ManageI = new ManageInterface("Manage", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane, result);
+                    applet.add(ManageI, ManageI.getName());
+                    cardlayout.show(contentPane, "Manage");
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "You Currently own no properties");
+                }
             }
         });
         btn3.addActionListener(new ActionListener() {
@@ -151,10 +160,18 @@ public class MainMenu extends BasePanel {
         newItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                ManageInterface ManageI;
-                ManageI = new ManageInterface("Manage", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
-                applet.add(ManageI, ManageI.getName());
-                cardlayout.show(contentPane, "Manage");
+                RestFullDBAdapter ad = new RestFullDBAdapter();
+                ArrayList<String[]> result = ad.retrievePlotsOwnedByCharacter(user.CharacterID);
+                int amount = result.size();
+
+                if (amount != 0) {
+                    ManageInterface ManageI;
+                    ManageI = new ManageInterface("Manage", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane, result);
+                    applet.add(ManageI, ManageI.getName());
+                    cardlayout.show(contentPane, "Manage");
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "You Currently own no properties");
+                }
             }
         });
         newItem2.addActionListener(new ActionListener() {

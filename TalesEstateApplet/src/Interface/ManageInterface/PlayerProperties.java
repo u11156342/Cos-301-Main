@@ -21,19 +21,14 @@ public class PlayerProperties extends JPanel {
     public int amount;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
 
-    PlayerProperties(int i, UserCharacter user, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane) {
+    PlayerProperties(int i, UserCharacter user, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane, ArrayList<String[]> uProperties) {
 
         w = i;
 
 
-        ArrayList<String[]> result = wrapper.retrievePlotsOwnedByCharacter(user.CharacterID);
+        ArrayList<String[]> result = uProperties;
         playersCurrentProperties = new PlayerOwnPanel[result.size()];
         amount = result.size();
-
-        if (amount == 0) {
-            h = 300;
-            JOptionPane.showMessageDialog(contentPane, "You Currently own no properties");
-        }
 
         h = amount * 140;
         for (int a = 0; a < playersCurrentProperties.length; a++) {

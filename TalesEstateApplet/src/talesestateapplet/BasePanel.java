@@ -3,8 +3,11 @@ package talesestateapplet;
 import Connections.RestFullAdapter;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +19,7 @@ public class BasePanel extends JPanel {
     private JButton next = new JButton();
     public RestFullAdapter adapter = new RestFullAdapter();
 
+
     public BasePanel(String name) {
         setName(name);
         JLabel label = new JLabel(getName(), SwingConstants.CENTER);
@@ -24,7 +28,7 @@ public class BasePanel extends JPanel {
         setLayout(new BorderLayout());
         add(btnPanel, BorderLayout.SOUTH);
 
-    }
+    }    
 
     public void addNextActionListener(ActionListener listener) {
         next.addActionListener(listener);

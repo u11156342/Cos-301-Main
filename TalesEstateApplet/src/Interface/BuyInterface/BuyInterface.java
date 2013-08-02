@@ -19,8 +19,6 @@ import talesestateapplet.BasePanel;
 import talesestateapplet.TalesEstateApplet;
 import talesestateapplet.UserCharacter;
 
-
-
 public class BuyInterface extends BasePanel {
 
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
@@ -40,7 +38,7 @@ public class BuyInterface extends BasePanel {
 
     public void init(final int JFXPANEL_WIDTH_INT, final int JFXPANEL_HEIGHT_INT) {
 
-       
+
         BuyMenuPicturePanel picmenu = new BuyMenuPicturePanel(adapter.ImageAdapter(4), JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT);
         ((JPanel) picmenu).setPreferredSize(new Dimension(picmenu.w, picmenu.h));
         final JScrollPane PicMenuScrollPane = new JScrollPane(picmenu);
@@ -49,7 +47,6 @@ public class BuyInterface extends BasePanel {
 
         MouseListener buyPickClicked;
         buyPickClicked = new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 String duchy = "";
@@ -178,7 +175,9 @@ public class BuyInterface extends BasePanel {
                     picked = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Choose what quality : ", "Chose " + abby + " located in " + duchy, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
                     ArrayList<String[]> result;
                     result = wrapper.queryPlotPrice(duchy, picked);
-                    int stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum:" + result.get(0)[0] + " Gold:" + result.get(0)[1] + " Silver:" + result.get(0)[2]);
+                    int stat;
+                    stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum:" + result.get(0)[0] + " Gold:" + result.get(0)[1] + " Silver:" + result.get(0)[2],"Purchase Confirmation",JOptionPane.YES_NO_OPTION);
+                    
 
                     if (stat == 0) {
                         int workerMax = 0;
@@ -218,20 +217,20 @@ public class BuyInterface extends BasePanel {
                         wrapper.addPlotToCharacter(user.CharacterName, duchy, 3, picked, groundArray, buildingArray, 1, 1, 0, workerMax, 0, Upkeep);
                         ManageInterface ManageI;
 
-                        ArrayList<String[]> results=null;
-                        int so=0;
-                        while(so==0)
-                        {
+                        ArrayList<String[]> results = null;
+                        int so = 0;
+                        while (so == 0) {
                             try {
                                 Thread.sleep(3000);
-                            results = wrapper.retrievePlotsOwnedByCharacter(user.CharacterID);
-                            so=results.size();
+                                results = wrapper.retrievePlotsOwnedByCharacter(user.CharacterID);
+                                so = results.size();
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(BuyInterface.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+                        ArrayList<String[]> allMyProperties = wrapper.retrievePlotsOwnedByCharacter(user.CharacterID);
 
-                        ManageI = new ManageInterface("Manage", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT, user, applet, layout, content);
+                        ManageI = new ManageInterface("Manage", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT, user, applet, layout, content, allMyProperties);
                         applet.add(ManageI, ManageI.getName());
                         layout.show(content, "Manage");
                     }
@@ -253,8 +252,6 @@ public class BuyInterface extends BasePanel {
             @Override
             public void mouseExited(MouseEvent e) {
             }
-
-
         };
 
         PicMenuScrollPane.addMouseListener(buyPickClicked);
