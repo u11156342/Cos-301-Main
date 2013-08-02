@@ -89,6 +89,8 @@ public class TalesEstateApplet extends JApplet {
         add(search, search.getName());
 
         fxContainer = new JFXPanel();
+        
+        
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -100,5 +102,6 @@ public class TalesEstateApplet extends JApplet {
     private void createScene() {
         StackPane root = new StackPane();
         fxContainer.setScene(new Scene(root));
+        fxContainer.getScene().getStylesheets().add(TalesEstateApplet.class.getResource("style.css").toExternalForm());
     }
 }

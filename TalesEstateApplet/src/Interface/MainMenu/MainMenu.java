@@ -1,11 +1,13 @@
 package Interface.MainMenu;
 
+import Connections.RestFullAdapter;
 import Interface.ManageInterface.ManageInterface;
 import Interface.admin.AdminMain;
 import talesestateapplet.BasePanel;
 import talesestateapplet.UserCharacter;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import javafx.scene.SceneBuilder;
 import javax.swing.*;
 import talesestateapplet.TalesEstateApplet;
 
@@ -15,10 +17,10 @@ import talesestateapplet.TalesEstateApplet;
  */
 public class MainMenu extends BasePanel {
 
-    Button btn = new Button("Buy new Property");
-    Button btn2 = new Button("View All my Properties");
-    Button btn3 = new Button("Search For a Property");
-    Button btn4 = new Button("Admin interface");
+    JButton btn = new JButton("Buy new Property");
+    JButton btn2 = new JButton("View All my Properties");
+    JButton btn3 = new JButton("Search For a Property");
+    JButton btn4 = new JButton("Admin interface");
     JMenuBar menu = new JMenuBar();
 
     public MainMenu(String name, int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
@@ -28,11 +30,28 @@ public class MainMenu extends BasePanel {
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
 
+        RestFullAdapter wrapper=new RestFullAdapter();
+        btn=new JButton(new ImageIcon(wrapper.ImageAdapter(7)));
+        btn.setContentAreaFilled(false);
+        btn.setBorderPainted(false);
+        btn2=new JButton(new ImageIcon(wrapper.ImageAdapter(8)));
+        btn2.setContentAreaFilled(false);
+        btn2.setBorderPainted(false);
+        btn3=new JButton(new ImageIcon(wrapper.ImageAdapter(10)));
+        btn3.setContentAreaFilled(false);
+        btn3.setBorderPainted(false);
+        btn4=new JButton(new ImageIcon(wrapper.ImageAdapter(9)));
+        btn4.setContentAreaFilled(false);
+        btn4.setBorderPainted(false);
+        
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
+        
+       
+        
 
 
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
