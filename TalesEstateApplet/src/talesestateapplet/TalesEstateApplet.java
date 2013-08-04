@@ -87,7 +87,8 @@ public class TalesEstateApplet extends JApplet {
         add(MainMenu, MainMenu.getName());
         add(Buy, Buy.getName());
         add(search, search.getName());
-
+        revalidate();
+        repaint();
         fxContainer = new JFXPanel();
         
         

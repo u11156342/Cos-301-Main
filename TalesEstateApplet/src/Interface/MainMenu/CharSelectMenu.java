@@ -71,9 +71,10 @@ public class CharSelectMenu extends BasePanel {
         container.add(btn, c);
 
         
-       add(container,BorderLayout.CENTER);
-       // bground.add(container,BorderLayout.CENTER);
-       // add(bground);        
+       //add(container,BorderLayout.CENTER);
+        bground.add(container,BorderLayout.CENTER);
+        add(bground);        
+        
     }
 
     public void addNextActionListener(final UserCharacter c, final CardLayout cardlayout, final Container contentPane, final MainMenu ref) {
