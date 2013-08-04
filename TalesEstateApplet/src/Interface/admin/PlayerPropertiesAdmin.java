@@ -45,6 +45,7 @@ public class PlayerPropertiesAdmin extends JPanel {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this);
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[2];
+            playersCurrentProperties[a].owner = result.get(a)[1];
 
             switch (result.get(a)[4]) {
                 case "Poor":

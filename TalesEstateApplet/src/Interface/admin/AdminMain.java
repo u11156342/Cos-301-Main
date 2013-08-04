@@ -37,7 +37,7 @@ public class AdminMain extends BasePanel {
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane) {
         PlayerPropertiesAdmin ad = new PlayerPropertiesAdmin(JFXPANEL_WIDTH_INT - 500, user, aThis, cardlayout, contentPane);
-        JScrollPane mainMenuScrollPane = new JScrollPane(ad, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane mainMenuScrollPane = new JScrollPane(ad, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 50, JFXPANEL_HEIGHT_INT - 50));
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);

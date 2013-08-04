@@ -5,15 +5,11 @@
 package Interface.admin;
 
 import Connections.RestFullDBAdapter;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -27,6 +23,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
     String[] coms = {"Add event", "View Property"};
     JComboBox commands = new JComboBox(coms);
     JButton bt = new JButton("next");
+    String owner;
     public int propertyID;
     public String duchy;
     public int quality;
@@ -62,6 +59,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
     }
 
     public void init(final TalesEstateApplet applet, final UserCharacter uchar, final CardLayout cardlayout, final Container contentPane) {
+        statusArea.append("Owner : "+owner+"\n");
         statusArea.append("Property id : " + propertyID+"\n" + "Located in " + duchy);
         statusArea.append("" + '\n');
         if (quality
