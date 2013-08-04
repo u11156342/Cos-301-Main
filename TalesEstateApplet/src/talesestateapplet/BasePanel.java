@@ -26,7 +26,6 @@ public class BasePanel extends JPanel {
         JLabel label = new JLabel(getName(), SwingConstants.CENTER);
         label.setFont(label.getFont().deriveFont(Font.BOLD, FONT_SIZE));
         setLayout(new BorderLayout());
-        setOpaque(false);
     }
 
     public void addNextActionListener(ActionListener listener) {

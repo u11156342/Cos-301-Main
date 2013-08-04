@@ -30,7 +30,7 @@ public class PlayerProperties extends JPanel {
         playersCurrentProperties = new PlayerOwnPanel[result.size()];
         amount = result.size();
 
-        h = amount * 80;
+        h = amount * 100;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(w, this);
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);

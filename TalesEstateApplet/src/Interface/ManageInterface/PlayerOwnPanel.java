@@ -1,5 +1,6 @@
 package Interface.ManageInterface;
 
+import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.BuyInterface.Generator;
 import Interface.PlayInterface.PlayInterface;
@@ -12,6 +13,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import talesestateapplet.TalesEstateApplet;
@@ -19,8 +22,8 @@ import talesestateapplet.TalesEstateApplet;
 public class PlayerOwnPanel extends JPanel {
 
     public JTextArea statusArea = new JTextArea();
-    Button exspand = new Button("Exspand plot");
-    Button play = new Button("play");
+    JButton exspand = new JButton("Exspand plot");
+    JButton play = new JButton("play");
     public int propertyID;
     public String duchy;
     public int quality;
@@ -28,18 +31,22 @@ public class PlayerOwnPanel extends JPanel {
     public int[][] tiles;
     public int[][] buildings;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
+    RestFullAdapter picadapter = new RestFullAdapter();
 
     PlayerOwnPanel(int w, PlayerProperties aThis) {
 
+        exspand = new JButton(new ImageIcon(picadapter.ImageAdapter(16)));
+        play = new JButton(new ImageIcon(picadapter.ImageAdapter(17)));
+        
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setColumns(4);
         statusArea.setEditable(false);
-        
+
         c.gridx = 0;
-        c.gridy=0;
+        c.gridy = 0;
         c.gridheight = 2;
         c.gridwidth = 2;
 
@@ -56,21 +63,21 @@ public class PlayerOwnPanel extends JPanel {
     }
 
     public void init(final TalesEstateApplet applet, final UserCharacter uchar, final CardLayout cardlayout, final Container contentPane) {
-        
-        statusArea.append("Property id : " + propertyID+"\n" + "Located in " + duchy);
+
+        statusArea.append("Property id : " + propertyID + "\n" + "Located in " + duchy);
         statusArea.append("" + '\n');
         if (quality
                 == 1) {
-            statusArea.append("Quality is : poor"+"\n"+"Current size is : " + size);
+            statusArea.append("Quality is : poor" + "\n" + "Current size is : " + size);
         } else if (quality
                 == 2) {
-            statusArea.append("Quality is : fine"+"\n"+"Current size is : " + size);
+            statusArea.append("Quality is : fine" + "\n" + "Current size is : " + size);
         } else if (quality
                 == 3) {
-            statusArea.append("Quality is : exquisite"+"\n"+"Current size is : " + size);
+            statusArea.append("Quality is : exquisite" + "\n" + "Current size is : " + size);
         }
 
-        statusArea.addMouseListener(
+        play.addMouseListener(
                 new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

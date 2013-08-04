@@ -13,19 +13,16 @@ import javax.swing.JPanel;
  *
  * @author NightFiyah
  */
-public class Background extends JPanel{
-    
+public class Background extends JPanel {
+
     BufferedImage im;
-    
-    public Background(BufferedImage ims)
-    {
-        im=ims;
+
+    public Background(BufferedImage ims) {
+        im = ims;
     }
-    
+
     @Override
-    public void paint(Graphics g)
-    {
-       g.drawImage(im,0, 0,1024,800, null);
+    public void paint(Graphics g) {
+        g.drawImage(im, 0, 0, 1024, 800, null);
     }
-    
 }
