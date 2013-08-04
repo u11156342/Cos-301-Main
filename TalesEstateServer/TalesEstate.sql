@@ -208,7 +208,10 @@ VALUES
 (0, 0, 0, 0, 'AdminMenu.png'),
 (0, 0, 0, 0, 'background.jpg'),
 (0, 0, 0, 0, 'exspand.png'),
-(0, 0, 0, 0, 'play.jpg')
+(0, 0, 0, 0, 'play.jpg'),
+(0, 0, 0, 0, 'SearchMenu.png'),
+(0, 0, 0, 0, 'DoSearch.gif')
+
 
 
 
