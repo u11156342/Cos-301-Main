@@ -20,39 +20,54 @@ public class PlayerOwnPanel extends JPanel {
 
     public JTextArea statusArea = new JTextArea();
     Button exspand = new Button("Exspand plot");
+    Button play = new Button("play");
     public int propertyID;
     public String duchy;
     public int quality;
     public int size;
     public int[][] tiles;
     public int[][] buildings;
-    
-    RestFullDBAdapter wrapper=new RestFullDBAdapter();
+    RestFullDBAdapter wrapper = new RestFullDBAdapter();
 
     PlayerOwnPanel(int w, PlayerProperties aThis) {
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        setPreferredSize(new Dimension(w - 100, 100));
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        statusArea.setPreferredSize(new Dimension(500, 90));
+        statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        statusArea.setColumns(4);
         statusArea.setEditable(false);
-        add(statusArea, BorderLayout.WEST);
-        add(exspand);
+        
+        c.gridx = 0;
+        c.gridy=0;
+        c.gridheight = 2;
+        c.gridwidth = 2;
+
+        add(statusArea, c);
+        c.gridheight = 1;
+        c.gridwidth = 1;
+
+        c.gridx = 2;
+        c.gridy = 0;
+        add(exspand, c);
+        c.gridx = 2;
+        c.gridy = 1;
+        add(play, c);
     }
 
     public void init(final TalesEstateApplet applet, final UserCharacter uchar, final CardLayout cardlayout, final Container contentPane) {
-        statusArea.append("Property id : " + propertyID + " located in " + duchy);
+        
+        statusArea.append("Property id : " + propertyID+"\n" + "Located in " + duchy);
         statusArea.append("" + '\n');
         if (quality
                 == 1) {
-            statusArea.append("Quality is : poor, Current size is : " + size);
+            statusArea.append("Quality is : poor"+"\n"+"Current size is : " + size);
         } else if (quality
                 == 2) {
-            statusArea.append("Quality is : fine, Current size is : " + size);
+            statusArea.append("Quality is : fine"+"\n"+"Current size is : " + size);
         } else if (quality
                 == 3) {
-            statusArea.append("Quality is : exquisite, Current size is : " + size);
+            statusArea.append("Quality is : exquisite"+"\n"+"Current size is : " + size);
         }
 
         statusArea.addMouseListener(
@@ -102,8 +117,8 @@ public class PlayerOwnPanel extends JPanel {
                     q = "Exquisite";
                 }
                 ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(propertyID);
-                
-                wrapper.modifyPlot(propertyID, uchar.CharacterName, duchy, size, q, tiles, buildings,Double.parseDouble(retrievePlotDetails.get(7)) , Double.parseDouble(retrievePlotDetails.get(8)), Integer.parseInt(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Integer.parseInt(retrievePlotDetails.get(9)), Double.parseDouble(retrievePlotDetails.get(10)));
+
+                wrapper.modifyPlot(propertyID, uchar.CharacterName, duchy, size, q, tiles, buildings, Double.parseDouble(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), Integer.parseInt(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Integer.parseInt(retrievePlotDetails.get(9)), Double.parseDouble(retrievePlotDetails.get(10)));
 
                 PlayInterface play = new PlayInterface("Play", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
                 applet.add(play, play.getName());

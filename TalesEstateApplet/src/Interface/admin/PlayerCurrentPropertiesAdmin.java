@@ -5,20 +5,13 @@
 package Interface.admin;
 
 import Connections.RestFullDBAdapter;
-import Interface.BuyInterface.Generator;
-import Interface.ManageInterface.PlayerProperties;
-import Interface.PlayInterface.PlayInterface;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -44,29 +37,42 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
 
     PlayerCurrentPropertiesAdmin(int w, PlayerPropertiesAdmin aThis) {
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        setPreferredSize(new Dimension(w - 100, 100));
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        statusArea.setPreferredSize(new Dimension(500, 90));
+        statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        statusArea.setColumns(4);
         statusArea.setEditable(false);
-        add(statusArea, BorderLayout.WEST);
-        add(commands);
-        add(bt);
+        
+        c.gridx = 0;
+        c.gridy=0;
+        c.gridheight = 2;
+        c.gridwidth = 2;
+
+        add(statusArea, c);
+        c.gridheight = 1;
+        c.gridwidth = 1;
+
+        c.gridx = 2;
+        c.gridy = 0;
+        add(commands, c);
+        c.gridx = 2;
+        c.gridy = 1;
+        add(bt, c);
     }
 
     public void init(final TalesEstateApplet applet, final UserCharacter uchar, final CardLayout cardlayout, final Container contentPane) {
-        statusArea.append("Property id : " + propertyID + " located in " + duchy);
+        statusArea.append("Property id : " + propertyID+"\n" + "Located in " + duchy);
         statusArea.append("" + '\n');
         if (quality
                 == 1) {
-            statusArea.append("Quality is : poor, Current size is : " + size);
+            statusArea.append("Quality is : poor"+"\n"+"Current size is : " + size);
         } else if (quality
                 == 2) {
-            statusArea.append("Quality is : fine, Current size is : " + size);
+            statusArea.append("Quality is : fine"+"\n"+"Current size is : " + size);
         } else if (quality
                 == 3) {
-            statusArea.append("Quality is : exquisite, Current size is : " + size);
+            statusArea.append("Quality is : exquisite"+"\n"+"Current size is : " + size);
         }
 
     }

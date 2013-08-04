@@ -37,11 +37,11 @@ public class PlayerPropertiesAdmin extends JPanel {
         if (amount == 0) {
             h = 300;
             JOptionPane.showMessageDialog(contentPane, "There are currently no  properties");
-            
+
         }
 
-        h = amount * 140;
-        for (int a = 0; a < playersCurrentProperties.length; a++) { 
+        h = amount * 80;
+        for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this);
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[2];
@@ -77,9 +77,9 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         if (type == 1) {
             JPanel panel = new JPanel(false);
-            panel.setBorder(BorderFactory.createLineBorder(Color.black));
 
             for (int a = 0; a < playersCurrentProperties.length; a++) {
+                playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(playersCurrentProperties[a]);
             }
             return panel;

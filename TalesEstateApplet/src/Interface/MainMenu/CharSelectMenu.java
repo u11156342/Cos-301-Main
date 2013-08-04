@@ -2,19 +2,15 @@ package Interface.MainMenu;
 
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
-import com.sun.javafx.css.Stylesheet;
-import com.sun.javafx.css.parser.CSSParser;
 import talesestateapplet.BasePanel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import talesestateapplet.Background;
 import talesestateapplet.UserCharacter;
 
 public class CharSelectMenu extends BasePanel {
@@ -30,15 +26,17 @@ public class CharSelectMenu extends BasePanel {
 
     public CharSelectMenu(String name) {
         super(name);
-
         BufferedImage tobeIcon = ad.ImageAdapter(6);
-        ImageIcon water = new ImageIcon(tobeIcon);
+        ImageIcon ic = new ImageIcon(tobeIcon);
 
-        btn = new JButton(water);
+        btn = new JButton(ic);
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
+        btn.setFocusPainted(false);
 
 
+        
+        
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         ArrayList<String> ch = wrapper.retrieveCharactersOwnedByUser(UserId);
@@ -48,6 +46,10 @@ public class CharSelectMenu extends BasePanel {
                 CharList[a] = ch.get(a);
             }
         }
+
+
+        
+
         c.gridy = 0;
         c.gridx = 1;
         JButton temp = new JButton(new ImageIcon(ad.ImageAdapter(11)));

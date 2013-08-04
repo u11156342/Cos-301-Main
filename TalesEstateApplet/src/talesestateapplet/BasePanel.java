@@ -2,6 +2,7 @@ package talesestateapplet;
 
 import Connections.RestFullAdapter;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -19,16 +20,14 @@ public class BasePanel extends JPanel {
     private JButton next = new JButton();
     public RestFullAdapter adapter = new RestFullAdapter();
 
-
     public BasePanel(String name) {
         setName(name);
+
         JLabel label = new JLabel(getName(), SwingConstants.CENTER);
         label.setFont(label.getFont().deriveFont(Font.BOLD, FONT_SIZE));
-        JPanel btnPanel = new JPanel(new GridBagLayout());
         setLayout(new BorderLayout());
-        add(btnPanel, BorderLayout.SOUTH);
-
-    }    
+        setOpaque(false);
+    }
 
     public void addNextActionListener(ActionListener listener) {
         next.addActionListener(listener);

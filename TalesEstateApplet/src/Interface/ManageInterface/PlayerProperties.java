@@ -30,7 +30,7 @@ public class PlayerProperties extends JPanel {
         playersCurrentProperties = new PlayerOwnPanel[result.size()];
         amount = result.size();
 
-        h = amount * 140;
+        h = amount * 80;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(w, this);
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
@@ -67,9 +67,9 @@ public class PlayerProperties extends JPanel {
 
         if (type == 1) {
             JPanel panel = new JPanel(false);
-            panel.setBorder(BorderFactory.createLineBorder(Color.black));
 
             for (int a = 0; a < playersCurrentProperties.length; a++) {
+                playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(playersCurrentProperties[a]);
             }
             return panel;

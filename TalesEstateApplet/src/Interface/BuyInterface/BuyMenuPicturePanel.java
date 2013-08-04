@@ -18,7 +18,6 @@ public class BuyMenuPicturePanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawRect(10, 10, 20, 20);
-        g.drawImage(background, 10, 10, w, h, null);
+        g.drawImage(background,0, 0, w, h, null);
     }
 }

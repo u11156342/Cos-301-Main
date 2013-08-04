@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javafx.scene.SceneBuilder;
 import javax.swing.*;
+import talesestateapplet.Background;
 import talesestateapplet.TalesEstateApplet;
 
 /**
@@ -35,6 +36,10 @@ public class MainMenu extends BasePanel {
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
 
+ 
+        
+        JButton Title = new JButton(new ImageIcon(wrapper.ImageAdapter(13)));
+
         btn = new JButton(new ImageIcon(wrapper.ImageAdapter(7)));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
@@ -57,11 +62,21 @@ public class MainMenu extends BasePanel {
 
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
         MainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+        
+        c.gridy = 0;
+        c.insets = new Insets(0, 0, 0, 0);  //top padding
+        c.gridx = 1;       //aligned with button
+        c.gridwidth = 4;   //4 columns wide
 
+        Title.setContentAreaFilled(false);
+        Title.setBorderPainted(false);
+        container.add(Title,c);
+        
+        
         btn.setFont(f);
 
         c.gridy = 1;
-        c.insets = new Insets(20, 0, 0, 0);  //top padding
+        c.insets = new Insets(100, 0, 0, 0);  //top padding
         c.gridx = 1;       //aligned with button 2
         c.gridwidth = 2;   //2 columns wide
 
