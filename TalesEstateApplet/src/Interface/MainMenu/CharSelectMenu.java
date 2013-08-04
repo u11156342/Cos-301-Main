@@ -28,12 +28,12 @@ public class CharSelectMenu extends BasePanel {
 
     public CharSelectMenu(String name) {
         super(name);
-        
-        bground=new Background(ad.ImageAdapter(15));
-        
-        
-        JPanel container=new JPanel();
-        
+
+        bground = new Background(ad.ImageAdapter(15));
+
+
+        JPanel container = new JPanel();
+
         BufferedImage tobeIcon = ad.ImageAdapter(6);
         ImageIcon ic = new ImageIcon(tobeIcon);
 
@@ -41,8 +41,8 @@ public class CharSelectMenu extends BasePanel {
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
         btn.setFocusPainted(false);
-        
-        
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         ArrayList<String> ch = wrapper.retrieveCharactersOwnedByUser(UserId);
@@ -51,7 +51,7 @@ public class CharSelectMenu extends BasePanel {
             for (int a = 0; a < ch.size(); a++) {
                 CharList[a] = ch.get(a);
             }
-        }       
+        }
 
         c.gridy = 0;
         c.gridx = 1;
@@ -70,11 +70,11 @@ public class CharSelectMenu extends BasePanel {
         c.gridx = 1;
         container.add(btn, c);
 
-        
-       //add(container,BorderLayout.CENTER);
-        bground.add(container,BorderLayout.CENTER);
-        add(bground);        
-        
+
+        add(container, BorderLayout.CENTER);
+        // bground.add(container,BorderLayout.CENTER);
+        //add(bground);        
+
     }
 
     public void addNextActionListener(final UserCharacter c, final CardLayout cardlayout, final Container contentPane, final MainMenu ref) {

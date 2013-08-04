@@ -36,8 +36,10 @@ public class PlayerOwnPanel extends JPanel {
     PlayerOwnPanel(int w, PlayerProperties aThis) {
 
         exspand = new JButton(new ImageIcon(picadapter.ImageAdapter(16)));
+        exspand.setCursor(new Cursor(Cursor.HAND_CURSOR));
         play = new JButton(new ImageIcon(picadapter.ImageAdapter(17)));
-        
+        play.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 

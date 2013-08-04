@@ -36,23 +36,26 @@ public class MainMenu extends BasePanel {
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT) {
 
- 
-        
+
+
         JButton Title = new JButton(new ImageIcon(wrapper.ImageAdapter(13)));
 
         btn = new JButton(new ImageIcon(wrapper.ImageAdapter(7)));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn2 = new JButton(new ImageIcon(wrapper.ImageAdapter(8)));
         btn2.setContentAreaFilled(false);
         btn2.setBorderPainted(false);
+        btn2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn3 = new JButton(new ImageIcon(wrapper.ImageAdapter(10)));
         btn3.setContentAreaFilled(false);
         btn3.setBorderPainted(false);
+        btn3.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn4 = new JButton(new ImageIcon(wrapper.ImageAdapter(9)));
         btn4.setContentAreaFilled(false);
         btn4.setBorderPainted(false);
-
+        btn4.setCursor(new Cursor(Cursor.HAND_CURSOR));
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -62,7 +65,7 @@ public class MainMenu extends BasePanel {
 
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
         MainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        
+
         c.gridy = 0;
         c.insets = new Insets(0, 0, 0, 0);  //top padding
         c.gridx = 1;       //aligned with button
@@ -70,9 +73,9 @@ public class MainMenu extends BasePanel {
 
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
-        container.add(Title,c);
-        
-        
+        container.add(Title, c);
+
+
         btn.setFont(f);
 
         c.gridy = 1;

@@ -48,7 +48,7 @@ public class BrowseInterface extends BasePanel {
         playIn.tileStates = tiles;
 
         playIn.setPreferredSize(new Dimension(playIn.wdOfcell * size + 100, playIn.htOfcell * size + 100));
-        JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         playMapScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT * 3 / 4));
         playMapScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         ((GameBrowseGrid) playIn).setScrollP(playMapScrollPane);

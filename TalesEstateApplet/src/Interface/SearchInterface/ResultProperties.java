@@ -61,10 +61,10 @@ public class ResultProperties extends JPanel {
 
         if (type == 1) {
             JPanel panel = new JPanel(false);
-            panel.setBorder(BorderFactory.createLineBorder(Color.black));
 
             for (int a = 0; a < searchedProperties.length; a++) {
                 panel.add(searchedProperties[a]);
+                searchedProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
             }
             return panel;
         }

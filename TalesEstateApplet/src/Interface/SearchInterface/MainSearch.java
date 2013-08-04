@@ -91,7 +91,10 @@ public class MainSearch extends BasePanel {
         add(slabe, c);
         add(size, c);
 
-        Button btn = new Button("search");
+        JButton btn = new JButton(new ImageIcon(picAdapter.ImageAdapter(19)));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        btn.setContentAreaFilled(false);
 
         btn.addActionListener(new ActionListener() {
             @Override

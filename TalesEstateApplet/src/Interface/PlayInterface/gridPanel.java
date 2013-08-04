@@ -26,7 +26,7 @@ public class gridPanel extends JFXPanel {
     int globalheight;
     Graphics2D g2d;
 
-    public gridPanel(int size) throws IOException {       
+    public gridPanel(int size) throws IOException {
         gridsize = size;
         wdOfcell = 160;
         htOfcell = 80;
@@ -35,7 +35,7 @@ public class gridPanel extends JFXPanel {
     }
 
     @Override
-    public void paint(final Graphics g) {        
+    public void paint(final Graphics g) {
 
         int xc = 0;
         int yc = 0;
@@ -47,7 +47,7 @@ public class gridPanel extends JFXPanel {
             for (int y = 0; y < gridsize; y++) {
                 xc = -this.scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                 yc = -this.scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2;
-                try {                    
+                try {
                     g2d.drawImage(tiles.get(tileStates[x][y]), xc, yc + topoffset, wdOfcell, htOfcell, this);
                 } catch (IOException ex) {
                     Logger.getLogger(gridPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +87,12 @@ public class gridPanel extends JFXPanel {
                         xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
-                            gridstates[x][y] = 12;
+
+                            if (tileStates[x][y] != -1) {
+                                gridstates[x][y] = 5;
+                            }
+
+
                             repaint();
                         }
                     }
@@ -118,6 +123,7 @@ public class gridPanel extends JFXPanel {
     void Build() {
         build = true;
     }
+
     public void setScrollP(JScrollPane scrollPane) {
         scroller = scrollPane;
     }

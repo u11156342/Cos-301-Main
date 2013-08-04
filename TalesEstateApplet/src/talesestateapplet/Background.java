@@ -7,6 +7,8 @@ package talesestateapplet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
