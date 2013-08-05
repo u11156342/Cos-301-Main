@@ -191,12 +191,12 @@ CREATE TABLE Picture
 
 INSERT INTO Picture(PictureDisplayHeight, PictureDisplayWidth, PictureXOffset, PictureYOffset, PictureImageName)
 VALUES
-(0, 0, 0, 0, 'Dirt.gif'),
-(0, 0, 0, 0, 'semi_fertile.gif'),
-(0, 0, 0, 0, 'fertile.gif'),
-(0, 0, 0, 0, 'water.gif'),
+(0, 0, 0, 0, 'poor land 0.125.png'),
+(0, 0, 0, 0, 'fine land 0.125.png'),
+(0, 0, 0, 0, 'exquisite land 0.125.png'),
+(0, 0, 0, 0, 'water 0.125.png'),
 (0, 0, 0, 0, 'Arnhelm.jpg'),
-(0, 0, 0, 0, 'Town 5-c.png'),
+(0, 0, 0, 0, 'Farm corn 0.125.png'),
 (0, 0, 0, 0, 'CharacterSelect.png'),
 (0, 0, 0, 0, 'BuyNew.png'),
 (0, 0, 0, 0, 'MyProp.png'),
@@ -211,7 +211,11 @@ VALUES
 (0, 0, 0, 0, 'play.jpg'),
 (0, 0, 0, 0, 'SearchMenu.png'),
 (0, 0, 0, 0, 'DoSearch.gif'),
-(0, 0, 0, 0, 'view.png')
+(0, 0, 0, 0, 'view.png'),
+
+/*new Pics */
+(0, 0, 0, 0, 'Mine zinc 0.125.png'),
+(0, 0, 0, 0, 'Mine quarry 0.125.png')
 
 
 
