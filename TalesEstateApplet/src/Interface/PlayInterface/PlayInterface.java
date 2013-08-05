@@ -32,7 +32,6 @@ public class PlayInterface extends BasePanel {
         propertyID = propertyIDz;
         tiles = tilesz;
         buildings = buildingsz;
-        System.out.println(size + "" + duchy + "" + quality + "" + propertyID + "" + tiles + "" + buildings);
         init(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT);
 
     }
@@ -46,17 +45,18 @@ public class PlayInterface extends BasePanel {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        tabPanel menu = new tabPanel(JFXPANEL_WIDTH_INT - 100, JFXPANEL_HEIGHT_INT / 4 - 50, propertyID, duchy, quality);
-        menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 100, JFXPANEL_HEIGHT_INT / 4 - 50));
+        BuildtabPanel menu = new BuildtabPanel(duchy,propertyID);
+      //  menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 100, JFXPANEL_HEIGHT_INT / 4 - 50));
         JScrollPane playmenuScrollPane = new JScrollPane(menu);
-        playmenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT / 4));
+        playmenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT / 4+20));
         playmenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(playmenuScrollPane, BorderLayout.SOUTH);
+        
         playIn.gridstates = buildings;
         playIn.tileStates = tiles;
         playIn.setPreferredSize(new Dimension(playIn.wdOfcell * size + 100, playIn.htOfcell * size + 100));
-        JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        playMapScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT * 3 / 4));
+        JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        playMapScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT * 4/5-20));
         playMapScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         ((gridPanel) playIn).setScrollP(playMapScrollPane);
 

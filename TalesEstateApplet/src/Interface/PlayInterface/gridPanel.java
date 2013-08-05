@@ -28,8 +28,8 @@ public class gridPanel extends JFXPanel {
 
     public gridPanel(int size) throws IOException {
         gridsize = size;
-        wdOfcell = 160;
-        htOfcell = 80;
+        wdOfcell = 240;
+        htOfcell = 120;
         globalwidth = wdOfcell * size;
         globalheight = globalheight * size;
     }
@@ -64,8 +64,9 @@ public class gridPanel extends JFXPanel {
                     xc = -this.scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                     yc = -this.scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2;
                     try {
-                        g2d.drawImage(tiles.get(gridstates[x][y]), xc + (wdOfcell / 4), topoffset + yc - (htOfcell / 4), wdOfcell / 2, htOfcell, this);
+                        g2d.drawImage(tiles.get(gridstates[x][y]), xc, topoffset + yc, wdOfcell, htOfcell, this);
                     } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
                     }
                 }
             }

@@ -45,6 +45,9 @@ public class BuyInterface extends BasePanel {
         PicMenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT * 3 / 4, JFXPANEL_HEIGHT_INT));
         PicMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
+        PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue()+500);
+        PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getMaximum()/4);
+                
         MouseListener buyPickClicked;
         buyPickClicked = new MouseListener() {
             @Override

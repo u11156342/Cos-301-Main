@@ -13,14 +13,14 @@ import javax.swing.*;
 
 public class BuildtabPanel extends JPanel {
 
-    int w;
-    int h;
+
     String duc;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
+    int PropertyID;
 
-    public BuildtabPanel(int with, int height, String duchy) {
-        w = with;
-        h = height;
+    public BuildtabPanel(String duchy,int propertyID) {
+        PropertyID=propertyID;
+
         duc = duchy;
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -31,24 +31,24 @@ public class BuildtabPanel extends JPanel {
         ArrayList<String[]> Improvements = null;
 
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural);
-        panel1.setPreferredSize(new Dimension(with, height));
+       // panel1.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
         JComponent panel2 = makeTextPanel("Mining", 1, Mining);
-        panel2.setPreferredSize(new Dimension(with, height));
+       // panel2.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Mining", null, panel2);
 
         JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing);
-        panel3.setPreferredSize(new Dimension(with, height));
+       // panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Manufacturing", null, panel3);
 
         JComponent panel4 = makeTextPanel("Services", 3, Services);
-        panel3.setPreferredSize(new Dimension(with, height));
+       // panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Services", null, panel4);
 
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements);
-        panel3.setPreferredSize(new Dimension(with, height));
+        //panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Improvements", null, panel5);
         add(tabbedPane);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -59,7 +59,11 @@ public class BuildtabPanel extends JPanel {
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr) {
         JPanel pic = new BuildPic();
         JPanel panel = new JPanel(false);
+        
+        
         final JTextArea buildingIn = new JTextArea();
+        JTextArea statusArea = new JTextArea();
+        
         String[] buildingsList;
         final int[] buildingsID;
         if (arr == null) {
@@ -120,15 +124,31 @@ public class BuildtabPanel extends JPanel {
         c.gridx = 2;
         buildingsPanel.add(buildings, c);
         JPanel buildingInfo = new JPanel();
-        pic.setPreferredSize(new Dimension(100, 100));
+        pic.setPreferredSize(new Dimension(100, 50));
         ((BuildPic) pic).set(12);
         buildingInfo.add(pic);
         buildingInfo.repaint();
         buildingInfo.revalidate();
-        buildingIn.setPreferredSize(new Dimension(200, 140));
+        buildingIn.setPreferredSize(new Dimension(200, 130));
         buildingInfo.add(buildingIn);
         panel.add(buildingsPanel);
         panel.add(buildingInfo);
+        
+        
+         statusArea.setEditable(false);
+        System.out.println(PropertyID);
+        ArrayList<String> results = wrapper.retrievePlotDetails(PropertyID);
+        statusArea.append("Gold : " + results.get(0) + "\n");
+        statusArea.append("Size : " + results.get(3) + "\n"+"Quality " + results.get(4) + "\n");
+        statusArea.append("Happiness : " + results.get(9) + "\n");
+        statusArea.append("Income : " + results.get(10) + "\n");
+        statusArea.append("Workers : " + results.get(11) + "/" + results.get(12) + "\n");
+        JScrollPane statusScroll = new JScrollPane(statusArea);
+        statusScroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+        statusScroll.setPreferredSize(new Dimension(160,130));
+        panel.add(statusScroll);
+        
+        
         return panel;
     }
 }

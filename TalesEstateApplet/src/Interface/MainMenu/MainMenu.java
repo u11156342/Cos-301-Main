@@ -79,7 +79,7 @@ public class MainMenu extends BasePanel {
         btn.setFont(f);
 
         c.gridy = 1;
-        c.insets = new Insets(100, 0, 0, 0);  //top padding
+        c.insets = new Insets(70, 0, 0, 0);  //top padding
         c.gridx = 1;       //aligned with button 2
         c.gridwidth = 2;   //2 columns wide
 

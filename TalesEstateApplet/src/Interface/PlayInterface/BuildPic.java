@@ -21,6 +21,6 @@ public class BuildPic extends JPanel {
     public void paint(final Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.drawImage(builpic, 0, 0, 100, 100, this);
+        g2d.drawImage(builpic, 0, 0, 100, 50, this);
     }
 }
