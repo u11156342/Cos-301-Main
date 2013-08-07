@@ -3,6 +3,7 @@ package Interface.ManageInterface;
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.BuyInterface.Generator;
+import Interface.PlayInterface.MainPlayInterface;
 import Interface.PlayInterface.PlayInterface;
 import talesestateapplet.UserCharacter;
 import java.awt.*;
@@ -83,9 +84,9 @@ public class PlayerOwnPanel extends JPanel {
                 new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlayInterface play = new PlayInterface("Play", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
+                MainPlayInterface play = new MainPlayInterface("MainPlay", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
                 applet.add(play, play.getName());
-                cardlayout.show(contentPane, "Play");
+                cardlayout.show(contentPane, "MainPlay");
             }
 
             @Override
