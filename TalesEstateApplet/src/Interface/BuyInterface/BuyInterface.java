@@ -8,6 +8,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,11 +46,12 @@ public class BuyInterface extends BasePanel {
         PicMenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT * 3 / 4, JFXPANEL_HEIGHT_INT));
         PicMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
-        PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue()+500);
-        PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getMaximum()/4);
-                
+        PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue() + 500);
+        PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getMaximum() / 4);
+
         MouseListener buyPickClicked;
         buyPickClicked = new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 String duchy = "";
@@ -179,8 +181,8 @@ public class BuyInterface extends BasePanel {
                     ArrayList<String[]> result;
                     result = wrapper.queryPlotPrice(duchy, picked);
                     int stat;
-                    stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum:" + result.get(0)[0] + " Gold:" + result.get(0)[1] + " Silver:" + result.get(0)[2],"Purchase Confirmation",JOptionPane.YES_NO_OPTION);
-                    
+                    stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum:" + result.get(0)[0] + " Gold:" + result.get(0)[1] + " Silver:" + result.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
+
 
                     if (stat == 0) {
                         int workerMax = 0;
@@ -256,6 +258,29 @@ public class BuyInterface extends BasePanel {
             public void mouseExited(MouseEvent e) {
             }
         };
+
+
+
+
+        PicMenuScrollPane.addMouseMotionListener(new MouseMotionListener() {
+
+            int tempx = 0;
+            int tempy = 0;
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue() + (tempx - e.getX()));
+                tempx = e.getX();
+                PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getValue() + (tempy - e.getY()));
+                tempy = e.getY();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                tempx = e.getX();
+                tempy = e.getY();
+            }
+        });
 
         PicMenuScrollPane.addMouseListener(buyPickClicked);
         add(PicMenuScrollPane, BorderLayout.CENTER);

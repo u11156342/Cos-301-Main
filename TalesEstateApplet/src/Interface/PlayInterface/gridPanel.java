@@ -89,7 +89,8 @@ public class gridPanel extends JFXPanel {
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
-                            if (tileStates[x][y] != -1) {
+                            
+                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
                                 gridstates[x][y] = 5;
                             }
 
