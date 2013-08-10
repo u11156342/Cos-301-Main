@@ -460,4 +460,21 @@ public class RestFullDBAdapter {
 
         return Conv.FromUrl(temp);
     }
+        public String getStatus(int propertyId) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "StatusReport/"+propertyId);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return temp;
+    }
 }

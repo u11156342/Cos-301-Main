@@ -13,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -84,7 +83,7 @@ public class PlayerOwnPanel extends JPanel {
                 new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainPlayInterface play = new MainPlayInterface("MainPlay", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
+                MainPlayInterface play = new MainPlayInterface("MainPlay", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings,applet,cardlayout,contentPane);
                 applet.add(play, play.getName());
                 cardlayout.show(contentPane, "MainPlay");
             }

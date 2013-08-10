@@ -45,12 +45,12 @@ public class PlayInterface extends BasePanel {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        BuildtabPanel menu = new BuildtabPanel(duchy,propertyID);
+      //  BuildtabPanel menu = new BuildtabPanel(duchy,propertyID);
       //  menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT - 100, JFXPANEL_HEIGHT_INT / 4 - 50));
-        JScrollPane playmenuScrollPane = new JScrollPane(menu);
-        playmenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT / 4+20));
-        playmenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        add(playmenuScrollPane, BorderLayout.SOUTH);
+       // JScrollPane playmenuScrollPane = new JScrollPane(menu);
+      // / playmenuScrollPane.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT / 4+20));
+       /// playmenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+       // add(playmenuScrollPane, BorderLayout.SOUTH);
         
         playIn.gridstates = buildings;
         playIn.tileStates = tiles;
