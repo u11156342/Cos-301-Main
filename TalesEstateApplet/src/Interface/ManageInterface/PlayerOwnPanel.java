@@ -83,7 +83,7 @@ public class PlayerOwnPanel extends JPanel {
                 new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainPlayInterface play = new MainPlayInterface("MainPlay", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings,applet,cardlayout,contentPane);
+                MainPlayInterface play = new MainPlayInterface("MainPlay", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings,applet,cardlayout,contentPane,uchar);
                 applet.add(play, play.getName());
                 cardlayout.show(contentPane, "MainPlay");
             }

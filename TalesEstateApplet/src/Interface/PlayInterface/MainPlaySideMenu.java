@@ -13,9 +13,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import talesestateapplet.TalesEstateApplet;
+import talesestateapplet.UserCharacter;
 
 /**
  *
@@ -25,7 +27,7 @@ public class MainPlaySideMenu extends JPanel {
 
     JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface;
 
-    public MainPlaySideMenu(final JTextPane textZone, final int PropertId, final TalesEstateApplet aThis, final CardLayout cardlayout, final Container contentPane,final String duchy) {
+    public MainPlaySideMenu(final JTextPane textZone, final int PropertId, final TalesEstateApplet aThis, final CardLayout cardlayout, final Container contentPane,final String duchy,final UserCharacter uchar) {
         Report = new JButton("Status Report");
         Deposite = new JButton("Deposit gold");
         Withdraw = new JButton("Withdraw gold");
@@ -74,15 +76,14 @@ public class MainPlaySideMenu extends JPanel {
         Deposite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RestFullDBAdapter wrapper = new RestFullDBAdapter();
-                textZone.setText(wrapper.getStatus(PropertId));
+                
+                double amount=Double.parseDouble(JOptionPane.showInputDialog("How much do you wish to deposit"));
             }
         });
         Withdraw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RestFullDBAdapter wrapper = new RestFullDBAdapter();
-                textZone.setText(wrapper.getStatus(PropertId));
+                double amount=Double.parseDouble(JOptionPane.showInputDialog("How much do you wish to Withdraw"));
             }
         });
 
@@ -94,6 +95,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
 
+        //use the property to get the info,then list all the buildins that are build onit
         listBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +106,7 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuildtabPanel Build = new BuildtabPanel("Build",duchy,PropertId,cardlayout,contentPane);
+                BuildtabPanel Build = new BuildtabPanel("Build",duchy,PropertId,cardlayout,contentPane,uchar);
                 aThis.add(Build, Build.getName());
                 cardlayout.show(contentPane, "Build");
             }

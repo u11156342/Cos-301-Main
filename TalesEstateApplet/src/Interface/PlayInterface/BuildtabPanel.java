@@ -15,9 +15,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import talesestateapplet.BasePanel;
+import talesestateapplet.UserCharacter;
 
 public class BuildtabPanel extends BasePanel {
-    
+
     String duc;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
     int PropertyID;
@@ -25,53 +26,55 @@ public class BuildtabPanel extends BasePanel {
     ArrayList<String[]> result2 = null;
     CardLayout Cardlayout;
     Container ContentPane;
-    
-    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane) {
+    UserCharacter UsersChar;
+    int PlotID;
+
+    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane, UserCharacter uchar) {
         super(build);
+        UsersChar = uchar;
         PropertyID = PropertId;
         Cardlayout = cardlayout;
         ContentPane = contentPane;
-        
+
         duc = duchy;
         JTabbedPane tabbedPane = new JTabbedPane();
-        
+
         ArrayList<String[]> Agricultural = null;
         ArrayList<String[]> Mining = null;
         ArrayList<String[]> Manufacturing = null;
         ArrayList<String[]> Services = null;
         ArrayList<String[]> Improvements = null;
-        
+
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural);
         // panel1.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-        
+
         JComponent panel2 = makeTextPanel("Mining", 1, Mining);
         // panel2.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Mining", null, panel2);
-        
+
         JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing);
         // panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Manufacturing", null, panel3);
-        
+
         JComponent panel4 = makeTextPanel("Services", 3, Services);
         // panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Services", null, panel4);
-        
+
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements);
         //panel3.setPreferredSize(new Dimension(with, height));
         tabbedPane.addTab("Improvements", null, panel5);
         add(tabbedPane);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
-    
+
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr) {
         JPanel panel = new JPanel(false);
-        
-        
+
+
         final JTextArea buildingIn = new JTextArea();
-        JTextArea statusArea = new JTextArea();
-        
+
         String[] buildingsList;
         final int[] buildingsID;
         if (arr == null) {
@@ -80,12 +83,12 @@ public class BuildtabPanel extends BasePanel {
         results1 = arr;
         buildingsList = new String[results1.size()];
         buildingsID = new int[results1.size()];
-        
+
         for (int a = 0; a < results1.size(); a++) {
             buildingsID[a] = Integer.parseInt(results1.get(a)[0]);
             buildingsList[a] = results1.get(a)[1];
         }
-        
+
         JPanel buildingsPanel = new JPanel();
         buildingsPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -99,7 +102,7 @@ public class BuildtabPanel extends BasePanel {
         temp = temp + "Building Time To Build : " + result2.get(0)[8] + '\n';
         temp = temp + "Building Size Required : " + result2.get(0)[9] + '\n';
         temp = temp + "Building Happiness : " + result2.get(0)[10] + '\n';
-        
+
         buildingIn.append(temp);
         buildingIn.setEditable(false);
         buildings.addItemListener(new ItemListener() {
@@ -128,13 +131,76 @@ public class BuildtabPanel extends BasePanel {
         Button bbutton = new Button("Build");
         bbutton.setPreferredSize(new Dimension(50, 50));
         c.gridx = 1;
-        
+
         bbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                boolean buySucess = true;
+
+                //do the building need the following values
+                //1 character iD
+                int charsId = UsersChar.CharacterID;
+                //2 Building id
                 int id = buildingsID[buildings.getSelectedIndex()];
-                ArrayList<String[]> r2 = wrapper.retrieveBuildingDetailsById(id);
-                JOptionPane.showMessageDialog(ContentPane, r2.get(0)[2]);
+                ArrayList<String[]> r2s = wrapper.retrieveBuildingDetailsById(id);
+                //3 Time Build (Prop gonna have to make the final value when the building will be completed
+                int WeeksToBuild = Integer.parseInt(r2s.get(0)[8]);
+
+                //now we need to do checks to see if the person can indeed build on the property;
+                // All the reqs the building has
+                double acresNeeded = Double.parseDouble(r2s.get(0)[9]);
+
+                int WorkersNeeded = Integer.parseInt(r2s.get(0)[7]);
+
+                double BuildingCost = Double.parseDouble(r2s.get(0)[4]);
+
+                double BuildingSetupCost = Double.parseDouble(r2s.get(0)[5]);
+
+                //the users current plot specs
+
+                ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(PropertyID);
+
+                int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(12));
+                int PlotWorkersUsed = Integer.parseInt(retrievePlotDetails.get(11));
+
+                double PlotAcreMax = Double.parseDouble(retrievePlotDetails.get(8));
+                double PlotAcresUsed = Double.parseDouble(retrievePlotDetails.get(1));
+
+
+                //first check acre req
+                if (PlotAcreMax == PlotAcresUsed) {
+                    JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
+                    buySucess = false;
+                } else if ((PlotAcresUsed + acresNeeded) > PlotAcreMax) {
+                    JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
+                    buySucess = false;
+                }
+
+                //worker check
+                if (PlotWorkerMax == PlotWorkersUsed) {
+                    buySucess = false;
+                    JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
+                } else if ((PlotWorkersUsed + WorkersNeeded) > PlotWorkerMax) {
+                    buySucess = false;
+                    JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
+                }
+
+                //money check
+
+                //Prereq check
+                //still need to think about this because the user can have multiple acfes of diff quality,so kinda need to split them in some way
+
+
+                //time check,need to use log see what is build and how much time is left
+
+
+                if (buySucess) {
+                    //if this is reached then the person has all the req to build,need to update all the values
+                }
+
+
+                JOptionPane.showMessageDialog(ContentPane, r2s.get(0)[1]);
                 Cardlayout.show(ContentPane, "MainPlay");
             }
         });
@@ -146,22 +212,7 @@ public class BuildtabPanel extends BasePanel {
         buildingInfo.add(buildingIn);
         panel.add(buildingsPanel);
         panel.add(buildingInfo);
-        
-        
-        statusArea.setEditable(false);
-        System.out.println(PropertyID);
-        ArrayList<String> results = wrapper.retrievePlotDetails(PropertyID);
-        statusArea.append("Gold : " + results.get(0) + "\n");
-        statusArea.append("Size : " + results.get(3) + "\n" + "Quality " + results.get(4) + "\n");
-        statusArea.append("Happiness : " + results.get(9) + "\n");
-        statusArea.append("Income : " + results.get(10) + "\n");
-        statusArea.append("Workers : " + results.get(11) + "/" + results.get(12) + "\n");
-        JScrollPane statusScroll = new JScrollPane(statusArea);
-        statusScroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        statusScroll.setPreferredSize(new Dimension(160, 130));
-        panel.add(statusScroll);
-        
-        
+
         return panel;
     }
 }

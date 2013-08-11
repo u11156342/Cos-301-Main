@@ -14,6 +14,7 @@ import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import talesestateapplet.BasePanel;
 import talesestateapplet.TalesEstateApplet;
+import talesestateapplet.UserCharacter;
 
 /**
  *
@@ -29,7 +30,7 @@ public class MainPlayInterface extends BasePanel {
     int[][] tiles;
     int[][] buildings;
 
-    public MainPlayInterface(String name, int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT, int propertyIDz, String duchys, int qual, int sizes, int[][] tilesz, int[][] buildingsz, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane) {
+    public MainPlayInterface(String name, int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT, int propertyIDz, String duchys, int qual, int sizes, int[][] tilesz, int[][] buildingsz, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane,UserCharacter uchar) {
         super(name);
 
         size = sizes;
@@ -44,7 +45,7 @@ public class MainPlayInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
 
-        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy);
+        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy,uchar);
         menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT / 5, JFXPANEL_HEIGHT_INT));
         add(menu, BorderLayout.EAST);
 
