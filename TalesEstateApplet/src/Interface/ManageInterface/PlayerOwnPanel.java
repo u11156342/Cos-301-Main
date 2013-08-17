@@ -58,7 +58,7 @@ public class PlayerOwnPanel extends JPanel {
 
         c.gridx = 2;
         c.gridy = 0;
-        add(exspand, c);
+      //  add(exspand, c);
         c.gridx = 2;
         c.gridy = 1;
         add(play, c);
@@ -105,34 +105,34 @@ public class PlayerOwnPanel extends JPanel {
             }
         });
 
-        exspand.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Generator gen = new Generator(3);
-                int old = size;
-                tiles = gen.ExspandGenerate(duchy, quality, size, tiles);
-                size = tiles.length;
-
-                if (old != size) {
-                    buildings = gen.ArrayCopy(buildings, old, size);
-                }
-
-                String q = "";
-                if (quality == 1) {
-                    q = "poor";
-                } else if (quality == 2) {
-                    q = "fine";
-                } else {
-                    q = "Exquisite";
-                }
-                ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(propertyID);
-
-                wrapper.modifyPlot(propertyID, uchar.CharacterName, duchy, size, q, tiles, buildings, Double.parseDouble(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), Integer.parseInt(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Integer.parseInt(retrievePlotDetails.get(9)), Double.parseDouble(retrievePlotDetails.get(10)));
-
-                PlayInterface play = new PlayInterface("Play", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
-                applet.add(play, play.getName());
-                cardlayout.show(contentPane, "Play");
-            }
-        });
+//        exspand.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                Generator gen = new Generator(3);
+//                int old = size;
+//                tiles = gen.ExspandGenerate(duchy, quality, size, tiles);
+//                size = tiles.length;
+//
+//                if (old != size) {
+//                    buildings = gen.ArrayCopy(buildings, old, size);
+//                }
+//
+//                String q = "";
+//                if (quality == 1) {
+//                    q = "poor";
+//                } else if (quality == 2) {
+//                    q = "fine";
+//                } else {
+//                    q = "Exquisite";
+//                }
+//                ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(propertyID);
+//
+//                wrapper.modifyPlot(propertyID, uchar.CharacterName, duchy, size, q, tiles, buildings, Double.parseDouble(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), Integer.parseInt(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Integer.parseInt(retrievePlotDetails.get(9)), Double.parseDouble(retrievePlotDetails.get(10)));
+//
+//                PlayInterface play = new PlayInterface("Play", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, propertyID, duchy, quality, size, tiles, buildings);
+//                applet.add(play, play.getName());
+//                cardlayout.show(contentPane, "Play");
+//            }
+//        });
     }
 }

@@ -114,8 +114,9 @@ public class MainPlaySideMenu extends JPanel {
         VisualInterface.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RestFullDBAdapter wrapper = new RestFullDBAdapter();
-                textZone.setText(wrapper.getStatus(PropertId));
+                PlayInterface visual=new PlayInterface("visual",aThis.getWidth(),aThis.getHeight(),PropertId);
+                aThis.add(visual, visual.getName());
+                cardlayout.show(contentPane, "visual");
             }
         });
 

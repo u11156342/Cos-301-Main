@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JScrollPane;
 
-public class gridPanel extends JFXPanel {
+public class VisualMap extends JFXPanel {
 
     public int gridsize;
     public int[][] gridstates;
@@ -26,7 +26,7 @@ public class gridPanel extends JFXPanel {
     int globalheight;
     Graphics2D g2d;
 
-    public gridPanel(int size) throws IOException {
+    public VisualMap(int size) throws IOException {
         gridsize = size;
         wdOfcell = 240;
         htOfcell = 120;
@@ -50,7 +50,7 @@ public class gridPanel extends JFXPanel {
                 try {
                     g2d.drawImage(tiles.get(tileStates[x][y]), xc, yc + topoffset, wdOfcell, htOfcell, this);
                 } catch (IOException ex) {
-                    Logger.getLogger(gridPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             move = move - (wdOfcell / 2);

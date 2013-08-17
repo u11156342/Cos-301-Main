@@ -1,7 +1,7 @@
 package Interface.SearchInterface;
 
 import Interface.PlayInterface.TileManager;
-import Interface.PlayInterface.gridPanel;
+import Interface.PlayInterface.VisualMap;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class GameBrowseGrid extends JFXPanel {
                     
                     g2d.drawImage(tiles.get(tileStates[x][y]), xc, yc + topoffset, wdOfcell, htOfcell, this);
                 } catch (IOException ex) {
-                    Logger.getLogger(gridPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
