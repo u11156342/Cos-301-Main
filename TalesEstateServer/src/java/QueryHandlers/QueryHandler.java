@@ -8,13 +8,14 @@ public class QueryHandler {
     private Connection conEstate = null;    //Connection to Estate database
     private Connection conProd = null;      //Connection to TalesProd database
     
-    public BuildingQueryHandler bqh;
-    public CharacterQueryHandler cqh;
-    public DuchyQueryHandler dqh; 
-    public PlotQueryHandler pqh;
-    public PriceQueryHandler prqh;
-    public UserQueryHandler uqh;
-    public PictureQueryHandler Picqh;
+    private BuildingQueryHandler bqh;
+    private CharacterQueryHandler cqh;
+    private DuchyQueryHandler dqh; 
+    private PlotQueryHandler pqh;
+    private PriceQueryHandler prqh;
+    private UserQueryHandler uqh;
+    private PictureQueryHandler Picqh;
+    private LogQueryHandler lqh;
 
     public QueryHandler() {
         db = new DatabaseConnection();
@@ -27,11 +28,17 @@ public class QueryHandler {
         pqh = new PlotQueryHandler(conEstate);
         prqh = new PriceQueryHandler(conEstate);
         Picqh = new PictureQueryHandler(conEstate);
+        lqh=new LogQueryHandler(conEstate);
         uqh = new UserQueryHandler(conProd);      
      
     }    
     public void closeConnection() {
         db.closeConnection();
+    }
+    
+    public LogQueryHandler getLogQH()
+    {
+        return lqh;
     }
     
     public BuildingQueryHandler getBuildingQH()

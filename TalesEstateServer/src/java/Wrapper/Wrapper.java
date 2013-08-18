@@ -3,6 +3,12 @@ package Wrapper;
 import QueryHandlers.QueryHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.imageio.ImageIO;
 import javax.ws.rs.GET;
@@ -35,21 +41,21 @@ public class Wrapper {
     @Path("retrieveCompleteBuildingList")
     @Produces("text/plain")
     public String retrieveCompleteBuildingList() {
-        return converter.ToUrl(handler.bqh.retrieveCompleteBuildingList());
+        return converter.ToUrl(handler.getBuildingQH().retrieveCompleteBuildingList());
     }
 
     @GET
     @Path("listBuildingBy/{duc}/{ind}")
     @Produces("text/plain")
     public String listBuildingBy(@PathParam("duc") String duchy, @PathParam("ind") String industry) {
-        return converter.ArrToUrl(handler.bqh.listBuildingBy(duchy, industry));
+        return converter.ArrToUrl(handler.getBuildingQH().listBuildingBy(duchy, industry));
     }
 
     @GET
     @Path("retrieveBuildingDetailsById/{id}")
     @Produces("text/plain")
     public String retrieveBuildingDetailsById(@PathParam("id") int buildingID) {
-        return converter.ArrToUrl(handler.bqh.retrieveBuildingDetailsById(buildingID));
+        return converter.ArrToUrl(handler.getBuildingQH().retrieveBuildingDetailsById(buildingID));
     }
     ///buildings end
     //</editor-fold>
@@ -60,7 +66,7 @@ public class Wrapper {
     @Path("retrieveDuchyList")
     @Produces("text/plain")
     public String retrieveDuchyList() throws IOException {
-        return converter.ToUrl(handler.dqh.retrieveDuchyList());
+        return converter.ToUrl(handler.getDuchyQH().retrieveDuchyList());
     }
 
     //duchy end
@@ -71,7 +77,7 @@ public class Wrapper {
     @Path("queryPlotPrice/{duc}/{qual}")
     @Produces("text/plain")
     public String queryPlotPrice(@PathParam("duc") String duchy, @PathParam("qual") String quality) {
-        return converter.ArrToUrl(handler.pqh.queryPlotPrice(duchy, quality));
+        return converter.ArrToUrl(handler.getPlotQH().queryPlotPrice(duchy, quality));
     }
 
     @GET
@@ -86,7 +92,7 @@ public class Wrapper {
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
         System.out.println("buildingArray " + buildingArray);
-        if (handler.pqh.addPlotToCharacter(characterName, duchyName, sizeValue, quality, handler.pqh.convertFromArray(groundArray), handler.pqh.convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
+        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, sizeValue, quality, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
             return "true";
         } else {
             return "false";
@@ -104,7 +110,7 @@ public class Wrapper {
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
 
-        if (handler.pqh.modifyPlot(plotId, characterName, duchyName, sizeValue, quality, handler.pqh.convertFromArray(groundArray), handler.pqh.convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
+        if (handler.getPlotQH().modifyPlot(plotId, characterName, duchyName, sizeValue, quality, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
             return "true";
         } else {
             return "false";
@@ -115,14 +121,14 @@ public class Wrapper {
     @Path("retrievePlotsOwnedByCharacter/{characterID}")
     @Produces("text/plain")
     public String retrievePlotsOwnedByCharacter(@PathParam("characterID") int characterID) {
-        return converter.ArrToUrl(handler.pqh.retrievePlotsOwnedByCharacter(characterID));
+        return converter.ArrToUrl(handler.getPlotQH().retrievePlotsOwnedByCharacter(characterID));
     }
 
     @GET
     @Path("retrievePlotDetails/{plotID}")
     @Produces("text/plain")
     public String retrievePlotDetails(@PathParam("plotID") int plotID) {
-        return converter.ToUrl(handler.pqh.retrievePlotDetails(plotID));
+        return converter.ToUrl(handler.getPlotQH().retrievePlotDetails(plotID));
     }
 
     @GET
@@ -140,14 +146,14 @@ public class Wrapper {
             quality = "";
         }
 
-        return converter.ArrToUrl(handler.pqh.searchPlotBy(characterName, duchy, size, quality));
+        return converter.ArrToUrl(handler.getPlotQH().searchPlotBy(characterName, duchy, size, quality));
     }
 
     @GET
     @Path("deletePlot/{plotID}")
     @Produces("text/plain")
     public String deletePlot(@PathParam("plotID") int plotID) {
-        if (handler.pqh.deletePlot(plotID)) {
+        if (handler.getPlotQH().deletePlot(plotID)) {
             return "true";
         } else {
             return "false";
@@ -162,7 +168,7 @@ public class Wrapper {
     @Path("retrieveMonthlyUpkeep/{duchy}/{quality}")
     @Produces("text/plain")
     public String retrieveMonthlyUpkeep(@PathParam("duchy") String duchy, @PathParam("quality") String quality) {
-        return converter.ToUrl(handler.prqh.retrieveMonthlyUpkeep(duchy, quality));
+        return converter.ToUrl(handler.getPriceQH().retrieveMonthlyUpkeep(duchy, quality));
     }
 
     //price end
@@ -174,7 +180,7 @@ public class Wrapper {
     public String registerEstateCharacter(@PathParam("characterName") String characterName) {
 
         characterName = characterName.replace('.', ' ');
-        if (handler.cqh.registerEstateCharacter(characterName)) {
+        if (handler.getCharacterQH().registerEstateCharacter(characterName)) {
             return "true";
         } else {
             return "false";
@@ -186,14 +192,14 @@ public class Wrapper {
     @Produces("text/plain")
     public String retrieveCharacterID(@PathParam("userID") String userName) {
         userName = userName.replace('.', ' ');
-        return "" + handler.cqh.retrieveCharacterID(userName);
+        return "" + handler.getCharacterQH().retrieveCharacterID(userName);
     }
 
     @GET
     @Path("retrieveAllCharacters")
     @Produces("text/plain")
     public String retrieveAllCharacters() {
-        return converter.ArrToUrl(handler.cqh.retrieveAllCharacters());
+        return converter.ArrToUrl(handler.getCharacterQH().retrieveAllCharacters());
     }
     //character end
     //</editor-fold>
@@ -202,7 +208,7 @@ public class Wrapper {
     @Path("checkLogin/{userID}")
     @Produces("text/plain")
     public String checkLogin(@PathParam("userID") String userID) {
-        if (handler.uqh.checkLogin(userID)) {
+        if (handler.getUserQH().checkLogin(userID)) {
             return "true";
         } else {
             return "false";
@@ -213,7 +219,7 @@ public class Wrapper {
     @Path("checkHasCharacter/{userID}")
     @Produces("text/plain")
     public String checkHasCharacter(@PathParam("userID") String userID) {
-        if (handler.uqh.checkHasCharacter(userID)) {
+        if (handler.getUserQH().checkHasCharacter(userID)) {
             return "true";
         } else {
             return "false";
@@ -224,14 +230,14 @@ public class Wrapper {
     @Path("retrieveCharactersOwnedByUser/{userID}")
     @Produces("text/plain")
     public String retrieveCharactersOwnedByUser(@PathParam("userID") String userID) {
-        return converter.ToUrl(handler.uqh.retrieveCharactersOwnedByUser(userID));
+        return converter.ToUrl(handler.getUserQH().retrieveCharactersOwnedByUser(userID));
     }
 
     @GET
     @Path("retrieveAllPlots")
     @Produces("text/plain")
     public String retrieveAllPlots() {
-        return converter.ArrToUrl(handler.pqh.retrieveAllPlots());
+        return converter.ArrToUrl(handler.getPlotQH().retrieveAllPlots());
     }
 
     @GET
@@ -240,9 +246,9 @@ public class Wrapper {
     public Response getImageByID(@PathParam("id") int imageID) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            for (int a = 0; a < handler.Picqh.loadedPictures.length; a++) {
+            for (int a = 0; a < handler.getPictureQH().loadedPictures.length; a++) {
                 if (a == imageID) {
-                    ImageIO.write(handler.Picqh.loadedPictures[a], "gif", baos);
+                    ImageIO.write(handler.getPictureQH().loadedPictures[a], "gif", baos);
                 }
             }
             byte[] imageData = baos.toByteArray();
@@ -254,6 +260,7 @@ public class Wrapper {
 
     }
 
+    // this one is hardcoded atm,need to complete it still
     @GET
     @Path("StatusReport/{PropertyId}")
     @Produces("text/html")
@@ -380,6 +387,15 @@ public class Wrapper {
 
         return html.toString();
 
+
+    }
+
+    @GET
+    @Path("logBuildingBuilt/{characterID}/{buildingID}")
+    @Produces("text/html")
+    public String logBuildingBuilt(@PathParam("characterID") int characterID,@PathParam("buildingID") int buildingID) {
+       handler.getLogQH().logBuildingBuilt(characterID, buildingID,new Date() );
+        return "";
 
     }
 }
