@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class RestFullDBAdapter {
@@ -460,10 +461,11 @@ public class RestFullDBAdapter {
 
         return Conv.FromUrl(temp);
     }
-        public String getStatus(int propertyId) {
+
+    public String getStatus(int propertyId) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "StatusReport/"+propertyId);
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "StatusReport/" + propertyId);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String inputLine;
@@ -476,5 +478,21 @@ public class RestFullDBAdapter {
         }
 
         return temp;
+    }
+
+    public void logBuildingBuilt(int characterID, int buildingID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID+"/"+buildingID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

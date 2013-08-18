@@ -121,16 +121,18 @@ public class VisualMap extends JFXPanel {
                     wantToPlaceYCord = e.getY();
                     Graphics2D create = (Graphics2D) ref.getGraphics().create();
 
+                    ref.repaint();
                     if (valid) {
                         create.drawImage(tiles.get(5), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
                     } else {
-                        create.drawImage(tiles.get(3), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
+                      //  create.drawImage(tiles.get(3), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
                     }
 
-                } catch (IOException ex) {
+                    Thread.sleep(10);
+                } catch (        IOException | InterruptedException ex) {
                     Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ref.repaint();
+
             }
         });
 

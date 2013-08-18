@@ -9,7 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -52,6 +55,14 @@ public class VisualSideMenu extends JPanel {
 
         c.gridy = 2;
         add(buildb, c);
+        
+        buildb.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              wrapper.logBuildingBuilt(1,2);
+            }
+        });
 
     }
 }
