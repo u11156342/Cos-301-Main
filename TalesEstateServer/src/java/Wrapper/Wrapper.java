@@ -393,8 +393,9 @@ public class Wrapper {
     @GET
     @Path("logBuildingBuilt/{characterID}/{buildingID}")
     @Produces("text/html")
-    public String logBuildingBuilt(@PathParam("characterID") int characterID,@PathParam("buildingID") int buildingID) {
-       handler.getLogQH().logBuildingBuilt(characterID, buildingID,new Date() );
+    public String logBuildingBuilt(@PathParam("characterID") int characterID,
+        @PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
+       handler.getLogQH().logBuildingBuilt(characterID, plotID, buildingID,new Date() );
         return "";
 
     }

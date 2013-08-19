@@ -408,6 +408,7 @@ CREATE TABLE BuildLog
 (
 	BuildLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	BuildLogCharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
+	BuildLogPlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
 	BuildLogBuildingID INT FOREIGN KEY REFERENCES Building(BuildingID),
 	BuildLogDateTimeBuilt DATETIME
 )

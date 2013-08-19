@@ -38,10 +38,11 @@ public class LogQueryHandlerTest extends TestCase {
         System.out.println("Testing logBuildingBuilt()");
         int characterID = 1;
         int buildingID = 1;
+        int plotID = 1;
         Date date = new Date();
         
         LogQueryHandler instance = new LogQueryHandler(con);
         
-        instance.logBuildingBuilt(characterID, buildingID, date);
+        instance.logBuildingBuilt(characterID, plotID, buildingID, date);
     }
 }
