@@ -349,12 +349,13 @@ public class BuildingQueryHandler {
         return null;
     }
     
-    public ArrayList<String> retrieveAllBuildingsOwnedByCharacter(int inid)
+    public ArrayList<String> retrieveAllBuildingsOwnedByCharacter(int charid, int plotid)
     {
         ArrayList<String> results = null;
         
         sql = "SELECT BuildLogBuildingID FROM BuildLog WHERE "
-                + "BuildLogCharacterID = " + inid;
+                + "BuildLogCharacterID = " + charid + " AND "
+                + "BuildLogPlotID = " + plotid;
         try
         {
             stmt = con.createStatement();
