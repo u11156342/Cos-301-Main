@@ -348,4 +348,39 @@ public class BuildingQueryHandler {
         
         return null;
     }
+    
+    public ArrayList<String> retrieveAllBuildingsOwnedByCharacter(int inid)
+    {
+        ArrayList<String> results = null;
+        
+        sql = "SELECT BuildLogBuildingID FROM BuildLog WHERE "
+                + "BuildLogCharacterID = " + inid;
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in function retrieveAllBuildingsOwnedByCharacter(): "
+                    + "Could not retrieve Building ID's from BuildLog table.");
+            System.out.println(e.getMessage());
+        }
+        
+        try
+        {
+            results = new ArrayList();
+            while(rs.next())
+            {
+                results.add(rs.getString("BuildLogBuildingID"));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in function retrieveAllBuildingsOwnedByCharacter(): "
+                    + "Could not loop through BuildLog results.");
+        }
+        
+        return results;
+    }
 }
