@@ -81,56 +81,62 @@ public class VisualMap extends JFXPanel {
             public void mouseDragged(MouseEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-
             // some idea of how we can show placing
             // bug grid draws over the it
             // very bad performance
+            boolean marker = false;
+
             @Override
             public void mouseMoved(MouseEvent e) {
-                try {
 
-                    boolean valid = false;
-                    int clickedx = e.getX();
-                    int clickedy = e.getY();
-                    double move = 0;
-                    double move2 = 0;
-                    int xc = 0;
-                    int yc = 0;
-                    for (int x = 0; x < gridsize; x++) {
-                        for (int y = 0; y < gridsize; y++) {
-                            xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
-                            yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
-                            if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
-                                valid = true;
-                                break;
+                int wantToPlaceXCord;
+                int wantToPlaceYCord;
+                wantToPlaceXCord = e.getX();
+                wantToPlaceYCord = e.getY();
+                Graphics2D create = (Graphics2D) ref.getGraphics().create();
 
-                            }
+                boolean valid = false;
+                int clickedx = e.getX();
+                int clickedy = e.getY();
+                double move = 0;
+                double move2 = 0;
+                int xc = 0;
+                int yc = 0;
+                for (int x = 0; x < gridsize; x++) {
+                    for (int y = 0; y < gridsize; y++) {
+                        xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
+                        yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
+                        if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
+
+                            valid = true;
+                            break;
+
                         }
-                        if (valid == true) {
+                        
+                        if(valid==true)
+                        {
                             break;
                         }
-                        move = move - (wdOfcell / 2);
-                        move2 = move2 + (htOfcell / 2);
                     }
 
+                    move = move - (wdOfcell / 2);
+                    move2 = move2 + (htOfcell / 2);
+                }
+                
+                if (valid == true) {
+                    try {
+                        if (!marker) {
+                            create.drawImage(tiles.get(5), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
+                            marker = true;
+                        }
 
-                    int wantToPlaceXCord;
-                    int wantToPlaceYCord;
-                    wantToPlaceXCord = e.getX();
-                    wantToPlaceYCord = e.getY();
-                    Graphics2D create = (Graphics2D) ref.getGraphics().create();
-
+                    } catch (IOException ex) {
+                        Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    marker = false;
                     ref.repaint();
-                    if (valid) {
-                        create.drawImage(tiles.get(5), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
-                    } else {
-                      //  create.drawImage(tiles.get(3), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
-                    }
-
-                    Thread.sleep(10);
-                } catch (        IOException | InterruptedException ex) {
-                    Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }

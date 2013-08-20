@@ -483,7 +483,7 @@ public class RestFullDBAdapter {
     public void logBuildingBuilt(int characterID, int buildingID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID+"/"+buildingID);
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID + "/" + buildingID);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String inputLine;
@@ -494,5 +494,24 @@ public class RestFullDBAdapter {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public ArrayList<String> retrieveAllBuildingsOwnedByCharacter(int characterID, int plotid) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "retrieveAllBuildingsOwnedByCharacter/" + characterID+"/"+plotid);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.FromUrl(temp);
     }
 }

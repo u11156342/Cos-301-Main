@@ -114,7 +114,7 @@ public class MainPlaySideMenu extends JPanel {
         VisualInterface.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlayInterface visual=new PlayInterface("visual",aThis.getWidth(),aThis.getHeight(),PropertId);
+                PlayInterface visual=new PlayInterface("visual",aThis.getWidth(),aThis.getHeight(),PropertId,uchar);
                 aThis.add(visual, visual.getName());
                 cardlayout.show(contentPane, "visual");
             }
