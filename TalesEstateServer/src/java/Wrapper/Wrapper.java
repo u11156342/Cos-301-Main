@@ -315,6 +315,7 @@ public class Wrapper {
         html.append("	</tr>");
 
         html.append("</table>");
+        html.append("</br>");
 
         html.append("</p>");
         html.append("This month you withdrew money from your estate as indicated in your income sheet.  In addition, you ");
@@ -391,12 +392,23 @@ public class Wrapper {
     }
 
     @GET
-    @Path("logBuildingBuilt/{characterID}/{buildingID}")
+    @Path("logBuildingBuilt/{characterID}/{plotID}/{buildingID}")
     @Produces("text/html")
     public String logBuildingBuilt(@PathParam("characterID") int characterID,
-        @PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
-       handler.getLogQH().logBuildingBuilt(characterID, plotID, buildingID,new Date() );
+            @PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
+
+        handler.getLogQH().logBuildingBuilt(characterID, plotID, buildingID, new Date());
         return "";
+
+    }
+
+    @GET
+    @Path("retrieveAllBuildingsOwnedByCharacter/{characterID}/{plotID}")
+    @Produces("text/html")
+    public String retrieveAllBuildingsOwnedByCharacter(@PathParam("characterID") int characterID,
+            @PathParam("plotID") int plotID) {
+
+        return converter.ToUrl( handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(characterID, plotID));
 
     }
 }
