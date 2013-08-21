@@ -480,10 +480,11 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    public void logBuildingBuilt(int characterID, int buildingID) {
+    public void logBuildingBuilt(int characterID, int plotiD,int buildingID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID + "/" + buildingID);
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID + "/" +plotiD +"/"+buildingID);
+            System.out.println("http://" + serverURL + ":" + serverPort + server + "logBuildingBuilt/" + characterID + "/" + plotiD+"/"+buildingID);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String inputLine;

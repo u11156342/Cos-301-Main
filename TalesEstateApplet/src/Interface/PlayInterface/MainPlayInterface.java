@@ -45,7 +45,7 @@ public class MainPlayInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
 
-        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy,uchar);
+        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy,uchar,propertyIDz);
         menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT / 5, JFXPANEL_HEIGHT_INT));
         add(menu, BorderLayout.EAST);
 

@@ -29,8 +29,9 @@ public class BuildtabPanel extends BasePanel {
     UserCharacter UsersChar;
     int PlotID;
 
-    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane, UserCharacter uchar) {
+    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane, UserCharacter uchar,int PID) {
         super(build);
+        PlotID=PID;
         UsersChar = uchar;
         PropertyID = PropertId;
         Cardlayout = cardlayout;
@@ -132,6 +133,7 @@ public class BuildtabPanel extends BasePanel {
         bbutton.setPreferredSize(new Dimension(50, 50));
         c.gridx = 1;
 
+        bbutton.setPreferredSize(new Dimension(150,60));
         bbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -165,7 +167,7 @@ public class BuildtabPanel extends BasePanel {
                 int PlotWorkersUsed = Integer.parseInt(retrievePlotDetails.get(11));
 
                 double PlotAcreMax = Double.parseDouble(retrievePlotDetails.get(8));
-                double PlotAcresUsed = Double.parseDouble(retrievePlotDetails.get(1));
+                double PlotAcresUsed = Double.parseDouble(retrievePlotDetails.get(7));
 
 
                 //first check acre req
@@ -194,13 +196,14 @@ public class BuildtabPanel extends BasePanel {
 
                 //time check,need to use log see what is build and how much time is left
 
-
+                //for now to test
+                buySucess=true;
                 if (buySucess) {
                     //if this is reached then the person has all the req to build,need to update all the values
+                   wrapper.logBuildingBuilt(charsId,buildingsID[buildings.getSelectedIndex()],PlotID); 
+                    System.out.println(PlotID);
                 }
 
-
-                JOptionPane.showMessageDialog(ContentPane, r2s.get(0)[1]);
                 Cardlayout.show(ContentPane, "MainPlay");
             }
         });

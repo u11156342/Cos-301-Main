@@ -16,6 +16,7 @@ public class VisualMap extends JFXPanel {
     public int gridsize;
     public int[][] gridstates;
     public int[][] tileStates;
+    public int[][] tempplacinggrid;
     public int wdOfcell;
     public int htOfcell;
     public TileManager tiles = new TileManager();
@@ -33,6 +34,7 @@ public class VisualMap extends JFXPanel {
         htOfcell = 80;
         globalwidth = wdOfcell * size;
         globalheight = globalheight * size;
+        tempplacinggrid = new int[size][size];
     }
 
     @Override
@@ -75,74 +77,91 @@ public class VisualMap extends JFXPanel {
             move2 = move2 + (htOfcell / 2);
         }
 
+        move = 0;
+        move2 = 0;
+        for (int x = 0; x < tempplacinggrid.length; x++) {
+            for (int y = 0; y < tempplacinggrid.length; y++) {
+                if (tempplacinggrid[x][y] != 0) {
+                    xc = -this.scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
+                    yc = -this.scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2;
+                    try {
+                        g2d.drawImage(tiles.get(tempplacinggrid[x][y]), xc, topoffset + yc, wdOfcell, htOfcell, this);
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+            }
+            move = move - (wdOfcell / 2);
+            move2 = move2 + (htOfcell / 2);
+        }
+
+
         final VisualMap ref = this;
+
         this.addMouseMotionListener(new MouseMotionListener() {
+
             @Override
             public void mouseDragged(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
             // some idea of how we can show placing
             // bug grid draws over the it
             // very bad performance
-            boolean marker = false;
 
             @Override
             public void mouseMoved(MouseEvent e) {
 
-
-                int wantToPlaceXCord;
-                int wantToPlaceYCord;
-                wantToPlaceXCord = e.getX();
-                wantToPlaceYCord = e.getY();
-                Graphics2D create = (Graphics2D) ref.getGraphics().create();
-
-                boolean valid = false;
                 int clickedx = e.getX();
                 int clickedy = e.getY();
                 double move = 0;
                 double move2 = 0;
                 int xc = 0;
                 int yc = 0;
+                boolean valid = false;
                 for (int x = 0; x < gridsize; x++) {
                     for (int y = 0; y < gridsize; y++) {
                         xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
+
+
+                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+
+                                for (int b = 0; b < tempplacinggrid.length; b++) {
+                                    for (int n = 0; n < tempplacinggrid.length; n++) {
+                                        tempplacinggrid[b][n] = 0;
+                                    }
+                                }
+                                tempplacinggrid[x][y] = 5;
+                            }
+
+
+                           
                             valid = true;
                             break;
-
                         }
-                        
-                        if(valid==true)
-                        {
+                        if (valid) {
                             break;
                         }
                     }
-
                     move = move - (wdOfcell / 2);
                     move2 = move2 + (htOfcell / 2);
                 }
-                
-                if (valid == true) {
-                    try {
-                        if (!marker) {
-                            create.drawImage(tiles.get(5), wantToPlaceXCord - (wdOfcell / 2), wantToPlaceYCord - (htOfcell / 2), wdOfcell, htOfcell, ref);
-                            marker = true;
+
+                if (!valid) {
+                    for (int b = 0; b < tempplacinggrid.length; b++) {
+                        for (int n = 0; n < tempplacinggrid.length; n++) {
+                            tempplacinggrid[b][n] = 0;
                         }
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(VisualMap.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } else {
-                    marker = false;
-                    ref.repaint();
                 }
-
+                
+                 repaint();
             }
         });
 
         this.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 int clickedx = e.getX();
