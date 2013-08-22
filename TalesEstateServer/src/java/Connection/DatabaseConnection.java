@@ -26,19 +26,19 @@ public class DatabaseConnection {
         try 
         {
             
-    String content = "This is the content to write into file";
-
-                File file = new File("findme.txt");
-
-                // if file doesnt exists, then create it
-                if (!file.exists()) {
-                        file.createNewFile();
-                }
-
-                FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
-                bw.close();
+//    String content = "This is the content to write into file 22";
+//
+//                File file = new File("findme.txt");
+//
+//                // if file doesnt exists, then create it
+//                if (!file.exists()) {
+//                        file.createNewFile();
+//                }
+//
+//                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//                BufferedWriter bw = new BufferedWriter(fw);
+//                bw.write(content);
+//                bw.close();
                         
             connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=TalesProd;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
