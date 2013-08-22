@@ -40,10 +40,12 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         }
 
-        h = amount * 80;
+        h = amount * 70;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this);
+            playersCurrentProperties[a].setPreferredSize(new Dimension(257,100));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
+            
             playersCurrentProperties[a].duchy = result.get(a)[2];
             playersCurrentProperties[a].owner = result.get(a)[1];
 
