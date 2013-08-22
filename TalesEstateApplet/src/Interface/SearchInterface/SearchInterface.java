@@ -29,7 +29,7 @@ public class SearchInterface extends BasePanel {
     }
 
     public void init(int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane) {
-        ResultProperties mmenu = new ResultProperties(JFXPANEL_WIDTH_INT - 500, properties.size() * 80, properties, aThis, cardlayout, contentPane);
+        ResultProperties mmenu = new ResultProperties(JFXPANEL_WIDTH_INT - 500, properties.size() * 100, properties, aThis, cardlayout, contentPane);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);

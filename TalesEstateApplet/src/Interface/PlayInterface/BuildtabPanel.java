@@ -28,9 +28,11 @@ public class BuildtabPanel extends BasePanel {
     Container ContentPane;
     UserCharacter UsersChar;
     int PlotID;
+    MainPlaySideMenu parent;
 
-    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane, UserCharacter uchar,int PID) {
+    BuildtabPanel(String build, String duchy, int PropertId, CardLayout cardlayout, Container contentPane, UserCharacter uchar,int PID ,MainPlaySideMenu ref) {
         super(build);
+        parent=ref;
         PlotID=PID;
         UsersChar = uchar;
         PropertyID = PropertId;
@@ -69,6 +71,7 @@ public class BuildtabPanel extends BasePanel {
         add(tabbedPane);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
+  
 
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr) {
         JPanel panel = new JPanel(false);
@@ -169,7 +172,8 @@ public class BuildtabPanel extends BasePanel {
                 double PlotAcreMax = Double.parseDouble(retrievePlotDetails.get(8));
                 double PlotAcresUsed = Double.parseDouble(retrievePlotDetails.get(7));
 
-
+/*
+                
                 //first check acre req
                 if (PlotAcreMax == PlotAcresUsed) {
                     JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
@@ -187,7 +191,7 @@ public class BuildtabPanel extends BasePanel {
                     buySucess = false;
                     JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
                 }
-
+*/
                 //money check
 
                 //Prereq check
@@ -204,6 +208,7 @@ public class BuildtabPanel extends BasePanel {
                     System.out.println(PlotID);
                 }
 
+                parent.listBuildings.doClick();
                 Cardlayout.show(ContentPane, "MainPlay");
             }
         });

@@ -32,7 +32,8 @@ public class MainPlayInterface extends BasePanel {
 
     public MainPlayInterface(String name, int JFXPANEL_WIDTH_INT, int JFXPANEL_HEIGHT_INT, int propertyIDz, String duchys, int qual, int sizes, int[][] tilesz, int[][] buildingsz, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane,UserCharacter uchar) {
         super(name);
-
+        
+        textZone.setEditable(false);    
         size = sizes;
         duchy = duchys;
         quality = qual;
@@ -45,7 +46,7 @@ public class MainPlayInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
 
-        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy,uchar,propertyIDz);
+        MainPlaySideMenu menu = new MainPlaySideMenu(textZone,propertyID,aThis,cardlayout,contentPane,duchy,uchar,propertyIDz,sizes,tilesz,buildingsz);
         menu.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT / 5, JFXPANEL_HEIGHT_INT));
         add(menu, BorderLayout.EAST);
 

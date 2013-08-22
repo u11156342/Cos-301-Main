@@ -25,7 +25,7 @@ public class VisualSideMenu extends JPanel {
     ArrayList buildings;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
     JList buildingTokens;
-    JButton title = new JButton("Title");
+    JButton title = new JButton("Buildings");
     String[] build;
     int[] buildID;
 

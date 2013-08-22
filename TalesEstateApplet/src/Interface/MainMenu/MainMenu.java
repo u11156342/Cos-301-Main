@@ -201,6 +201,9 @@ public class MainMenu extends BasePanel {
         newItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                AdminMain admin;
+                admin = new AdminMain("Admin", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
+                applet.add(admin, admin.getName());
                 cardlayout.show(contentPane, "Admin");
             }
         });

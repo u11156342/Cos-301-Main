@@ -1,4 +1,3 @@
-
 package Interface.BuyInterface;
 
 import java.util.Random;
@@ -9,6 +8,7 @@ public class Generator {
     double[] probability = new double[4];
     int tileRange = 4;
     int mapsize;
+
     public Generator(int size) {
         genStates = new int[size][size];
         mapsize = size;
@@ -17,40 +17,55 @@ public class Generator {
 
     public int[][] ExspandGenerate(String duche, int quality, int size, int[][] tiles) {
 
-        int workingsize=size;
+        System.out.println("begin");
+        int workingsize = size;
         if (needToUpSize(tiles)) {
+            System.out.println("upsize");
             tiles = ArrayCopy(tiles, size, size + 3);
-            
-            workingsize=tiles.length;
+
+            workingsize = tiles.length;
         }
 
+        printArray(tiles);
 
         for (int a = 0; a < workingsize; a++) {
 
             if (tiles[a][workingsize - 1] == -1) {
 
                 for (int c = a; c < a + 3; c++) {
-                    for (int b = workingsize; b > workingsize-3; b--) {
-                        tiles[c][b-1] = getRandom(duche, quality);
+                    for (int b = workingsize; b > workingsize - 3; b--) {
+                        if (tiles[c][b - 1] != -1) {
+                            System.out.println("error");
+                        } else {
+                            tiles[c][b - 1] = getRandom(duche, quality);
+                        }
                     }
-                }
 
+                }
+                System.out.println("m1");
+                printArray(tiles);
                 return tiles;
+
             }
         }
+
         for (int a = 0; a < workingsize; a++) {
 
             if (tiles[workingsize - 1][a] == -1) {
 
 
-                for (int b = workingsize; b > workingsize- 3; b--) {
+                for (int b = workingsize; b > workingsize - 3; b--) {
                     for (int c = a; c < a + 3; c++) {
-                        tiles[b-1][c] = getRandom(duche, quality);
+                        tiles[b - 1][c] = getRandom(duche, quality);
                     }
                 }
+                System.out.println("m2");
+                printArray(tiles);
                 return tiles;
             }
         }
+        System.out.println("m3");
+        printArray(tiles);
         return tiles;
     }
 
@@ -96,6 +111,15 @@ public class Generator {
         }
         return genStates;
 
+    }
+
+    public void printArray(int[][] arr) {
+        for (int a = 0; a < arr.length; a++) {
+            for (int b = 0; b < arr[0].length; b++) {
+                System.out.print(arr[a][b] + "   ");
+            }
+            System.out.println("");
+        }
     }
 
     public int getRandom(String duche, int quality) {
