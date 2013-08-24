@@ -114,7 +114,6 @@ public class PlotQueryHandler {
                 plotPrice = Integer.parseInt(rs.getString("PriceLand"));
                 plotUpkeep = Integer.parseInt(rs.getString("PriceMonthlyUpkeep"));
 
-                System.out.println(plotPrice + " " + plotUpkeep);
                 //Find price values
                 sql = "SELECT AmountPlatinum, AmountGold, AmountSilver "
                         + "FROM Amount WHERE AmountID = "
@@ -200,12 +199,14 @@ public class PlotQueryHandler {
      * This function will add a certain plot to a character, as each character
      * in the game system can own one or more plots.
      */ 
-    public boolean addPlotToCharacter(String characterName, String duchyName, int sizeValue,
-            String quality, int[][] groundArray, int[][] buildingArray, double acresUsed,
-            double acreMax, int workersUsed, int workerMax, int happiness, double monthlyIncome) {
+    public boolean addPlotToCharacter(String characterName, String duchyName, String quality,
+            int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, 
+            double monthlyIncome, int workersUsed, int workerMax) 
+    {
         int characterID, duchyID, qualityID;
         String ground, building;
-
+        int exquisite = 0, fine = 0, poor = 0;
+        
         //Resolve all ID's
         //*Fault checking
         try {
@@ -230,18 +231,37 @@ public class PlotQueryHandler {
             rs.next();
             qualityID = Integer.parseInt(rs.getString("QualityID"));
 
+            if(qualityID == 3)
+                exquisite += 1;
+            else if(qualityID == 2)
+                exquisite += 1;
+            else if(qualityID == 1)
+                exquisite += 1;
+            
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
-
+            
             //Add the plot to database
-            sql = "INSERT INTO Plot (PlotOwnedBy, PlotDuchy, PlotSize, PlotQuality,"
-                    + "PlotGroundArray, PlotBuildingArray, PlotAcresUsed, "
-                    + "PlotAcreMax, PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, "
-                    + "PlotWorkerMax) VALUES "
-                    + "(" + characterID + ", " + duchyID + ", " + sizeValue + ", "
-                    + qualityID + ", '" + ground + "', '" + building + "', "
-                    + acresUsed + ", " + acreMax + ", " + happiness + ", "
-                    + monthlyIncome + ", " + workersUsed + ", " + workerMax + ")";
+            int amountID;
+            sql = "INSERT INTO Amount VALUES(0,0,0);";
+            stmt = con.createStatement();
+            stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            rs = stmt.getGeneratedKeys();
+            rs.next();
+            amountID = rs.getInt(1);
+            
+            sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
+                    + "PlotGroundArray, PlotBuildingArray, PlotHappiness, "
+                    + "PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, "
+                    + "PlotAcreExquisite, PlotAcreExquisiteMax, "
+                    + "PlotAcreFine, PlotAcreFineMax, "
+                    + "PlotAcrePoor, PlotAcrePoorMax) VALUES "
+                    + "(" + characterID + ", " + amountID + ", " + duchyID + ", " + sizeValue
+                    + ", '" + ground + "', '" + building + "', "
+                    + + happiness + ", " + monthlyIncome + ", " + workersUsed + ", " + workerMax 
+                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ")";
+            
             stmt = con.createStatement();
             stmt.execute(sql);
 
@@ -271,20 +291,24 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                line = new String[13];
+                line = new String[17];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
-                line[2] = rs.getString("PlotDuchy");
-                line[3] = rs.getString("PlotSize");
-                line[4] = rs.getString("PlotQuality");
+                line[2] = rs.getString("PlotAmount");
+                line[3] = rs.getString("PlotDuchy");
+                line[4] = rs.getString("PlotSize");
                 line[5] = rs.getString("PlotGroundArray");
                 line[6] = rs.getString("PlotBuildingArray");
-                line[7] = rs.getString("PlotAcresUsed");
-                line[8] = rs.getString("PlotAcreMax");
-                line[9] = rs.getString("PlotHappiness");
-                line[10] = rs.getString("PlotMonthlyIncome");
-                line[11] = rs.getString("PlotWorkersUsed");
-                line[12] = rs.getString("PlotWorkerMax");
+                line[7] = rs.getString("PlotHappiness");
+                line[8] = rs.getString("PlotMonthlyIncome");
+                line[9] = rs.getString("PlotWorkersUsed");
+                line[10] = rs.getString("PlotWorkerMax");
+                line[11] = rs.getString("PlotAcreExquisite");
+                line[12] = rs.getString("PlotAcreExquisiteMax");
+                line[13] = rs.getString("PlotAcreFine");
+                line[14] = rs.getString("PlotAcreFineMax");
+                line[15] = rs.getString("PlotAcrePoor");
+                line[16] = rs.getString("PlotAcrePoorMax");
 
                 values.add(line);
             }
@@ -298,19 +322,21 @@ public class PlotQueryHandler {
                 rs.next();
                 values.get(a)[1] = rs.getString("UserCharacterName");
 
+                sql = "SELECT * FROM Amount WHERE AmountID = "
+                        + values.get(a)[2];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                values.get(a)[2] = rs.getString("AmountPlatinum") + "-"
+                        + rs.getString("AmountGold") + "-"
+                        + rs.getString("AmountSilver");
+                
                 sql = "SELECT DuchyName FROM Duchy WHERE "
-                        + "DuchyID = " + values.get(a)[2];
+                        + "DuchyID = " + values.get(a)[3];
                 stmt = con.createStatement();
                 rs = stmt.executeQuery(sql);
                 rs.next();
-                values.get(a)[2] = rs.getString("DuchyName");
-
-                sql = "SELECT QualityDescription FROM Quality WHERE "
-                        + "QualityID = " + values.get(a)[4];
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                values.get(a)[4] = rs.getString("QualityDescription");
+                values.get(a)[3] = rs.getString("DuchyName");
             }
 
             return values;
@@ -338,17 +364,21 @@ public class PlotQueryHandler {
 
             value.add(rs.getString("PlotID"));
             value.add(rs.getString("PlotOwnedBy"));
+            value.add(rs.getString("PlotAmount"));
             value.add(rs.getString("PlotDuchy"));
             value.add(rs.getString("PlotSize"));
-            value.add(rs.getString("PlotQuality"));
             value.add(rs.getString("PlotGroundArray"));
             value.add(rs.getString("PlotBuildingArray"));
-            value.add(rs.getString("PlotAcresUsed"));
-            value.add(rs.getString("PlotAcreMax"));
             value.add(rs.getString("PlotHappiness"));
             value.add(rs.getString("PlotMonthlyIncome"));
             value.add(rs.getString("PlotWorkersUsed"));
             value.add(rs.getString("PlotWorkerMax"));
+            value.add(rs.getString("PlotAcreExquisite"));
+            value.add(rs.getString("PlotAcreExquisiteMax"));
+            value.add(rs.getString("PlotAcreFine"));
+            value.add(rs.getString("PlotAcreFineMax"));
+            value.add(rs.getString("PlotAcrePoor"));
+            value.add(rs.getString("PlotAcrePoorMax"));
 
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
@@ -357,19 +387,21 @@ public class PlotQueryHandler {
             rs.next();
             value.set(1, rs.getString("UserCharacterName"));
 
+            sql = "SELECT * FROM Amount WHERE AmountID = "
+                    + value.get(2);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            value.set(2, rs.getString("AmountPlatinum") + "-"
+                    + rs.getString("AmountGold") + "-"
+                    + rs.getString("AmountSilver"));
+            
             sql = "SELECT DuchyName FROM Duchy WHERE "
-                    + "DuchyID = " + value.get(2);
+                    + "DuchyID = " + value.get(3);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            value.set(2, rs.getString("DuchyName"));
-
-            sql = "SELECT QualityDescription FROM Quality WHERE "
-                    + "QualityID = " + value.get(4);
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            value.set(4, rs.getString("QualityDescription"));
+            value.set(3, rs.getString("DuchyName"));
 
             return value;
         } catch (Exception e) {
@@ -382,13 +414,20 @@ public class PlotQueryHandler {
 
      /**
      * This function changes plot details to the ones provided.
+     * *Danger: This function has the power to change values beyond their
+     * specified parameters.
+     * PlotAmount supplied in the following format: amountExquisite-amountFine-amountPoor
+     * i.e. 1-0-1
      */ 
-    public boolean modifyPlot(int plotID, String characterName, String duchyName, int sizeValue,
-        String quality, int[][] groundArray, int[][] buildingArray, double acresUsed,
-        double acreMax, int workersUsed, int workerMax, int happiness, double monthlyIncome) {
-        int characterID, duchyID, qualityID;
+    public boolean modifyPlot(int plotID, String characterName, String plotAmount, String duchyName,
+        int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, 
+        int workersUsed, int workerMax, double acreE, int acreEM, double acreF, int acreFM,
+        double acreP, int acrePM) {
+        
+        int characterID, duchyID, amountID;
         String ground, building;
-
+        int plat, gold, silver;
+        
         //Exchange ID's with values  
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
@@ -405,13 +444,19 @@ public class PlotQueryHandler {
             rs.next();
             duchyID = Integer.parseInt(rs.getString("DuchyID"));
 
-            sql = "SELECT QualityID FROM Quality WHERE "
-                    + "LOWER(QualityDescription) = '" + quality.toLowerCase() + "'";
+            StringTokenizer st = new StringTokenizer(plotAmount, "-");
+            plat = Integer.parseInt(st.nextToken());
+            gold = Integer.parseInt(st.nextToken());
+            silver = Integer.parseInt(st.nextToken());
+            
+            sql = "SELECT AmountID FROM Amount WHERE AmountPlatinum = "
+                    + plat + " AND AmountGold = " + gold
+                    + " AND AmountSilver = " + silver;
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            qualityID = Integer.parseInt(rs.getString("QualityID"));
-
+            amountID = Integer.parseInt(rs.getString("AmountID"));
+            
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
             
@@ -419,17 +464,21 @@ public class PlotQueryHandler {
 
             sql = "UPDATE Plot SET "
                     + "PlotOwnedBy = " + characterID + ", "
+                    + "PlotAmount = " + amountID + ", "
                     + "PlotDuchy = " + duchyID + ", "
                     + "PlotSize = " + sizeValue + ", "
-                    + "PlotQuality = " + qualityID + ", "
                     + "PlotGroundArray = '" + ground + "', "
                     + "PlotBuildingArray = '" + building + "', "
-                    + "PlotAcresUsed = " + acresUsed + ", "
-                    + "PlotAcreMax = " + acreMax + ", "
                     + "PlotHappiness = " + happiness + ", "
                     + "PlotMonthlyIncome = " + monthlyIncome + ", "
                     + "PlotWorkersUsed = " + workersUsed + ", "
-                    + "PlotWorkerMax = " + workerMax + " "
+                    + "PlotWorkerMax = " + workerMax + ", "
+                    + "PlotAcreExquisite = " + acreE + ", "
+                    + "PlotAcreExquisiteMax = " + acreEM + ", "
+                    + "PlotAcreFine = " + acreF + ", "
+                    + "PlotAcreFineMax = " + acreFM + ", "
+                    + "PlotAcrePoor = " + acreP + ", "
+                    + "PlotAcrePoorMax = " + acrePM + " "
                     + "WHERE PlotID = " + plotID;
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -502,29 +551,55 @@ public class PlotQueryHandler {
             }
 
             if (qualityID != 0 && (characterID != 0 || duchyID != 0 || size > 0)) {
-                sql += " AND PlotQuality LIKE " + qualityID;
+                if(qualityID == 1)
+                {
+                    sql += " AND PlotAcrePoorMax > 0";
+                }
+                else if(qualityID == 2)
+                {
+                    sql += " AND PlotAcreFineMax > 0";
+                }
+                else if(qualityID == 3)
+                {
+                    sql += " AND PlotAcreExquisiteMax > 0";
+                }
             } else if (qualityID != 0) {
-                sql += " WHERE PlotQuality LIKE " + qualityID;
+                if(qualityID == 1)
+                {
+                    sql += " WHERE PlotAcrePoorMax > 0";
+                }
+                else if(qualityID == 2)
+                {
+                    sql += " WHERE PlotAcreFineMax > 0";
+                }
+                else if(qualityID == 3)
+                {
+                    sql += " WHERE PlotAcreExquisiteMax > 0";
+                }
             }
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                line = new String[13];
+                line = new String[17];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
-                line[2] = rs.getString("PlotDuchy");
-                line[3] = rs.getString("PlotSize");
-                line[4] = rs.getString("PlotQuality");
+                line[2] = rs.getString("PlotAmount");
+                line[3] = rs.getString("PlotDuchy");
+                line[4] = rs.getString("PlotSize");
                 line[5] = rs.getString("PlotGroundArray");
                 line[6] = rs.getString("PlotBuildingArray");
-                line[7] = rs.getString("PlotAcresUsed");
-                line[8] = rs.getString("PlotAcreMax");
-                line[9] = rs.getString("PlotHappiness");
-                line[10] = rs.getString("PlotMonthlyIncome");
-                line[11] = rs.getString("PlotWorkersUsed");
-                line[12] = rs.getString("PlotWorkerMax");
+                line[7] = rs.getString("PlotHappiness");
+                line[8] = rs.getString("PlotMonthlyIncome");
+                line[9] = rs.getString("PlotWorkersUsed");
+                line[10] = rs.getString("PlotWorkerMax");
+                line[11] = rs.getString("PlotAcreExquisite");
+                line[12] = rs.getString("PlotAcreExquisiteMax");
+                line[13] = rs.getString("PlotAcreFine");
+                line[14] = rs.getString("PlotAcreFineMax");
+                line[15] = rs.getString("PlotAcrePoor");
+                line[16] = rs.getString("PlotAcrePoorMax");
                 values.add(line);
             }
 
@@ -572,21 +647,24 @@ public class PlotQueryHandler {
             result = new ArrayList();
             while(rs.next())
             {
-               
-                line = new String[13];
+                line = new String[17];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
-                line[2] = rs.getString("PlotDuchy");
-                line[3] = rs.getString("PlotSize");
-                line[4] = rs.getString("PlotQuality");
+                line[2] = rs.getString("PlotAmount");
+                line[3] = rs.getString("PlotDuchy");
+                line[4] = rs.getString("PlotSize");
                 line[5] = rs.getString("PlotGroundArray");
                 line[6] = rs.getString("PlotBuildingArray");
-                line[7] = rs.getString("PlotAcresUsed");
-                line[8] = rs.getString("PlotAcreMax");
-                line[9] = rs.getString("PlotHappiness");
-                line[10] = rs.getString("PlotMonthlyIncome");
-                line[11] = rs.getString("PlotWorkersUsed");
-                line[12] = rs.getString("PlotWorkerMax");
+                line[7] = rs.getString("PlotHappiness");
+                line[8] = rs.getString("PlotMonthlyIncome");
+                line[9] = rs.getString("PlotWorkersUsed");
+                line[10] = rs.getString("PlotWorkerMax");
+                line[11] = rs.getString("PlotAcreExquisite");
+                line[12] = rs.getString("PlotAcreExquisiteMax");
+                line[13] = rs.getString("PlotAcreFine");
+                line[14] = rs.getString("PlotAcreFineMax");
+                line[15] = rs.getString("PlotAcrePoor");
+                line[16] = rs.getString("PlotAcrePoorMax");
                 
                 sql = "SELECT UserCharacterName FROM UserCharacter "
                         + "WHERE UserCharacterID = " + line[1];
@@ -595,24 +673,24 @@ public class PlotQueryHandler {
                 lrs.next();
                 line[1] = lrs.getString("UserCharacterName");
 
+                sql = "SELECT * FROM Amount WHERE AmountID = "
+                        + line[2];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                line[2] = rs.getString("AmountPlatinum") + "-"
+                        + rs.getString("AmountGold") + "-"
+                        + rs.getString("AmountSilver");
+                
                 sql = "SELECT DuchyName FROM Duchy WHERE "
-                        + "DuchyID = " + line[2];
+                        + "DuchyID = " + line[3];
                 stmt = con.createStatement();
                 lrs = stmt.executeQuery(sql);
                 lrs.next();
-                line[2] = lrs.getString("DuchyName");
-
-                sql = "SELECT QualityDescription FROM Quality WHERE "
-                        + "QualityID = " + line[4];
-                stmt = con.createStatement();
-                lrs = stmt.executeQuery(sql);
-                lrs.next();
-                line[4] = lrs.getString("QualityDescription");
+                line[3] = lrs.getString("DuchyName");
                 
                 result.add(line);
-                
             }
-            
            
             return result;
         }
@@ -621,5 +699,341 @@ public class PlotQueryHandler {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+    
+    /* This function retrieves the balance of the provided plot.
+     */
+    public ArrayList<Integer> getCurrentAmount(int plotID)
+    {
+        ArrayList<Integer> amounts = new ArrayList();
+        int amountID, curPlat, curGold, curSil;
+        
+        sql = "SELECT PlotAmount FROM Plot WHERE "
+                + "PlotID = " + plotID;
+        
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("PlotAmount"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
+                    + "WHERE AmountID = " + amountID;
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
+            curGold = Integer.parseInt(rs.getString("AmountGold"));
+            curSil = Integer.parseInt(rs.getString("AmountSilver"));
+            
+            amounts.add(curPlat);
+            amounts.add(curGold);
+            amounts.add(curSil);
+            
+            return amounts;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function getCurrentAmount().");
+            System.out.println(e.getMessage());
+        }
+                
+        return null;
+    }
+    /* This function modifies they amount of currency(i.e. silver, gold, platinum)
+     * that an estate ownes.
+     */
+    public boolean modifyAmount(int inPlotID, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        String sql = "";
+        int amountID = 0;
+        
+        sql = "SELECT PlotAmount FROM Plot WHERE "
+                + "PlotID = " + inPlotID;
+        
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("PlotAmount"));
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function modifyAmount().");
+            System.out.println(e.getMessage());
+        }
+        
+        sql = "UPDATE Amount SET "
+                + "AmountPlatinum = " + amountPlatinum
+                + " AmountGold = " + amountGold
+                + " AmountSilver = " + amountSilver
+                + " WHERE AmountID = " + amountID;
+        
+        try
+        {
+            stmt = con.createStatement();
+            stmt.executeQuery(sql);
+            
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function modifyAmount()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;  //Not successful
+    }
+    
+    /* This function adds an amount to the provided plot.
+     */
+    public boolean depositAmount(int plotID, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        int amountID, curPlat, curGold, curSil;
+        
+        sql = "SELECT PlotAmount FROM Plot WHERE PlotID = " + plotID;
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("PlotAmount"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
+                    + "WHERE AmountID = " + amountID;
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
+            curGold = Integer.parseInt(rs.getString("AmountGold"));
+            curSil = Integer.parseInt(rs.getString("AmountSilver"));
+            
+            curPlat += amountPlatinum;
+            curGold += amountGold;
+            curSil += amountSilver;
+            
+            sql = "UPDATE Amount SET "
+                    + "AmountPlatinum = " + curPlat + ", "
+                    + "AmountGold = " + curGold + ", "
+                    + "AmountSilver = " + curSil + " "
+                    + "WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function addAmount()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    /* This function removes an amount from the provided plot.
+     */
+    public boolean withdrawAmount(int plotID, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        int amountID, curPlat, curGold, curSil;
+        
+        sql = "SELECT PlotAmount FROM Plot WHERE PlotID = " + plotID;
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("PlotAmount"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
+                    + "WHERE AmountID = " + amountID;
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
+            curGold = Integer.parseInt(rs.getString("AmountGold"));
+            curSil = Integer.parseInt(rs.getString("AmountSilver"));
+            
+            curPlat -= amountPlatinum;
+            curGold -= amountGold;
+            curSil -= amountSilver;
+            
+            if(curPlat < 0 || curGold < 0 || curSil < 0)
+            {
+                System.out.println("Error in removeAmount() - removed too much. An amount fell below zero.");
+            }
+            else
+            {
+                sql = "UPDATE Amount SET "
+                        + "AmountPlatinum = " + curPlat + ", "
+                        + "AmountGold = " + curGold + ", "
+                        + "AmountSilver = " + curSil + " "
+                        + "WHERE AmountID = " + amountID;
+                stmt = con.createStatement();
+                stmt.execute(sql);
+
+                return true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function addAmount()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    /*Adds an extra plot(3x3 grid) to the provided estate.
+     * plotID - Unique ID of the character's plot
+     * quality - Description of the quality of plot to be added. e.g. 'fine'
+     * groundArray - 2D array of ground tiles.
+     * 
+     * *Note: Need to supply groundArray because of lack of functionality
+     * in the PlotQueryHandler to generate random water tiles. (To be added
+     * later).
+     */
+    public boolean expandPlot(int plotID, String quality, int[][] groundArray)
+    {
+        int exquisite, fine, poor;
+        String gArray;
+                
+        quality = quality.toLowerCase();
+        
+        if(quality.equals("exquisite") || quality.equals("fine") || quality.equals("poor"))
+        {   
+            try
+            {
+                sql = "SELECT PlotGroundArray, PlotAcreExquisiteMax, PlotAcreFineMax, PlotAcrePoorMax "
+                        + "FROM Plot WHERE PlotID = " + plotID;
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+
+                exquisite = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
+                fine = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
+                poor = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
+                gArray = rs.getString("PlotGroundArray");
+                
+                if(quality.equals("exquisite"))
+                {
+                    exquisite += 1;
+                }
+                else if(quality.equals("fine"))
+                {
+                    fine += 1;
+                }
+                else
+                {
+                    poor += 1;
+                }
+                
+                gArray = gArray + convertToArray(groundArray);
+                
+                //Add back to database
+                sql = "UPDATE Plot SET "
+                        + "PlotAcreExquisiteMax = " + exquisite + ", "
+                        + "PlotAcreFineMax = " + fine + ", "
+                        + "PlotAcrePoorMax = " + poor + ","
+                        + "PlotGroundArray = " + gArray + " "
+                        + "WHERE PlotID = " + plotID;
+                stmt = con.createStatement();
+                stmt.execute(sql);
+                
+                return true;  //Update successful
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error in PlotQueryHander, function expandPlot()");
+                System.out.println(e.getMessage());
+            }
+        }
+        else
+        {
+            System.out.println("Invalid quality supplied.");
+        }
+        
+        return false;  //Unsuccessful expansion
+    }
+    
+    /* This function returns the amount of exquisite, fine, poor acres the
+     * provided plot has.
+     */
+    public ArrayList<Integer> getAcreQualityAmounts(int plotID)
+    {
+        ArrayList<Integer> amounts = new ArrayList();
+        
+        sql = "SELECT PlotAcreExquisiteMax, PlotAcreFineMax, PlotAcrePoorMax "
+                + "FROM Plot WHERE PlotID = " + plotID;
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            amounts.add(Integer.parseInt(rs.getString("PlotAcreExquisiteMax")));
+            amounts.add(Integer.parseInt(rs.getString("PlotAcreFineMax")));
+            amounts.add(Integer.parseInt(rs.getString("PlotAcrePoorMax")));
+            
+            return amounts;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, function getAcreQualityAmount()");
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    /* This function will be used when buildings are bought, to add to acres used,
+     * and to check for limit overflow.
+     * 
+     * Returns false if modification is unsuccessful.
+     */
+    public boolean useAcresOnPlot(int plotID, double acreExquisite, double acreFine, double acrePoor)
+    {
+        double curEx, curFine, curPoor;
+        
+        sql = "SELECT PlotAcreExquisite, PlotAcreExquisiteMax, PlotAcreFine, PlotAcreFineMax, "
+                + "PlotAcrePoor, PlotAcrePoorMax "
+                + "FROM Plot WHERE PlotID = " + plotID;
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            curEx = Double.parseDouble(rs.getString("PlotAcreExquisite"));
+            curFine = Double.parseDouble(rs.getString("PlotAcreFine"));
+            curPoor = Double.parseDouble(rs.getString("PlotAcrePoor"));
+            
+            //Check for overflow
+            if((curEx + acreExquisite) > Integer.parseInt(rs.getString("PlotAcreExquisiteMax")))
+                System.out.println("Error in function useAcresOnPlot() - Exquisite acre overflow.");
+            else if((curFine + acreFine) > Integer.parseInt(rs.getString("PlotAcreFineMax")))
+                System.out.println("Error in function useAcresOnPlot() - Fine acre overflow.");
+            else if((curPoor + acrePoor) > Integer.parseInt(rs.getString("PlotAcrePoorMax")))
+                System.out.println("Error in function useAcresOnPlot() - Poor acre overflow.");
+            else
+            {
+                //All acre useages are within limits. Add to table.
+                sql = "UPDATE Plot SET "
+                        + "PlotAcreExquisite = " + (curEx + acreExquisite)
+                        + "PlotAcreFine = " + (curFine + acreFine)
+                        + "PlotAcrePoor = " + (curPoor + acrePoor)
+                        + " WHERE PlotID = " + plotID;
+                stmt = con.createStatement();
+                stmt.execute(sql);
+                
+                return true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in PlotQueryHandler, in function useAcresOnPlot().");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
     }
 }

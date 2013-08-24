@@ -138,7 +138,17 @@ public class PlotQueryHandlerTest extends TestCase {
      * characters to the database every time the program is tested.
      */
     public void testAddPlotToCharacter() {
-        //System.out.println("Testing addPlotToCharacter()");
+        System.out.println("Testing addPlotToCharacter()");
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        int[][] ar1 = new int[3][3];
+        for(int a = 0; a < 3; a++)
+            for(int b = 0; b < 3; b++)
+                ar1[a][b] = 2;
+        int[][] ar2 = new int[3][3];
+        for(int a = 0; a < 3; a++)
+            for(int b = 0; b < 3; b++)
+                ar2[a][b] = 0;
+        instance.addPlotToCharacter("QR Character", "Sarkland", "Poor", 3, ar1, ar2, 0, 0, 0, 0);
     }
 
     /**
@@ -152,20 +162,24 @@ public class PlotQueryHandlerTest extends TestCase {
         
         //This is one of the results that should be present.
         ArrayList<String[]> expResult = new ArrayList();
-        String[] line = new String[13];
+        String[] line = new String[17];
         line[0] = "1";
         line[1] = "QR Character";
-        line[2] = "Rotheim";
-        line[3] = "3";
-        line[4] = "Exquisite";
+        line[2] = "0-0-0";
+        line[3] = "Rotheim";
+        line[4] = "3";
         line[5] = "2,2,3;2,2,3;2,2,2;";
         line[6] = "0,0,0;0,0,0;0,0,0;";
-        line[7] = "1.0";
-        line[8] = "1";
+        line[7] = "0";
+        line[8] = "-50.0";
         line[9] = "0";
-        line[10] = "-50.0";
-        line[11] = "0";
-        line[12] = "80";
+        line[10] = "80";
+        line[11] = "0.0";
+        line[12] = "1";
+        line[13] = "0.0";
+        line[14] = "0";
+        line[15] = "0.0";
+        line[16] = "0";
         expResult.add(line);
         
         boolean correct = false;
@@ -183,7 +197,11 @@ public class PlotQueryHandlerTest extends TestCase {
                 result.get(a)[9].equals(expResult.get(0)[9]) &&
                 result.get(a)[10].equals(expResult.get(0)[10]) &&
                 result.get(a)[11].equals(expResult.get(0)[11]) &&
-                result.get(a)[12].equals(expResult.get(0)[12]))
+                result.get(a)[12].equals(expResult.get(0)[12]) &&
+                result.get(a)[13].equals(expResult.get(0)[13]) &&
+                result.get(a)[14].equals(expResult.get(0)[14]) &&
+                result.get(a)[15].equals(expResult.get(0)[15]) &&
+                result.get(a)[16].equals(expResult.get(0)[16]))
                 correct = true;
         }
         
@@ -202,17 +220,21 @@ public class PlotQueryHandlerTest extends TestCase {
         ArrayList<String> expResult = new ArrayList();
         expResult.add("1");
         expResult.add("QR Character");
+        expResult.add("0-0-0");
         expResult.add("Rotheim");
         expResult.add("3");
-        expResult.add("Exquisite");
         expResult.add("2,2,3;2,2,3;2,2,2;");
         expResult.add("0,0,0;0,0,0;0,0,0;");
-        expResult.add("1.0");
-        expResult.add("1");
         expResult.add("0");
         expResult.add("-50.0");
         expResult.add("0");
         expResult.add("80");
+        expResult.add("0.0");
+        expResult.add("1");
+        expResult.add("0.0");
+        expResult.add("0");
+        expResult.add("0.0");
+        expResult.add("0");
         
         boolean correct = false;
         if(result.get(0).equals(expResult.get(0)) &&
@@ -248,6 +270,7 @@ public class PlotQueryHandlerTest extends TestCase {
      */
     public void testSearchPlotBy() {
         System.out.println("Testing searchPlotBy()");
+        
         PlotQueryHandler instance = new PlotQueryHandler(con);
         String characterName = "QR Character";
         String duchy = "Rotheim";
@@ -256,20 +279,24 @@ public class PlotQueryHandlerTest extends TestCase {
         ArrayList<String[]> result = instance.searchPlotBy(characterName, duchy, size, quality);
         
         ArrayList<String[]> expResult = new ArrayList();
-        String[] line = new String[13];
+        String[] line = new String[17];
         line[0] = "1";
         line[1] = "3";
-        line[2] = "5";
-        line[3] = "3";
+        line[2] = "37";
+        line[3] = "5";
         line[4] = "3";
         line[5] = "2,2,3;2,2,3;2,2,2;";
         line[6] = "0,0,0;0,0,0;0,0,0;";
-        line[7] = "1.0";
-        line[8] = "1";
+        line[7] = "0";
+        line[8] = "-50.0";
         line[9] = "0";
-        line[10] = "-50.0";
-        line[11] = "0";
-        line[12] = "80";
+        line[10] = "80";
+        line[11] = "0.0";
+        line[12] = "1";
+        line[13] = "0.0";
+        line[14] = "0";
+        line[15] = "0.0";
+        line[16] = "0";
         expResult.add(line);
         
         boolean correct = false;
@@ -287,7 +314,11 @@ public class PlotQueryHandlerTest extends TestCase {
                     result.get(a)[9].equals(expResult.get(0)[9]) &&
                     result.get(a)[10].equals(expResult.get(0)[10]) &&
                     result.get(a)[11].equals(expResult.get(0)[11]) &&
-                    result.get(a)[12].equals(expResult.get(0)[12]))
+                    result.get(a)[12].equals(expResult.get(0)[12]) &&
+                    result.get(a)[13].equals(expResult.get(0)[13]) && 
+                    result.get(a)[14].equals(expResult.get(0)[14]) &&
+                    result.get(a)[15].equals(expResult.get(0)[15]) &&
+                    result.get(a)[16].equals(expResult.get(0)[16]))
                 correct = true;
         }
 
@@ -313,37 +344,45 @@ public class PlotQueryHandlerTest extends TestCase {
         ArrayList<String[]> results = instance.retrieveAllPlots();
         
         //Check a single result
-        String[] result = new String[13];
-        result[0] = "1";
-        result[1] = "QR Character";
-        result[2] = "Rotheim";
-        result[3] = "3";
-        result[4] = "Exquisite";
-        result[5] = "2,2,3;2,2,3;2,2,2;";
-        result[6] = "0,0,0;0,0,0;0,0,0;";
-        result[7] = "1.0";
-        result[8] = "1";
-        result[9] = "0";
-        result[10] = "-50.0";
-        result[11] = "0";
-        result[12] = "80";
+        String[] line = new String[17];
+        line[0] = "1";
+        line[1] = "QR Character";
+        line[2] = "0-0-0";
+        line[3] = "Rotheim";
+        line[4] = "3";
+        line[5] = "2,2,3;2,2,3;2,2,2;";
+        line[6] = "0,0,0;0,0,0;0,0,0;";
+        line[7] = "0";
+        line[8] = "-50.0";
+        line[9] = "0";
+        line[10] = "80";
+        line[11] = "0.0";
+        line[12] = "1";
+        line[13] = "0.0";
+        line[14] = "0";
+        line[15] = "0.0";
+        line[16] = "0";
         
         boolean correct = false;
         for(int a = 0; a < results.size(); a++)
         {
-            if(results.get(a)[0].equals(result[0]) &&
-                    results.get(a)[1].equals(result[1]) &&
-                    results.get(a)[2].equals(result[2]) &&
-                    results.get(a)[3].equals(result[3]) &&
-                    results.get(a)[4].equals(result[4]) &&
-                    results.get(a)[5].equals(result[5]) &&
-                    results.get(a)[6].equals(result[6]) &&
-                    results.get(a)[7].equals(result[7]) &&
-                    results.get(a)[8].equals(result[8]) &&
-                    results.get(a)[9].equals(result[9]) &&
-                    results.get(a)[10].equals(result[10]) &&
-                    results.get(a)[11].equals(result[11]) &&
-                    results.get(a)[12].equals(result[12]))
+            if(results.get(a)[0].equals(line[0]) &&
+                    results.get(a)[1].equals(line[1]) &&
+                    results.get(a)[2].equals(line[2]) &&
+                    results.get(a)[3].equals(line[3]) &&
+                    results.get(a)[4].equals(line[4]) &&
+                    results.get(a)[5].equals(line[5]) &&
+                    results.get(a)[6].equals(line[6]) &&
+                    results.get(a)[7].equals(line[7]) &&
+                    results.get(a)[8].equals(line[8]) &&
+                    results.get(a)[9].equals(line[9]) &&
+                    results.get(a)[10].equals(line[10]) &&
+                    results.get(a)[11].equals(line[11]) &&
+                    results.get(a)[12].equals(line[12]) &&
+                    results.get(a)[13].equals(line[13]) &&
+                    results.get(a)[14].equals(line[14]) &&
+                    results.get(a)[15].equals(line[15]) &&
+                    results.get(a)[16].equals(line[16]))
                 correct = true;
         }
         
