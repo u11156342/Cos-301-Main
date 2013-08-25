@@ -50,7 +50,7 @@ public class RestFullAdapter {
 
     public BufferedImage ImageAdapter(int id) {
         try {
-            return ImageIO.read(new URL("http://" + serverURL + ":" + serverPort +"/TalesEstateServer/resources/Wrapper/getImageByID/" + id));
+            return ImageIO.read(new URL("http://" + serverURL + ":" + serverPort +"/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id));
 
 
         } catch (MalformedURLException ex) {

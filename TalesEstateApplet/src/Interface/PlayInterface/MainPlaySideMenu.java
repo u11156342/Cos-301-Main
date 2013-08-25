@@ -150,7 +150,7 @@ public class MainPlaySideMenu extends JPanel {
 
 
 
-
+//int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
                 wrapper.modifyPlot(PlotID, uchar.CharacterName, duchy, size, picked, tiles, buildings, Double.parseDouble(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), Integer.parseInt(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Integer.parseInt(retrievePlotDetails.get(9)), Double.parseDouble(retrievePlotDetails.get(10)));
 
                 textZone.setText(wrapper.getStatus(PropertId));

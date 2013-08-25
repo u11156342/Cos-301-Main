@@ -219,7 +219,7 @@ public class BuyInterface extends BasePanel {
                             }
                         }
                         Upkeep = 0 - (Integer.parseInt(wrapper.retrieveMonthlyUpkeep(duchy, picked).get(1))) * 10 + (Integer.parseInt(wrapper.retrieveMonthlyUpkeep(duchy, picked).get(2)));
-                        wrapper.addPlotToCharacter(user.CharacterName, duchy, 3, picked, groundArray, buildingArray, 1, 1, 0, workerMax, 0, Upkeep);
+                        wrapper.addPlotToCharacter(user.CharacterName, duchy ,picked,3, groundArray, buildingArray, 0, Upkeep, workerMax, 0);
                         ManageInterface ManageI;
 
                         ArrayList<String[]> results = null;
