@@ -703,9 +703,9 @@ public class PlotQueryHandler {
     
     /* This function retrieves the balance of the provided plot.
      */
-    public ArrayList<Integer> getCurrentAmount(int plotID)
+    public ArrayList<String> getCurrentAmount(int plotID)
     {
-        ArrayList<Integer> amounts = new ArrayList();
+        ArrayList<String> amounts = new ArrayList();
         int amountID, curPlat, curGold, curSil;
         
         sql = "SELECT PlotAmount FROM Plot WHERE "
@@ -726,9 +726,9 @@ public class PlotQueryHandler {
             curGold = Integer.parseInt(rs.getString("AmountGold"));
             curSil = Integer.parseInt(rs.getString("AmountSilver"));
             
-            amounts.add(curPlat);
-            amounts.add(curGold);
-            amounts.add(curSil);
+            amounts.add(""+curPlat);
+            amounts.add(""+curGold);
+            amounts.add(""+curSil);
             
             return amounts;
         }
@@ -958,9 +958,9 @@ public class PlotQueryHandler {
     /* This function returns the amount of exquisite, fine, poor acres the
      * provided plot has.
      */
-    public ArrayList<Integer> getAcreQualityAmounts(int plotID)
+    public ArrayList<String> getAcreQualityAmounts(int plotID)
     {
-        ArrayList<Integer> amounts = new ArrayList();
+        ArrayList<String> amounts = new ArrayList();
         
         sql = "SELECT PlotAcreExquisiteMax, PlotAcreFineMax, PlotAcrePoorMax "
                 + "FROM Plot WHERE PlotID = " + plotID;
@@ -970,9 +970,9 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            amounts.add(Integer.parseInt(rs.getString("PlotAcreExquisiteMax")));
-            amounts.add(Integer.parseInt(rs.getString("PlotAcreFineMax")));
-            amounts.add(Integer.parseInt(rs.getString("PlotAcrePoorMax")));
+            amounts.add(""+Integer.parseInt(rs.getString("PlotAcreExquisiteMax")));
+            amounts.add(""+Integer.parseInt(rs.getString("PlotAcreFineMax")));
+            amounts.add(""+Integer.parseInt(rs.getString("PlotAcrePoorMax")));
             
             return amounts;
         }
