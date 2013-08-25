@@ -99,9 +99,15 @@ public class VisualMap extends JFXPanel {
         final VisualMap ref = this;
 
         this.addMouseMotionListener(new MouseMotionListener() {
+            int tempx = 0;
+            int tempy = 0;
 
             @Override
             public void mouseDragged(MouseEvent e) {
+                //      scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()));
+                //    tempx = e.getX();
+                //     scroller.getVerticalScrollBar().setValue(scroller.getVerticalScrollBar().getValue() + (tempy - e.getY()));
+                //      tempy = e.getY();
             }
             // some idea of how we can show placing
             // bug grid draws over the it
@@ -109,6 +115,9 @@ public class VisualMap extends JFXPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+
+                tempx = e.getX();
+                tempy = e.getY();
 
                 int clickedx = e.getX();
                 int clickedy = e.getY();
@@ -136,11 +145,12 @@ public class VisualMap extends JFXPanel {
                             }
 
 
-                           
+
                             valid = true;
                             break;
                         }
                         if (valid) {
+
                             break;
                         }
                     }
@@ -154,14 +164,14 @@ public class VisualMap extends JFXPanel {
                             tempplacinggrid[b][n] = 0;
                         }
                     }
+
                 }
-                
-                 repaint();
+                repaint();
+
             }
         });
 
         this.addMouseListener(new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 int clickedx = e.getX();
@@ -206,6 +216,7 @@ public class VisualMap extends JFXPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
+
 
     }
 

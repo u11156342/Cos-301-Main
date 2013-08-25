@@ -4,7 +4,7 @@ import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
 import Interface.BuyInterface.BuyInterface;
 import Interface.SearchInterface.MainSearch;
-import Interface.admin.AdminMain;
+import Interface.admin.MainAdminSearch;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import javafx.application.Platform;
@@ -29,7 +29,7 @@ public class TalesEstateApplet extends JApplet {
     private BuyInterface Buy;
     private MainMenu MainMenu;
     MainSearch search;
-    AdminMain admin;
+    MainAdminSearch admin;
     CharSelectMenu CSelect;
     public static JFrame frame;
     UserCharacter Pchar = new UserCharacter();

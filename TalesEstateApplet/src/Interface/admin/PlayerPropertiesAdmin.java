@@ -25,12 +25,12 @@ public class PlayerPropertiesAdmin extends JPanel {
     public int amount;
     RestFullDBAdapter wrapper = new RestFullDBAdapter();
 
-    PlayerPropertiesAdmin(int i, UserCharacter user, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane) {
+    PlayerPropertiesAdmin(int i, UserCharacter user, TalesEstateApplet aThis, CardLayout cardlayout, Container contentPane,ArrayList<String[]> result) {
 
         w = i;
 
 
-        ArrayList<String[]> result = wrapper.retrieveAllPlots();
+       // ArrayList<String[]> result = wrapper.retrieveAllPlots();
         playersCurrentProperties = new PlayerCurrentPropertiesAdmin[result.size()];
         amount = result.size();
 
@@ -48,19 +48,6 @@ public class PlayerPropertiesAdmin extends JPanel {
             
             playersCurrentProperties[a].duchy = result.get(a)[2];
             playersCurrentProperties[a].owner = result.get(a)[1];
-
-            switch (result.get(a)[4]) {
-                case "Poor":
-                    playersCurrentProperties[a].quality = 1;
-                    break;
-                case "Fine":
-                    playersCurrentProperties[a].quality = 2;
-                    break;
-                default:
-                    playersCurrentProperties[a].quality = 3;
-                    break;
-            }
-
             playersCurrentProperties[a].size = Integer.parseInt(result.get(a)[3]);
             playersCurrentProperties[a].tiles = wrapper.convertFromArray(result.get(a)[5]);
             playersCurrentProperties[a].buildings = wrapper.convertFromArray(result.get(a)[6]);

@@ -4,7 +4,7 @@ import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.ManageInterface.ManageInterface;
 import Interface.ManageInterface.PlayerOwnPanel;
-import Interface.admin.AdminMain;
+import Interface.admin.MainAdminSearch;
 import talesestateapplet.BasePanel;
 import talesestateapplet.UserCharacter;
 import java.awt.*;
@@ -149,8 +149,8 @@ public class MainMenu extends BasePanel {
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                AdminMain admin;
-                admin = new AdminMain("Admin", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
+                MainAdminSearch admin;
+                admin = new MainAdminSearch("Admin", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
                 applet.add(admin, admin.getName());
                 cardlayout.show(contentPane, "Admin");
             }
@@ -201,8 +201,8 @@ public class MainMenu extends BasePanel {
         newItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                AdminMain admin;
-                admin = new AdminMain("Admin", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
+                MainAdminSearch admin;
+                admin = new MainAdminSearch("Admin", applet.JFXPANEL_WIDTH_INT, applet.JFXPANEL_HEIGHT_INT, Pchar, applet, cardlayout, contentPane);
                 applet.add(admin, admin.getName());
                 cardlayout.show(contentPane, "Admin");
             }

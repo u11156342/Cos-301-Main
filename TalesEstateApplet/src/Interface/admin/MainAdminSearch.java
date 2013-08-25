@@ -1,4 +1,4 @@
-package Interface.SearchInterface;
+package Interface.admin;
 
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
@@ -13,10 +13,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import talesestateapplet.TalesEstateApplet;
+import talesestateapplet.UserCharacter;
 
-public class MainSearch extends BasePanel {
+public class MainAdminSearch extends BasePanel {
 
-    public MainSearch(String name, final int JFXPANEL_WIDTH_INT, final int JFXPANEL_HEIGHT_INT, final TalesEstateApplet aThis, final CardLayout cardlayout, final Container contentPane) {
+    public MainAdminSearch(String name, final int JFXPANEL_WIDTH_INT, final int JFXPANEL_HEIGHT_INT,final UserCharacter uc, final TalesEstateApplet aThis, final CardLayout cardlayout, final Container contentPane) {
         super(name);
 
         setLayout(new GridBagLayout());
@@ -55,7 +56,7 @@ public class MainSearch extends BasePanel {
         JLabel slabe = new JLabel("Size");
 
         RestFullAdapter picAdapter = new RestFullAdapter();
-        JButton title = new JButton(new ImageIcon(picAdapter.ImageAdapter(18)));
+        JButton title = new JButton("Admin Search");
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
 
@@ -119,9 +120,9 @@ public class MainSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
-                SearchInterface si = new SearchInterface("mainS", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT, result, aThis, cardlayout, contentPane);
+                AdminSearchInterface si = new AdminSearchInterface("AdminS", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT, result, aThis, cardlayout, contentPane,uc);
                 aThis.add(si, si.getName());
-                cardlayout.show(contentPane, "mainS");
+                cardlayout.show(contentPane, "AdminS");
             }
         });
 
