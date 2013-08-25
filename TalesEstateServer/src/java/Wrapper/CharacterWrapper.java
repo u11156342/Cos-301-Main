@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 @Path("/CharacterWrapper")
 public class CharacterWrapper {
 
-    QueryHandler handler = handler = new QueryHandler();
+    QueryHandler handler = handler = new QueryHandler(0);
     Converter converter = new Converter();
       @GET
     @Path("registerEstateCharacter/{characterName}")

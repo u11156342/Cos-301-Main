@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 @Path("/LogWrapper")
 public class LogWrapper {
 
-    QueryHandler handler = handler = new QueryHandler();
+    QueryHandler handler = handler = new QueryHandler(0);
     Converter converter = new Converter();
 
     @GET

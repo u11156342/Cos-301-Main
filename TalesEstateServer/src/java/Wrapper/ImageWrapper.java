@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
 @Path("/ImageWrapper")
 public class ImageWrapper {
 
-    QueryHandler handler = handler = new QueryHandler();
+    QueryHandler handler = handler = new QueryHandler(1);
     Converter converter = new Converter();
 
     @GET
