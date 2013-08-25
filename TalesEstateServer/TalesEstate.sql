@@ -79,7 +79,18 @@ VALUES
 (0,50,0),
 (0,2,5),
 (0,100,0),
-(0,5,0)
+(0,5,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0)
 
 CREATE TABLE Price
 (
@@ -344,7 +355,8 @@ VALUES
 CREATE TABLE UserCharacter
 (
 	UserCharacterID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	UserCharacterName NVARCHAR(MAX)
+	UserCharacterName NVARCHAR(MAX),
+	UserCharacterGold INT
 )
 
 INSERT INTO UserCharacter(UserCharacterName)
@@ -361,33 +373,38 @@ CREATE TABLE Plot
 (
 	PlotID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	PlotOwnedBy INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
+	PlotAmount INT FOREIGN KEY REFERENCES Amount(AmountID),
 	PlotDuchy INT FOREIGN KEY REFERENCES Duchy(DuchyID),
 	PlotSize INT,
-	PlotQuality INT FOREIGN KEY REFERENCES Quality(QualityID),
 	PlotGroundArray NVARCHAR(MAX),
 	PlotBuildingArray NVARCHAR(MAX),
-	PlotAcresUsed FLOAT,
-	PlotAcreMax INT,
 	PlotHappiness INT,
 	PlotMonthlyIncome FLOAT,
 	PlotWorkersUsed INT,
-	PlotWorkerMax INT
+	PlotWorkerMax INT,
+	PlotAcreExquisite FLOAT,
+	PlotAcreExquisiteMax INT,
+	PlotAcreFine FLOAT,
+	PlotAcreFineMax INT,
+	PlotAcrePoor FLOAT,
+	PlotAcrePoorMax INT
 )
 
-INSERT INTO Plot(PlotOwnedBy, PlotDuchy, PlotSize, PlotQuality, PlotGroundArray, PlotBuildingArray, PlotAcresUsed, 
-PlotAcreMax, PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax)
+INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
+PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
+PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax)
 VALUES
-(3, 5, 3, 3, '2,2,3;2,2,3;2,2,2;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -50, 0, 80),
-(3, 4, 3, 3, '2,2,2;2,3,3;2,3,3;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -25, 0, 80),
-(3, 4, 3, 3, '2,3,2;2,2,3;3,2,3;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -25, 0, 80),
-(3, 4, 3, 3, '2,3,2;2,2,3;2,3,2;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -25, 0, 80),
-(3, 6, 3, 3, '2,2,2;3,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -50, 0, 80),
-(3, 6, 3, 3, '3,3,3;2,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -50, 0, 80),
-(4, 4, 9, 3, '2,2,2,2,2,2,2,3,2;2,2,3,2,2,2,2,2,2;3,2,2,2,2,2,2,2,2;2,2,3,3,2,2,2,2,2;2,2,3,2,2,2,3,3,2;2,3,2,2,2,2,2,2,3;2,3,2,2,2,2,2,3,2;2,2,2,2,2,3,2,3,2;2,2,2,3,2,2,2,2,2;', '0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;', 1, 1, 0, -25, 0, 80),
-(4, 4, 3, 3, '2,2,2;2,2,2;2,2,3;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -25, 0, 80),
-(4, 4, 3, 3, '3,2,2;2,2,2;3,2,2;', '0,0,0;0,0,0;0,0,0;', 1, 1, 0, -25, 0, 80),
-(1, 1, 3, 2, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 0, 0, 5, 0, 0, 0),
-(1, 1, 3, 2, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 0, 0, 0, 0, 0, 0)
+(3, 37, 5, 3, '2,2,3;2,2,3;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
+(3, 38, 4, 3, '2,2,2;2,3,3;2,3,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
+(3, 39, 4, 3, '2,3,2;2,2,3;3,2,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
+(3, 40, 4, 3, '2,3,2;2,2,3;2,3,2;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
+(3, 41, 6, 3, '2,2,2;3,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
+(3, 42, 6, 3, '3,3,3;2,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
+(4, 43, 4, 9, '2,2,2,2,2,2,2,3,2;2,2,3,2,2,2,2,2,2;3,2,2,2,2,2,2,2,2;2,2,3,3,2,2,2,2,2;2,2,3,2,2,2,3,3,2;2,3,2,2,2,2,2,2,3;2,3,2,2,2,2,2,3,2;2,2,2,2,2,3,2,3,2;2,2,2,3,2,2,2,2,2;', '0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;', 0, -25, 0, 80, 0, 9, 0, 0, 0, 0),
+(4, 44, 4, 3, '2,2,2;2,2,2;2,2,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
+(4, 45, 4, 3, '3,2,2;2,2,2;3,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 0, 0, 1, 0, 0),
+(1, 46, 1, 3, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 5, 0, 0, 0, 0, 0, 0, 1, 0, 0),
+(1, 47, 1, 3, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
 
 CREATE TABLE Tile
 (

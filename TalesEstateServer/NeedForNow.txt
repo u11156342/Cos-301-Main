@@ -1,0 +1,43 @@
+status report  //added to BuildingQueryHandler
+	getAllBuildings(int PlotID)
+
+deposite  //added depositAmount() to PlotQueryHandler
+	modifyGold(int PlotID,int amount)
+
+withdraw  //added withdrawAmount() to PlotQueryHandler
+	modifyGold(int PlotID,int amount)
+*Also added modifyAmount(): changes values to supplied values	
+
+exspand //removed plot fields in plot table. added newer. added function to plotqueryhandler
+	exspandPlot(int PlotID,String Quality)
+
+modified:
+addPlotToCharacter()
+retrievePlotsOwnedByCharacter()
+retrievePlotDetails()
+modifyPlot()
+searchPlotBy()
+deletePlot()
+...in order to make the above (and below) functions possible.
+
+list buildings  //same as above?? - praat met my hieroor
+	getAllBuildings(int PlotID)
+
+
+add building
+
+	getCurrentGold(int PlotID)  //added getCurrentAmount() to plotqueryhandler
+	getAcreQualityAmounts(int PlotID) //added getAcreQualityAmounts() to plotqueryhandler
+	getAllBuildings(int PlotID)  //Daar is n retrieveAllBuildingsOwnedByCharacter(). As nie genoeg, praat met my hieroor
+	
+	
+	addBuildingToPlot() //kla gedoen sover ek weet - word dit gedoen deur modifyPlot()? Indien, kan
+		ek n kleiner function maak wat net dit doen.
+	
+	modifyGold(int PlotID)  //Kyk in die PlotQueryHander vir die deposit/withdraw/modifyGold functions.
+	modifyWorkers(int PlotID,int workersAmount) - ***as gold en die res werk sal ek worders in sit.
+	modifyAcres(int PlotID,string Quality,double amount)  //added useAcresOnPlot()
+
+
+Visual interface
+later

@@ -81,18 +81,18 @@ public class Wrapper {
     }
 
     @GET
-    @Path("addPlotToCharacter/{characterName}/{duchyName}/{sizeValue}/{quality}/{groundArray}/{buildingArray}/{acresUsed}/{acreMax}/{workersUsed}/{workerMax}/{happiness}/{monthlyIncome}")
+    @Path("addPlotToCharacter/{characterName}/{duchyName}/{quality}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}")
     @Produces("text/plain")
-    public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("sizeValue") int sizeValue,
-            @PathParam("quality") String quality, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("acresUsed") double acresUsed,
-            @PathParam("acreMax") double acreMax, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("happiness") int happiness, @PathParam("monthlyIncome") double monthlyIncome) {
+    public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("quality") String quality,
+            @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness,
+            @PathParam("monthlyIncome") double monthlyIncome, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax) {
 
         characterName = characterName.replace('.', ' ');
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
         System.out.println("buildingArray " + buildingArray);
-        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, sizeValue, quality, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
+        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax)) {
             return "true";
         } else {
             return "false";
@@ -100,17 +100,19 @@ public class Wrapper {
     }
 
     @GET
-    @Path("modifyPlot/{plotId}/{characterName}/{duchyName}/{sizeValue}/{quality}/{groundArray}/{buildingArray}/{acresUsed}/{acreMax}/{workersUsed}/{workerMax}/{happiness}/{monthlyIncome}")
+    @Path("modifyPlot/{plotId}/{characterName}/{plotAmount}/{duchyName}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}{workersUsed}/{workerMax}/{exquisiteUsed}/{exquisiteMax}/{fineUsed}/{fineMax}/{poorUsed}/{poorMax}")
     @Produces("text/plain")
-    public String modifyPlot(@PathParam("plotId") int plotId, @PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("sizeValue") int sizeValue,
-            @PathParam("quality") String quality, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("acresUsed") double acresUsed,
-            @PathParam("acreMax") double acreMax, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("happiness") int happiness, @PathParam("monthlyIncome") double monthlyIncome) {
+    public String modifyPlot(@PathParam("plotId") int plotId, @PathParam("characterName") String characterName, @PathParam("plotAmount") String plotAmount, 
+            @PathParam("duchyName") String duchyName, @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray, 
+            @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness, @PathParam("monthlyIncome") double monthlyIncome, 
+            @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("exquisiteUsed") double exquisiteUsed, @PathParam("exquisiteMax") int exquisiteMax,
+            @PathParam("fineUsed") double fineUsed, @PathParam("fineMax") int fineMax, @PathParam("poorUsed") double poorUsed, @PathParam("poorMax") int poorMax) {
 
         characterName = characterName.replace('.', ' ');
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
 
-        if (handler.getPlotQH().modifyPlot(plotId, characterName, duchyName, sizeValue, quality, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome)) {
+        if (handler.getPlotQH().modifyPlot(plotId, characterName, plotAmount, duchyName, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax, exquisiteUsed, exquisiteMax, fineUsed, fineMax, poorUsed, poorMax)) {
             return "true";
         } else {
             return "false";
