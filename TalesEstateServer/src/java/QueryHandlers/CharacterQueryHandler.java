@@ -25,6 +25,7 @@ public class CharacterQueryHandler {
      */
     public boolean registerEstateCharacter(String characterName)
     {
+        int amountID;
         try
         {
             //Check if character is already registered to the Estate system
@@ -36,8 +37,16 @@ public class CharacterQueryHandler {
 
             if(!rs.next())
             {
-                sql = "INSERT INTO UserCharacter (UserCharacterName) "
-                        + "VALUES ('" + characterName + "')";
+                sql = "INSERT INTO Amount VALUES(0,0,0);";
+                stmt = con.createStatement();
+                stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+
+                rs = stmt.getGeneratedKeys();
+                rs.next();
+                amountID = rs.getInt(1);
+                
+                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterAmount) "
+                        + "VALUES ('" + characterName + "', " + amountID + ")";
                 stmt = con.createStatement();
                 stmt.execute(sql);
                 return true;
@@ -113,5 +122,162 @@ public class CharacterQueryHandler {
         }
         
         return null;
+    }
+    
+    public ArrayList<String> getCharacterAmounts(String characterName)
+    {
+        ArrayList<String> result = new ArrayList();
+        int amountID = 0;
+        
+        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
+                + "UserCharacterName = '" + characterName + "'";
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("UserCharacterID"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM "
+                    + "Amount WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            result.add(rs.getString("AmountPlatinum"));
+            result.add(rs.getString("AmountGold"));
+            result.add(rs.getString("AmountSilver"));
+            
+            return result;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in CharacterQueryHandler, function getCharacterAmounts()");
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        int amountID;
+        int curPlat, curGold, curSilv;
+        
+        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
+                + "UserCharacterName = '" + characterName + "'";
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
+            
+            sql = "UPDATE Amount SET "
+                    + "AmountPlatinum = " + amountPlatinum
+                    + " AmountGold = " + amountGold
+                    + " AmountSilver = " + amountSilver
+                    + " WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+        }
+        
+        return false;
+    }
+    
+    public boolean depositAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        int amountID;
+        int curPlat, curGold, curSilv;
+        
+        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
+                + "UserCharacterName = '" + characterName + "'";
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
+                    + "WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
+            curGold = Integer.parseInt(rs.getString("AmountGold"));
+            curSilv = Integer.parseInt(rs.getString("AmountSilver"));
+            
+            sql = "UPDATE Amount SET "
+                    + "AmountPlatinum = " + (curPlat + amountPlatinum)
+                    + " AmountGold = " + (curGold + amountGold)
+                    + " AmountSilver = " + (curSilv + amountSilver)
+                    + " WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+        }
+        
+        return false;
+    }
+    
+    public boolean withdrawAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver)
+    {
+        int amountID;
+        int curPlat, curGold, curSilv;
+        
+        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
+                + "UserCharacterName = '" + characterName + "'";
+        try
+        {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
+            
+            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
+                    + "WHERE AmountID = " + amountID;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
+            curGold = Integer.parseInt(rs.getString("AmountGold"));
+            curSilv = Integer.parseInt(rs.getString("AmountSilver"));
+            
+            if((curPlat - amountPlatinum) < 0)
+                System.out.println("Character does not have enough platinum.");
+            else if((curGold - amountGold) < 0)
+                System.out.println("Character does not have enough gold.");
+            else if((curSilv - amountSilver) < 0)
+                System.out.println("Character does not have enough silver.");
+            else
+            {
+                sql = "UPDATE Amount SET "
+                        + "AmountPlatinum = " + (curPlat - amountPlatinum)
+                        + " AmountGold = " + (curGold - amountGold)
+                        + " AmountSilver = " + (curSilv - amountSilver)
+                        + " WHERE AmountID = " + amountID;
+                stmt = con.createStatement();
+                stmt.execute(sql);
+
+                return true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+        }
+        
+        return false;
     }
 }

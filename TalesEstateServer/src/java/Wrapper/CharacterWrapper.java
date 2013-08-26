@@ -5,6 +5,7 @@
 package Wrapper;
 
 import QueryHandlers.QueryHandler;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -47,5 +48,33 @@ public class CharacterWrapper {
     @Produces("text/plain")
     public String retrieveAllCharacters() {
         return converter.ArrToUrl(handler.getCharacterQH().retrieveAllCharacters());
+    }
+    
+    @GET
+    @Path("getCharacterAmounts/{characterName}")
+    @Produces("text/plain")
+    public ArrayList<String> getCharacterAmounts(@PathParam("characterName") String characterName) {
+        return handler.getCharacterQH().getCharacterAmounts(characterName);
+    }
+    
+    @GET
+    @Path("modifyAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
+    @Produces("text/plain")
+    public boolean modifyAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
+        return handler.getCharacterQH().modifyAmount(characterName, amountPlatinum, amountGold, amountSilver);
+    }
+    
+    @GET
+    @Path("depositAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
+    @Produces("text/plain")
+    public boolean depositAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
+        return handler.getCharacterQH().depositAmount(characterName, amountPlatinum, amountGold, amountSilver);
+    }
+    
+    @GET
+    @Path("withdrawAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
+    @Produces("text/plain")
+    public boolean withdrawAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
+        return handler.getCharacterQH().withdrawAmount(characterName, amountPlatinum, amountGold, amountSilver);
     }
 }

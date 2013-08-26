@@ -90,6 +90,13 @@ VALUES
 (0,0,0),
 (0,0,0),
 (0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
+(0,0,0),
 (0,0,0)
 
 CREATE TABLE Price
@@ -356,18 +363,18 @@ CREATE TABLE UserCharacter
 (
 	UserCharacterID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	UserCharacterName NVARCHAR(MAX),
-	UserCharacterGold INT
+	UserCharacterAmount INT FOREIGN KEY REFERENCES Amount(AmountID)
 )
 
-INSERT INTO UserCharacter(UserCharacterName)
+INSERT INTO UserCharacter(UserCharacterName, UserCharacterAmount)
 VALUES
-('Gilthana'),
-('Fiorella de Luca'),
-('QR Character'),
-('ABCharacter'),
-('Saachi Namasri'),
-('Test123'),
-('Test 123')
+('Gilthana', 48),
+('Fiorella de Luca', 49),
+('QR Character', 50),
+('ABCharacter', 51),
+('Saachi Namasri', 52),
+('Test123', 53),
+('Test 123', 54)
 
 CREATE TABLE Plot
 (
