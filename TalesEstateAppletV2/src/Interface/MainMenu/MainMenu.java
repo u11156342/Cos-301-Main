@@ -2,6 +2,7 @@ package Interface.MainMenu;
 
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
+import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -112,6 +113,10 @@ public class MainMenu extends BasePanel {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                MyPropertiesInterface mProp;
+                mProp = new MyPropertiesInterface("MyProp", tc);
+                tc.mainapplet.add(mProp, mProp.getName());
+                tc.cardlayout.show(tc.contentpane, "MyProp");
             }
         });
         btn3.addActionListener(new ActionListener() {
@@ -147,25 +152,23 @@ public class MainMenu extends BasePanel {
         newItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-              
             }
         });
         newItem2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-              
             }
         });
         newItem3.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {               
+            public void actionPerformed(java.awt.event.ActionEvent e) {
             }
         });
 
     }
 
     public void showMenu(TransferContainer tc) {
-       // tc.mainapplet.setJMenuBar(menu);
+        // tc.mainapplet.setJMenuBar(menu);
         tc.mainframe.setJMenuBar(menu);
     }
 }

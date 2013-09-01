@@ -7,13 +7,13 @@ package talesestateappletv2;
 import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
+import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.event.ActionListener;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
@@ -33,6 +33,7 @@ public class TalesEstateAppletV2 extends JApplet {
     BuyInterface Buy;
     MainMenu MainMenu;
     CharSelectMenu CSelect;
+    MyPropertiesInterface mProp;
 
     /**
      * @param args the command line arguments
@@ -82,6 +83,8 @@ public class TalesEstateAppletV2 extends JApplet {
 
         Buy = new BuyInterface("Buy", tContain);
         Buy.addNextActionListener(buttonListener);
+        
+
 
 
         add(CSelect, CSelect.getName());
