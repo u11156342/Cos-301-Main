@@ -14,7 +14,7 @@ import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import talesestateapplet.BasePanel;
 import talesestateapplet.TalesEstateApplet;
-import talesestateapplet.UserCharacter; 
+import talesestateapplet.UserCharacter;
 
 /**
  *
