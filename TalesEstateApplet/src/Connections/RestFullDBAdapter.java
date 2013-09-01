@@ -87,6 +87,8 @@ public class RestFullDBAdapter {
 
         return Conv.FromUrl(temp);
 
+        
+      
     }
 
     public ArrayList<String[]> queryPlotPrice(String duchy, String quality) {

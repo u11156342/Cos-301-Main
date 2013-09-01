@@ -81,7 +81,7 @@ public class TalesEstateApplet extends JApplet {
 
         search = new MainSearch("Search", JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT, this, this.cardlayout, this.getContentPane());
         
-        
+ 
 
         add(CSelect, CSelect.getName());
         add(MainMenu, MainMenu.getName());
