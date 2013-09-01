@@ -29,8 +29,8 @@ public class MainPlaySideMenu extends JPanel {
     public ArrayList<String> amount2;
     public int pId;
 
-    public MainPlaySideMenu(final JTextPane textZone, TransferContainer tc,int p) {
-        pId=p;
+    public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p) {
+        pId = p;
         Report = new JButton("Status Report");
         Deposite = new JButton("Deposit gold");
         Withdraw = new JButton("Withdraw gold");
@@ -39,8 +39,8 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings = new JButton("Add Building");
         VisualInterface = new JButton("Visual Interface");
 
-        amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
-        amount2 = tc.rdb.getCurrentAmount(pId);
+
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -86,11 +86,51 @@ public class MainPlaySideMenu extends JPanel {
         Deposite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                double gold=Integer.parseInt(amount1.get(0))*10.0 + Integer.parseInt(amount1.get(1)) + Integer.parseInt(amount1.get(2))/10;
-                String mes = "How much gold do you wish to deposit, available gold "+gold;
+                amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
+                amount2 = tc.rdb.getCurrentAmount(pId);
+                double gold = Integer.parseInt(amount1.get(0)) * 10.0 + Integer.parseInt(amount1.get(1)) + (Integer.parseInt(amount1.get(2)) * 1.0 / 10);
+                String mes = "How much gold do you wish to deposit, available gold " + gold;
                 try {
-                    double amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                    double amountz = 0;
+                    amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                    if (amountz == 0) {
+                        return;
+                    }
+                    if (gold >= amountz) {
+
+                        int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
+                        System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
+                        //plots gold so it becomes less
+                        tempa = tempa + (int) amountz * 10;
+                        int nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        int ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        int nsilver = tempa;
+                        //plot 
+
+                        tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
+                        amount2 = tc.rdb.getCurrentAmount(pId);
+                        System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
+
+                        // users gold so it becomes more
+                        tempa = Integer.parseInt(amount1.get(0)) * 100 + Integer.parseInt(amount1.get(1)) * 10 + Integer.parseInt(amount1.get(2));
+                        System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                        tempa = tempa - (int) amountz * 10;
+                        nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        nsilver = tempa;
+
+                        //user 
+                        tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
+                        System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(textZone,"You do not have enough gold");
+                    }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -99,14 +139,50 @@ public class MainPlaySideMenu extends JPanel {
         Withdraw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 double gold=Integer.parseInt(amount2.get(0))*10.0 + Integer.parseInt(amount2.get(1)) + Integer.parseInt(amount2.get(2))/10;
-                String mes = "How much gold do you wish to Withdraw, available gold " +gold;
+                amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
+                amount2 = tc.rdb.getCurrentAmount(pId);
+                double gold = Integer.parseInt(amount2.get(0)) * 10.0 + Integer.parseInt(amount2.get(1)) + (Integer.parseInt(amount2.get(2)) * 1.0 / 10);
+                String mes = "How much gold do you wish to Withdraw, available gold " + gold;
                 try {
-                    double amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
-                    if(gold>=amountz)
+                    double amountz = 0;
+                    amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                    if (amountz == 0) {
+                        return;
+                    }
+                    if (gold >= amountz) {
+
+                        int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
+                        System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
+                        //plots gold so it becomes less
+                        tempa = tempa - (int) amountz * 10;
+                        int nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        int ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        int nsilver = tempa;
+                        //plot 
+
+                        tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
+                        amount2 = tc.rdb.getCurrentAmount(pId);
+                        System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
+
+                        // users gold so it becomes more
+                        tempa = Integer.parseInt(amount1.get(0)) * 100 + Integer.parseInt(amount1.get(1)) * 10 + Integer.parseInt(amount1.get(2));
+                        System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                        tempa = tempa + (int) amountz * 10;
+                        nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        nsilver = tempa;
+
+                        //user 
+                        tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
+                        System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                    }
+                    else
                     {
-                        tc.rdb.modifyAmount(mes, PROPERTIES, HEIGHT, ALLBITS);
-                        tc.rdb.
+                        JOptionPane.showMessageDialog(textZone,"You do not have enough gold");
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());

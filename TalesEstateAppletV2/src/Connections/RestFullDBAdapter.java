@@ -331,4 +331,29 @@ public class RestFullDBAdapter {
 
         return Conv.FromUrl(temp);
     }
+
+    public boolean modifyAmount(int inPlotID, int amountPlatinum, int amountGold, int amountSilver) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyAmount" + "/" + inPlotID + "/" + amountPlatinum + "/" + amountGold + "/" + amountSilver);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            inputLine = in.readLine();
+            temp = temp + inputLine;
+
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if ("".equals(temp)) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
 }
