@@ -126,6 +126,7 @@ public class CharacterQueryHandler {
     
     public ArrayList<String> getCharacterAmounts(String characterName)
     {
+        System.out.println(characterName);
         ArrayList<String> result = new ArrayList();
         int amountID = 0;
         
@@ -136,7 +137,7 @@ public class CharacterQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            amountID = Integer.parseInt(rs.getString("UserCharacterID"));
+            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
             
             sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM "
                     + "Amount WHERE AmountID = " + amountID;
@@ -160,6 +161,7 @@ public class CharacterQueryHandler {
     
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver)
     {
+        System.out.println("UPDATING GOLD TO "+amountPlatinum+" "+amountGold+" "+amountSilver);
         int amountID;
         int curPlat, curGold, curSilv;
         
@@ -174,8 +176,8 @@ public class CharacterQueryHandler {
             
             sql = "UPDATE Amount SET "
                     + "AmountPlatinum = " + amountPlatinum
-                    + " AmountGold = " + amountGold
-                    + " AmountSilver = " + amountSilver
+                    + ", AmountGold = " + amountGold
+                    + ", AmountSilver = " + amountSilver
                     + " WHERE AmountID = " + amountID;
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -185,6 +187,7 @@ public class CharacterQueryHandler {
         catch(Exception e)
         {
             System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+            e.printStackTrace();
         }
         
         return false;
@@ -225,7 +228,9 @@ public class CharacterQueryHandler {
         }
         catch(Exception e)
         {
-            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+            
+            System.out.println("Error in CharacterQueryHandler, function depositAmount()");
+            
         }
         
         return false;

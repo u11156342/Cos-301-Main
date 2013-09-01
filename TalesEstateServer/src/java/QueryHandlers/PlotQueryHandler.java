@@ -234,9 +234,9 @@ public class PlotQueryHandler {
             if(qualityID == 3)
                 exquisite += 1;
             else if(qualityID == 2)
-                exquisite += 1;
+                fine += 1;
             else if(qualityID == 1)
-                exquisite += 1;
+                poor += 1;
             
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);

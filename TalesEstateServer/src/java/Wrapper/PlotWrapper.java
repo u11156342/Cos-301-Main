@@ -31,7 +31,6 @@ public class PlotWrapper {
         return converter.ArrToUrl(handler.getPlotQH().queryPlotPrice(duchy, quality));
     }
 
-    @GET
     @Path("addPlotToCharacter/{characterName}/{duchyName}/{quality}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}")
     @Produces("text/plain")
     public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("quality") String quality,
@@ -43,6 +42,7 @@ public class PlotWrapper {
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
         System.out.println("buildingArray " + buildingArray);
+        System.out.println(quality);
         if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax)) {
             return "true";
         } else {

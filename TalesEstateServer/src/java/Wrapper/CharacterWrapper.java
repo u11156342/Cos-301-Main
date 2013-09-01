@@ -22,7 +22,8 @@ public class CharacterWrapper {
 
     QueryHandler handler = handler = new QueryHandler(0);
     Converter converter = new Converter();
-      @GET
+
+    @GET
     @Path("registerEstateCharacter/{characterName}")
     @Produces("text/plain")
     public String registerEstateCharacter(@PathParam("characterName") String characterName) {
@@ -49,28 +50,34 @@ public class CharacterWrapper {
     public String retrieveAllCharacters() {
         return converter.ArrToUrl(handler.getCharacterQH().retrieveAllCharacters());
     }
-    
+
     @GET
     @Path("getCharacterAmounts/{characterName}")
     @Produces("text/plain")
-    public ArrayList<String> getCharacterAmounts(@PathParam("characterName") String characterName) {
-        return handler.getCharacterQH().getCharacterAmounts(characterName);
+    public String getCharacterAmounts(@PathParam("characterName") String characterName) {
+        characterName = characterName.replace('.', ' ');
+        return converter.ToUrl(handler.getCharacterQH().getCharacterAmounts(characterName));
     }
-    
+
     @GET
     @Path("modifyAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
     @Produces("text/plain")
-    public boolean modifyAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
-        return handler.getCharacterQH().modifyAmount(characterName, amountPlatinum, amountGold, amountSilver);
+    public String modifyAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
+        characterName = characterName.replace('.', ' ');
+        if (handler.getCharacterQH().modifyAmount(characterName, amountPlatinum, amountGold, amountSilver)) {
+            return "true";
+        } else {
+            return "";
+        }
     }
-    
+
     @GET
     @Path("depositAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
     @Produces("text/plain")
     public boolean depositAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
         return handler.getCharacterQH().depositAmount(characterName, amountPlatinum, amountGold, amountSilver);
     }
-    
+
     @GET
     @Path("withdrawAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
     @Produces("text/plain")
