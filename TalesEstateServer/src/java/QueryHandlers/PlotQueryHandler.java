@@ -362,23 +362,23 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
 
-            value.add(rs.getString("PlotID"));
-            value.add(rs.getString("PlotOwnedBy"));
-            value.add(rs.getString("PlotAmount"));
-            value.add(rs.getString("PlotDuchy"));
-            value.add(rs.getString("PlotSize"));
-            value.add(rs.getString("PlotGroundArray"));
-            value.add(rs.getString("PlotBuildingArray"));
-            value.add(rs.getString("PlotHappiness"));
-            value.add(rs.getString("PlotMonthlyIncome"));
-            value.add(rs.getString("PlotWorkersUsed"));
-            value.add(rs.getString("PlotWorkerMax"));
-            value.add(rs.getString("PlotAcreExquisite"));
-            value.add(rs.getString("PlotAcreExquisiteMax"));
-            value.add(rs.getString("PlotAcreFine"));
-            value.add(rs.getString("PlotAcreFineMax"));
-            value.add(rs.getString("PlotAcrePoor"));
-            value.add(rs.getString("PlotAcrePoorMax"));
+            value.add(rs.getString("PlotID")); //0
+            value.add(rs.getString("PlotOwnedBy"));//1
+            value.add(rs.getString("PlotAmount"));//2
+            value.add(rs.getString("PlotDuchy"));//3
+            value.add(rs.getString("PlotSize"));//4
+            value.add(rs.getString("PlotGroundArray"));//5
+            value.add(rs.getString("PlotBuildingArray"));//6
+            value.add(rs.getString("PlotHappiness"));//7
+            value.add(rs.getString("PlotMonthlyIncome"));//8
+            value.add(rs.getString("PlotWorkersUsed"));//9
+            value.add(rs.getString("PlotWorkerMax"));//10
+            value.add(rs.getString("PlotAcreExquisite"));//11
+            value.add(rs.getString("PlotAcreExquisiteMax"));//12
+            value.add(rs.getString("PlotAcreFine"));//13
+            value.add(rs.getString("PlotAcreFineMax"));//14
+            value.add(rs.getString("PlotAcrePoor"));//15
+            value.add(rs.getString("PlotAcrePoorMax"));//16
 
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
