@@ -4,6 +4,7 @@ import Interface.MyProperties.PlayerOwnPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -42,18 +43,13 @@ public class ResultUnit extends JPanel {
     }
 
     public void init(TransferContainer tc) {
-        statusArea.append("Property id : " + propertyID + "\n" + "Located in " + duchy);
-        statusArea.append("" + '\n');
-        if (quality
-                == 1) {
-            statusArea.append("Quality is : poor" + "\n" + "Current size is : " + size);
-        } else if (quality
-                == 2) {
-            statusArea.append("Quality is : fine" + "\n" + "Current size is : " + size);
-        } else if (quality
-                == 3) {
-            statusArea.append("Quality is : exquisite" + "\n" + "Current size is : " + size);
-        }
+        
+        ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(propertyID);               
+        
+        statusArea.setPreferredSize(new Dimension(160,100));
+        statusArea.append("Owner : " + retrievePlotDetails.get(1)+ "\n");
+        statusArea.append("Plot Duchy : " + retrievePlotDetails.get(3)+ "\n");
+        statusArea.append("Plot Size : " + retrievePlotDetails.get(4)+ "\n");
 
         Browse.addActionListener(new ActionListener() {
             @Override

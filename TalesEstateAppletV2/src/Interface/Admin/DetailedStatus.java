@@ -5,10 +5,14 @@
 package Interface.Admin;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JViewport;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -16,31 +20,36 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
-public class DetailedStatus extends BasePanel{
-    
-    public JTextPane textZone = new JTextPane();
-    JButton back=new JButton("back");
-    
-    public DetailedStatus(String name,int Pid,final TransferContainer tc)
-    {
-        super(name);
-        textZone.setContentType("text/html"); 
-        textZone.setText(tc.rdb.getStatus(Pid));
-        
-        this.add(textZone,BorderLayout.CENTER);
-        
-        back.addActionListener(new ActionListener(){
+public class DetailedStatus extends BasePanel {
 
+    public JTextPane textZone = new JTextPane();
+    JButton back = new JButton("back");
+
+    public DetailedStatus(String name, int Pid, final TransferContainer tc) {
+        super(name);
+        
+        JScrollPane stats = new JScrollPane(textZone);
+       
+        stats.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+        
+        textZone.setContentType("text/html");
+        String t = tc.rdb.getSuperStatusReport(Pid);
+
+        textZone.setText(t);
+        textZone.setEditable(false);
+
+        this.add(stats, BorderLayout.CENTER);
+
+        back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               tc.cardlayout.show(tc.contentpane, "AdminS");
+                tc.cardlayout.show(tc.contentpane, "AdminS");
             }
         });
-        add(back,BorderLayout.SOUTH);
-        
-        
-        
-        
+        add(back, BorderLayout.SOUTH);
+
+
+
+
     }
-    
 }

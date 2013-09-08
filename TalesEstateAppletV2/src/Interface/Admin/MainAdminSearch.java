@@ -48,7 +48,7 @@ public class MainAdminSearch extends BasePanel {
         JLabel slabe = new JLabel("Size");
 
         RestFullAdapter picAdapter = new RestFullAdapter();
-        JButton title = new JButton("Admin Search");
+        JButton title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
 

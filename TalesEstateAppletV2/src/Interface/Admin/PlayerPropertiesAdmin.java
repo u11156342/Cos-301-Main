@@ -29,7 +29,7 @@ public class PlayerPropertiesAdmin extends JPanel {
             h = 300;
             JOptionPane.showMessageDialog(tc.contentpane, "There are currently no  properties");
         }
-        h = amount * 70;
+        h = amount * 60;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this,tc);
             playersCurrentProperties[a].setPreferredSize(new Dimension(257,100));

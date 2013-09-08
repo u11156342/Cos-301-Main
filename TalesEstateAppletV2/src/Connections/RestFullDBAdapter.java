@@ -419,7 +419,26 @@ public class RestFullDBAdapter {
 
         return temp;
     }
+        public String getSuperStatusReport(int propertyId) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "Wrapper/" + "SuperStatusReport/" + propertyId);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return temp;
+    }
+
+    
+    
     public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
         String temp = "";
         try {

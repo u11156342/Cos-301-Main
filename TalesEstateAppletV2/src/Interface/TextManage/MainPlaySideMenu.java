@@ -210,6 +210,9 @@ public class MainPlaySideMenu extends JPanel {
                 String picked = (String) JOptionPane.showInputDialog(ref, "Choose what quality : ", "", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
 
                 ArrayList<String[]> cost;
+                if (picked == null) {
+                    return;
+                }
                 cost = tc.rdb.queryPlotPrice(retrievePlotDetails.get(3), picked);
                 int stat;
 
@@ -285,7 +288,7 @@ public class MainPlaySideMenu extends JPanel {
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
                         //modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
-                        tc.rdb.modifyPlot(pId, tc.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), size, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
+                        tc.rdb.modifyPlot(pId, tc.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
 
 
                         Report.doClick();
@@ -303,7 +306,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         //use the property to get the info,then list all the buildins that are build on it
-        String duch;
+
         listBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -337,10 +340,11 @@ public class MainPlaySideMenu extends JPanel {
         });
 
 
+       final MainPlaySideMenu tr= this;
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId,duchy_);
+                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId, duchy_,tr);
                 tc.mainapplet.add(Build, Build.getName());
                 tc.cardlayout.show(tc.contentpane, "Build");
             }

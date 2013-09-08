@@ -1,6 +1,7 @@
 package Interface.BuyBuilding;
 
 import Connections.RestFullDBAdapter;
+import Interface.TextManage.MainPlaySideMenu;
 import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Container;
@@ -28,11 +29,11 @@ public class BuildtabPanel extends BasePanel {
     int PlotID;
     TransferContainer tain;
 
-    public BuildtabPanel(String name,TransferContainer tc,int PID,String duchy) {
-        super(name);
-        tain=tc;
-        PlotID=PID;
-        duc = duchy;
+    public BuildtabPanel(String build, TransferContainer tc, int pId, String duchy_, MainPlaySideMenu tr) {
+        super(build);
+        tain = tc;
+        PlotID = pId;
+        duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();
 
         ArrayList<String[]> Agricultural = null;
@@ -41,27 +42,26 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Services = null;
         ArrayList<String[]> Improvements = null;
 
-        JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural);
+        JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural,tr);
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        JComponent panel2 = makeTextPanel("Mining", 1, Mining);
+        JComponent panel2 = makeTextPanel("Mining", 1, Mining,tr);
         tabbedPane.addTab("Mining", null, panel2);
 
-        JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing);
+        JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing,tr);
         tabbedPane.addTab("Manufacturing", null, panel3);
 
-        JComponent panel4 = makeTextPanel("Services", 3, Services);
+        JComponent panel4 = makeTextPanel("Services", 3, Services,tr);
         tabbedPane.addTab("Services", null, panel4);
 
-        JComponent panel5 = makeTextPanel("Improvements", 4, Improvements);
+        JComponent panel5 = makeTextPanel("Improvements", 4, Improvements,tr);
         tabbedPane.addTab("Improvements", null, panel5);
         add(tabbedPane);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
-  
 
-    protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr) {
+    protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr, final MainPlaySideMenu tr) {
         JPanel panel = new JPanel(false);
 
 
@@ -124,7 +124,7 @@ public class BuildtabPanel extends BasePanel {
         bbutton.setPreferredSize(new Dimension(50, 50));
         c.gridx = 1;
 
-        bbutton.setPreferredSize(new Dimension(150,60));
+        bbutton.setPreferredSize(new Dimension(150, 60));
         bbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -157,28 +157,28 @@ public class BuildtabPanel extends BasePanel {
                 int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(10));
                 double PlotWorkersUsed = Double.parseDouble(retrievePlotDetails.get(9));
 
-                
-                int poormax= Integer.parseInt(retrievePlotDetails.get(16));
-                double poorused=Double.parseDouble(retrievePlotDetails.get(15));
-                
-                int finemax= Integer.parseInt(retrievePlotDetails.get(14));
-                double fineused=Double.parseDouble(retrievePlotDetails.get(13));
-                
-                int exmax= Integer.parseInt(retrievePlotDetails.get(12));
-                double exused=Double.parseDouble(retrievePlotDetails.get(11));                
 
-                int checkCounter=0;
-/*
+                int poormax = Integer.parseInt(retrievePlotDetails.get(16));
+                double poorused = Double.parseDouble(retrievePlotDetails.get(15));
+
+                int finemax = Integer.parseInt(retrievePlotDetails.get(14));
+                double fineused = Double.parseDouble(retrievePlotDetails.get(13));
+
+                int exmax = Integer.parseInt(retrievePlotDetails.get(12));
+                double exused = Double.parseDouble(retrievePlotDetails.get(11));
+
+                int checkCounter = 0;
+                /*
                 
-                //first check acre req // do later
-                if (PlotAcreMax == PlotAcresUsed) {
-                    JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
-                    buySucess = false;
-                } else if ((PlotAcresUsed + acresNeeded) > PlotAcreMax) {
-                    JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
-                    buySucess = false;
-                }
-*/
+                 //first check acre req // do later
+                 if (PlotAcreMax == PlotAcresUsed) {
+                 JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
+                 buySucess = false;
+                 } else if ((PlotAcresUsed + acresNeeded) > PlotAcreMax) {
+                 JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
+                 buySucess = false;
+                 }
+                 */
                 //worker check
                 if (PlotWorkerMax == PlotWorkersUsed) {
                     buySucess = false;
@@ -186,10 +186,8 @@ public class BuildtabPanel extends BasePanel {
                 } else if ((PlotWorkersUsed + WorkersNeeded) > PlotWorkerMax) {
                     buySucess = false;
                     JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
-                }
-                else
-                {
-                   checkCounter++; 
+                } else {
+                    checkCounter++;
                 }
 
                 //money check
@@ -201,13 +199,14 @@ public class BuildtabPanel extends BasePanel {
                 //time check,need to use log see what is build and how much time is left
 
                 //for now to test
-                buySucess=true;
+                buySucess = true;
                 if (buySucess) {
                     //if this is reached then the person has all the req to build,need to update all the values
-                   tain.rdb.logBuildingBuilt(charsId,buildingsID[buildings.getSelectedIndex()],PlotID); 
+                    tain.rdb.logBuildingBuilt(charsId, buildingsID[buildings.getSelectedIndex()], PlotID);
                     System.out.println(PlotID);
                 }
-                Cardlayout.show(ContentPane, "MainPlay");
+                tr.listBuildings.doClick();
+                tain.cardlayout.show(tain.contentpane, "MPlay");
             }
         });
         buildingsPanel.add(bbutton, c);
