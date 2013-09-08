@@ -163,12 +163,16 @@ public class PlotWrapper {
     @GET
     @Path("expandPlot/{plotID}/{quality}/{groundArray}")
     @Produces("text/html")
-    public String expandPlot(@PathParam("plotID") int plotID, @PathParam("quality") String quality, @PathParam("quality") String groundArray) {
+    public String expandPlot(@PathParam("plotID") int plotID, @PathParam("quality") String quality, @PathParam("groundArray") String groundArray) {
+        System.out.println(plotID);
+        groundArray = groundArray.replace('_', ';');
         if (handler.getPlotQH().expandPlot(plotID, quality, handler.getPlotQH().convertFromArray(groundArray))) {
             return "true";
         } else {
             return "false";
         }
+
+
     }
 
     @GET

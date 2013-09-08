@@ -860,7 +860,7 @@ public class PlotQueryHandler {
      */
     public boolean expandPlot(int plotID, String quality, int[][] groundArray) {
         int exquisite, fine, poor;
-        String gArray;
+        String gArray = "";
 
         quality = quality.toLowerCase();
 
@@ -872,11 +872,15 @@ public class PlotQueryHandler {
                 rs = stmt.executeQuery(sql);
                 rs.next();
 
+                System.out.println(sql);
                 exquisite = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
-                fine = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
-                poor = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
-                gArray = rs.getString("PlotGroundArray");
-
+                System.out.println("c "+exquisite);
+                fine = Integer.parseInt(rs.getString("PlotAcreFineMax"));
+                System.out.println("c "+fine);
+                poor = Integer.parseInt(rs.getString("PlotAcrePoorMax"));
+                System.out.println("c "+poor);
+                
+               // gArray = rs.getString("PlotGroundArray");
                 if (quality.equals("exquisite")) {
                     exquisite += 1;
                 } else if (quality.equals("fine")) {
@@ -886,21 +890,22 @@ public class PlotQueryHandler {
                 }
 
                 gArray = gArray + convertToArray(groundArray);
-
                 //Add back to database
+                
                 sql = "UPDATE Plot SET "
                         + "PlotAcreExquisiteMax = " + exquisite + ", "
                         + "PlotAcreFineMax = " + fine + ", "
                         + "PlotAcrePoorMax = " + poor + ","
-                        + "PlotGroundArray = " + gArray + " "
+                        + "PlotGroundArray = '" + gArray + "' "
                         + "WHERE PlotID = " + plotID;
+                System.out.println(sql);
                 stmt = con.createStatement();
                 stmt.execute(sql);
-
                 return true;  //Update successful
             } catch (Exception e) {
                 System.out.println("Error in PlotQueryHander, function expandPlot()");
                 System.out.println(e.getMessage());
+    
             }
         } else {
             System.out.println("Invalid quality supplied.");
