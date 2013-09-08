@@ -4,6 +4,8 @@
  */
 package Interface.TextManage;
 
+import Interface.BuyBuilding.BuildtabPanel;
+import Interface.BuyProperty.Generator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,7 @@ public class MainPlaySideMenu extends JPanel {
     public ArrayList<String> amount1;
     public ArrayList<String> amount2;
     public int pId;
+    String duchy_;
 
     public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p) {
         pId = p;
@@ -38,6 +41,13 @@ public class MainPlaySideMenu extends JPanel {
         listBuildings = new JButton("List Buildings");
         addBuildings = new JButton("Add Building");
         VisualInterface = new JButton("Visual Interface");
+
+        ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(pId);
+        tiles = tc.rdb.convertFromArray(retrievePlotDetails.get(5));
+        buildings = tc.rdb.convertFromArray(retrievePlotDetails.get(6));
+        size = tiles.length;
+        duchy_ = retrievePlotDetails.get(3);
+
 
 
 
@@ -81,8 +91,10 @@ public class MainPlaySideMenu extends JPanel {
         Report.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                textZone.setText(tc.rdb.getStatus(pId));
             }
         });
+        Report.doClick();
         Deposite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,14 +138,13 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(textZone,"You do not have enough gold");
+                    } else {
+                        JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                Report.doClick();
             }
         });
         Withdraw.addActionListener(new ActionListener() {
@@ -179,27 +190,149 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(textZone,"You do not have enough gold");
+                    } else {
+                        JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                Report.doClick();
             }
         });
 
         exspand.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(pId);
+
+                String[] choices = {"Poor", "Fine", "Exquisite"};
+                String picked = (String) JOptionPane.showInputDialog(ref, "Choose what quality : ", "", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+
+                ArrayList<String[]> cost;
+                cost = tc.rdb.queryPlotPrice(retrievePlotDetails.get(3), picked);
+                int stat;
+
+                stat = JOptionPane.showConfirmDialog(ref, "Will cost: Platinum:" + cost.get(0)[0] + " Gold:" + cost.get(0)[1] + " Silver:" + cost.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
+
+                if (stat == 0) {
+
+                    amount2 = tc.rdb.getCurrentAmount(pId);
+                    //how much gold the plot has
+                    int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
+
+                    // the amoun the plot will cost
+                    int costr = 100 * Integer.parseInt(cost.get(0)[0]) + 10 * Integer.parseInt(cost.get(0)[1]) + Integer.parseInt(cost.get(0)[2]);
+                    System.out.println(tempa + " " + costr);
+                    if (tempa >= costr) {
+
+                        tempa = tempa - costr;
+
+                        int nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        int ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        int nsilver = tempa;
+
+                        tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
+
+                        Generator gen = new Generator(3);
+
+                        tiles = tc.rdb.convertFromArray(retrievePlotDetails.get(5));
+                        buildings = tc.rdb.convertFromArray(retrievePlotDetails.get(6));
+
+                        int old = tiles.length;
+                        System.out.println("SIZE BEFORE EXSPAND " + old);
+                        int[][] tilesz = gen.ExspandGenerate(retrievePlotDetails.get(3), picked, size, tiles);
+                        size = tilesz.length;
+                        System.out.println("SIZE AFTER EXSPAND " + size);
+
+                        if (old != size) {
+                            buildings = gen.ArrayCopy(buildings, old, size);
+                        }
+
+
+                        tc.rdb.expandPlot(pId, picked, tilesz);
+
+                        //ok so now the property is exspanded in terms of acres and stuff but I still need to edit max workers and income
+
+                        int workerMax;
+                        int quality;
+                        switch (picked) {
+                            case "Poor":
+                                quality = 1;
+                                workerMax = 20;
+                                break;
+                            case "Fine":
+                                quality = 2;
+                                workerMax = 40;
+                                break;
+                            default:
+                                quality = 3;
+                                workerMax = 80;
+                                break;
+                        }
+                        double Upkeep;
+                        String pc;
+                        duchy_ = retrievePlotDetails.get(3);
+                        ArrayList<String> retrieveMonthlyUpkeep = tc.rdb.retrieveMonthlyUpkeep(retrievePlotDetails.get(3), picked);
+                        pc = retrieveMonthlyUpkeep.get(0);
+                        String gc = retrieveMonthlyUpkeep.get(1);
+                        String sc = retrieveMonthlyUpkeep.get(2);
+
+                        Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (100 * Double.parseDouble(pc) + 10 * Double.parseDouble(gc) + Double.parseDouble(sc));
+
+                        workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
+                        System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
+                        //modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
+                        tc.rdb.modifyPlot(pId, tc.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), size, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
+
+
+                        Report.doClick();
+
+                    } else {
+                        JOptionPane.showMessageDialog(textZone, "There is not enough funds in the property");
+                    }
+
+
+
+
+                }
+
             }
         });
 
-        //use the property to get the info,then list all the buildins that are build onit
+        //use the property to get the info,then list all the buildins that are build on it
+        String duch;
         listBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                ArrayList<String> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, pId);
+                textZone.setText("");
+                StringBuilder html = new StringBuilder();
+                html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
+                html.append("<table border=\"1\">");
+                html.append("<th>Building ID</th>");
+                html.append("<th>Building name </th>");
+                html.append("<th>Income</th>");
+                html.append("<th>Happiness</th>");
+
+                ArrayList<String[]> tempresult;
+                for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
+                    tempresult = tc.rdb.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)));
+                    html.append("	<tr>");
+                    html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)).append("</td>");
+                    html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");
+                    html.append(" <td>").append(tempresult.get(0)[6]).append("</td>");
+                    html.append(" <td>").append(tempresult.get(0)[10]).append("</td>");
+                    html.append("	</tr>");
+
+                }
+
+                html.append("</table>");
+
+                textZone.setText(html.toString());
             }
         });
 
@@ -207,6 +340,9 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId,duchy_);
+                tc.mainapplet.add(Build, Build.getName());
+                tc.cardlayout.show(tc.contentpane, "Build");
             }
         });
         VisualInterface.addActionListener(new ActionListener() {

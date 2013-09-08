@@ -235,6 +235,7 @@ public class BuyInterface extends BasePanel {
                             }
                             Upkeep = 0 - (Integer.parseInt(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(1))) * 10 + (Integer.parseInt(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(2)));
                             tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
+                            tain.cardlayout.show(tain.contentpane, "MainMenu");
 
                         } else {
                             JOptionPane.showMessageDialog(PicMenuScrollPane," You do not have enough funds to purchase this plot");

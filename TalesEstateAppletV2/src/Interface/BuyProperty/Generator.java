@@ -25,8 +25,12 @@ public class Generator {
 
             workingsize = tiles.length;
         }
+        
+        System.out.println("size : "+size);
+        System.out.println("working size "+workingsize);
+        System.out.println("tiles l "+tiles.length);
 
-        printArray(tiles);
+      //  printArray(tiles);
 
         for (int a = 0; a < workingsize; a++) {
 
@@ -92,8 +96,8 @@ public class Generator {
         }
 
 
-        for (int a = 0; a < oldsize; a++) {
-            for (int b = 0; b < oldsize; b++) {
+        for (int a = 0; a < other.length; a++) {
+            for (int b = 0; b < other.length; b++) {
                 temp[a][b] = other[a][b];
             }
         }
@@ -161,5 +165,23 @@ public class Generator {
             }
         }
         return -1;
+    }
+
+    public int[][] ExspandGenerate(String get, String picked, int size, int[][] tiles) {
+
+        int temp = 0;
+        switch (picked) {
+            case "Poor":
+                temp = 1;
+                break;
+            case "Fine":
+                temp = 2;
+                break;
+            default:
+                temp = 3;
+                break;
+        }
+        
+        return this.ExspandGenerate(get,temp,size,tiles);
     }
 }
