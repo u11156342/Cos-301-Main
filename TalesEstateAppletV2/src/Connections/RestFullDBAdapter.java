@@ -516,4 +516,56 @@ public class RestFullDBAdapter {
 
         return Conv.FromUrl(temp);
     }
+
+    public ArrayList<String> retrieveDuchyList() {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "DuchyWrapper/" + "retrieveDuchyList");
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.FromUrl(temp);
+
+    }
+
+    public ArrayList<String[]> searchPlotBy(String characterName, String duchy, int size, String quality) {
+        String temp = "";
+        try {
+
+            characterName = characterName.replace(' ', '.');
+            if ("".equals(characterName)) {
+                characterName = characterName + "-";
+            }
+            if ("".equals(duchy)) {
+                duchy = duchy + "-";
+            }
+            if (0 == (size)) {
+                size = -1;
+            }
+            if ("".equals(quality)) {
+                quality = quality + "-";
+            }
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "searchPlotBy/" + characterName + "/" + duchy + "/" + size + "/" + quality);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.ArrFromUrl(temp);
+    }
 }

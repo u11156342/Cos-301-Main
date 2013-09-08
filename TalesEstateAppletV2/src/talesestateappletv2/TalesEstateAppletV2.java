@@ -8,11 +8,10 @@ import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
 import Interface.MyProperties.MyPropertiesInterface;
+import Interface.Search.MainSearch;
 import java.awt.event.ActionListener;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javax.swing.JApplet;
@@ -84,12 +83,13 @@ public class TalesEstateAppletV2 extends JApplet {
         Buy = new BuyInterface("Buy", tContain);
         Buy.addNextActionListener(buttonListener);
         
-
+        MainSearch search = new MainSearch("Search",tContain);
 
 
         add(CSelect, CSelect.getName());
         add(MainMenu, MainMenu.getName());
         add(Buy, Buy.getName());
+        add(search,search.getName());
         revalidate();
         repaint();
 

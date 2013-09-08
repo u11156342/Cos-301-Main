@@ -154,15 +154,23 @@ public class BuildtabPanel extends BasePanel {
 
                 ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(PlotID);
 
-                int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(12));
-                double PlotWorkersUsed = Double.parseDouble(retrievePlotDetails.get(11));
+                int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(10));
+                double PlotWorkersUsed = Double.parseDouble(retrievePlotDetails.get(9));
 
-                double PlotAcreMax = Double.parseDouble(retrievePlotDetails.get(8));
-                double PlotAcresUsed = Double.parseDouble(retrievePlotDetails.get(7));
+                
+                int poormax= Integer.parseInt(retrievePlotDetails.get(16));
+                double poorused=Double.parseDouble(retrievePlotDetails.get(15));
+                
+                int finemax= Integer.parseInt(retrievePlotDetails.get(14));
+                double fineused=Double.parseDouble(retrievePlotDetails.get(13));
+                
+                int exmax= Integer.parseInt(retrievePlotDetails.get(12));
+                double exused=Double.parseDouble(retrievePlotDetails.get(11));                
 
+                int checkCounter=0;
 /*
                 
-                //first check acre req
+                //first check acre req // do later
                 if (PlotAcreMax == PlotAcresUsed) {
                     JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
                     buySucess = false;
@@ -170,7 +178,7 @@ public class BuildtabPanel extends BasePanel {
                     JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
                     buySucess = false;
                 }
-
+*/
                 //worker check
                 if (PlotWorkerMax == PlotWorkersUsed) {
                     buySucess = false;
@@ -179,7 +187,11 @@ public class BuildtabPanel extends BasePanel {
                     buySucess = false;
                     JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
                 }
-*/
+                else
+                {
+                   checkCounter++; 
+                }
+
                 //money check
 
                 //Prereq check
