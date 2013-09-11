@@ -34,7 +34,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setColumns(4);
         statusArea.setEditable(false);
-        statusArea.setPreferredSize(new Dimension(150,50));
+        statusArea.setPreferredSize(new Dimension(170,50));
         
         //init();
         

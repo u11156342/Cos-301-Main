@@ -96,7 +96,7 @@ public class RestFullDBAdapter {
     }
 
     public int[][] convertFromArray(String inArray) {
-        System.out.println(inArray);
+        System.out.println(" conveter "+ inArray);
         int[][] result;
         StringTokenizer str, stc;
         int rows, columns;
@@ -116,6 +116,7 @@ public class RestFullDBAdapter {
             }
         }
 
+        System.out.println(result.length);
         return result;
     }
 

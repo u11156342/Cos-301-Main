@@ -110,7 +110,6 @@ public class MainAdminSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = tc.rdb.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
-                System.out.println("re "+result.size());
                 AdminSearchInterface si = new AdminSearchInterface("AdminS", tc,result);
                 tc.mainapplet.add(si, si.getName());
                 tc.cardlayout.show(tc.contentpane, "AdminS");
@@ -120,6 +119,17 @@ public class MainAdminSearch extends BasePanel {
         c.gridy = 5;
         c.gridwidth = 2;
         add(btn, c);
+        
+        JButton back=new JButton("Back");
+        back.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               tc.cardlayout.show(tc.contentpane, "MainMenu");
+            }
+        });
+        c.gridy=6;
+        add(back,c);
 
     }
 }

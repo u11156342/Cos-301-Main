@@ -16,7 +16,7 @@ import talesestateappletv2.TransferContainer;
 
 public class MainSearch extends BasePanel {
 
-    public MainSearch(String name,final TransferContainer tc) {
+    public MainSearch(String name, final TransferContainer tc) {
         super(name);
 
         setLayout(new GridBagLayout());
@@ -75,7 +75,7 @@ public class MainSearch extends BasePanel {
         add(size, c);
 
         JButton btn = new JButton(new ImageIcon(picAdapter.ImageAdapter(19)));
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));        
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setContentAreaFilled(false);
 
         btn.addActionListener(new ActionListener() {
@@ -109,7 +109,7 @@ public class MainSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
-                SearchInterface si = new SearchInterface("mainS",result,tc);
+                SearchInterface si = new SearchInterface("mainS", result, tc);
                 tc.mainapplet.add(si, si.getName());
                 tc.cardlayout.show(tc.contentpane, "mainS");
             }
@@ -118,6 +118,16 @@ public class MainSearch extends BasePanel {
         c.gridy = 5;
         c.gridwidth = 2;
         add(btn, c);
+
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tc.cardlayout.show(tc.contentpane, "MainMenu");
+            }
+        });
+        c.gridy = 6;
+        add(back, c);
 
     }
 }

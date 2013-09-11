@@ -6,6 +6,7 @@ package Interface.TextManage;
 
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.Generator;
+import Interface.PlayInterface.PlayInterface;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -237,7 +238,7 @@ public class MainPlaySideMenu extends JPanel {
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
 
-                        tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
+
 
                         Generator gen = new Generator(3);
 
@@ -250,9 +251,20 @@ public class MainPlaySideMenu extends JPanel {
                         size = tilesz.length;
                         System.out.println("SIZE AFTER EXSPAND " + size);
 
-                        if (old != size) {
-                            buildings = gen.ArrayCopy(buildings, old, size);
+                        //   if (old != size) {
+                        //      buildings = gen.ArrayCopy(buildings, old, size);
+                        //   }
+
+                        int[][] temp = new int[buildings.length][buildings.length];
+                        for (int a = 0; a < buildings.length; a++) {
+                            System.arraycopy(buildings[a], 0, temp[a], 0, buildings.length);
                         }
+
+                        buildings = new int[tilesz.length][tilesz.length];
+                        for (int a = 0; a < temp.length; a++) {
+                            System.arraycopy(temp[a], 0, buildings[a], 0, temp.length);
+                        }
+
 
 
                         tc.rdb.expandPlot(pId, picked, tilesz);
@@ -287,9 +299,10 @@ public class MainPlaySideMenu extends JPanel {
 
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
-                        //modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
+                        // modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
                         tc.rdb.modifyPlot(pId, tc.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
 
+                        tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
                         Report.doClick();
 
@@ -340,11 +353,11 @@ public class MainPlaySideMenu extends JPanel {
         });
 
 
-       final MainPlaySideMenu tr= this;
+        final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId, duchy_,tr);
+                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId, duchy_, tr);
                 tc.mainapplet.add(Build, Build.getName());
                 tc.cardlayout.show(tc.contentpane, "Build");
             }
@@ -352,6 +365,10 @@ public class MainPlaySideMenu extends JPanel {
         VisualInterface.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                PlayInterface visual = new PlayInterface("visual", pId, tc);
+                tc.mainapplet.add(visual, visual.getName());
+                tc.cardlayout.show(tc.contentpane, "visual");
             }
         });
 

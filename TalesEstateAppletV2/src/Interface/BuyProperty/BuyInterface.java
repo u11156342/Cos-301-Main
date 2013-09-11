@@ -6,12 +6,15 @@ package Interface.BuyProperty;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -187,21 +190,21 @@ public class BuyInterface extends BasePanel {
 
                     if (stat == 0) {
 
-                        System.out.println("CASH ="+userCash+" B COST ="+buildingCost);
+                        System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
                         if (userCash >= buildingCost) {
                             int workerMax = 0;
                             int Upkeep = 0;
-                            System.out.println("CASH BEFORE = "+userCash);
-                            System.out.println("COST "+buildingCost);
+                            System.out.println("CASH BEFORE = " + userCash);
+                            System.out.println("COST " + buildingCost);
                             //update the bros cash
-                            userCash=userCash-buildingCost;
-                            int nplat=userCash/100;
-                            userCash=userCash-nplat*100;
-                            int ngold=userCash/10;
-                            userCash=userCash-ngold*10;
-                            int nsilver=userCash;
-                            System.out.println("CASH AFTER "+(nplat)+(ngold)+nsilver);
-                            tain.rdb.modifyAmount(tain.CharacterName,nplat,ngold,nsilver);
+                            userCash = userCash - buildingCost;
+                            int nplat = userCash / 100;
+                            userCash = userCash - nplat * 100;
+                            int ngold = userCash / 10;
+                            userCash = userCash - ngold * 10;
+                            int nsilver = userCash;
+                            System.out.println("CASH AFTER " + (nplat) + (ngold) + nsilver);
+                            tain.rdb.modifyAmount(tain.CharacterName, nplat, ngold, nsilver);
 
                             Generator gen = new Generator(3);
                             int quality;
@@ -238,7 +241,7 @@ public class BuyInterface extends BasePanel {
                             tain.cardlayout.show(tain.contentpane, "MainMenu");
 
                         } else {
-                            JOptionPane.showMessageDialog(PicMenuScrollPane," You do not have enough funds to purchase this plot");
+                            JOptionPane.showMessageDialog(PicMenuScrollPane, " You do not have enough funds to purchase this plot");
                         }
                     }
                 }
@@ -285,5 +288,14 @@ public class BuyInterface extends BasePanel {
 
         PicMenuScrollPane.addMouseListener(buyPickClicked);
         add(PicMenuScrollPane, BorderLayout.CENTER);
+
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tain.cardlayout.show(tain.contentpane, "MainMenu");
+            }
+        });
+        add(back, BorderLayout.SOUTH);
     }
 }
