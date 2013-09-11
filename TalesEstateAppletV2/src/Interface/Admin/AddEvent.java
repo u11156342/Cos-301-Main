@@ -4,9 +4,12 @@
  */
 package Interface.Admin;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -40,7 +43,7 @@ public class AddEvent extends BasePanel {
     JLabel l5 = new JLabel("Silver Modifier");
     JLabel l6 = new JLabel("Defense Modifier");
 
-    public AddEvent(String name, TransferContainer tc) {
+    public AddEvent(String name, final TransferContainer tc) {
         super(name);
 
         setLayout(new GridBagLayout());
@@ -62,7 +65,7 @@ public class AddEvent extends BasePanel {
         c.gridx = 0;
         c.gridy = 0;
 
-        
+
 
         add(des, c);
 
@@ -131,6 +134,16 @@ public class AddEvent extends BasePanel {
         c.gridx = 1;
         c.gridy = 13;
         add(cansel, c);
+
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tc.cardlayout.show(tc.contentpane, "AdminS");
+            }
+        });
+        c.gridy = 14;
+        add(back, c);
 
     }
 }

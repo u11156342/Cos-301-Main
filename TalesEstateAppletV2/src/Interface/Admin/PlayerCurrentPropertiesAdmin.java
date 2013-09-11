@@ -1,5 +1,6 @@
 package Interface.Admin;
 
+import Interface.BrowseInterface.BrowseInterface;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,7 +17,7 @@ import talesestateappletv2.TransferContainer;
 public class PlayerCurrentPropertiesAdmin extends JPanel {
 
     public JTextArea statusArea = new JTextArea();
-    String[] coms = {"Status","Add event", "View Property"};
+    String[] coms = {"Status", "Add event", "View Property"};
     JComboBox commands = new JComboBox(coms);
     JButton bt = new JButton("next");
     String owner;
@@ -27,41 +28,48 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
     int[][] tiles;
     int[][] buildings;
 
-    PlayerCurrentPropertiesAdmin(int w, PlayerPropertiesAdmin aThis,final TransferContainer t) {
+    PlayerCurrentPropertiesAdmin(int w, PlayerPropertiesAdmin aThis, final TransferContainer t) {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setColumns(4);
         statusArea.setEditable(false);
-        statusArea.setPreferredSize(new Dimension(170,50));
-        
-        //init();
-        
-        bt.addActionListener(new ActionListener(){
+        statusArea.setPreferredSize(new Dimension(170, 50));
 
+        //init();
+
+        bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = commands.getSelectedIndex();
-                
-                if(selectedIndex==0)
-                {
-                    DetailedStatus ds=new DetailedStatus("stats",propertyID,t);
-                    t.mainapplet.add(ds,ds.getName());
-                    t.cardlayout.show(t.contentpane,"stats");
-                }
-                else if(selectedIndex==1)
-                {
-                    AddEvent ev=new AddEvent("event",t);
-                    t.mainapplet.add(ev,ev.getName());
-                    t.cardlayout.show(t.contentpane,"event");
+
+                if (selectedIndex == 0) {
+                    DetailedStatus ds = new DetailedStatus("stats", propertyID, t);
+                    t.mainapplet.add(ds, ds.getName());
+                    t.cardlayout.show(t.contentpane, "stats");
+                } else if (selectedIndex == 1) {
+                    AddEvent ev = new AddEvent("event", t);
+                    t.mainapplet.add(ev, ev.getName());
+                    t.cardlayout.show(t.contentpane, "event");
+                } else if (selectedIndex == 2) {
+                    System.out.println(propertyID);
+                    ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
+
+                    size = Integer.parseInt("" + retrievePlotDetails.get(4));
+                    tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
+                    buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));
+
+                    BrowseInterface bi = new BrowseInterface("Browse", t, propertyID, size, tiles, buildings);
+                    t.mainapplet.add(bi, bi.getName());
+                    t.cardlayout.show(t.contentpane, "Browse");
                 }
             }
         });
-        
-                
+
+
         c.gridx = 0;
-        c.gridy=0;
+        c.gridy = 0;
         c.gridheight = 2;
         c.gridwidth = 2;
 
@@ -75,19 +83,19 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         c.gridx = 2;
         c.gridy = 1;
         add(bt, c);
-        
-        
+
+
     }
 
     public void init(TransferContainer t) {
-        
-        ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);     
-        
-        
-        statusArea.append("Owner : "+retrievePlotDetails.get(1)+"\n");
-        statusArea.append("Located in " + retrievePlotDetails.get(3)+"\n");
-        statusArea.append("Happiness : " + retrievePlotDetails.get(7)+"\n");
-        statusArea.append("Income : " + retrievePlotDetails.get(8)+"\n");
+
+        ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
+
+
+        statusArea.append("Owner : " + retrievePlotDetails.get(1) + "\n");
+        statusArea.append("Located in " + retrievePlotDetails.get(3) + "\n");
+        statusArea.append("Happiness : " + retrievePlotDetails.get(7) + "\n");
+        statusArea.append("Income : " + retrievePlotDetails.get(8) + "\n");
 
 
     }

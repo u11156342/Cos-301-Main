@@ -1,10 +1,15 @@
 package Interface.Search;
 
+import Interface.BrowseInterface.BrowseInterface;
+import Interface.BrowseInterface.GameBrowseGrid;
 import Interface.MyProperties.PlayerOwnPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -42,9 +47,9 @@ public class ResultUnit extends JPanel {
         add(Browse, c);
     }
 
-    public void init(TransferContainer tc) {
+    public void init(final TransferContainer tc) {
         
-        ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(propertyID);               
+        final ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(propertyID);               
         
         statusArea.setPreferredSize(new Dimension(160,100));
         statusArea.append("Owner : " + retrievePlotDetails.get(1)+ "\n");
@@ -54,6 +59,10 @@ public class ResultUnit extends JPanel {
         Browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                BrowseInterface bi=new BrowseInterface("Browse",tc,propertyID,size,tiles,buildings);
+                tc.mainapplet.add(bi,bi.getName());
+                tc.cardlayout.show(tc.contentpane,"Browse");
+                
             }
         });
     }
