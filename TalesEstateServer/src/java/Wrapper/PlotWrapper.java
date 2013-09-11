@@ -51,7 +51,7 @@ public class PlotWrapper {
     }
 
     @GET
-    @Path("modifyPlot/{plotId}/{characterName}/{plotAmount}/{duchyName}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}{workersUsed}/{workerMax}/{exquisiteUsed}/{exquisiteMax}/{fineUsed}/{fineMax}/{poorUsed}/{poorMax}")
+    @Path("modifyPlot/{plotId}/{characterName}/{plotAmount}/{duchyName}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}/{exquisiteUsed}/{exquisiteMax}/{fineUsed}/{fineMax}/{poorUsed}/{poorMax}")
     @Produces("text/plain")
     public String modifyPlot(@PathParam("plotId") int plotId, @PathParam("characterName") String characterName, @PathParam("plotAmount") String plotAmount,
             @PathParam("duchyName") String duchyName, @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray,

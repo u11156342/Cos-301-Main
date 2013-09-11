@@ -455,12 +455,13 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             amountID = Integer.parseInt(rs.getString("AmountID"));
-
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
 
             System.out.println(happiness);
 
+            //ek gaan dit edit om ni die plots te update ni
+            
             sql = "UPDATE Plot SET "
                     + "PlotOwnedBy = " + characterID + ", "
                     + "PlotAmount = " + amountID + ", "
@@ -471,15 +472,17 @@ public class PlotQueryHandler {
                     + "PlotHappiness = " + happiness + ", "
                     + "PlotMonthlyIncome = " + monthlyIncome + ", "
                     + "PlotWorkersUsed = " + workersUsed + ", "
-                    + "PlotWorkerMax = " + workerMax + ", "
-                    + "PlotAcreExquisite = " + acreE + ", "
-                    + "PlotAcreExquisiteMax = " + acreEM + ", "
-                    + "PlotAcreFine = " + acreF + ", "
-                    + "PlotAcreFineMax = " + acreFM + ", "
-                    + "PlotAcrePoor = " + acreP + ", "
-                    + "PlotAcrePoorMax = " + acrePM + " "
+                    +"PlotWorkerMax = " + workerMax + " "
+                    //+ "PlotWorkerMax = " + workerMax + ", "
+//                    + "PlotAcreExquisite = " + acreE + ", "
+//                    + "PlotAcreExquisiteMax = " + acreEM + ", "
+//                    + "PlotAcreFine = " + acreF + ", "
+//                    + "PlotAcreFineMax = " + acreFM + ", "
+//                    + "PlotAcrePoor = " + acreP + ", "
+//                    + "PlotAcrePoorMax = " + acrePM + " "
                     + "WHERE PlotID = " + plotID;
             stmt = con.createStatement();
+
             stmt.execute(sql);
 
             return true;
