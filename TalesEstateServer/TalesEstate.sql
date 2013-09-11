@@ -363,18 +363,19 @@ CREATE TABLE UserCharacter
 (
 	UserCharacterID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	UserCharacterName NVARCHAR(MAX),
-	UserCharacterAmount INT FOREIGN KEY REFERENCES Amount(AmountID)
+	UserCharacterAmount INT FOREIGN KEY REFERENCES Amount(AmountID),
+	UserCharacterStatus INT
 )
 
 INSERT INTO UserCharacter(UserCharacterName, UserCharacterAmount)
 VALUES
-('Gilthana', 48),
-('Fiorella de Luca', 49),
-('QR Character', 50),
-('ABCharacter', 51),
-('Saachi Namasri', 52),
-('Test123', 53),
-('Test 123', 54)
+('Gilthana', 48, 0),
+('Fiorella de Luca', 49, 0),
+('QR Character', 50, 0),
+('ABCharacter', 51, 0),
+('Saachi Namasri', 52, 0),
+('Test123', 53, 0),
+('Test 123', 54, 0)
 
 CREATE TABLE Plot
 (
@@ -394,7 +395,8 @@ CREATE TABLE Plot
 	PlotAcreFine FLOAT,
 	PlotAcreFineMax INT,
 	PlotAcrePoor FLOAT,
-	PlotAcrePoorMax INT
+	PlotAcrePoorMax INT,
+	PlotDefenseValue FLOAT
 )
 
 INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 

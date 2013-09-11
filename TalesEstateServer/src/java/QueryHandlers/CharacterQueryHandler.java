@@ -45,8 +45,8 @@ public class CharacterQueryHandler {
                 rs.next();
                 amountID = rs.getInt(1);
                 
-                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterAmount) "
-                        + "VALUES ('" + characterName + "', " + amountID + ")";
+                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterAmount, UserCharacterStatus) "
+                        + "VALUES ('" + characterName + "', " + amountID + ", 0)";
                 stmt = con.createStatement();
                 stmt.execute(sql);
                 return true;
@@ -107,9 +107,10 @@ public class CharacterQueryHandler {
             
             while(rs.next())
             {
-                line = new String[2];
+                line = new String[3];
                 line[0] = rs.getString("UserCharacterID");
                 line[1] = rs.getString("UserCharacterName");
+                line[2] = rs.getString("UserCharacterStatus");
                 values.add(line);
             }
             
@@ -281,6 +282,52 @@ public class CharacterQueryHandler {
         catch(Exception e)
         {
             System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
+        }
+        
+        return false;
+    }
+    
+    /* Addd to, or removes from, the character's social status.
+     * statusAmount can be positive, or negative depeding on whether
+     * the amount must be increased, or decreased respectively.
+     * i.e. 10, or -23
+     */
+    public boolean modifyStatus(int characterID, int statusAmount)
+    {
+        int currentStatus = 0;
+        
+        try
+        {
+            //Get current status value
+            sql = "SELECT UserCharacterStatus FROM UserCharacter "
+                    + "WHERE UserCharacterID = " + characterID;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            currentStatus = Integer.parseInt(rs.getString("UserCharacterStatus"));
+            if((currentStatus + statusAmount) >= 0 || (currentStatus + statusAmount) <= 100)
+            {
+                currentStatus = currentStatus + statusAmount;
+                sql = "UPDATE UserCharacter SET "
+                        + "UserCharacterStatus = " + currentStatus
+                        + " WHERE UserCharacterID = " + characterID;
+                stmt = con.createStatement();
+                stmt.execute(sql);
+                
+                return true;
+            }
+            else
+            {
+                System.out.println("Error in CharacterQueryHandler, function modifyStatus()");
+                System.out.println("Character status parameter overflow.");
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in CharacterQueryHandler, function modifyStatus()");
+            System.out.println(e.getMessage());
         }
         
         return false;
