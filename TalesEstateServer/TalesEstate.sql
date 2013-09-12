@@ -367,7 +367,7 @@ CREATE TABLE UserCharacter
 	UserCharacterStatus INT
 )
 
-INSERT INTO UserCharacter(UserCharacterName, UserCharacterAmount)
+INSERT INTO UserCharacter(UserCharacterName, UserCharacterAmount,UserCharacterStatus)
 VALUES
 ('Gilthana', 48, 0),
 ('Fiorella de Luca', 49, 0),
