@@ -21,7 +21,7 @@ public class PlayerProperties extends JPanel {
 
         playersCurrentProperties = new PlayerOwnPanel[result.size()];
         int amount = result.size();
-        h = amount * 100;
+        h = amount * 200;
 
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);

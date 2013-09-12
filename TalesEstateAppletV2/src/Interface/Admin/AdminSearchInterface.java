@@ -37,7 +37,7 @@ public class AdminSearchInterface extends BasePanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                t.cardlayout.show(t.contentpane, "MainMenu");
+                t.cardlayout.show(t.contentpane, "AMain");
             }
         });
         add(back, BorderLayout.SOUTH);

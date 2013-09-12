@@ -28,9 +28,9 @@ public class AddEvent extends BasePanel {
     String[] haps = {"-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5"};
     JComboBox happinessmod = new JComboBox(haps);
     JTextField incomemod = new JTextField();
-    JTextField platmod = new JTextField();
-    JTextField goldmod = new JTextField();
-    JTextField silmod = new JTextField();
+   // JTextField platmod = new JTextField();
+    //JTextField goldmod = new JTextField();
+    //JTextField silmod = new JTextField();
     JTextField defmod = new JTextField();
     JButton add = new JButton("add");
     JButton cansel = new JButton("cancel");
@@ -51,22 +51,14 @@ public class AddEvent extends BasePanel {
 
 
         incomemod.setPreferredSize(new Dimension(100, 40));
-        platmod.setPreferredSize(new Dimension(100, 40));
-        goldmod.setPreferredSize(new Dimension(100, 40));
-        silmod.setPreferredSize(new Dimension(100, 40));
+    //    platmod.setPreferredSize(new Dimension(100, 40));
+      //  goldmod.setPreferredSize(new Dimension(100, 40));
+        //silmod.setPreferredSize(new Dimension(100, 40));
         defmod.setPreferredSize(new Dimension(100, 40));
-
-
-
-
-
-
 
         c.gridx = 0;
         c.gridy = 0;
-
-
-
+        
         add(des, c);
 
         c.gridy = 1;
@@ -101,39 +93,36 @@ public class AddEvent extends BasePanel {
 
         c.gridy = 9;
         c.gridx = 0;
-        add(l3, c);
+        //add(l3, c);
         c.gridx = 1;
         c.gridy = 9;
-        add(platmod, c);
+       // add(platmod, c);
 
         c.gridy = 10;
         c.gridx = 0;
-        add(l4, c);
+        //add(l4, c);
         c.gridx = 1;
         c.gridy = 10;
-        add(goldmod, c);
+        //add(goldmod, c);
 
         c.gridy = 11;
         c.gridx = 0;
-        add(l5, c);
+        //add(l5, c);
         c.gridx = 1;
         c.gridy = 11;
-        add(silmod, c);
+        //add(silmod, c);
 
         c.gridy = 12;
         c.gridx = 0;
-        add(l6, c);
+     //   add(l6, c);
         c.gridx = 1;
         c.gridy = 12;
-        add(defmod, c);
+     //   add(defmod, c);
 
         c.gridx = 0;
         c.gridy = 13;
         add(add, c);
 
-        c.gridx = 1;
-        c.gridy = 13;
-        add(cansel, c);
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
@@ -142,7 +131,8 @@ public class AddEvent extends BasePanel {
                 tc.cardlayout.show(tc.contentpane, "AdminS");
             }
         });
-        c.gridy = 14;
+        c.gridx=1;
+        c.gridy = 13;
         add(back, c);
 
     }

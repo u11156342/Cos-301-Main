@@ -40,6 +40,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         //init();
 
         bt.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = commands.getSelectedIndex();

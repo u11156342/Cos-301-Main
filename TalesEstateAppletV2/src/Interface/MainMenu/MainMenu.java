@@ -2,6 +2,7 @@ package Interface.MainMenu;
 
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
+import Interface.Admin.AdminMenu;
 import Interface.Admin.MainAdminSearch;
 import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.*;
@@ -129,10 +130,13 @@ public class MainMenu extends BasePanel {
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                MainAdminSearch admin;
-                admin = new MainAdminSearch("Admin",tc);
-                tc.mainapplet.add(admin, admin.getName());
-                tc.cardlayout.show(tc.contentpane, "Admin");
+                
+                AdminMenu am=new AdminMenu("AMain",tc);
+                
+                tc.mainapplet.add(am,am.getName());
+                tc.cardlayout.show(tc.contentpane,"AMain");
+                
+
             }
         });
 

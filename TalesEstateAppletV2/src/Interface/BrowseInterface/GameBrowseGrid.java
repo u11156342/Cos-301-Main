@@ -42,6 +42,7 @@ public class GameBrowseGrid extends JFXPanel {
     @Override
     public void paint(final Graphics g) {
 
+        gridsize=tileStates.length;
         int xc = 0;
         int yc = 0;
         g2d = (Graphics2D) g.create();
@@ -70,6 +71,7 @@ public class GameBrowseGrid extends JFXPanel {
         move2 = 0;
 
         //THIS GOES THROGH THE ARRAY AND THEN PAINTS THE HOUSES AND STUFF IF THEY NEED TO BE THERE
+        System.out.println("done painting grid starting to paint houses");
         for (int x = 0; x < gridsize; x++) {
             for (int y = 0; y < gridsize; y++) {
                 if (gridstates[x][y] != 0) {

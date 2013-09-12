@@ -6,11 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -78,10 +74,11 @@ public class MainAdminSearch extends BasePanel {
 
         JButton btn = new JButton(new ImageIcon(picAdapter.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         btn.setContentAreaFilled(false);
 
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -110,26 +107,30 @@ public class MainAdminSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = tc.rdb.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
-                AdminSearchInterface si = new AdminSearchInterface("AdminS", tc,result);
-                tc.mainapplet.add(si, si.getName());
-                tc.cardlayout.show(tc.contentpane, "AdminS");
+                if (result.isEmpty()) {
+                    JOptionPane.showMessageDialog(tc.contentpane, "There are currently no  properties");
+                } else {
+                    AdminSearchInterface si = new AdminSearchInterface("AdminS", tc, result);
+                    tc.mainapplet.add(si, si.getName());
+                    tc.cardlayout.show(tc.contentpane, "AdminS");
+                }
             }
         });
 
         c.gridy = 5;
         c.gridwidth = 2;
         add(btn, c);
-        
-        JButton back=new JButton("Back");
-        back.addActionListener(new ActionListener(){
+
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               tc.cardlayout.show(tc.contentpane, "MainMenu");
+                tc.cardlayout.show(tc.contentpane, "MainMenu");
             }
         });
-        c.gridy=6;
-        add(back,c);
+        c.gridy = 6;
+        add(back, c);
 
     }
 }

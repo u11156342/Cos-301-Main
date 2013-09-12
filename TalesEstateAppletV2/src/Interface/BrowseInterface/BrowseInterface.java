@@ -58,8 +58,8 @@ public class BrowseInterface extends BasePanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                t.cardlayout.show(t.contentpane, "AdminS");
-                t.cardlayout.show(t.contentpane, "MPlay");
+                t.cardlayout.show(t.contentpane, "MainMenu");
+               // t.cardlayout.show(t.contentpane, "MPlay");
             }
         });
 

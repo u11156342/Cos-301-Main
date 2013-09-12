@@ -7,7 +7,9 @@ package Interface.TextManage;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.Generator;
 import Interface.PlayInterface.PlayInterface;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -114,7 +116,8 @@ public class MainPlaySideMenu extends JPanel {
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
                         //plots gold so it becomes less
-                        tempa = tempa + (int) amountz * 10;
+                       // System.out.println(amountz);
+                        tempa = tempa +(int)(amountz * 10);
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
                         int ngold = tempa / 10;
@@ -166,7 +169,7 @@ public class MainPlaySideMenu extends JPanel {
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
                         //plots gold so it becomes less
-                        tempa = tempa - (int) amountz * 10;
+                        tempa = tempa - (int)(amountz * 10);
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
                         int ngold = tempa / 10;
