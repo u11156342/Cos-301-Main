@@ -229,7 +229,7 @@ public class RestFullDBAdapter {
             characterName = characterName.replace(' ', '.');
 
             URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax);
-
+            System.out.println(url);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String inputLine;

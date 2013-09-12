@@ -6,6 +6,7 @@ package Connections;
 
 import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import junit.framework.TestCase;
 
 /**
@@ -55,6 +56,31 @@ public class RestFullDBAdapterTest extends TestCase {
     }
 
     /**
+     * Test of logBuildingBuilt method, of class RestFullDBAdapter.
+     */
+    // still need to test
+    public void testlogBuildingBuilt() {
+        System.out.println("logBuildingBuilt");
+        int buildingID = 1;
+        int plotid = 4;
+        int cid = 3;
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+        instance.logBuildingBuilt(cid, plotid, buildingID);
+        ArrayList<String> retrieveAllBuildingsOwnedByCharacter = instance.retrieveAllBuildingsOwnedByCharacter(cid, plotid);
+        boolean found = false;
+        for (int i = 0; i < retrieveAllBuildingsOwnedByCharacter.size(); i++) {
+            if ("1".equals(retrieveAllBuildingsOwnedByCharacter.get(i))) {
+                found = true;
+            }
+
+        }
+
+        if (found == false) {
+         //   fail("building not found");
+        }
+    }
+
+    /**
      * Test of retrieveDuchyList method, of class RestFullDBAdapter.
      */
     public void testRetrieveDuchyList() {
@@ -79,36 +105,6 @@ public class RestFullDBAdapterTest extends TestCase {
     }
 
     /**
-     * Test of addPlotToCharacter method, of class RestFullDBAdapter.
-     */
-    public void testAddPlotToCharacter() {
-        System.out.println("addPlotToCharacter");
-        String characterName = "QR Character";
-        String duchyName = "Thegnheim";
-        int sizeValue = 3;
-        String quality = "Fine";
-        int[][] groundArray = {{0, 0, 0}, {0, 0, 0}, {-1, -1, -1}};
-        int[][] buildingArray = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-        int workersUsed = 0;
-        int workerMax = 0;
-        int happiness = 0;
-        double monthlyIncome = 0.0;
-        int size=3;
-        double poorused=0;
-        int poormax=1;
-        double fineused=0;
-        int finemax=1;
-        double exused=0.0;
-        int exmax=1;
-        
-        RestFullDBAdapter instance = new RestFullDBAdapter();
-        boolean expResult = true;
-        //String characterName, String duchyName, String quality, sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,double monthlyIncome, int workersUsed, int workerMax
-        boolean result = instance.addPlotToCharacter(characterName, duchyName, quality,size, groundArray, buildingArray, happiness, monthlyIncome, workersUsed, workerMax);
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of modifyPlot method, of class RestFullDBAdapter.
      */
     public void testModifyPlot() {
@@ -128,7 +124,7 @@ public class RestFullDBAdapterTest extends TestCase {
         double monthlyIncome = 0.0;
         RestFullDBAdapter instance = new RestFullDBAdapter();
         boolean expResult = true;
-        boolean result = instance.modifyPlot(plotId, characterName, duchyName, sizeValue, quality, groundArray, buildingArray, acresUsed, acreMax, workersUsed, workerMax, happiness, monthlyIncome);
+        boolean result = instance.modifyPlot(plotId, characterName, "0-0-0", quality, sizeValue, groundArray, buildingArray, 0, 0.0, 0, 0, 0.0, 0, 0.0, 0, 0.0, 0);
         assertEquals(expResult, result);
     }
 
@@ -166,12 +162,87 @@ public class RestFullDBAdapterTest extends TestCase {
         RestFullDBAdapter instance = new RestFullDBAdapter();
         ArrayList expResult = new ArrayList();
         expResult.add("12");
-        expResult.add("QR Character");
+        expResult.add("Fiorella de Luca");
 
         ArrayList result = instance.retrievePlotDetails(plotID);
         assertEquals(expResult.get(0), result.get(0));
         assertEquals(expResult.get(1), result.get(1));
 
+    }
+
+    /**
+     * Test of expandPlot method, of class RestFullDBAdapter.
+     */
+    public void testexpandPlot() {
+        System.out.println("expandPlot");
+        int plotID = 12;
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+
+        int[][] array = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+        int[][] array2 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+        boolean res = instance.expandPlot(plotID, "fine", array2);
+        assertEquals(res, true);
+    }
+
+    /**
+     * Test of getCurrentAmount method, of class RestFullDBAdapter.
+     */
+    public void testgetCurrentAmount() {
+        System.out.println("getCurrentAmount");
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+        ArrayList<String> result = instance.getCurrentAmount(4);
+        String t1 = (String) result.get(0);
+        String t2 = (String) result.get(1);
+        String t3 = (String) result.get(2);
+
+        assertEquals(Integer.parseInt(t1), 0);
+        assertEquals(Integer.parseInt(t2), 0);
+        assertEquals(Integer.parseInt(t3), 0);
+    }
+
+    /**
+     * Test of modifyAmount method, of class RestFullDBAdapter.
+     */
+    public void testmodifyAmountPlot() {
+        System.out.println("modifyAmount");
+        int plotID = 12;
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+
+        instance.modifyAmount(4, 0, 0, 0);
+        ArrayList<String> result = instance.getCurrentAmount(4);
+        assertEquals(Integer.parseInt(result.get(0)), 0);
+        assertEquals(Integer.parseInt(result.get(1)), 0);
+        assertEquals(Integer.parseInt(result.get(2)), 0);
+        instance.modifyAmount(4, 1, 1, 1);
+        result = instance.getCurrentAmount(4);
+
+        assertEquals(Integer.parseInt(result.get(0)), 1);
+        assertEquals(Integer.parseInt(result.get(1)), 1);
+        assertEquals(Integer.parseInt(result.get(2)), 1);
+
+        instance.modifyAmount(4, 0, 0, 0);
+    }
+
+    /**
+     * Test of getStatus method, of class RestFullDBAdapter.
+     */
+    public void testgetStatus() {
+        System.out.println("getStatus");
+        int plotID = 12;
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+        String r = instance.getStatus(12);
+        assertFalse("".equals(r));
+    }
+
+    /**
+     * Test of getStatus method, of class RestFullDBAdapter.
+     */
+    public void testtgetSuperStatusReport() {
+        System.out.println("getSuperStatusReport");
+        int plotID = 12;
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+        String r = instance.getSuperStatusReport(12);
+        assertFalse("".equals(r));
     }
 
     /**
@@ -185,20 +256,41 @@ public class RestFullDBAdapterTest extends TestCase {
         String quality = "Fine";
         RestFullDBAdapter instance = new RestFullDBAdapter();
         ArrayList<String[]> result = instance.searchPlotBy(characterName, duchy, size, quality);
-        assertEquals("12", result.get(0)[0]);
+        assertEquals("14", result.get(0)[0]);
 
     }
 
     /**
-     * Test of deletePlot method, of class RestFullDBAdapter.
+     * Test of getCharacterAmounts method, of class RestFullDBAdapter.
      */
-    public void testDeletePlot() {
-        System.out.println("deletePlot");
-        int plotID = 0;
+    public void testgetCharacterAmounts() {
+        String name = "QR Character";
         RestFullDBAdapter instance = new RestFullDBAdapter();
-        boolean expResult = true;
-        boolean result = instance.deletePlot(plotID);
-        assertEquals(expResult, result);
+        ArrayList result = instance.getCharacterAmounts(name);
+        assertEquals("0", result.get(0));
+        assertEquals("0", result.get(1));
+        assertEquals("0", result.get(2));
+
+    }
+
+    /**
+     * Test of modifyAmount method, of class RestFullDBAdapter.
+     */
+    public void testmodifyAmount() {
+        System.out.println("modifyAmount");
+        String name = "QR Character";
+        RestFullDBAdapter instance = new RestFullDBAdapter();
+        ArrayList result = instance.getCharacterAmounts(name);
+        assertEquals("0", result.get(0));
+        assertEquals("0", result.get(1));
+        assertEquals("0", result.get(2));
+        instance.modifyAmount(name, 0, 1, 0);
+        result = instance.getCharacterAmounts(name);
+        assertEquals("0", result.get(0));
+        assertEquals("1", result.get(1));
+        assertEquals("0", result.get(2));
+        instance.modifyAmount(name, 0, 0, 0);
+
     }
 
     /**
@@ -236,7 +328,7 @@ public class RestFullDBAdapterTest extends TestCase {
         RestFullDBAdapter instance = new RestFullDBAdapter();
         int expResult = 1;
         int result = instance.retrieveCharacterID(userID);
-        assertEquals(expResult,1);
+        assertEquals(expResult, 1);
     }
 
     /**
@@ -255,7 +347,7 @@ public class RestFullDBAdapterTest extends TestCase {
      */
     public void testConvertToArray() {
         System.out.println("convertToArray");
-        int[][] inArray = {{-1,-1,-1},{0,-1,2},{0,-1,0}};
+        int[][] inArray = {{-1, -1, -1}, {0, -1, 2}, {0, -1, 0}};
         RestFullDBAdapter instance = new RestFullDBAdapter();
         String expResult = "-1,-1,-1_0,-1,2_0,-1,0_";
         String result = instance.convertToArray(inArray);
@@ -268,7 +360,7 @@ public class RestFullDBAdapterTest extends TestCase {
     public void testConvertFromArray() {
         String inArray = "-1,-1,-1;0,-1,2;0,-1,0;";
         RestFullDBAdapter instance = new RestFullDBAdapter();
-        int[][] expResult = {{-1,-1,-1},{0,-1,2},{0,-1,0}};
+        int[][] expResult = {{-1, -1, -1}, {0, -1, 2}, {0, -1, 0}};
         int[][] result = instance.convertFromArray(inArray);
         assertEquals(expResult[0][0], result[0][0]);
         assertEquals(expResult[2][2], result[2][2]);

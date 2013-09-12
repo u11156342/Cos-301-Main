@@ -49,19 +49,21 @@ public class BuyInterfaceTest extends TestCase {
         RestFullDBAdapter wrapper = new RestFullDBAdapter();
         long ti=System.currentTimeMillis();
         wrapper.registerEstateCharacter(ti+"");
-        wrapper.addPlotToCharacter(ti+"", duchyName, 3, "Fine", groundArray, buildingArray, 1, 1, 0, workerMax, 0, monthlyIncome);
+         wrapper.addPlotToCharacter(ti+"", duchyName, quality,3, groundArray, buildingArray, 0, monthlyIncome, 0, workerMax);
 
         ArrayList<String[]> results = null;
         int so = 0;
         while (so == 0) {
             try {
                 Thread.sleep(3000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BuyInterfaceTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 results = wrapper.retrievePlotsOwnedByCharacter(wrapper.retrieveCharacterID(ti+""));
                 so = results.size();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(BuyInterface.class.getName()).log(Level.SEVERE, null, ex);
-            }
+  
         }
+        assertFalse(so==0);
 
     }
 }

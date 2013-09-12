@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
@@ -43,6 +44,8 @@ public class ManageGold extends BasePanel {
         silmod.setPreferredSize(new Dimension(100, 40));
 
 
+        playername.setPreferredSize(new Dimension(100, 40));
+        final ManageGold ref=this;
         findPlayer.addActionListener(new ActionListener() {
 
             ArrayList<String> characterAmounts;
@@ -58,6 +61,7 @@ public class ManageGold extends BasePanel {
                 }
 
                 if (characterAmounts != null && !characterAmounts.isEmpty()) {
+                    JOptionPane.showMessageDialog(ref,"Player found");
                     platAmount = Integer.parseInt(characterAmounts.get(0));
                     goldAmount = Integer.parseInt(characterAmounts.get(1));
                     silverAmount = Integer.parseInt(characterAmounts.get(2));
@@ -66,15 +70,17 @@ public class ManageGold extends BasePanel {
                     goldmod.setText("" + goldAmount);
                     silmod.setText("" + silverAmount);
                 }
+                else
+                    JOptionPane.showMessageDialog(ref,"Player not found");
             }
         });
 
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 0;
 
         add(playername, c);
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 0;
 
         add(findPlayer, c);
 
@@ -130,7 +136,8 @@ public class ManageGold extends BasePanel {
             }
         });
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 6;
+        c.gridwidth=2;
         add(back, c);
     }
 }

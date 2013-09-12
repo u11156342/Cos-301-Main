@@ -28,7 +28,6 @@ public class AdminMenu extends BasePanel {
 
 
         search.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) {
                 MainAdminSearch admin;
@@ -39,7 +38,6 @@ public class AdminMenu extends BasePanel {
         });
 
         ManageCharacterGold.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) {
                 ManageGold mg = new ManageGold("CGold", tc);
@@ -59,5 +57,16 @@ public class AdminMenu extends BasePanel {
         c.gridy = 1;
         add(ManageCharacterGold, c);
 
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tc.cardlayout.show(tc.contentpane, "MainMenu");
+            }
+        });
+
+        back.setPreferredSize(new Dimension(250, 60));
+        c.gridy = 2;
+        add(back, c);
     }
 }

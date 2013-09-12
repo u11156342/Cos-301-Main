@@ -4,7 +4,6 @@
  */
 package Interface.PlayInterface;
 
-import java.awt.image.BufferedImage;
 import static junit.framework.Assert.assertFalse;
 import junit.framework.TestCase;
 

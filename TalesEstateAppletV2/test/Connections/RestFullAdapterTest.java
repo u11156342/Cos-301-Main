@@ -7,6 +7,10 @@ package Connections;
 import java.awt.image.BufferedImage;
 import static junit.framework.Assert.assertFalse;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -17,22 +21,29 @@ public class RestFullAdapterTest extends TestCase {
     public RestFullAdapterTest(String testName) {
         super(testName);
     }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
     
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
    /**
      * Test of ImageAdapter method, of class RestFullAdapter.
      */
     public void testImageAdapter() {
         System.out.println("ImageAdapter");
-        int id = 0;
+        int id = 1;
         RestFullAdapter instance = new RestFullAdapter();
         BufferedImage expResult = null;
         BufferedImage result = instance.ImageAdapter(id);
