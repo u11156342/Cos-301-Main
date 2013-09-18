@@ -7,6 +7,7 @@ package Interface.TextManage;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.Generator;
 import Interface.PlayInterface.PlayInterface;
+import Interface.RightsManagement.RightsInterface;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,7 +26,7 @@ import talesestateappletv2.TransferContainer;
  */
 public class MainPlaySideMenu extends JPanel {
 
-    public JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface;
+    public JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement;
     final MainPlaySideMenu ref = this;
     int size;
     int[][] tiles;
@@ -44,6 +45,7 @@ public class MainPlaySideMenu extends JPanel {
         listBuildings = new JButton("List Buildings");
         addBuildings = new JButton("Add Building");
         VisualInterface = new JButton("Visual Interface");
+        RightsManagement = new JButton("Rights Management");
 
         ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(pId);
         tiles = tc.rdb.convertFromArray(retrievePlotDetails.get(5));
@@ -90,6 +92,9 @@ public class MainPlaySideMenu extends JPanel {
         VisualInterface.setPreferredSize(new Dimension(150, 60));
         add(VisualInterface, c);
 
+        c.gridy = 7;
+        RightsManagement.setPreferredSize(new Dimension(150, 60));
+        add(RightsManagement, c);
 
         Report.addActionListener(new ActionListener() {
             @Override
@@ -116,8 +121,8 @@ public class MainPlaySideMenu extends JPanel {
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
                         //plots gold so it becomes less
-                       // System.out.println(amountz);
-                        tempa = tempa +(int)(amountz * 10);
+                        // System.out.println(amountz);
+                        tempa = tempa + (int) (amountz * 10);
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
                         int ngold = tempa / 10;
@@ -169,7 +174,7 @@ public class MainPlaySideMenu extends JPanel {
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
                         //plots gold so it becomes less
-                        tempa = tempa - (int)(amountz * 10);
+                        tempa = tempa - (int) (amountz * 10);
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
                         int ngold = tempa / 10;
@@ -372,6 +377,16 @@ public class MainPlaySideMenu extends JPanel {
                 PlayInterface visual = new PlayInterface("visual", pId, tc);
                 tc.mainapplet.add(visual, visual.getName());
                 tc.cardlayout.show(tc.contentpane, "visual");
+            }
+        });
+
+        RightsManagement.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                RightsInterface ri = new RightsInterface("right", tc);
+                tc.mainapplet.add(ri, ri.getName());
+                tc.cardlayout.show(tc.contentpane, "right");
             }
         });
 
