@@ -23,9 +23,14 @@ public class PlayInterface extends BasePanel {
     int[][] buildings;
     JScrollPane playMapScrollPane;
 
-    public PlayInterface(String play, int propertyIDz, TransferContainer tc) {
+    public PlayInterface(String play, TransferContainer tc) {
         super(play);
         System.out.println("play interface");
+
+    }
+
+    public void init(final TransferContainer t, int propertyIDz) {
+
         propertyID = propertyIDz;
 
         RestFullDBAdapter wrapper = new RestFullDBAdapter();
@@ -35,10 +40,7 @@ public class PlayInterface extends BasePanel {
         size = Integer.parseInt("" + results.get(4));
         tiles = wrapper.convertFromArray("" + results.get(5));
         buildings = wrapper.convertFromArray("" + results.get(6));
-        init(tc);
-    }
 
-    public void init(final TransferContainer t) {
 
         VisualMap playIn = null;
         try {

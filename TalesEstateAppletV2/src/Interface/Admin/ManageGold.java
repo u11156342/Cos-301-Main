@@ -45,9 +45,8 @@ public class ManageGold extends BasePanel {
 
 
         playername.setPreferredSize(new Dimension(100, 40));
-        final ManageGold ref=this;
+        final ManageGold ref = this;
         findPlayer.addActionListener(new ActionListener() {
-
             ArrayList<String> characterAmounts;
             int platAmount = 0;
             int goldAmount = 0;
@@ -55,13 +54,20 @@ public class ManageGold extends BasePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
+
+                String[] characters = {"piet", "ben", "jave"};
+                String picked = (String) JOptionPane.showInputDialog(findPlayer, "Choose the character you are looking for : ", "", JOptionPane.QUESTION_MESSAGE, null, characters, characters[0]);
+
+
                 try {
                     characterAmounts = tc.rdb.getCharacterAmounts(playername.getText());
                 } catch (Exception ex) {
                 }
 
                 if (characterAmounts != null && !characterAmounts.isEmpty()) {
-                    JOptionPane.showMessageDialog(ref,"Player found");
+                    JOptionPane.showMessageDialog(ref, "Player found");
                     platAmount = Integer.parseInt(characterAmounts.get(0));
                     goldAmount = Integer.parseInt(characterAmounts.get(1));
                     silverAmount = Integer.parseInt(characterAmounts.get(2));
@@ -69,20 +75,20 @@ public class ManageGold extends BasePanel {
                     platmod.setText("" + platAmount);
                     goldmod.setText("" + goldAmount);
                     silmod.setText("" + silverAmount);
+                } else {
+                    JOptionPane.showMessageDialog(ref, "Player not found");
                 }
-                else
-                    JOptionPane.showMessageDialog(ref,"Player not found");
             }
         });
 
-        c.gridx = 1;
-        c.gridy = 0;
-
-        add(playername, c);
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 2;
 
         add(findPlayer, c);
+        c.gridwidth = 1;
+
+        //c.gridwidth = 0;
 
         c.gridx = 0;
         c.gridy = 2;
@@ -115,7 +121,6 @@ public class ManageGold extends BasePanel {
         JButton modify = new JButton("Modify");
 
         modify.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) {
                 throw new UnsupportedOperationException("Not supported yet.");
@@ -124,20 +129,19 @@ public class ManageGold extends BasePanel {
 
         c.gridx = 0;
         c.gridy = 5;
-
+        c.gridwidth = 2;
         add(modify, c);
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, "AMain");
             }
         });
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridy = 6;
-        c.gridwidth=2;
+        c.gridwidth = 2;
         add(back, c);
     }
 }

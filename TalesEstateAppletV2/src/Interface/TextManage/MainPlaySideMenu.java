@@ -365,8 +365,8 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuildtabPanel Build = new BuildtabPanel("Build", tc, pId, duchy_, tr);
-                tc.mainapplet.add(Build, Build.getName());
+
+                tc.Build.init(pId, duchy_, tr);
                 tc.cardlayout.show(tc.contentpane, "Build");
             }
         });
@@ -374,8 +374,7 @@ public class MainPlaySideMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                PlayInterface visual = new PlayInterface("visual", pId, tc);
-                tc.mainapplet.add(visual, visual.getName());
+               tc.visual.init(tc, pId);
                 tc.cardlayout.show(tc.contentpane, "visual");
             }
         });
@@ -384,8 +383,6 @@ public class MainPlaySideMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                RightsInterface ri = new RightsInterface("right", tc);
-                tc.mainapplet.add(ri, ri.getName());
                 tc.cardlayout.show(tc.contentpane, "right");
             }
         });

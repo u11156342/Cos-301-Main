@@ -238,6 +238,7 @@ public class BuyInterface extends BasePanel {
                             }
                             Upkeep = 0 - (Integer.parseInt(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(1))) * 10 + (Integer.parseInt(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(2)));
                             tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
+                            tain.mProp.init();
                             tain.cardlayout.show(tain.contentpane, "MainMenu");
 
                         } else {

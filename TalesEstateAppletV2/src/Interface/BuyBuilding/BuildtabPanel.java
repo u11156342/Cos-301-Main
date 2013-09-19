@@ -29,9 +29,13 @@ public class BuildtabPanel extends BasePanel {
     int PlotID;
     TransferContainer tain;
 
-    public BuildtabPanel(String build, TransferContainer tc, int pId, String duchy_, MainPlaySideMenu tr) {
+    public BuildtabPanel(String build, TransferContainer tc) {
         super(build);
         tain = tc;
+    }
+
+    public void init(int pId, String duchy_, MainPlaySideMenu tr) {
+
         PlotID = pId;
         duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -42,20 +46,20 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Services = null;
         ArrayList<String[]> Improvements = null;
 
-        JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural,tr);
+        JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural, tr);
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        JComponent panel2 = makeTextPanel("Mining", 1, Mining,tr);
+        JComponent panel2 = makeTextPanel("Mining", 1, Mining, tr);
         tabbedPane.addTab("Mining", null, panel2);
 
-        JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing,tr);
+        JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing, tr);
         tabbedPane.addTab("Manufacturing", null, panel3);
 
-        JComponent panel4 = makeTextPanel("Services", 3, Services,tr);
+        JComponent panel4 = makeTextPanel("Services", 3, Services, tr);
         tabbedPane.addTab("Services", null, panel4);
 
-        JComponent panel5 = makeTextPanel("Improvements", 4, Improvements,tr);
+        JComponent panel5 = makeTextPanel("Improvements", 4, Improvements, tr);
         tabbedPane.addTab("Improvements", null, panel5);
         add(tabbedPane);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

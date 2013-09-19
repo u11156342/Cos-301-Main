@@ -33,7 +33,7 @@ public class PlayerOwnPanel extends JPanel {
     TransferContainer tain;
 
     PlayerOwnPanel(TransferContainer tc) {
-        tain=tc;
+        tain = tc;
         exspand = new JButton(new ImageIcon(tc.ad.ImageAdapter(16)));
         exspand.setCursor(new Cursor(Cursor.HAND_CURSOR));
         play = new JButton(new ImageIcon(tc.ad.ImageAdapter(17)));
@@ -62,7 +62,7 @@ public class PlayerOwnPanel extends JPanel {
         add(play, c);
     }
 
-    public void init(TransferContainer tc) {
+    public void init(final TransferContainer tc) {
 
         statusArea.append("Located in " + duchy);
         statusArea.append("" + '\n');
@@ -72,7 +72,7 @@ public class PlayerOwnPanel extends JPanel {
         statusArea.append("" + '\n');
         statusArea.append("Happiness => " + hap);
         statusArea.append("" + '\n');
-        statusArea.append("Workers =>" + wc+"/"+wm);
+        statusArea.append("Workers =>" + wc + "/" + wm);
         statusArea.append("" + '\n');
         statusArea.append("Poor acres : " + quality.get(0)[1] + "/" + quality.get(0)[2]);
         statusArea.append("" + '\n');
@@ -84,16 +84,15 @@ public class PlayerOwnPanel extends JPanel {
         play.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainPlayInterface mp=new MainPlayInterface("MPlay",tain,propertyID);
-                mp.buildings=buildings;
-                mp.duchy=duchy;
-                mp.propertyID=propertyID;
-                mp.tiles=tiles;
-                mp.amount=amount;
-                mp.quality=quality;
-                
-                tain.mainapplet.add(mp,mp.getName());
-                
+
+                tc.mp.buildings = buildings;
+                tc.mp.duchy = duchy;
+                tc.mp.propertyID = propertyID;
+                tc.mp.tiles = tiles;
+                tc.mp.amount = amount;
+                tc.mp.quality = quality;
+                tc.mp.init(tain, propertyID);
+
                 tain.cardlayout.show(tain.contentpane, "MPlay");
             }
 

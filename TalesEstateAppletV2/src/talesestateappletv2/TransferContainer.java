@@ -6,6 +6,17 @@ package talesestateappletv2;
 
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
+import Interface.Admin.AdminMenu;
+import Interface.BuyBuilding.BuildtabPanel;
+import Interface.BuyProperty.BuyInterface;
+import Interface.MainMenu.CharSelectMenu;
+import Interface.MainMenu.MainMenu;
+import Interface.MyProperties.MyPropertiesInterface;
+import Interface.PlayInterface.PlayInterface;
+import Interface.PlayerManagement.PlayerManagementInterface;
+import Interface.RightsManagement.RightsInterface;
+import Interface.Search.MainSearch;
+import Interface.TextManage.MainPlayInterface;
 import java.awt.CardLayout;
 import java.awt.Container;
 import javafx.embed.swing.JFXPanel;
@@ -26,9 +37,20 @@ public class TransferContainer {
     public String CharacterName;
     public JFrame mainframe;
     public JApplet mainapplet;
-    public RestFullAdapter ad=new RestFullAdapter();
-    public RestFullDBAdapter rdb=new RestFullDBAdapter();
+    public RestFullAdapter ad = new RestFullAdapter();
+    public RestFullDBAdapter rdb = new RestFullDBAdapter();
     public Container contentpane;
+    public BuyInterface Buy;
+    public MainMenu MainMenu;
+    public CharSelectMenu CSelect;
+    public MyPropertiesInterface mProp;
+    public MainSearch search;
+    public AdminMenu am;
+    public MainPlayInterface mp;
+    public BuildtabPanel Build;
+    public PlayInterface visual;
+    public RightsInterface ri;
+    public PlayerManagementInterface pmI;
 
     public TransferContainer() {
         cardlayout = new CardLayout();

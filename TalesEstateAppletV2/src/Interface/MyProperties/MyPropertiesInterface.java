@@ -27,6 +27,9 @@ public class MyPropertiesInterface extends BasePanel {
     public MyPropertiesInterface(String name, TransferContainer tc) {
         super(name);
         tain = tc;
+    }
+
+    public void init() {
 
         title = new JButton(new ImageIcon(tain.ad.ImageAdapter(12)));
         title.setContentAreaFilled(false);
@@ -38,7 +41,7 @@ public class MyPropertiesInterface extends BasePanel {
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);
         add(title, BorderLayout.NORTH);
-        
+
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
             @Override
@@ -47,6 +50,7 @@ public class MyPropertiesInterface extends BasePanel {
             }
         });
         add(back, BorderLayout.SOUTH);
-
+                
+       // tain.cardlayout.show(tain.contentpane, "MainMenu");
     }
 }

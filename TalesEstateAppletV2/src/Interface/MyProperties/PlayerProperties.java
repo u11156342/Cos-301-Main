@@ -17,8 +17,9 @@ public class PlayerProperties extends JPanel {
     PlayerProperties(TransferContainer tc) {
         w = tc.JFXPANEL_WIDTH_INT-300;
 
+               
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
-
+ System.out.println("retrieving plots "+result.size());
         playersCurrentProperties = new PlayerOwnPanel[result.size()];
         int amount = result.size();
         h = amount * 200;

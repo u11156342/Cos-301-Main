@@ -34,9 +34,11 @@ public class MainPlayInterface extends BasePanel {
     public ArrayList<String[]> quality;
     public ArrayList<String> amount;
 
-    public MainPlayInterface(String name, final TransferContainer tc, int Pid) {
+    public MainPlayInterface(String name) {
         super(name);
+    }
 
+    public void init(final TransferContainer tc, int Pid) {
         textZone.setEditable(false);
 
         JScrollPane scrollText = new JScrollPane(textZone);
@@ -59,6 +61,5 @@ public class MainPlayInterface extends BasePanel {
             }
         });
         add(back, BorderLayout.SOUTH);
-
     }
 }

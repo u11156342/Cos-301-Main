@@ -6,10 +6,12 @@ import Interface.Admin.AdminMenu;
 import Interface.Admin.MainAdminSearch;
 import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import talesestateappletv2.BasePanel;
+import talesestateappletv2.TalesEstateAppletV2;
 import talesestateappletv2.TransferContainer;
 
 /**
@@ -19,13 +21,15 @@ import talesestateappletv2.TransferContainer;
 public class MainMenu extends BasePanel {
 
     JButton btn = new JButton("Buy new Property");
+    JButton pman = new JButton("Player Management");
     JButton btn2 = new JButton("View All my Properties");
     JButton btn3 = new JButton("Search For a Property");
     JButton btn4 = new JButton("Admin interface");
-    JMenuBar menu = new JMenuBar();
+    TalesEstateAppletV2 applet;
 
-    public MainMenu(String name, TransferContainer tc) {
+    public MainMenu(String name, TransferContainer tc, TalesEstateAppletV2 me) {
         super(name);
+        applet = me;
         init(tc);
     }
 
@@ -70,6 +74,7 @@ public class MainMenu extends BasePanel {
         container.add(Title, c);
 
 
+
         btn.setFont(f);
 
         c.gridy = 1;
@@ -77,10 +82,17 @@ public class MainMenu extends BasePanel {
         c.gridx = 1;
         c.gridwidth = 2;
 
+        container.add(pman, c);
+
+        c.gridy = 2;
+        c.insets = new Insets(20, 0, 0, 0);
+        c.gridx = 1;
+        c.gridwidth = 2;
+
         container.add(btn, c);
         btn2.setFont(f);
 
-        c.gridy = 2;
+        c.gridy = 3;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
@@ -88,7 +100,7 @@ public class MainMenu extends BasePanel {
         container.add(btn2, c);
         btn3.setFont(f);
 
-        c.gridy = 3;
+        c.gridy = 4;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
@@ -96,7 +108,7 @@ public class MainMenu extends BasePanel {
 
         btn4.setFont(f);
 
-        c.gridy = 4;
+        c.gridy = 5;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
@@ -111,13 +123,21 @@ public class MainMenu extends BasePanel {
                 tc.cardlayout.show(tc.contentpane, "Buy");
             }
         });
+        pman.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tc.pmI.init(tc);
+                tc.cardlayout.show(tc.contentpane, "PlayerMan");
+
+            }
+        });
 
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                MyPropertiesInterface mProp;
-                mProp = new MyPropertiesInterface("MyProp", tc);
-                tc.mainapplet.add(mProp, mProp.getName());
+                tc.mProp = new MyPropertiesInterface("MyProp", tc);
+                applet.add(tc.mProp, tc.mProp.getName());
+                tc.mProp.init();
                 tc.cardlayout.show(tc.contentpane, "MyProp");
             }
         });
@@ -130,55 +150,8 @@ public class MainMenu extends BasePanel {
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                
-                AdminMenu am=new AdminMenu("AMain",tc);
-                
-                tc.mainapplet.add(am,am.getName());
-                tc.cardlayout.show(tc.contentpane,"AMain");
-                
-
+                tc.cardlayout.show(tc.contentpane, "AMain");
             }
         });
-
-        JMenu Properties = new JMenu("Properties");
-        JMenuItem newItem = new JMenuItem("Buy New Property");
-        Properties.add(newItem);
-        JMenuItem newItem1 = new JMenuItem("View All My Properties");
-        Properties.add(newItem1);
-        JMenuItem newItem2 = new JMenuItem("Search for a property");
-        Properties.add(newItem2);
-        JMenuItem newItem3 = new JMenuItem("Admin Interface");
-        Properties.add(newItem3);
-
-        menu.add(Properties);
-
-        newItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "Buy");
-            }
-        });
-
-        newItem1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-            }
-        });
-        newItem2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-            }
-        });
-        newItem3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-            }
-        });
-
-    }
-
-    public void showMenu(TransferContainer tc) {
-        // tc.mainapplet.setJMenuBar(menu);
-        tc.mainframe.setJMenuBar(menu);
     }
 }
