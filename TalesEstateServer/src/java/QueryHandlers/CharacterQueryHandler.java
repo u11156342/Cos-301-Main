@@ -89,6 +89,29 @@ public class CharacterQueryHandler {
         return 0;
     }
     
+    /* This function returns a certain character's ID based on the character
+     * name supplied. This function was modified to return more results.
+     */ 
+    public int retrieveCharacterIDExtra(String characterName)
+    {
+        System.out.println(characterName);
+        try
+        {
+            sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
+                    + "UserCharacterName LIKE '%" + characterName + "%'";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            return Integer.parseInt(rs.getString("UserCharacterID"));
+        }
+        catch(Exception e)
+        {
+            System.out.println("Could not execute function retrieveCharacterID()");
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+    
      /* This function returns a list of all the characters registered to the
      * estate system database.
      */ 

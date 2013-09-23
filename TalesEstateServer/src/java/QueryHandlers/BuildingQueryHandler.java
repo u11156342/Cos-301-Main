@@ -384,4 +384,263 @@ public class BuildingQueryHandler {
         
         return results;
     }
+    
+    /* Will return an empty string ("") if the building may be placed on the
+     * provided plot.
+     * Otherwise, will return text in string describing the required pre-
+     * requisite.
+     * 
+     * Note: have to hard code for worker limit.
+     * Note: when removing buildings, prerequisites have to be rechecked.
+     */
+    public String checkBuildingPrerequisites(int plotID, int buildingID) {
+        ArrayList<String> plot = null;
+        int prereq = 0;
+        int workerCount = 0, buildingCount = 0, start = 0;
+        
+        //Get the plot to be checked against
+        sql = "SELECT PlotDutchy, PlotGroundArray, PlotBuildingArray, "
+                + "PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisiteMax, "
+                + ", PlotAcreFineMax, PlotAcrePoorMax "
+                + "FROM Plot "
+                + "WHERE PlotID = " + plotID;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            if(rs != null) {
+                //Store retrieved plot
+                plot = new ArrayList();
+                plot.add(rs.getString("PlotDutchy"));           //0
+                plot.add(rs.getString("PlotGroundArray"));      //1
+                plot.add(rs.getString("PlotBuildingArray"));    //2
+                plot.add(rs.getString("PlotWorkersUsed"));      //3
+                plot.add(rs.getString("PlotWorkerMax"));        //4
+                plot.add(rs.getString("PlotAcreExquisiteMax")); //5
+                plot.add(rs.getString("PlotAcreFineMax"));      //6
+                plot.add(rs.getString("PlotAcrePoorMax"));      //7
+            }
+            else
+                return "plot does not exist";
+        }
+        catch(Exception e) {
+            System.out.println("Error in function checkBuildingPrerequisites():");
+            System.out.println("Error retrieving plot.");
+            System.out.println(e.getMessage());
+        }
+        
+        //Get prerequisite
+        sql = "SELECT BuildingPrerequisiteID FROM Building "
+                + "WHERE BuildingID = " + buildingID;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            prereq = Integer.parseInt(rs.getString("BuildingPrerequisiteID"));
+        }
+        catch (Exception e) {
+            System.out.println("Error in function checkBuildingPrerequisites():");
+            System.out.println("Error retrieving building prerequisite.");
+            System.out.println(e.getMessage());
+        }
+        
+        //Check all 'per worker' requirements'
+        start = 0;
+        
+        //Check all 1 per 30 worker buildings
+        if(buildingID == 52) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 30) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        else if(buildingID == 69) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 50) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        else if(buildingID == 45 || buildingID == 50 || buildingID == 54 ||
+                buildingID == 68) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 100) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        else if(buildingID == 65 || buildingID == 66) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 200) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        else if(buildingID == 53) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 300) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        else if(buildingID == 55 || buildingID == 56 || buildingID == 57 ||
+                buildingID == 58 || buildingID == 59 || buildingID == 64 ||
+                buildingID == 67) {
+            buildingCount = countOccurrences(plot.get(2), Integer.toString(buildingID));
+            workerCount = Integer.parseInt(plot.get(3));
+            
+            if(buildingCount > 0 && workerCount > 0) {
+                if(((workerCount / 500) - 1) < buildingCount) {
+                    return "worker limit";
+                }
+            }
+        }
+        
+        //Check all prerequisites
+        switch(prereq) {
+            case 1: //No prerequisites
+                break;
+            case 2: //At least 1 poor
+                if(Integer.parseInt(plot.get(7)) > 0)
+                    break;
+                else
+                    return "poor";
+            case 3: //At least 1 fine
+                if(Integer.parseInt(plot.get(6)) > 0)
+                    break;
+                else
+                    return "fine";
+            case 4: //At least 1 exquisite
+                if(Integer.parseInt(plot.get(5)) > 0)
+                    break;
+                else
+                    return "exquisite";
+            case 5: //No exquisite
+                if(Integer.parseInt(plot.get(5)) > 0)
+                    return "no exquisite";
+                else
+                    break;
+            case 6: //Water
+                if(plot.get(1).contains("3"))
+                    break;
+                else
+                    return "water";
+            case 7: //Near water. This check must be done elsewhere as well - 
+                //when they building is placed. i.e. Shipyard.
+                //return values in both cases below; but distinguish between them
+                //by checking if there is suitable water.
+                if(plot.get(1).contains("3"))
+                    return "good-near water";
+                else
+                    return "bad-near water";
+            case 8: return "wild land";
+                //break;
+            case 9: 
+                if(plot.get(0).equals("Sarkland") || plot.get(0).equals("Ragonvaldr"))
+                    break;
+                else
+                    return "not on bay of maresco";
+                //break;
+            case 10: //Check for suitable source
+                break;
+            case 11: //Iron mine on plot
+                if(plot.get(2).contains("13"))
+                    break;
+                else
+                    return "iron mine";
+            case 12: //Check for vineyard
+                if(plot.get(2).contains("4"))
+                    break;
+                else
+                    return "vineyard";
+            case 13: //Check for primary source
+                break;
+            case 14: //Check for timber plantation. No natural image/block for this yet
+                break;
+            case 15: //Check for flour mill
+                if(plot.get(2).contains("44"))
+                    break;  
+                else
+                    return "flour mill";
+            case 16: //Livestock or hunters (check for building no. 6?)
+                if(plot.get(2).contains("1") || plot.get(2).contains("2") ||
+                        plot.get(2).contains("8"))
+                    break;
+                else
+                    return "livestock or hunters";
+            case 17: //Barracks
+                if(plot.get(2).contains("60"))
+                    break;
+                else return "barracks";
+            case 18: //Inside walls. Will check for 1 wall~
+                if(plot.get(2).contains("73") || plot.get(2).contains("74") ||
+                        plot.get(2).contains("75") || plot.get(2).contains("76"))
+                    break;
+                else
+                    return "walls";
+        }
+        
+        return "";  //All prerequisites met.
+    }
+    
+    /* Helper function for checkBuildingPrerequisites();
+     * Counts the number of times a certain substring occurs in a string.
+     */
+    public int countOccurrences(String whole, String part) {
+        int count = 0, remem = 0;
+        
+        while(remem != -1) {
+            remem = whole.indexOf(part, remem);
+            if(remem != -1) {
+                ++count;
+                remem += part.length();
+            }
+        }
+        
+        return count;
+    }
+    
+    /* This function returns the time a building takes to build in weeks. The
+     * result is returned as an integer.
+     * This function returns -1 if an error occurred.
+     */
+    public int getBuildingTTB(int buildingID) {
+        sql = "SELECT BuildingTimeToBuild FROM Building WHERE "
+                + "BuildingID = " + buildingID;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            if(rs.next()) {
+                return Integer.parseInt(rs.getString("BuildingTimeToBuild"));
+            }
+            else {
+                System.out.println("Error in function getBuildingTTB():");
+                System.out.println("No results returned.");
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error in function getBuildingTTB():");
+            System.out.println(e.getMessage());
+        }
+        
+        return -1;
+    }
 }

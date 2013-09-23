@@ -989,4 +989,177 @@ public class PlotQueryHandler {
 
         return false;
     }
+    
+    //-----------------------------------------------------------------------//
+    /* This function allows one to add a character to a plot, thus 'sharing' 
+     * access to that plot. These are the following rights:
+     * deposit - character can deposit gold into plot.
+     * withdraw - character can withdraw gold from the plot.
+     * buy - character can buy buildings for the plot(with the plot's gold).
+     * place - character can place building tokens.
+     * expand - character can expand the plot.
+     * 
+     * Function returns true if successful, false if not.
+     * 
+     * *Note: The PlotID/UserCharacterID pair in the Plot table means that that
+     *  character has all rights to that plot.
+     */
+    public boolean addPlotAccess(int plotID, int userID, boolean deposit,
+            boolean withdraw, boolean buy, boolean place, boolean expand,
+            boolean status) {
+        int depositBit, withdrawBit, buyBit, placeBit, expandBit, statusBit;
+        
+        if(deposit)
+            depositBit = 1;
+        else
+            depositBit = 0;
+        
+        if(withdraw)
+            withdrawBit = 1;
+        else
+            withdrawBit = 0;
+        
+        if(buy)
+            buyBit = 1;
+        else
+            buyBit = 0;
+        
+        if(place)
+            placeBit = 1;
+        else
+            placeBit = 0;
+        
+        if(expand)
+            expandBit = 1;
+        else
+            expandBit = 0;
+        
+        if(status)
+            statusBit = 1;
+        else
+            statusBit = 0;
+        
+        sql = "INSERT INTO PlotAccess VALUES("
+                + plotID + ", " + userID + ", " + depositBit + ", " 
+                + withdrawBit + ", " + buyBit + ", " + placeBit + ", "
+                + expandBit + ", " + statusBit + ")";
+                        
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in function addPlotAccess():");
+            System.out.println(e.getMessage());
+        }
+        
+        
+        return false;
+    }
+    
+    /* This function modifies a certain characters access rights to a certain
+     * plot.
+     */
+    public boolean modifyPlotAccess(int plotID, int userID, boolean deposit,
+            boolean withdraw, boolean buy, boolean place, boolean expand, 
+            boolean status) {
+        int depositBit, withdrawBit, buyBit, placeBit, expandBit, statusBit;
+        
+        if(deposit)
+            depositBit = 1;
+        else
+            depositBit = 0;
+        
+        if(withdraw)
+            withdrawBit = 1;
+        else
+            withdrawBit = 0;
+        
+        if(buy)
+            buyBit = 1;
+        else
+            buyBit = 0;
+        
+        if(place)
+            placeBit = 1;
+        else
+            placeBit = 0;
+        
+        if(expand)
+            expandBit = 1;
+        else
+            expandBit = 0;
+        
+        if(status)
+            statusBit = 1;
+        else
+            statusBit = 0;
+        
+        sql = "UPDATE PlotAccess SET "
+                + "PlotAccessDeposit = " + depositBit + ", "
+                + "PlotAccessWithdraw = " + withdrawBit + ", "
+                + "PlotAccessBuy = " + buyBit + ", "
+                + "PlotAccessPlace = " + placeBit + ", "
+                + "PlotAccessExpand = " + expandBit  + ", "
+                + "PlotAccessStatus = " + statusBit + " "
+                + "WHERE PlotID = " + plotID + " AND "
+                + "UserCharacterID = " + userID;
+        
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in function addPlotAccess():");
+            System.out.println(e.getMessage());
+        }
+        
+        
+        return false;
+    }
+    
+    /* This function returns the access rights of a certain user on a certain
+     * plot.
+     */
+    public ArrayList<String> getPlotAccess(int plotID, int userID) {
+        ArrayList<String> result = null;
+        
+        sql = "SELECT PlotAccessDeposit, PlotAccessWithdraw, PlotAccessBuy, "
+                + "PlotAccessPlace, PlotAccessExpand, PlotAccessStatus "
+                + "FROM PlotAccess "
+                + "WHERE PlotID = " + plotID 
+                + " AND UserCharacterID = " + userID;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            if(rs.next()) {
+                result = new ArrayList();
+                
+                result.add(rs.getString("PlotAccessDeposit"));
+                result.add(rs.getString("PlotAccessWithdraw"));
+                result.add(rs.getString("PlotAccessBuy"));
+                result.add(rs.getString("PlotAccessPlace"));
+                result.add(rs.getString("PlotAccessExpand"));
+                result.add(rs.getString("PlotAccessStatus"));
+                
+                return result;
+            }
+            else {
+                System.out.println("Error in function getPlotAccess():");
+                System.out.println("No results");
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Error in function getPlotAccess():");
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+    //-----------------------------------------------------------------------//
 }

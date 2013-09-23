@@ -278,9 +278,9 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
 BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness)
 VALUES
-(1, 23, 'Farm (Cattle)(Dairy and Meat)',								1,	1,	25,		50,		4,		10,	1,	1,		0),
+(1, 23, 'Farm (Cattle)(Dairy and Meat)',							1,	1,	25,		50,		4,		10,	1,	1,		0),
 (1, 25, 'Farm (Sheep)',												7,	1,	25,		25,		3,		10,	1,	1,		0),
-(1, 24, 'Farm (Grain)(Rice, Maize)',									8,	3,	25,		25,		3.5,	10,	2,	1,		0),
+(1, 24, 'Farm (Grain)(Rice, Maize)',								8,	3,	25,		25,		3.5,	10,	2,	1,		0),
 (1, 43, 'Vineyard',													6,	5,	25,		25,		2.5,	10,	2,	1,		0),
 (1, 27, 'Farm (Vegetable)',											11,	1,	20,		20,		2,		10,	1,	1,		0),
 (1, 26, 'Farm (Work Animals)(Dray horses, Oxen, Bison etc.)',		11,	1,	25,		25,		3,		10,	1,	1,		0),
@@ -292,8 +292,8 @@ VALUES
 (1, 42, 'Timber Plantations',										11,	1,	25,		50,		4,		10,	1,	1,		0),
 
 (2, 34, 'Mining Operation (Iron)',									5,	1,	75,		50,		8,		15,	2,	1,		0),
-(2, 30, 'Mining Operation (Copper)',									9,	1,	75,		50,		8,		15,	2,	1,		0),
-(2, 40, 'Mining Operation (Silver)',									3,	1,	75,		75,		10,		20,	3,	1,		0),
+(2, 30, 'Mining Operation (Copper)',								9,	1,	75,		50,		8,		15,	2,	1,		0),
+(2, 40, 'Mining Operation (Silver)',								3,	1,	75,		75,		10,		20,	3,	1,		0),
 (2, 33, 'Mining Operation (Gold)',									3,	1,	100,	100,	13,		20,	3,	1,		0),
 (2, 35, 'Mining Operation (Lead)',									3,	1,	50,		50,		6,		15,	2,	1,		0),
 (2, 21, 'Mining Operation (Zinc)',									3,	1,	50,		50,		5,		15,	2,	1,		0),

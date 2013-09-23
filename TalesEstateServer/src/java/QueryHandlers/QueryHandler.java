@@ -16,6 +16,7 @@ public class QueryHandler {
     private UserQueryHandler uqh;
     private PictureQueryHandler Picqh;
     private LogQueryHandler lqh;
+    private EventQueryHandler eqh;
 
     public QueryHandler(int type) {
         db = new DatabaseConnection();
@@ -32,7 +33,7 @@ public class QueryHandler {
         }
         lqh = new LogQueryHandler(conEstate);
         uqh = new UserQueryHandler(conProd);
-
+        eqh = new EventQueryHandler(conEstate);
     }
 
     public void closeConnection() {
@@ -69,5 +70,9 @@ public class QueryHandler {
 
     public UserQueryHandler getUserQH() {
         return uqh;
+    }
+    
+    public EventQueryHandler getEventQH() {
+        return eqh;
     }
 }
