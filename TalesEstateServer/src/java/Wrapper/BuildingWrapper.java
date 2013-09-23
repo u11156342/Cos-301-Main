@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 @Path("/BuildingWrapper")
 public class BuildingWrapper {
 
-    QueryHandler handler = handler = new QueryHandler(0);
+    QueryHandler handler = new QueryHandler(0);
     Converter converter = new Converter();
 
     @GET
@@ -51,5 +51,19 @@ public class BuildingWrapper {
 
         return converter.ToUrl(handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(characterID, plotID));
 
+    }
+    
+    @GET
+    @Path("checkBuildingPrerequisites/{plotID}/{buildingID}")
+    @Produces("text/plain")
+    public String checkBuildingPrerequisites(@PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
+        return handler.getBuildingQH().checkBuildingPrerequisites(plotID, buildingID);
+    }
+    
+    @GET
+    @Path("getBuildingTTB/{buildingID}")
+    @Produces("text/plain")
+    public String getBuildingTTB(@PathParam("buildingID") int buildingID) {
+        return handler.getBuildingQH().getBuildingTTB(buildingID);
     }
 }

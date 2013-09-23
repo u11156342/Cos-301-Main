@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 @Path("/CharacterWrapper")
 public class CharacterWrapper {
 
-    QueryHandler handler = handler = new QueryHandler(0);
+    QueryHandler handler = new QueryHandler(0);
     Converter converter = new Converter();
 
     @GET
@@ -44,6 +44,14 @@ public class CharacterWrapper {
         return "" + handler.getCharacterQH().retrieveCharacterID(userName);
     }
 
+    @GET
+    @Path("retrieveCharacterIDExtra/{userID}")
+    @Produces("text/plain")
+    public String retrieveCharacterIDExtra(@PathParam("userID") String userName) {
+        userName = userName.replace('.', ' ');
+        return "" + handler.getCharacterQH().retrieveCharacterIDExtra(userName);
+    }
+    
     @GET
     @Path("retrieveAllCharacters")
     @Produces("text/plain")

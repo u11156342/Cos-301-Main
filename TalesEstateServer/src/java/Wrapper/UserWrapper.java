@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 @Path("/UserWrapper")
 public class UserWrapper {
 
-    QueryHandler handler = handler = new QueryHandler(0);
+    QueryHandler handler = new QueryHandler(0);
     Converter converter = new Converter();
 
     @GET

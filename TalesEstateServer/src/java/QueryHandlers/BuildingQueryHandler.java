@@ -622,14 +622,14 @@ public class BuildingQueryHandler {
      * result is returned as an integer.
      * This function returns -1 if an error occurred.
      */
-    public int getBuildingTTB(int buildingID) {
+    public String getBuildingTTB(int buildingID) {
         sql = "SELECT BuildingTimeToBuild FROM Building WHERE "
                 + "BuildingID = " + buildingID;
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             if(rs.next()) {
-                return Integer.parseInt(rs.getString("BuildingTimeToBuild"));
+                return rs.getString("BuildingTimeToBuild");
             }
             else {
                 System.out.println("Error in function getBuildingTTB():");
@@ -641,6 +641,6 @@ public class BuildingQueryHandler {
             System.out.println(e.getMessage());
         }
         
-        return -1;
+        return "-1";
     }
 }

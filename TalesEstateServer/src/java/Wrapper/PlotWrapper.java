@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 @Path("/PlotWrapper")
 public class PlotWrapper {
 
-    QueryHandler handler = handler = new QueryHandler(0);
+    QueryHandler handler = new QueryHandler(0);
     Converter converter = new Converter();
 
     @GET
@@ -192,4 +192,34 @@ public class PlotWrapper {
             return "false";
         }
     }
+    
+    @GET
+    @Path("addPlotAccess/{plotID}/{userID}/{deposit}/{withdraw}/{buy}/{place}/{expand}/{status}")
+    @Produces("text/html")
+    public String addPlotAccess(int plotID, int userID, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean expand, boolean status) {
+        if (handler.getPlotQH().addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status)) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    
+    @GET
+    @Path("modifyPlotAccess/{plotID}/{userID}/{deposit}/{withdraw}/{buy}/{place}/{expand}/{status}")
+    @Produces("text/html")
+    public String modifyPlotAccess(int plotID, int userID, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean expand, boolean status) {
+        if (handler.getPlotQH().addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status)) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    
+    @GET
+    @Path("getPlotAccess/{plotID}/{userID}")
+    @Produces("text/html")
+    public String getPlotAccess(int plotID, int userID) {
+        return converter.ToUrl(handler.getPlotQH().getPlotAccess(plotID, userID));
+    }
+    
 }
