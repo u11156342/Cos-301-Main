@@ -303,7 +303,7 @@ public class MainPlaySideMenu extends JPanel {
                         String gc = retrieveMonthlyUpkeep.get(1);
                         String sc = retrieveMonthlyUpkeep.get(2);
 
-                        Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (100 * Double.parseDouble(pc) + 10 * Double.parseDouble(gc) + Double.parseDouble(sc));
+                        Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (10 * Double.parseDouble(pc) + Double.parseDouble(gc) + Double.parseDouble(sc)/10);
 
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
