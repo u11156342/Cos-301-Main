@@ -203,10 +203,10 @@ public class Wrapper {
         html.append("<th>Income</th>");
         html.append("<th>Happiness</th>");
 
-         ArrayList<String> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
         ArrayList<String[]> tempresult;
         for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
-            tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)));
+            tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             html.append("	<tr>");
             html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)).append("</td>");
             html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");

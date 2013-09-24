@@ -461,7 +461,7 @@ public class PlotQueryHandler {
             System.out.println(happiness);
 
             //ek gaan dit edit om ni die plots te update ni
-            
+
             sql = "UPDATE Plot SET "
                     + "PlotOwnedBy = " + characterID + ", "
                     + "PlotAmount = " + amountID + ", "
@@ -472,14 +472,14 @@ public class PlotQueryHandler {
                     + "PlotHappiness = " + happiness + ", "
                     + "PlotMonthlyIncome = " + monthlyIncome + ", "
                     + "PlotWorkersUsed = " + workersUsed + ", "
-                    +"PlotWorkerMax = " + workerMax + " "
+                    + "PlotWorkerMax = " + workerMax + " "
                     //+ "PlotWorkerMax = " + workerMax + ", "
-//                    + "PlotAcreExquisite = " + acreE + ", "
-//                    + "PlotAcreExquisiteMax = " + acreEM + ", "
-//                    + "PlotAcreFine = " + acreF + ", "
-//                    + "PlotAcreFineMax = " + acreFM + ", "
-//                    + "PlotAcrePoor = " + acreP + ", "
-//                    + "PlotAcrePoorMax = " + acrePM + " "
+                    //                    + "PlotAcreExquisite = " + acreE + ", "
+                    //                    + "PlotAcreExquisiteMax = " + acreEM + ", "
+                    //                    + "PlotAcreFine = " + acreF + ", "
+                    //                    + "PlotAcreFineMax = " + acreFM + ", "
+                    //                    + "PlotAcrePoor = " + acreP + ", "
+                    //                    + "PlotAcrePoorMax = " + acrePM + " "
                     + "WHERE PlotID = " + plotID;
             stmt = con.createStatement();
 
@@ -877,13 +877,13 @@ public class PlotQueryHandler {
 
                 System.out.println(sql);
                 exquisite = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
-                System.out.println("c "+exquisite);
+                System.out.println("c " + exquisite);
                 fine = Integer.parseInt(rs.getString("PlotAcreFineMax"));
-                System.out.println("c "+fine);
+                System.out.println("c " + fine);
                 poor = Integer.parseInt(rs.getString("PlotAcrePoorMax"));
-                System.out.println("c "+poor);
-                
-               // gArray = rs.getString("PlotGroundArray");
+                System.out.println("c " + poor);
+
+                // gArray = rs.getString("PlotGroundArray");
                 if (quality.equals("exquisite")) {
                     exquisite += 1;
                 } else if (quality.equals("fine")) {
@@ -894,7 +894,7 @@ public class PlotQueryHandler {
 
                 gArray = gArray + convertToArray(groundArray);
                 //Add back to database
-                
+
                 sql = "UPDATE Plot SET "
                         + "PlotAcreExquisiteMax = " + exquisite + ", "
                         + "PlotAcreFineMax = " + fine + ", "
@@ -908,7 +908,7 @@ public class PlotQueryHandler {
             } catch (Exception e) {
                 System.out.println("Error in PlotQueryHander, function expandPlot()");
                 System.out.println(e.getMessage());
-    
+
             }
         } else {
             System.out.println("Invalid quality supplied.");
@@ -989,7 +989,7 @@ public class PlotQueryHandler {
 
         return false;
     }
-    
+
     //-----------------------------------------------------------------------//
     /* This function allows one to add a character to a plot, thus 'sharing' 
      * access to that plot. These are the following rights:
@@ -1008,153 +1008,254 @@ public class PlotQueryHandler {
             boolean withdraw, boolean buy, boolean place, boolean expand,
             boolean status) {
         int depositBit, withdrawBit, buyBit, placeBit, expandBit, statusBit;
-        
-        if(deposit)
+
+        if (deposit) {
             depositBit = 1;
-        else
+        } else {
             depositBit = 0;
-        
-        if(withdraw)
+        }
+
+        if (withdraw) {
             withdrawBit = 1;
-        else
+        } else {
             withdrawBit = 0;
-        
-        if(buy)
+        }
+
+        if (buy) {
             buyBit = 1;
-        else
+        } else {
             buyBit = 0;
-        
-        if(place)
+        }
+
+        if (place) {
             placeBit = 1;
-        else
+        } else {
             placeBit = 0;
-        
-        if(expand)
+        }
+
+        if (expand) {
             expandBit = 1;
-        else
+        } else {
             expandBit = 0;
-        
-        if(status)
+        }
+
+        if (status) {
             statusBit = 1;
-        else
+        } else {
             statusBit = 0;
-        
+        }
+
         sql = "INSERT INTO PlotAccess VALUES("
-                + plotID + ", " + userID + ", " + depositBit + ", " 
+                + plotID + ", " + userID + ", " + depositBit + ", "
                 + withdrawBit + ", " + buyBit + ", " + placeBit + ", "
                 + expandBit + ", " + statusBit + ")";
-                        
+
         try {
             stmt = con.createStatement();
             stmt.execute(sql);
-            
+
             return true;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in function addPlotAccess():");
             System.out.println(e.getMessage());
         }
-        
-        
+
+
         return false;
     }
-    
+
     /* This function modifies a certain characters access rights to a certain
      * plot.
      */
     public boolean modifyPlotAccess(int plotID, int userID, boolean deposit,
-            boolean withdraw, boolean buy, boolean place, boolean expand, 
+            boolean withdraw, boolean buy, boolean place, boolean expand,
             boolean status) {
         int depositBit, withdrawBit, buyBit, placeBit, expandBit, statusBit;
-        
-        if(deposit)
+
+        if (deposit) {
             depositBit = 1;
-        else
+        } else {
             depositBit = 0;
-        
-        if(withdraw)
+        }
+
+        if (withdraw) {
             withdrawBit = 1;
-        else
+        } else {
             withdrawBit = 0;
-        
-        if(buy)
+        }
+
+        if (buy) {
             buyBit = 1;
-        else
+        } else {
             buyBit = 0;
-        
-        if(place)
+        }
+
+        if (place) {
             placeBit = 1;
-        else
+        } else {
             placeBit = 0;
-        
-        if(expand)
+        }
+
+        if (expand) {
             expandBit = 1;
-        else
+        } else {
             expandBit = 0;
-        
-        if(status)
+        }
+
+        if (status) {
             statusBit = 1;
-        else
+        } else {
             statusBit = 0;
-        
+        }
+
         sql = "UPDATE PlotAccess SET "
                 + "PlotAccessDeposit = " + depositBit + ", "
                 + "PlotAccessWithdraw = " + withdrawBit + ", "
                 + "PlotAccessBuy = " + buyBit + ", "
                 + "PlotAccessPlace = " + placeBit + ", "
-                + "PlotAccessExpand = " + expandBit  + ", "
+                + "PlotAccessExpand = " + expandBit + ", "
                 + "PlotAccessStatus = " + statusBit + " "
                 + "WHERE PlotID = " + plotID + " AND "
                 + "UserCharacterID = " + userID;
-        
+
         try {
             stmt = con.createStatement();
             stmt.execute(sql);
-            
+
             return true;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in function addPlotAccess():");
             System.out.println(e.getMessage());
         }
-        
-        
+
+
         return false;
     }
-    
+
     /* This function returns the access rights of a certain user on a certain
      * plot.
      */
     public ArrayList<String> getPlotAccess(int plotID, int userID) {
         ArrayList<String> result = null;
-        
+
         sql = "SELECT PlotAccessDeposit, PlotAccessWithdraw, PlotAccessBuy, "
                 + "PlotAccessPlace, PlotAccessExpand, PlotAccessStatus "
                 + "FROM PlotAccess "
-                + "WHERE PlotID = " + plotID 
+                + "WHERE PlotID = " + plotID
                 + " AND UserCharacterID = " + userID;
-        
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            if(rs.next()) {
+            if (rs.next()) {
                 result = new ArrayList();
-                
+
                 result.add(rs.getString("PlotAccessDeposit"));
                 result.add(rs.getString("PlotAccessWithdraw"));
                 result.add(rs.getString("PlotAccessBuy"));
                 result.add(rs.getString("PlotAccessPlace"));
                 result.add(rs.getString("PlotAccessExpand"));
                 result.add(rs.getString("PlotAccessStatus"));
-                
+
                 return result;
-            }
-            else {
+            } else {
                 System.out.println("Error in function getPlotAccess():");
                 System.out.println("No results");
             }
+        } catch (Exception e) {
+            System.out.println("Error in function getPlotAccess():");
+            System.out.println(e.getMessage());
         }
-        catch(Exception e) {
+
+        return null;
+    }
+
+// returns all acces rights for a plot
+    public ArrayList<String[]> getAllAccess(int plotID) {
+        ArrayList<String[]> result = new ArrayList();
+        String[] line;
+
+        sql = "SELECT PlotAccessDeposit, PlotAccessWithdraw, PlotAccessBuy, "
+                + "PlotAccessPlace, PlotAccessExpand, PlotAccessStatus,UserCharacterID "
+                + "FROM PlotAccess "
+                + "WHERE PlotID = " + plotID;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                line = new String[7];
+
+                line[0] = rs.getString("PlotAccessDeposit");
+                line[1] = rs.getString("PlotAccessWithdraw");
+                line[2] = rs.getString("PlotAccessBuy");
+                line[3] = rs.getString("PlotAccessPlace");
+                line[4] = rs.getString("PlotAccessExpand");
+                line[5] = rs.getString("PlotAccessStatus");
+                line[6] = rs.getString("UserCharacterID");
+
+                result.add(line);
+            }
+            return result;
+        } catch (Exception e) {
+            System.out.println("Error in function getPlotAccess():");
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    //removes a person from a plots access
+    public boolean removeAccess(int PlotID, int userID) {
+
+        sql = "DELETE "
+                + "FROM PlotAccess "
+                + "WHERE PlotID = " + PlotID
+                + " AND UserCharacterID = " + userID;
+
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in function removeAccess():");
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
+    //returns all the plots where I have a right
+    public ArrayList<String[]> AllPlotsIHaveAccess(int userID) {
+        ArrayList<String[]> result = new ArrayList();
+        String[] line = null;
+
+        sql = "SELECT PlotID,PlotAccessDeposit, PlotAccessWithdraw, PlotAccessBuy, "
+                + "PlotAccessPlace, PlotAccessExpand, PlotAccessStatus "
+                + "FROM PlotAccess "
+                + "WHERE UserCharacterID = " + userID;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+
+
+                line = new String[7];
+                line[0] = rs.getString("PlotID");
+                line[1] = rs.getString("PlotAccessDeposit");
+                line[2] = rs.getString("PlotAccessWithdraw");
+                line[3] = rs.getString("PlotAccessBuy");
+                line[4] = rs.getString("PlotAccessPlace");
+                line[5] = rs.getString("PlotAccessExpand");
+                line[6] = rs.getString("PlotAccessStatus");
+
+                result.add(line);
+
+            }
+            return result;
+        } catch (Exception e) {
             System.out.println("Error in function getPlotAccess():");
             System.out.println(e.getMessage());
         }

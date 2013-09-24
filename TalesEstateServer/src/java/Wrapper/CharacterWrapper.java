@@ -51,7 +51,7 @@ public class CharacterWrapper {
         userName = userName.replace('.', ' ');
         return converter.ArrToUrl(handler.getCharacterQH().retrieveCharacterIDExtra(userName));
     }
-    
+
     @GET
     @Path("retrieveAllCharacters")
     @Produces("text/plain")
@@ -91,5 +91,14 @@ public class CharacterWrapper {
     @Produces("text/plain")
     public boolean withdrawAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
         return handler.getCharacterQH().withdrawAmount(characterName, amountPlatinum, amountGold, amountSilver);
+    }
+
+    @GET
+    @Path("retrieveCharacterName/{characterID}")
+    @Produces("text/plain")
+    public String retrieveCharacterName(@PathParam("characterID") int characterID) {
+        String temp = handler.getCharacterQH().retrieveCharacterName(characterID);
+        temp = temp.replace(' ', '.');
+        return temp;
     }
 }

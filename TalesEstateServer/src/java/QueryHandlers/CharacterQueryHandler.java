@@ -77,6 +77,24 @@ public class CharacterQueryHandler {
         }
         return 0;
     }
+    /* This function returns a certain character's name based on the character
+     * id supplied.
+     */
+
+    public String retrieveCharacterName(int  characterID) {
+        try {
+            sql = "SELECT UserCharacterName FROM UserCharacter WHERE "
+                    + "UserCharacterID = '" + characterID + "'";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            return rs.getString("UserCharacterName");
+        } catch (Exception e) {
+            System.out.println("Could not execute function retrieveCharacterID()");
+            System.out.println(e.getMessage());
+        }
+        return "";
+    }
 
     /* This function returns a certain character's ID based on the character
      * name supplied. This function was modified to return more results.
@@ -89,12 +107,12 @@ public class CharacterQueryHandler {
             sql = "SELECT UserCharacterID,UserCharacterName FROM UserCharacter WHERE "
                     + "UserCharacterName LIKE '%" + characterName + "%'";
             stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);            
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                line=new String[2];
-                line[0]=rs.getString("UserCharacterID");
-                line[1]=rs.getString("UserCharacterName");
+                line = new String[2];
+                line[0] = rs.getString("UserCharacterID");
+                line[1] = rs.getString("UserCharacterName");
                 result.add(line);
             }
 

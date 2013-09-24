@@ -207,7 +207,7 @@ public class PlotWrapper {
     @GET
     @Path("modifyPlotAccess/{plotID}/{userID}/{deposit}/{withdraw}/{buy}/{place}/{expand}/{status}")
     @Produces("text/html")
-    public String modifyPlotAccess(@PathParam("plotID")int plotID,@PathParam("userID") int userID,@PathParam("deposit") boolean deposit,@PathParam("withdraw") boolean withdraw,@PathParam("buy") boolean buy,@PathParam("place") boolean place,@PathParam("expand") boolean expand,@PathParam("status") boolean status) {
+    public String modifyPlotAccess(@PathParam("plotID") int plotID, @PathParam("userID") int userID, @PathParam("deposit") boolean deposit, @PathParam("withdraw") boolean withdraw, @PathParam("buy") boolean buy, @PathParam("place") boolean place, @PathParam("expand") boolean expand, @PathParam("status") boolean status) {
         if (handler.getPlotQH().addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status)) {
             return "true";
         } else {
@@ -218,7 +218,32 @@ public class PlotWrapper {
     @GET
     @Path("getPlotAccess/{plotID}/{userID}")
     @Produces("text/html")
-    public String getPlotAccess(@PathParam("plotID")int plotID,@PathParam("userID") int userID) {
+    public String getPlotAccess(@PathParam("plotID") int plotID, @PathParam("userID") int userID) {
         return converter.ToUrl(handler.getPlotQH().getPlotAccess(plotID, userID));
+    }
+
+    @GET
+    @Path("getAllAccess/{plotID}")
+    @Produces("text/html")
+    public String getAllAccess(@PathParam("plotID") int plotID) {
+        return converter.ArrToUrl(handler.getPlotQH().getAllAccess(plotID));
+    }
+
+    @GET
+    @Path("removeAccess/{plotID}/{userID}")
+    @Produces("text/html")
+    public String RemoveAccess(@PathParam("plotID") int plotID, @PathParam("userID") int userID) {
+        if (handler.getPlotQH().removeAccess(plotID, userID)) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    @GET
+    @Path("AllPlotsIHaveAccess/{userID}")
+    @Produces("text/html")
+    public String RemoveAccess(@PathParam("userID") int userID) {
+        return converter.ArrToUrl(handler.getPlotQH().AllPlotsIHaveAccess(userID));
     }
 }
