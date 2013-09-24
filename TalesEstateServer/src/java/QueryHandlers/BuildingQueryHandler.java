@@ -399,9 +399,9 @@ public class BuildingQueryHandler {
         int workerCount = 0, buildingCount = 0, start = 0;
         
         //Get the plot to be checked against
-        sql = "SELECT PlotDutchy, PlotGroundArray, PlotBuildingArray, "
+        sql = "SELECT PlotDuchy, PlotGroundArray, PlotBuildingArray, "
                 + "PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisiteMax, "
-                + ", PlotAcreFineMax, PlotAcrePoorMax "
+                + "PlotAcreFineMax, PlotAcrePoorMax "
                 + "FROM Plot "
                 + "WHERE PlotID = " + plotID;
         try {
@@ -412,7 +412,7 @@ public class BuildingQueryHandler {
             if(rs != null) {
                 //Store retrieved plot
                 plot = new ArrayList();
-                plot.add(rs.getString("PlotDutchy"));           //0
+                plot.add(rs.getString("PlotDuchy"));           //0
                 plot.add(rs.getString("PlotGroundArray"));      //1
                 plot.add(rs.getString("PlotBuildingArray"));    //2
                 plot.add(rs.getString("PlotWorkersUsed"));      //3
@@ -522,17 +522,17 @@ public class BuildingQueryHandler {
                 if(Integer.parseInt(plot.get(7)) > 0)
                     break;
                 else
-                    return "poor";
+                    return "poor acre";
             case 3: //At least 1 fine
                 if(Integer.parseInt(plot.get(6)) > 0)
                     break;
                 else
-                    return "fine";
+                    return "fine acre";
             case 4: //At least 1 exquisite
                 if(Integer.parseInt(plot.get(5)) > 0)
                     break;
                 else
-                    return "exquisite";
+                    return "exquisite acre";
             case 5: //No exquisite
                 if(Integer.parseInt(plot.get(5)) > 0)
                     return "no exquisite";

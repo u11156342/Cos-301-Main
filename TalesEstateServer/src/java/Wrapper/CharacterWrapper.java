@@ -45,11 +45,11 @@ public class CharacterWrapper {
     }
 
     @GET
-    @Path("retrieveCharacterIDExtra/{userID}")
+    @Path("retrieveCharacterIDExtra/{characterName}")
     @Produces("text/plain")
-    public String retrieveCharacterIDExtra(@PathParam("userID") String userName) {
+    public String retrieveCharacterIDExtra(@PathParam("characterName") String userName) {
         userName = userName.replace('.', ' ');
-        return "" + handler.getCharacterQH().retrieveCharacterIDExtra(userName);
+        return converter.ArrToUrl(handler.getCharacterQH().retrieveCharacterIDExtra(userName));
     }
     
     @GET

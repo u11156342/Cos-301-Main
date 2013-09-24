@@ -17,9 +17,9 @@ public class EventWrapper {
     @Path("addEvent/{plotID}/{eventName}/{eventDescription}/{platinumMod}"
             + "/{goldMod}/{silverMod}/{happinessMod}/{incomeMod}")
     @Produces("text/plain")
-    public String addEvent(int plotID, String eventName, String eventDescription,
-            int platinumMod, int goldMod, int silverMod, int happinessMod,
-            int incomeMod) {
+    public String addEvent(@PathParam("plotID")int plotID,@PathParam("eventName") String eventName,@PathParam("eventDescription") String eventDescription,
+            @PathParam("platinumMod")int platinumMod,@PathParam("goldMod") int goldMod,@PathParam("silverMod") int silverMod,@PathParam("happinessMod") int happinessMod,
+            @PathParam("incomeMod")int incomeMod) {
         if(handler.getEventQH().addEvent(plotID, eventName, eventDescription,
                 platinumMod, goldMod, silverMod, happinessMod, incomeMod))
             return "true";
@@ -30,7 +30,7 @@ public class EventWrapper {
     @GET
     @Path("getEvent/{month}")
     @Produces("text/plain")
-    public String getEvent(int month) {
+    public String getEvent(@PathParam("month")int month) {
         return converter.ArrToUrl(handler.getEventQH().getEvent(month));
     }
 }
