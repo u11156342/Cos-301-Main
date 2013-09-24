@@ -353,7 +353,8 @@ public class BuildingQueryHandler {
     {
         ArrayList<String> results = null;
         
-        sql = "SELECT BuildLogBuildingID FROM BuildLog WHERE "
+        sql = "SELECT BuildLogBuildingID, BuildLogTimeToComplete, "
+                + "BuildLogCompleted FROM BuildLog WHERE "
                 + "BuildLogCharacterID = " + charid + " AND "
                 + "BuildLogPlotID = " + plotid;
         try
@@ -374,6 +375,8 @@ public class BuildingQueryHandler {
             while(rs.next())
             {
                 results.add(rs.getString("BuildLogBuildingID"));
+                results.add(rs.getString("BuildLogTimeToComplete"));
+                results.add(rs.getString("BuildLogCompleted"));
             }
         }
         catch(Exception e)

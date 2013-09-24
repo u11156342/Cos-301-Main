@@ -436,7 +436,9 @@ CREATE TABLE BuildLog
 	BuildLogCharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
 	BuildLogPlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
 	BuildLogBuildingID INT FOREIGN KEY REFERENCES Building(BuildingID),
-	BuildLogDateTimeBuilt DATETIME
+	BuildLogDateTimeBuilt DATETIME,
+	BuildLogTimeToComplete INT,
+	BuildLogCompleted BIT
 )
 
 CREATE TABLE PlotAccess

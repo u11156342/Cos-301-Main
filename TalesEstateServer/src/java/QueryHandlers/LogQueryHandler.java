@@ -27,7 +27,7 @@ public class LogQueryHandler {
      */
     public void logBuildingBuilt(int characterID, int buildingID, int plotID, Date date)
     {
-        String day, month, year, hourS, time, period;
+        String day, month, year, hourS, time, period, ttb = "";
         int hour, resultCount = 0;
         ResultSet rs = null;
         
@@ -79,11 +79,15 @@ public class LogQueryHandler {
             }
             else
             {
-                sql = "SELECT * FROM Plot WHERE " + plotID + " = "
-                        + "PlotID";
-                resultCount = 0;
+                //Modified here
                 try
                 {
+                    ttb = rs.getString("BuildingTimeToBuild");
+
+                    sql = "SELECT * FROM Plot WHERE " + plotID + " = "
+                            + "PlotID";
+                    resultCount = 0;
+
                     stmt = con.createStatement();
                     rs = stmt.executeQuery(sql);
                     while(rs.next())
@@ -96,6 +100,7 @@ public class LogQueryHandler {
                     System.out.println("Error when executing logBuildingBuilt()");
                     System.out.println(e.getMessage());
                 }
+                ///////////////
                 
                 if(resultCount == 0)
                 {
@@ -156,9 +161,11 @@ public class LogQueryHandler {
 
                     time = hourS + ":" + st.nextToken() + ":" + st.nextToken() + " " + period;
                     sql = "INSERT INTO BuildLog(BuildLogCharacterID, BuildLogPlotID, "
-                            + " BuildLogBuildingID, BuildLogDateTimeBuilt) VALUES "
+                            + " BuildLogBuildingID, BuildLogDateTimeBuilt, "
+                            + "BuildLogTimeToComplete, BuildLogCompleted) VALUES "
                             + "(" + characterID + ", " + plotID + ", " + 
-                            buildingID + ", '" + year + month + day + " " + time + "')";
+                            buildingID + ", '" + year + month + day + " " + time + "'"
+                            + ", " + ttb + ", 0)";
 
                     System.out.println(sql);
                     try
