@@ -36,7 +36,7 @@ public class MainPlaySideMenu extends JPanel {
     public int pId;
     String duchy_;
 
-    public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p) {
+    public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p, boolean isowner) {
         pId = p;
         Report = new JButton("Status Report");
         Deposite = new JButton("Deposit gold");
@@ -59,42 +59,127 @@ public class MainPlaySideMenu extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        if (isowner) {
+            c.gridx = 2;
+            c.gridy = 0;
+            Report.setPreferredSize(new Dimension(150, 60));
+            add(Report, c);
+            c.gridx = 2;
+            c.gridy = 1;
+            // c.insets = new Insets(30, 0, 0, 0);
+            Deposite.setPreferredSize(new Dimension(150, 60));
+            add(Deposite, c);
+            c.gridx = 2;
+            c.gridy = 2;
+            //  c.insets = new Insets(30, 0, 0, 0);
+            Withdraw.setPreferredSize(new Dimension(150, 60));
+            add(Withdraw, c);
+            c.gridx = 2;
+            c.gridy = 3;
+            // c.insets = new Insets(30, 0, 0, 0);
+            exspand.setPreferredSize(new Dimension(150, 60));
+            add(exspand, c);
+            c.gridy = 4;
+            //  c.insets = new Insets(30, 0, 0, 0);
+            listBuildings.setPreferredSize(new Dimension(150, 60));
+            add(listBuildings, c);
+            c.gridy = 5;
+            //  c.insets = new Insets(30, 0, 0, 0);
+            addBuildings.setPreferredSize(new Dimension(150, 60));
+            add(addBuildings, c);
+            c.gridy = 6;
+            //  c.insets = new Insets(30, 0, 0, 0);
+            VisualInterface.setPreferredSize(new Dimension(150, 60));
+            add(VisualInterface, c);
 
-        c.gridx = 2;
-        c.gridy = 0;
-        Report.setPreferredSize(new Dimension(150, 60));
-        add(Report, c);
-        c.gridx = 2;
-        c.gridy = 1;
-        // c.insets = new Insets(30, 0, 0, 0);
-        Deposite.setPreferredSize(new Dimension(150, 60));
-        add(Deposite, c);
-        c.gridx = 2;
-        c.gridy = 2;
-        //  c.insets = new Insets(30, 0, 0, 0);
-        Withdraw.setPreferredSize(new Dimension(150, 60));
-        add(Withdraw, c);
-        c.gridx = 2;
-        c.gridy = 3;
-        // c.insets = new Insets(30, 0, 0, 0);
-        exspand.setPreferredSize(new Dimension(150, 60));
-        add(exspand, c);
-        c.gridy = 4;
-        //  c.insets = new Insets(30, 0, 0, 0);
-        listBuildings.setPreferredSize(new Dimension(150, 60));
-        add(listBuildings, c);
-        c.gridy = 5;
-        //  c.insets = new Insets(30, 0, 0, 0);
-        addBuildings.setPreferredSize(new Dimension(150, 60));
-        add(addBuildings, c);
-        c.gridy = 6;
-        //  c.insets = new Insets(30, 0, 0, 0);
-        VisualInterface.setPreferredSize(new Dimension(150, 60));
-        add(VisualInterface, c);
+            c.gridy = 7;
+            RightsManagement.setPreferredSize(new Dimension(150, 60));
+            add(RightsManagement, c);
+        } else {
+            ArrayList<String> plotAccess = tc.rdb.getPlotAccess(pId, tc.CharacterID);
+            System.out.println(plotAccess);
 
-        c.gridy = 7;
-        RightsManagement.setPreferredSize(new Dimension(150, 60));
-        add(RightsManagement, c);
+            boolean dep = false;
+            boolean with = false;
+            boolean buy = false;
+            boolean pla = false;
+            boolean ex = false;
+            boolean st = false;
+
+            if ("1".equals(plotAccess.get(0))) {
+                dep = true;
+            }
+
+            if ("1".equals(plotAccess.get(1))) {
+                with = true;
+            }
+
+            if ("1".equals(plotAccess.get(2))) {
+                buy = true;
+            }
+
+            if ("1".equals(plotAccess.get(3))) {
+                pla = true;
+            }
+            if ("1".equals(plotAccess.get(4))) {
+                ex = true;
+            }
+            if ("1".equals(plotAccess.get(5))) {
+                st = true;
+            }
+
+            System.out.println(dep + " " + with + " " + buy + " " + pla + " " + ex + " " + st);
+
+            c.gridx = 2;
+            c.gridy = 0;
+            Report.setPreferredSize(new Dimension(150, 60));
+            if (st) {
+                add(Report, c);
+            }
+            c.gridx = 2;
+            c.gridy = 1;
+            // c.insets = new Insets(30, 0, 0, 0);
+            Deposite.setPreferredSize(new Dimension(150, 60));
+            if (dep) {
+                add(Deposite, c);
+            }
+            c.gridx = 2;
+            c.gridy = 2;
+            //  c.insets = new Insets(30, 0, 0, 0);
+            Withdraw.setPreferredSize(new Dimension(150, 60));
+            if (with) {
+                add(Withdraw, c);
+            }
+            c.gridx = 2;
+            c.gridy = 3;
+            // c.insets = new Insets(30, 0, 0, 0);
+            exspand.setPreferredSize(new Dimension(150, 60));
+            if (ex) {
+                add(exspand, c);
+            }
+            c.gridy = 4;
+            //  c.insets = new Insets(30, 0, 0, 0);
+
+            listBuildings.setPreferredSize(new Dimension(150, 60));
+            if (st||buy) {
+                add(listBuildings, c);
+            }
+            c.gridy = 5;
+            //  c.insets = new Insets(30, 0, 0, 0);
+
+            addBuildings.setPreferredSize(new Dimension(150, 60));
+            if (buy) {
+                add(addBuildings, c);
+            }
+            c.gridy = 6;
+            //  c.insets = new Insets(30, 0, 0, 0);
+
+            VisualInterface.setPreferredSize(new Dimension(150, 60));
+            if (pla) {
+                add(VisualInterface, c);
+            }
+
+        }
 
         Report.addActionListener(new ActionListener() {
             @Override
@@ -303,7 +388,7 @@ public class MainPlaySideMenu extends JPanel {
                         String gc = retrieveMonthlyUpkeep.get(1);
                         String sc = retrieveMonthlyUpkeep.get(2);
 
-                        Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (10 * Double.parseDouble(pc) + Double.parseDouble(gc) + Double.parseDouble(sc)/10);
+                        Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (10 * Double.parseDouble(pc) + Double.parseDouble(gc) + Double.parseDouble(sc) / 10);
 
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
@@ -332,7 +417,7 @@ public class MainPlaySideMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ArrayList<String> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, pId);
+                ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, pId);
                 textZone.setText("");
                 StringBuilder html = new StringBuilder();
                 html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
@@ -341,15 +426,22 @@ public class MainPlaySideMenu extends JPanel {
                 html.append("<th>Building name </th>");
                 html.append("<th>Income</th>");
                 html.append("<th>Happiness</th>");
+                html.append("<th>Status</th>");
 
                 ArrayList<String[]> tempresult;
                 for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
-                    tempresult = tc.rdb.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)));
+                    tempresult = tc.rdb.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
                     html.append("	<tr>");
-                    html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)).append("</td>");
+                    html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
                     html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");
                     html.append(" <td>").append(tempresult.get(0)[6]).append("</td>");
                     html.append(" <td>").append(tempresult.get(0)[10]).append("</td>");
+                    if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(a)[2])) {
+                        html.append(" <td>").append("Uncompleted").append("</td>");
+                    } else {
+                        html.append(" <td>").append("Completed").append("</td>");
+                    }
+
                     html.append("	</tr>");
 
                 }
@@ -374,7 +466,7 @@ public class MainPlaySideMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               tc.visual.init(tc, pId);
+                tc.visual.init(tc, pId);
                 tc.cardlayout.show(tc.contentpane, "visual");
             }
         });
@@ -383,6 +475,9 @@ public class MainPlaySideMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                tc.ri = new RightsInterface("right");
+                tc.mainapplet.add(tc.ri, tc.ri.getName());
+                tc.ri.init(tc, pId);
                 tc.cardlayout.show(tc.contentpane, "right");
             }
         });

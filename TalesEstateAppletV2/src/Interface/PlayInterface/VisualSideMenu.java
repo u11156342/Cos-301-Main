@@ -27,7 +27,7 @@ public class VisualSideMenu extends JPanel {
         PropertyID = PropertyId;
 
 
-        ArrayList<String> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, PropertyId);
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, PropertyId);
 
         build = new String[retrieveAllBuildingsOwnedByCharacter.size()];
         buildID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
@@ -36,9 +36,9 @@ public class VisualSideMenu extends JPanel {
         ArrayList<String[]> tempresult;        
 
         for (int a = 0; a < build.length; a++) {
-            tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)));
+            tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             build[a] = tempresult.get(0)[1];
-            buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a));
+            buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
         }
 
 

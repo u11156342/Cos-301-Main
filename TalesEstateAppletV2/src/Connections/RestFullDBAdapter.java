@@ -517,7 +517,7 @@ public class RestFullDBAdapter {
         }
     }
 
-    public ArrayList<String> retrieveAllBuildingsOwnedByCharacter(int characterID, int plotid) {
+    public ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter(int characterID, int plotid) {
         String temp = "";
         try {
 
@@ -533,7 +533,7 @@ public class RestFullDBAdapter {
             System.out.println(ex.getMessage());
         }
 
-        return Conv.FromUrl(temp);
+        return Conv.ArrFromUrl(temp);
     }
 
     public ArrayList<String> retrieveDuchyList() {
@@ -623,5 +623,120 @@ public class RestFullDBAdapter {
         }
 
         return temp;
+    }
+
+    public ArrayList<String> getPlotAccess(int plotID, int userID) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "getPlotAccess/" + plotID + "/" + userID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.FromUrl(temp);
+    }
+
+    public ArrayList<String[]> getAllAccess(int plotID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "getAllAccess/" + plotID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.ArrFromUrl(temp);
+    }
+
+    public String retrieveCharacterName(int characterID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterName/" + characterID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        temp = temp.replace('.', ' ');
+
+        return temp;
+    }
+
+    public String addPlotAccess(int plotID, int UserId, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean exspand, boolean status) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotAccess/" + plotID + "/" + UserId + "/" + deposit + "/" + withdraw + "/" + buy + "/" + place + "/" + exspand + "/" + status);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
+    }
+
+    public boolean removeAccess(int plotId, int UserID) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "removeAccess" + "/" + plotId + "/" + UserID);
+            System.out.println(url);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if ("false".equals(temp)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public ArrayList<String[]> AllPlotsIHaveAccess(int UserID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "AllPlotsIHaveAccess/" + UserID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.ArrFromUrl(temp);
     }
 }

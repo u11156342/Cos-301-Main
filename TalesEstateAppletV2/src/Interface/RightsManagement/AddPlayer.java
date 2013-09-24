@@ -21,9 +21,9 @@ public class AddPlayer extends BasePanel {
         super(name);
     }
 
-    public void init(final TransferContainer tc) {
+    public void init(final TransferContainer tc,String PlayerName,int PlotID) {
 
-        AddPlayerForm pform=new AddPlayerForm();
+        AddPlayerForm pform=new AddPlayerForm(PlayerName,tc,PlotID);
         
         add(pform,BorderLayout.CENTER);
 

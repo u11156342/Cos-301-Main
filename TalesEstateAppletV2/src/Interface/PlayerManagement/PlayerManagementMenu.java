@@ -121,7 +121,8 @@ public class PlayerManagementMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        add(donateGoldToPlayer, c);
+        //maby later
+       // add(donateGoldToPlayer, c);
 
 
 

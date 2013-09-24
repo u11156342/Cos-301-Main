@@ -62,7 +62,7 @@ public class PlayerOwnPanel extends JPanel {
         add(play, c);
     }
 
-    public void init(final TransferContainer tc) {
+    public void init(final TransferContainer tc, final boolean own) {
 
         statusArea.append("Located in " + duchy);
         statusArea.append("" + '\n');
@@ -87,14 +87,16 @@ public class PlayerOwnPanel extends JPanel {
 
                 tain.mp = new MainPlayInterface("MPlay");
                 tain.mainapplet.add(tain.mp, tain.mp.getName());
-                
+
                 tc.mp.buildings = buildings;
                 tc.mp.duchy = duchy;
                 tc.mp.propertyID = propertyID;
                 tc.mp.tiles = tiles;
                 tc.mp.amount = amount;
                 tc.mp.quality = quality;
+                tc.mp.IsOwner = own;
                 tc.mp.init(tain, propertyID);
+
 
 
                 tain.cardlayout.show(tain.contentpane, "MPlay");

@@ -103,7 +103,7 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.Build = new BuildtabPanel("Build", tContain);
 
 
-        tContain.ri = new RightsInterface("right", tContain);
+        tContain.ri = new RightsInterface("right");
 
         tContain.pmI=new PlayerManagementInterface("PlayerMan");
 
@@ -116,7 +116,7 @@ public class TalesEstateAppletV2 extends JApplet {
       //  add(tContain.mp, tContain.mp.getName());
         add(tContain.Build, tContain.Build.getName());
         add(tContain.visual, tContain.visual.getName());
-        add(tContain.ri, tContain.ri.getName());
+       // add(tContain.ri, tContain.ri.getName());
         add(tContain.pmI, tContain.pmI.getName());
 
         revalidate();

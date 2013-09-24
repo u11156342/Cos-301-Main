@@ -66,7 +66,7 @@ public class RestFullDBAdapterTest extends TestCase {
         int cid = 3;
         RestFullDBAdapter instance = new RestFullDBAdapter();
         instance.logBuildingBuilt(cid, plotid, buildingID);
-        ArrayList<String> retrieveAllBuildingsOwnedByCharacter = instance.retrieveAllBuildingsOwnedByCharacter(cid, plotid);
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = instance.retrieveAllBuildingsOwnedByCharacter(cid, plotid);
         boolean found = false;
         for (int i = 0; i < retrieveAllBuildingsOwnedByCharacter.size(); i++) {
             if ("1".equals(retrieveAllBuildingsOwnedByCharacter.get(i))) {

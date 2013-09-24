@@ -33,6 +33,8 @@ public class MainPlayInterface extends BasePanel {
     public int[][] buildings;
     public ArrayList<String[]> quality;
     public ArrayList<String> amount;
+    
+    public boolean IsOwner;
 
     public MainPlayInterface(String name) {
         super(name);
@@ -46,7 +48,7 @@ public class MainPlayInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
 
-        MainPlaySideMenu menu = new MainPlaySideMenu(textZone, tc, Pid);
+        MainPlaySideMenu menu = new MainPlaySideMenu(textZone, tc, Pid,IsOwner);
         menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
         add(menu, BorderLayout.EAST);
 

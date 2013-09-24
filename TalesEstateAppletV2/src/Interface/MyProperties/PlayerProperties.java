@@ -15,16 +15,18 @@ public class PlayerProperties extends JPanel {
     PlayerOwnPanel[] playersCurrentProperties;
 
     PlayerProperties(TransferContainer tc) {
-        w = tc.JFXPANEL_WIDTH_INT-300;
+        w = tc.JFXPANEL_WIDTH_INT - 300;
 
-               
+
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
- System.out.println("retrieving plots "+result.size());
-        playersCurrentProperties = new PlayerOwnPanel[result.size()];
-        int amount = result.size();
+        ArrayList<String[]> AllPlotsIHaveAccess = tc.rdb.AllPlotsIHaveAccess(tc.CharacterID);
+
+        System.out.println("retrieving plots " + (result.size() + AllPlotsIHaveAccess.size()));
+        playersCurrentProperties = new PlayerOwnPanel[(result.size() + AllPlotsIHaveAccess.size())];
+        int amount = result.size() + AllPlotsIHaveAccess.size();
         h = amount * 200;
 
-        for (int a = 0; a < playersCurrentProperties.length; a++) {
+        for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
@@ -47,25 +49,62 @@ public class PlayerProperties extends JPanel {
             playersCurrentProperties[a].hap = Integer.parseInt(result.get(a)[7]);
             playersCurrentProperties[a].wc = Integer.parseInt(result.get(a)[9]);
             playersCurrentProperties[a].wm = Integer.parseInt(result.get(a)[10]);
-            playersCurrentProperties[a].init(tc);
+            playersCurrentProperties[a].init(tc,true);
+        }
+
+
+        for (int i = result.size(); i < (result.size() + AllPlotsIHaveAccess.size()); i++) {
+            System.out.println("adding right prop");
+            playersCurrentProperties[i] = new PlayerOwnPanel(tc);
+
+            ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
+
+            playersCurrentProperties[i].propertyID = Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]);
+            System.out.println(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
+            playersCurrentProperties[i].duchy = retrievePlotDetails.get(3);
+            playersCurrentProperties[i].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[i].propertyID);
+            ArrayList<String[]> list = new ArrayList();
+
+            String[] t1 = {"poor", retrievePlotDetails.get(15), retrievePlotDetails.get(16)};
+            list.add(t1);
+            String[] t2 = {"fine", retrievePlotDetails.get(13), retrievePlotDetails.get(14)};
+            list.add(t2);
+            String[] t3 = {"Exquisite", retrievePlotDetails.get(11), retrievePlotDetails.get(12)};
+            list.add(t3);
+
+            playersCurrentProperties[i].quality = list;
+            System.out.println(playersCurrentProperties[i].amount);
+            playersCurrentProperties[i].size = Integer.parseInt(retrievePlotDetails.get(4));
+            playersCurrentProperties[i].tiles = tc.rdb.convertFromArray(retrievePlotDetails.get(5));
+            playersCurrentProperties[i].buildings = tc.rdb.convertFromArray(retrievePlotDetails.get(6));
+            playersCurrentProperties[i].income = Double.parseDouble(retrievePlotDetails.get(8));
+            playersCurrentProperties[i].hap = Integer.parseInt(retrievePlotDetails.get(7));
+            playersCurrentProperties[i].wc = Integer.parseInt(retrievePlotDetails.get(9));
+            playersCurrentProperties[i].wm = Integer.parseInt(retrievePlotDetails.get(10));
+            playersCurrentProperties[i].init(tc,false);
         }
 
 
 
 
-        JComponent panel1 = makePanel("Panel #1", 1);
+        JComponent panel1 = makePanel("Panel #1", 1, result.size());
         panel1.setPreferredSize(new Dimension(w, h));
         add(panel1);
     }
 
-    protected JComponent makePanel(String text, int type) {
+    protected JComponent makePanel(String text, int type, int bound) {
 
         if (type == 1) {
             JPanel panel = new JPanel(false);
 
             for (int a = 0; a < playersCurrentProperties.length; a++) {
-                playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
-                panel.add(playersCurrentProperties[a]);
+                if (a >= bound) {
+                    playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                    panel.add(playersCurrentProperties[a]);
+                } else {
+                    playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
+                    panel.add(playersCurrentProperties[a]);
+                }
             }
             return panel;
         }
