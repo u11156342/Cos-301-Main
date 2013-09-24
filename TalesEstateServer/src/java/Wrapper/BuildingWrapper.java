@@ -49,7 +49,7 @@ public class BuildingWrapper {
     public String retrieveAllBuildingsOwnedByCharacter(@PathParam("characterID") int characterID,
             @PathParam("plotID") int plotID) {
 
-        return converter.ToUrl(handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(characterID, plotID));
+        return converter.ArrToUrl(handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(characterID, plotID));
 
     }
     
