@@ -439,4 +439,31 @@ CREATE TABLE BuildLog
 	BuildLogDateTimeBuilt DATETIME
 )
 
+CREATE TABLE PlotAccess
+(
+	PlotAccessID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
+	UserCharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
+	PlotAccessDeposit BIT,
+	PlotAccessWithdraw BIT,
+	PlotAccessBuy BIT,
+	PlotAccessPlace BIT,
+	PlotAccessExpand BIT,
+	PlotAccessStatus BIT
+)
+
+CREATE TABLE EventLog
+(
+	EventLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
+	EventLogName VARCHAR(50),
+	EventLogDescription VARCHAR(MAX),
+	EventLogDateAdded DATE,
+	EventLogEffectPlatinum INT,
+	EventLogEffectGold INT,
+	EventLogEffectSilver INT,
+	EventLogEffectHappiness INT,
+	EventLogEffectIncome INT
+)
+
 GO
