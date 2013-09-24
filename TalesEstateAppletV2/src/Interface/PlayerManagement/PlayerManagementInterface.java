@@ -23,7 +23,7 @@ public class PlayerManagementInterface extends BasePanel {
 
     public void init(final TransferContainer tc) {
 
-        PlayerManagementMenu pmm = new PlayerManagementMenu();
+        PlayerManagementMenu pmm = new PlayerManagementMenu(tc);
 
         add(pmm, BorderLayout.CENTER);
 

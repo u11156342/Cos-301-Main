@@ -96,7 +96,7 @@ public class RestFullDBAdapter {
     }
 
     public int[][] convertFromArray(String inArray) {
-        System.out.println(" conveter "+ inArray);
+        System.out.println(" conveter " + inArray);
         int[][] result;
         StringTokenizer str, stc;
         int rows, columns;
@@ -420,7 +420,8 @@ public class RestFullDBAdapter {
 
         return temp;
     }
-        public String getSuperStatusReport(int propertyId) {
+
+    public String getSuperStatusReport(int propertyId) {
         String temp = "";
         try {
             URL url = new URL("http://" + serverURL + ":" + serverPort + server + "Wrapper/" + "SuperStatusReport/" + propertyId);
@@ -438,8 +439,6 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    
-    
     public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
         String temp = "";
         try {
@@ -587,5 +586,42 @@ public class RestFullDBAdapter {
         }
 
         return Conv.ArrFromUrl(temp);
+    }
+
+    public ArrayList<String[]> retrieveCharacterIDExtra(String characterName) {
+        String temp = "";
+        try {
+            characterName = characterName.replace(' ', '.');
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterIDExtra/" + characterName);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.ArrFromUrl(temp);
+    }
+
+    public String checkBuildingPrerequisites(int plotID, int buildingID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "BuildingWrapper/" + "checkBuildingPrerequisites/" + plotID + "/" + buildingID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return temp;
     }
 }

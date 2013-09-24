@@ -85,6 +85,9 @@ public class PlayerOwnPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
 
+                tain.mp = new MainPlayInterface("MPlay");
+                tain.mainapplet.add(tain.mp, tain.mp.getName());
+                
                 tc.mp.buildings = buildings;
                 tc.mp.duchy = duchy;
                 tc.mp.propertyID = propertyID;
@@ -92,6 +95,7 @@ public class PlayerOwnPanel extends JPanel {
                 tc.mp.amount = amount;
                 tc.mp.quality = quality;
                 tc.mp.init(tain, propertyID);
+
 
                 tain.cardlayout.show(tain.contentpane, "MPlay");
             }

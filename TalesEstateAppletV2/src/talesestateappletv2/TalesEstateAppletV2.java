@@ -111,9 +111,9 @@ public class TalesEstateAppletV2 extends JApplet {
         add(tContain.MainMenu, tContain.MainMenu.getName());
         add(tContain.Buy, tContain.Buy.getName());
         add(tContain.search, tContain.search.getName());
-        add(tContain.mProp, tContain.mProp.getName());
+       // add(tContain.mProp, tContain.mProp.getName());
         add(tContain.am, tContain.am.getName());
-        add(tContain.mp, tContain.mp.getName());
+      //  add(tContain.mp, tContain.mp.getName());
         add(tContain.Build, tContain.Build.getName());
         add(tContain.visual, tContain.visual.getName());
         add(tContain.ri, tContain.ri.getName());

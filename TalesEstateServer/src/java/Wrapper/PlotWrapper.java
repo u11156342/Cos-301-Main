@@ -192,34 +192,33 @@ public class PlotWrapper {
             return "false";
         }
     }
-    
+
     @GET
     @Path("addPlotAccess/{plotID}/{userID}/{deposit}/{withdraw}/{buy}/{place}/{expand}/{status}")
     @Produces("text/html")
-    public String addPlotAccess(int plotID, int userID, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean expand, boolean status) {
+    public String addPlotAccess(@PathParam("plotID") int plotID, @PathParam("userID") int userID, @PathParam("deposit") boolean deposit, @PathParam("withdraw") boolean withdraw, @PathParam("buy") boolean buy, @PathParam("place") boolean place, @PathParam("expand") boolean expand, @PathParam("status") boolean status) {
         if (handler.getPlotQH().addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status)) {
             return "true";
         } else {
             return "false";
         }
     }
-    
+
     @GET
     @Path("modifyPlotAccess/{plotID}/{userID}/{deposit}/{withdraw}/{buy}/{place}/{expand}/{status}")
     @Produces("text/html")
-    public String modifyPlotAccess(int plotID, int userID, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean expand, boolean status) {
+    public String modifyPlotAccess(@PathParam("plotID")int plotID,@PathParam("userID") int userID,@PathParam("deposit") boolean deposit,@PathParam("withdraw") boolean withdraw,@PathParam("buy") boolean buy,@PathParam("place") boolean place,@PathParam("expand") boolean expand,@PathParam("status") boolean status) {
         if (handler.getPlotQH().addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status)) {
             return "true";
         } else {
             return "false";
         }
     }
-    
+
     @GET
     @Path("getPlotAccess/{plotID}/{userID}")
     @Produces("text/html")
-    public String getPlotAccess(int plotID, int userID) {
+    public String getPlotAccess(@PathParam("plotID")int plotID,@PathParam("userID") int userID) {
         return converter.ToUrl(handler.getPlotQH().getPlotAccess(plotID, userID));
     }
-    
 }

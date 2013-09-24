@@ -120,7 +120,7 @@ public class MainPlaySideMenu extends JPanel {
 
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
-                        //plots gold so it becomes less
+                        //plots gold so it becomes more
                         // System.out.println(amountz);
                         tempa = tempa + (int) (amountz * 10);
                         int nplat = tempa / 100;
@@ -134,7 +134,7 @@ public class MainPlaySideMenu extends JPanel {
                         amount2 = tc.rdb.getCurrentAmount(pId);
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
 
-                        // users gold so it becomes more
+                        // users gold so it becomes less
                         tempa = Integer.parseInt(amount1.get(0)) * 100 + Integer.parseInt(amount1.get(1)) * 10 + Integer.parseInt(amount1.get(2));
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
                         tempa = tempa - (int) amountz * 10;
