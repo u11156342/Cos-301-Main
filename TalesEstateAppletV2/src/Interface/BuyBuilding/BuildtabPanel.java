@@ -2,6 +2,7 @@ package Interface.BuyBuilding;
 
 import Connections.RestFullDBAdapter;
 import Interface.TextManage.MainPlaySideMenu;
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Container;
@@ -61,7 +62,16 @@ public class BuildtabPanel extends BasePanel {
 
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements, tr);
         tabbedPane.addTab("Improvements", null, panel5);
-        add(tabbedPane);
+        add(tabbedPane, BorderLayout.CENTER);
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tain.cardlayout.show(tain.contentpane, "MainMenu");
+            }
+        });
+
+        add(back, BorderLayout.SOUTH);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
 
@@ -133,84 +143,154 @@ public class BuildtabPanel extends BasePanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                boolean buySucess = true;
-
-                //do the building need the following values
-                //1 character iD
-                int charsId = tain.CharacterID;
-                //2 Building id
                 int id = buildingsID[buildings.getSelectedIndex()];
-                ArrayList<String[]> r2s = tain.rdb.retrieveBuildingDetailsById(id);
-                //3 Time Build (Prop gonna have to make the final value when the building will be completed
-                int WeeksToBuild = Integer.parseInt(r2s.get(0)[8]);
 
-                //now we need to do checks to see if the person can indeed build on the property;
-                // All the reqs the building has
-                double acresNeeded = Double.parseDouble(r2s.get(0)[9]);
+                String checkBuildingPrerequisites = tain.rdb.checkBuildingPrerequisites(PlotID, id);
 
-                int WorkersNeeded = Integer.parseInt(r2s.get(0)[7]);
-
-                double BuildingCost = Double.parseDouble(r2s.get(0)[4]);
-
-                double BuildingSetupCost = Double.parseDouble(r2s.get(0)[5]);
-
-                //the users current plot specs
-
-                ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(PlotID);
-
-                int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(10));
-                double PlotWorkersUsed = Double.parseDouble(retrievePlotDetails.get(9));
-
-
-                int poormax = Integer.parseInt(retrievePlotDetails.get(16));
-                double poorused = Double.parseDouble(retrievePlotDetails.get(15));
-
-                int finemax = Integer.parseInt(retrievePlotDetails.get(14));
-                double fineused = Double.parseDouble(retrievePlotDetails.get(13));
-
-                int exmax = Integer.parseInt(retrievePlotDetails.get(12));
-                double exused = Double.parseDouble(retrievePlotDetails.get(11));
-
-                int checkCounter = 0;
-                /*
-                
-                 //first check acre req // do later
-                 if (PlotAcreMax == PlotAcresUsed) {
-                 JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
-                 buySucess = false;
-                 } else if ((PlotAcresUsed + acresNeeded) > PlotAcreMax) {
-                 JOptionPane.showMessageDialog(ContentPane, "Your plot is full,purchase more acres to keep on building");
-                 buySucess = false;
-                 }
-                 */
-                //worker check
-                if (PlotWorkerMax == PlotWorkersUsed) {
-                    buySucess = false;
-                    JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
-                } else if ((PlotWorkersUsed + WorkersNeeded) > PlotWorkerMax) {
-                    buySucess = false;
-                    JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
+                if (!"".equals(checkBuildingPrerequisites)) {
+                    JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites);
                 } else {
-                    checkCounter++;
+
+                    boolean buySucess = true;
+
+                    //do the building need the following values
+                    //1 character iD
+                    int charsId = tain.CharacterID;
+                    //2 Building id
+
+                    ArrayList<String[]> r2s = tain.rdb.retrieveBuildingDetailsById(id);
+                    //3 Time Build (Prop gonna have to make the final value when the building will be completed
+                    int WeeksToBuild = Integer.parseInt(r2s.get(0)[8]);
+
+                    //now we need to do checks to see if the person can indeed build on the property;
+                    // All the reqs the building has
+                    double acresNeeded = Double.parseDouble(r2s.get(0)[9]);
+
+                    int WorkersNeeded = Integer.parseInt(r2s.get(0)[7]);
+
+                    double BuildingCost = Double.parseDouble(r2s.get(0)[4]);
+
+                    double BuildingSetupCost = Double.parseDouble(r2s.get(0)[5]);
+
+                    //the users current plot specs
+
+
+                    ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(PlotID);
+
+                    int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(10));
+                    double PlotWorkersUsed = Double.parseDouble(retrievePlotDetails.get(9));
+
+
+                    int poormax = Integer.parseInt(retrievePlotDetails.get(16));
+                    double poorused = Double.parseDouble(retrievePlotDetails.get(15));
+
+                    int finemax = Integer.parseInt(retrievePlotDetails.get(14));
+                    double fineused = Double.parseDouble(retrievePlotDetails.get(13));
+
+                    int exmax = Integer.parseInt(retrievePlotDetails.get(12));
+                    double exused = Double.parseDouble(retrievePlotDetails.get(11));
+
+                    int checkCounter = 0;
+
+                    int preReq = Integer.parseInt(r2s.get(0)[3]);
+
+                    if (preReq == 2) {
+
+                        if (poorused == poormax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Poor acre space to build");
+                            buySucess = false;
+                        } else if ((poorused + acresNeeded) > poormax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Poor acre space to build");
+                            buySucess = false;
+                        } else {
+                            checkCounter++;
+                        }
+                    } else if (preReq == 3) {
+                        if (fineused == finemax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Fine acre space to build");
+                            buySucess = false;
+                        } else if ((fineused + acresNeeded) > finemax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Fine space to build");
+                            buySucess = false;
+                        } else {
+                            checkCounter++;
+                        }
+                    } else if (preReq == 4) {
+                        if (exused == exmax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Exquisite space to build");
+                            buySucess = false;
+                        } else if ((exused + acresNeeded) > exmax) {
+                            JOptionPane.showMessageDialog(ContentPane, "This building requires more Exquisite space to build");
+                            buySucess = false;
+                        } else {
+                        }
+                    } else {
+                        checkCounter++;
+                    }
+
+                    //worker check
+                    if (PlotWorkerMax == PlotWorkersUsed) {
+                        buySucess = false;
+                        JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
+                    } else if ((PlotWorkersUsed + WorkersNeeded) > PlotWorkerMax) {
+                        buySucess = false;
+                        JOptionPane.showMessageDialog(ContentPane, "Your plot has no more space for workers,purchase more acres to keep on building");
+                    } else {
+                        checkCounter++;
+                    }
+
+                    //money check
+                    ArrayList<String> currentAmount = tain.rdb.getCurrentAmount(PlotID);
+
+                    // amount if money in the plot
+                    int silver = Integer.parseInt(currentAmount.get(0)) * 100 + Integer.parseInt(currentAmount.get(1)) * 10 + Integer.parseInt(currentAmount.get(2));
+
+                    // need to look at setup cost tho
+                    if ((BuildingCost * 10) > silver) {
+                        JOptionPane.showMessageDialog(ContentPane, "You need more money to buy this building");
+                    } else {
+                        checkCounter++;
+                    }
+                    //time check,need to use log see what is build and how much time is left
+
+                    // all his current buildings in the log
+                    ArrayList<String> retrieveAllBuildingsOwnedByCharacter = tain.rdb.retrieveAllBuildingsOwnedByCharacter(tain.CharacterID, PlotID);
+
+                    //
+
+
+
+
+
+
+
+                    if (buySucess && checkCounter == 3) {
+                        //if this is reached then the person has all the req to build,need to update all the values
+                        //log the building
+                        tain.rdb.logBuildingBuilt(charsId, buildingsID[buildings.getSelectedIndex()], PlotID);
+                        // now we need to consume the acres
+                        
+                        // consume workers
+                        
+                        
+                        
+                        
+                        //consume funds
+                        ArrayList<String> amount2 = tain.rdb.getCurrentAmount(PlotID);
+                        int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
+                        //plots gold so it becomes less
+                        tempa = tempa - (int) (BuildingCost * 10);
+                        int nplat = tempa / 100;
+                        tempa = tempa - nplat * 100;
+                        int ngold = tempa / 10;
+                        tempa = tempa - ngold * 10;
+                        int nsilver = tempa;
+                        tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
+
+                    }
+                    tr.listBuildings.doClick();
+                    tain.cardlayout.show(tain.contentpane, "MPlay");
                 }
-
-                //money check
-
-                //Prereq check
-                //still need to think about this because the user can have multiple acfes of diff quality,so kinda need to split them in some way
-
-
-                //time check,need to use log see what is build and how much time is left
-
-                //for now to test
-                buySucess = true;
-                if (buySucess) {
-                    //if this is reached then the person has all the req to build,need to update all the values
-                    tain.rdb.logBuildingBuilt(charsId, buildingsID[buildings.getSelectedIndex()], PlotID);
-                    System.out.println(PlotID);
-                }
-                tr.listBuildings.doClick();
-                tain.cardlayout.show(tain.contentpane, "MPlay");
             }
         });
         buildingsPanel.add(bbutton, c);
