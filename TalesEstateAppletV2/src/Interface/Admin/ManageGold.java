@@ -32,6 +32,7 @@ public class ManageGold extends BasePanel {
     JLabel l4 = new JLabel("Platinum : ");
     JLabel l5 = new JLabel("Gold : ");
     JLabel l6 = new JLabel("Silver : ");
+    String username;
 
     public ManageGold(String name, final TransferContainer tc) {
         super(name);
@@ -57,27 +58,45 @@ public class ManageGold extends BasePanel {
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
 
-                String[] characters = {"piet", "ben", "jave"};
-                String picked = (String) JOptionPane.showInputDialog(findPlayer, "Choose the character you are looking for : ", "", JOptionPane.QUESTION_MESSAGE, null, characters, characters[0]);
+                ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
 
+                String[] characters;
 
-                try {
-                    characterAmounts = tc.rdb.getCharacterAmounts(playername.getText());
-                } catch (Exception ex) {
+                characters = new String[retrieveCharacterIDExtra.size()];
+                for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
+                    characters[i] = retrieveCharacterIDExtra.get(i)[1];
                 }
 
-                if (characterAmounts != null && !characterAmounts.isEmpty()) {
-                    JOptionPane.showMessageDialog(ref, "Player found");
-                    platAmount = Integer.parseInt(characterAmounts.get(0));
-                    goldAmount = Integer.parseInt(characterAmounts.get(1));
-                    silverAmount = Integer.parseInt(characterAmounts.get(2));
-
-                    platmod.setText("" + platAmount);
-                    goldmod.setText("" + goldAmount);
-                    silmod.setText("" + silverAmount);
+                String picked = "";
+                if (characters.length > 0) {
+                    picked = (String) JOptionPane.showInputDialog(findPlayer, "Choose the character you are looking for : ", "", JOptionPane.QUESTION_MESSAGE, null, characters, characters[0]);
                 } else {
-                    JOptionPane.showMessageDialog(ref, "Player not found");
+                    JOptionPane.showMessageDialog(findPlayer, "No characters found");
                 }
+
+                if (!"".equals(picked) && picked != null) {
+                    username = picked;
+
+                    try {
+                        characterAmounts = tc.rdb.getCharacterAmounts(picked);
+                    } catch (Exception ex) {
+                    }
+                    if (characterAmounts != null && !characterAmounts.isEmpty()) {
+                        JOptionPane.showMessageDialog(ref, "Player found");
+                        platAmount = Integer.parseInt(characterAmounts.get(0));
+                        goldAmount = Integer.parseInt(characterAmounts.get(1));
+                        silverAmount = Integer.parseInt(characterAmounts.get(2));
+
+                        platmod.setText("" + platAmount);
+                        goldmod.setText("" + goldAmount);
+                        silmod.setText("" + silverAmount);
+                    } else {
+                        JOptionPane.showMessageDialog(ref, "Player not found");
+                    }
+                }
+
+
+
             }
         });
 
@@ -122,8 +141,16 @@ public class ManageGold extends BasePanel {
 
         modify.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                throw new UnsupportedOperationException("Not supported yet.");
+            public void actionPerformed(ActionEvent ae) {   
+                try
+                {
+                tc.rdb.modifyAmount(username, Integer.parseInt(platmod.getText()),Integer.parseInt(goldmod.getText()),Integer.parseInt(silmod.getText()));
+                JOptionPane.showMessageDialog(playername, "Funds Updated");
+                }
+                catch(Exception ex)
+                {
+                   JOptionPane.showMessageDialog(playername, "Only enter valid integers"); 
+                }
             }
         });
 

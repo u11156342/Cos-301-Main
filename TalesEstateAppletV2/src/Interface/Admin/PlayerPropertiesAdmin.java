@@ -37,7 +37,7 @@ public class PlayerPropertiesAdmin extends JPanel {
             h=300;
         }
         else
-        h = amount * 65;
+        h = amount * 75;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this, tc);
             playersCurrentProperties[a].setPreferredSize(new Dimension(257, 100));

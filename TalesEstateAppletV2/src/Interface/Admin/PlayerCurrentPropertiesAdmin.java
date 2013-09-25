@@ -50,7 +50,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     t.mainapplet.add(ds, ds.getName());
                     t.cardlayout.show(t.contentpane, "stats");
                 } else if (selectedIndex == 1) {
-                    AddEvent ev = new AddEvent("event", t);
+                    AddEvent ev = new AddEvent("event", t,propertyID);
                     t.mainapplet.add(ev, ev.getName());
                     t.cardlayout.show(t.contentpane, "event");
                 } else if (selectedIndex == 2) {

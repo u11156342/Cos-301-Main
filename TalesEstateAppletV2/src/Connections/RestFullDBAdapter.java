@@ -739,4 +739,70 @@ public class RestFullDBAdapter {
 
         return Conv.ArrFromUrl(temp);
     }
+
+    public boolean useAcresOnPlot(int plotId, double acreExquisite, double acreFine, double acrePoor) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "useAcresOnPlot" + "/" + plotId + "/" + acreExquisite + "/" + acreFine + "/" + acrePoor);
+            System.out.println(url);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if ("false".equals(temp)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean addEvent(int plotId, String eventName, String eventDescription, int platinumMod, int goldMod, int silverMod, int happinessMod, int incomeMod) {
+        String temp = "";
+        try {
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "EventWrapper/" + "addEvent" + "/" + plotId + "/" + eventName + "/" + eventDescription + "/" + platinumMod + "/" + goldMod + "/" + silverMod + "/" + happinessMod + "/" + incomeMod);
+            System.out.println(url);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if ("false".equals(temp)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public ArrayList<String[]> getEvent(int month, int PlotID) {
+        String temp = "";
+        try {
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "EventWrapper/" + "getEvent/" + month + "/" + PlotID);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                temp = temp + "\n" + inputLine;
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Conv.ArrFromUrl(temp);
+    }
 }
