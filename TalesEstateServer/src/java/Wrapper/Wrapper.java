@@ -2,6 +2,7 @@ package Wrapper;
 
 import QueryHandlers.QueryHandler;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -73,7 +74,7 @@ public class Wrapper {
 
         html.append("<br>");
 
-        html.append("<h1> <font color=\"blue\">Happiness, Workers and Events</font></h1>");
+        html.append("<h1> <font color=\"blue\">Happiness and Workers</font></h1>");
 
         html.append("<table border=\"1\">");
         html.append("	<tr>");
@@ -105,6 +106,41 @@ public class Wrapper {
 
         html.append("</table>");
         html.append("</br>");
+
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(cal.MONTH) + 1; //zero-based
+
+        ArrayList<String[]> event = handler.getEventQH().getEvent(month, PropertyId);
+
+        if (event != null) {
+            if (event.size() > 0) {
+                html.append("<h1> <font color=\"blue\">Events</font></h1>");
+                for (int i = 0; i < event.size(); i++) {
+                    html.append("<br>");
+                    html.append("Name : ").append(event.get(i)[2]).append("");
+                    html.append("<br>");
+                    html.append("<p> Description : ").append(event.get(i)[3]).append("</p>");
+                    html.append("<br>");
+                    html.append("<table border=\"1\">");
+                    html.append("	<tr>");
+                    html.append("<td>Platinum Effect</td><td>").append(event.get(i)[5]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Gold Effect</td><td>").append(event.get(i)[6]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Silver Effect</td><td>").append(event.get(i)[7]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Happiness Effect</td><td>").append(event.get(i)[8]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Income Effect</td><td>").append(event.get(i)[9]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("</table>");
+                }
+            }
+        }
 
         html.append("</body>");
 
@@ -196,6 +232,41 @@ public class Wrapper {
         html.append("</table>");
         html.append("</br>");
 
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(cal.MONTH) + 1; //zero-based
+
+        ArrayList<String[]> event = handler.getEventQH().getEvent(month, PropertyId);
+
+        if (event != null) {
+            if (event.size() > 0) {
+                html.append("<h1> <font color=\"blue\">Events</font></h1>");
+                for (int i = 0; i < event.size(); i++) {
+                    html.append("<br>");
+                    html.append("Name : ").append(event.get(i)[2]).append("");
+                    html.append("<br>");
+                    html.append("<p> Description : ").append(event.get(i)[3]).append("</p>");
+                    html.append("<br>");
+                    html.append("<table border=\"1\">");
+                    html.append("	<tr>");
+                    html.append("<td>Platinum Effect</td><td>").append(event.get(i)[5]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Gold Effect</td><td>").append(event.get(i)[6]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Silver Effect</td><td>").append(event.get(i)[7]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Happiness Effect</td><td>").append(event.get(i)[8]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("	<tr>");
+                    html.append("<td>Income Effect</td><td>").append(event.get(i)[9]).append("</td>");
+                    html.append("	</tr>");
+                    html.append("</table>");
+                }
+            }
+        }
+
         html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
         html.append("<table border=\"1\">");
         html.append("<th>Building ID</th>");
@@ -208,7 +279,7 @@ public class Wrapper {
         for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
             tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             html.append("	<tr>");
-            html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)).append("</td>");
+            html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
             html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");
             html.append(" <td>").append(tempresult.get(0)[6]).append("</td>");
             html.append(" <td>").append(tempresult.get(0)[10]).append("</td>");

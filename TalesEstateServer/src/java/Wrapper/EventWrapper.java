@@ -28,9 +28,9 @@ public class EventWrapper {
     }
     
     @GET
-    @Path("getEvent/{month}")
+    @Path("getEvent/{month}/{PlotID}")
     @Produces("text/plain")
-    public String getEvent(@PathParam("month")int month) {
-        return converter.ArrToUrl(handler.getEventQH().getEvent(month));
+    public String getEvent(@PathParam("month")int month,@PathParam("PlotID")int PlotID) {
+        return converter.ArrToUrl(handler.getEventQH().getEvent(month,PlotID));
     }
 }

@@ -11,6 +11,7 @@ public class PlotQueryHandler {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
+    private ResultSet rs2 = null;
     private String sql = "";
     private ArrayList<String> duchyList, qualityList;
 
@@ -507,15 +508,7 @@ public class PlotQueryHandler {
         values = new ArrayList();
 
         try {
-            //Get ID's
-            if (!characterName.equals("")) {
-                sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
-                        + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                characterID = Integer.parseInt(rs.getString("UserCharacterID"));
-            }
+
 
             if (!duchy.equals("")) {
                 sql = "SELECT DuchyID FROM Duchy WHERE "
@@ -535,65 +528,85 @@ public class PlotQueryHandler {
                 qualityID = Integer.parseInt(rs.getString("QualityID"));
             }
 
-            sql = "SELECT * FROM Plot";
-            if (characterID != 0) {
-                sql += " WHERE PlotOwnedBy LIKE " + characterID;
-            }
 
-            if (duchyID != 0 && characterID != 0) {
-                sql += " AND PlotDuchy LIKE " + duchyID;
-            } else if (duchyID != 0) {
-                sql += " WHERE PlotDuchy LIKE " + duchyID;
-            }
+            //Get ID's
+            if (!characterName.equals("")) {
+                sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
+                        + "LOWER(UserCharacterName) like '%" + characterName.toLowerCase() + "%'";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    characterID = Integer.parseInt(rs.getString("UserCharacterID"));
 
-            if (size > 0 && (characterID != 0 || duchyID != 0)) {
-                sql += " AND PlotSize LIKE " + size;
-            } else if (size > 0) {
-                sql += " WHERE PlotSize LIKE " + size;
-            }
+                    sql = "SELECT * FROM Plot";
+                    if (characterID != 0) {
+                        sql += " WHERE PlotOwnedBy LIKE " + characterID;
+                    }
 
-            if (qualityID != 0 && (characterID != 0 || duchyID != 0 || size > 0)) {
-                if (qualityID == 1) {
-                    sql += " AND PlotAcrePoorMax > 0";
-                } else if (qualityID == 2) {
-                    sql += " AND PlotAcreFineMax > 0";
-                } else if (qualityID == 3) {
-                    sql += " AND PlotAcreExquisiteMax > 0";
+                    if (duchyID != 0 && characterID != 0) {
+                        sql += " AND PlotDuchy LIKE " + duchyID;
+                    } else if (duchyID != 0) {
+                        sql += " WHERE PlotDuchy LIKE " + duchyID;
+                    }
+
+                    if (size > 0 && (characterID != 0 || duchyID != 0)) {
+                        sql += " AND PlotSize LIKE " + size;
+                    } else if (size > 0) {
+                        sql += " WHERE PlotSize LIKE " + size;
+                    }
+
+                    if (qualityID != 0 && (characterID != 0 || duchyID != 0 || size > 0)) {
+                        if (qualityID == 1) {
+                            sql += " AND PlotAcrePoorMax > 0";
+                        } else if (qualityID == 2) {
+                            sql += " AND PlotAcreFineMax > 0";
+                        } else if (qualityID == 3) {
+                            sql += " AND PlotAcreExquisiteMax > 0";
+                        }
+                    } else if (qualityID != 0) {
+                        if (qualityID == 1) {
+                            sql += " WHERE PlotAcrePoorMax > 0";
+                        } else if (qualityID == 2) {
+                            sql += " WHERE PlotAcreFineMax > 0";
+                        } else if (qualityID == 3) {
+                            sql += " WHERE PlotAcreExquisiteMax > 0";
+                        }
+                    }
+
+
+                    stmt = con.createStatement();
+                    rs2 = stmt.executeQuery(sql);
+
+                    while (rs2.next()) {
+                        line = new String[17];
+                        line[0] = rs2.getString("PlotID");
+                        line[1] = rs2.getString("PlotOwnedBy");
+                        line[2] = rs2.getString("PlotAmount");
+                        line[3] = rs2.getString("PlotDuchy");
+                        line[4] = rs2.getString("PlotSize");
+                        line[5] = rs2.getString("PlotGroundArray");
+                        line[6] = rs2.getString("PlotBuildingArray");
+                        line[7] = rs2.getString("PlotHappiness");
+                        line[8] = rs2.getString("PlotMonthlyIncome");
+                        line[9] = rs2.getString("PlotWorkersUsed");
+                        line[10] = rs2.getString("PlotWorkerMax");
+                        line[11] = rs2.getString("PlotAcreExquisite");
+                        line[12] = rs2.getString("PlotAcreExquisiteMax");
+                        line[13] = rs2.getString("PlotAcreFine");
+                        line[14] = rs2.getString("PlotAcreFineMax");
+                        line[15] = rs2.getString("PlotAcrePoor");
+                        line[16] = rs2.getString("PlotAcrePoorMax");
+                        values.add(line);
+                    }
+
+
                 }
-            } else if (qualityID != 0) {
-                if (qualityID == 1) {
-                    sql += " WHERE PlotAcrePoorMax > 0";
-                } else if (qualityID == 2) {
-                    sql += " WHERE PlotAcreFineMax > 0";
-                } else if (qualityID == 3) {
-                    sql += " WHERE PlotAcreExquisiteMax > 0";
-                }
+
             }
 
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
 
-            while (rs.next()) {
-                line = new String[17];
-                line[0] = rs.getString("PlotID");
-                line[1] = rs.getString("PlotOwnedBy");
-                line[2] = rs.getString("PlotAmount");
-                line[3] = rs.getString("PlotDuchy");
-                line[4] = rs.getString("PlotSize");
-                line[5] = rs.getString("PlotGroundArray");
-                line[6] = rs.getString("PlotBuildingArray");
-                line[7] = rs.getString("PlotHappiness");
-                line[8] = rs.getString("PlotMonthlyIncome");
-                line[9] = rs.getString("PlotWorkersUsed");
-                line[10] = rs.getString("PlotWorkerMax");
-                line[11] = rs.getString("PlotAcreExquisite");
-                line[12] = rs.getString("PlotAcreExquisiteMax");
-                line[13] = rs.getString("PlotAcreFine");
-                line[14] = rs.getString("PlotAcreFineMax");
-                line[15] = rs.getString("PlotAcrePoor");
-                line[16] = rs.getString("PlotAcrePoorMax");
-                values.add(line);
-            }
+
+
 
             return values;
         } catch (Exception e) {
@@ -974,8 +987,8 @@ public class PlotQueryHandler {
                 //All acre useages are within limits. Add to table.
                 sql = "UPDATE Plot SET "
                         + "PlotAcreExquisite = " + (curEx + acreExquisite)
-                        + "PlotAcreFine = " + (curFine + acreFine)
-                        + "PlotAcrePoor = " + (curPoor + acrePoor)
+                        + ", PlotAcreFine = " + (curFine + acreFine)
+                        + ", PlotAcrePoor = " + (curPoor + acrePoor)
                         + " WHERE PlotID = " + plotID;
                 stmt = con.createStatement();
                 stmt.execute(sql);

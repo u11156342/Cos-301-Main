@@ -59,13 +59,14 @@ public class EventQueryHandler {
     /* This function returns all events for the given month.
      * 
      */
-    public ArrayList<String[]> getEvent(int month) {
-        ArrayList<String[]> results = null;
+    public ArrayList<String[]> getEvent(int month,int PlotID) {
+        ArrayList<String[]> results = new ArrayList();
         String[] result = null;
         boolean added = false;
         
-        sql = "SELECT * FROM Event WHERE "
-                + "MONTH(EventLogDateAdded) = " + month;
+        sql = "SELECT * FROM EventLog WHERE "
+                + "MONTH(EventLogDateAdded) = " + month
+                + " AND  PlotID= " + PlotID;
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
