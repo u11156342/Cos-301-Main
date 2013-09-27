@@ -768,7 +768,7 @@ public class PlotQueryHandler {
         try {
             System.out.println(sql);
             stmt = con.createStatement();
-            stmt.executeQuery(sql);
+            stmt.execute(sql);
 
             return true;
         } catch (Exception e) {

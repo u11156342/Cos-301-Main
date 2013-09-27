@@ -1,8 +1,5 @@
 package Connection;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.ResultSet;
