@@ -257,11 +257,11 @@ public class PlotQueryHandler {
                     + "PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, "
                     + "PlotAcreExquisite, PlotAcreExquisiteMax, "
                     + "PlotAcreFine, PlotAcreFineMax, "
-                    + "PlotAcrePoor, PlotAcrePoorMax) VALUES "
+                    + "PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue) VALUES "
                     + "(" + characterID + ", " + amountID + ", " + duchyID + ", " + sizeValue
                     + ", '" + ground + "', '" + building + "', "
                     + +happiness + ", " + monthlyIncome + ", " + workersUsed + ", " + workerMax
-                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ")";
+                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0)";
 
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -292,7 +292,7 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                line = new String[17];
+                line = new String[18];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
                 line[2] = rs.getString("PlotAmount");
@@ -310,7 +310,7 @@ public class PlotQueryHandler {
                 line[14] = rs.getString("PlotAcreFineMax");
                 line[15] = rs.getString("PlotAcrePoor");
                 line[16] = rs.getString("PlotAcrePoorMax");
-
+                line[17] = rs.getString("PlotDefenseValue");
                 values.add(line);
             }
 
@@ -380,7 +380,8 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotAcreFineMax"));//14
             value.add(rs.getString("PlotAcrePoor"));//15
             value.add(rs.getString("PlotAcrePoorMax"));//16
-
+            value.add(rs.getString("PlotDefenseValue"));//17
+            
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
             stmt = con.createStatement();
@@ -422,7 +423,7 @@ public class PlotQueryHandler {
     public boolean modifyPlot(int plotID, String characterName, String plotAmount, String duchyName,
             int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,
             int workersUsed, int workerMax, double acreE, int acreEM, double acreF, int acreFM,
-            double acreP, int acrePM) {
+            double acreP, int acrePM, double defenseValue) {
 
         int characterID, duchyID, amountID;
         String ground, building;
@@ -473,7 +474,8 @@ public class PlotQueryHandler {
                     + "PlotHappiness = " + happiness + ", "
                     + "PlotMonthlyIncome = " + monthlyIncome + ", "
                     + "PlotWorkersUsed = " + workersUsed + ", "
-                    + "PlotWorkerMax = " + workerMax + " "
+                    + "PlotWorkerMax = " + workerMax + ", "
+                    + "PlotDefenseValue = " + defenseValue + " "
                     //+ "PlotWorkerMax = " + workerMax + ", "
                     //                    + "PlotAcreExquisite = " + acreE + ", "
                     //                    + "PlotAcreExquisiteMax = " + acreEM + ", "
@@ -573,12 +575,11 @@ public class PlotQueryHandler {
                         }
                     }
 
-
                     stmt = con.createStatement();
                     rs2 = stmt.executeQuery(sql);
 
                     while (rs2.next()) {
-                        line = new String[17];
+                        line = new String[18];
                         line[0] = rs2.getString("PlotID");
                         line[1] = rs2.getString("PlotOwnedBy");
                         line[2] = rs2.getString("PlotAmount");
@@ -596,20 +597,15 @@ public class PlotQueryHandler {
                         line[14] = rs2.getString("PlotAcreFineMax");
                         line[15] = rs2.getString("PlotAcrePoor");
                         line[16] = rs2.getString("PlotAcrePoorMax");
+                        line[17] = rs2.getString("PlotDefenseValue");
                         values.add(line);
                     }
-
-
                 }
-
             }
 
-
-
-
-
             return values;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.println("Could not execute function searchPlotBy()");
             System.out.println(e.getMessage());
         }
@@ -649,7 +645,7 @@ public class PlotQueryHandler {
             ResultSet lrs;
             result = new ArrayList();
             while (rs.next()) {
-                line = new String[17];
+                line = new String[18];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
                 line[2] = rs.getString("PlotAmount");
@@ -667,6 +663,7 @@ public class PlotQueryHandler {
                 line[14] = rs.getString("PlotAcreFineMax");
                 line[15] = rs.getString("PlotAcrePoor");
                 line[16] = rs.getString("PlotAcrePoorMax");
+                line[17] = rs.getString("PlotDefenseValue");
 
                 sql = "SELECT UserCharacterName FROM UserCharacter "
                         + "WHERE UserCharacterID = " + line[1];

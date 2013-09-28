@@ -271,93 +271,94 @@ CREATE TABLE Building
 	BuildingWorkersNeeded INT,	
 	BuildingTimeToBuild INT,		/*In weeks*/
 	BuildingSizeRequired FLOAT,		/*In acres*/
-	BuildingHappiness INT			/*Positive, or negative*/
+	BuildingHappiness INT,			/*Positive, or negative*/
+	BuildingDefenseValue FLOAT
 )
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness)
+BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
 VALUES
-(1, 23, 'Farm (Cattle)(Dairy and Meat)',							1,	1,	25,		50,		4,		10,	1,	1,		0),
-(1, 25, 'Farm (Sheep)',												7,	1,	25,		25,		3,		10,	1,	1,		0),
-(1, 24, 'Farm (Grain)(Rice, Maize)',								8,	3,	25,		25,		3.5,	10,	2,	1,		0),
-(1, 43, 'Vineyard',													6,	5,	25,		25,		2.5,	10,	2,	1,		0),
-(1, 27, 'Farm (Vegetable)',											11,	1,	20,		20,		2,		10,	1,	1,		0),
-(1, 26, 'Farm (Work Animals)(Dray horses, Oxen, Bison etc.)',		11,	1,	25,		25,		3,		10,	1,	1,		0),
-(1, 5, 'Fishing Operation',											11,	6,	50,		50,		5,		20,	2,	1,		0),
-(1, 5, 'Hunting Operation',											11,	8,	25,		25,		2.5,	5,	1,	1,		0),
-(1, 5, 'Orchards (Fruit)',											11,	3,	25,		50,		6,		15,	2,	1,		0),
-(1, 5, 'Plantations (Tea, Coffee, Cocoa, Spices)',					2,	4,	25,		100,	12,		20,	4,	1,		0),
-(1, 41, 'Horse Stud Farm',											11,	1,	50,		125,	10,		20,	1,	1,		0),
-(1, 42, 'Timber Plantations',										11,	1,	25,		50,		4,		10,	1,	1,		0),
+(1, 23, 'Farm (Cattle)(Dairy and Meat)',							1,	1,	25,		50,		4,		10,	1,	1,		0,	0),
+(1, 25, 'Farm (Sheep)',												7,	1,	25,		25,		3,		10,	1,	1,		0,	0),
+(1, 24, 'Farm (Grain)(Rice, Maize)',								8,	3,	25,		25,		3.5,	10,	2,	1,		0,	0),
+(1, 43, 'Vineyard',													6,	5,	25,		25,		2.5,	10,	2,	1,		0,	0),
+(1, 27, 'Farm (Vegetable)',											11,	1,	20,		20,		2,		10,	1,	1,		0,	0),
+(1, 26, 'Farm (Work Animals)(Dray horses, Oxen, Bison etc.)',		11,	1,	25,		25,		3,		10,	1,	1,		0,	0),
+(1, 5, 'Fishing Operation',											11,	6,	50,		50,		5,		20,	2,	1,		0,	0),
+(1, 5, 'Hunting Operation',											11,	8,	25,		25,		2.5,	5,	1,	1,		0,	0),
+(1, 5, 'Orchards (Fruit)',											11,	3,	25,		50,		6,		15,	2,	1,		0,	0),
+(1, 5, 'Plantations (Tea, Coffee, Cocoa, Spices)',					2,	4,	25,		100,	12,		20,	4,	1,		0,	0),
+(1, 41, 'Horse Stud Farm',											11,	1,	50,		125,	10,		20,	1,	1,		0,	0),
+(1, 42, 'Timber Plantations',										11,	1,	25,		50,		4,		10,	1,	1,		0,	0),
 
-(2, 34, 'Mining Operation (Iron)',									5,	1,	75,		50,		8,		15,	2,	1,		0),
-(2, 30, 'Mining Operation (Copper)',								9,	1,	75,		50,		8,		15,	2,	1,		0),
-(2, 40, 'Mining Operation (Silver)',								3,	1,	75,		75,		10,		20,	3,	1,		0),
-(2, 33, 'Mining Operation (Gold)',									3,	1,	100,	100,	13,		20,	3,	1,		0),
-(2, 35, 'Mining Operation (Lead)',									3,	1,	50,		50,		6,		15,	2,	1,		0),
-(2, 21, 'Mining Operation (Zinc)',									3,	1,	50,		50,		5,		15,	2,	1,		0),
-(2, 29, 'Mining Operation (Coal)',									4,	1,	50,		25,		3,		15,	2,	1,		0),
-(2, 5, 'Oil Refinery (Pitch, Lamp oil, Trade with Hoblings)',		1,	9,	100,	75,		10,		25,	4,	1,		0),
-(2, 22, 'Quarry',													1,	1,	25,		25,		2,		15,	1,	1,		0),
-(2, 31, 'Mining Operation (Diamond)',								5,	1,	100,	150,	15,		30,	4,	1,		0),
-(2, 36, 'Mining Operation (Malachite)',								6,	1,	50,		50,		5,		15,	2,	1,		0),
-(2, 37, 'Mining Operation (Ruby)',									3,	1,	75,		75,		8,		20,	3,	1,		0),
-(2, 38, 'Mining Operation (Sapphire)',								3,	1,	75,		75,		8,		20,	3,	1,		0),
-(2, 32, 'Mining Operation (Emerald)',								5,	1,	75,		75,		8,		20,	3,	1,		0),
-(2, 39, 'Mining Operation (Semi Precious)',							11,	1,	50,		50,		3,		15,	2,	1,		0),
-(2, 28, 'Clay',														2,	1,	25,		25,		2,		10,	1,	1,		0),
+(2, 34, 'Mining Operation (Iron)',									5,	1,	75,		50,		8,		15,	2,	1,		0,	0),
+(2, 30, 'Mining Operation (Copper)',								9,	1,	75,		50,		8,		15,	2,	1,		0,	0),
+(2, 40, 'Mining Operation (Silver)',								3,	1,	75,		75,		10,		20,	3,	1,		0,	0),
+(2, 33, 'Mining Operation (Gold)',									3,	1,	100,	100,	13,		20,	3,	1,		0,	0),
+(2, 35, 'Mining Operation (Lead)',									3,	1,	50,		50,		6,		15,	2,	1,		0,	0),
+(2, 21, 'Mining Operation (Zinc)',									3,	1,	50,		50,		5,		15,	2,	1,		0,	0),
+(2, 29, 'Mining Operation (Coal)',									4,	1,	50,		25,		3,		15,	2,	1,		0,	0),
+(2, 5, 'Oil Refinery (Pitch, Lamp oil, Trade with Hoblings)',		1,	9,	100,	75,		10,		25,	4,	1,		0,	0),
+(2, 22, 'Quarry',													1,	1,	25,		25,		2,		15,	1,	1,		0,	0),
+(2, 31, 'Mining Operation (Diamond)',								5,	1,	100,	150,	15,		30,	4,	1,		0,	0),
+(2, 36, 'Mining Operation (Malachite)',								6,	1,	50,		50,		5,		15,	2,	1,		0,	0),
+(2, 37, 'Mining Operation (Ruby)',									3,	1,	75,		75,		8,		20,	3,	1,		0,	0),
+(2, 38, 'Mining Operation (Sapphire)',								3,	1,	75,		75,		8,		20,	3,	1,		0,	0),
+(2, 32, 'Mining Operation (Emerald)',								5,	1,	75,		75,		8,		20,	3,	1,		0,	0),
+(2, 39, 'Mining Operation (Semi Precious)',							11,	1,	50,		50,		3,		15,	2,	1,		0,	0),
+(2, 28, 'Clay',														2,	1,	25,		25,		2,		10,	1,	1,		0,	0),
 
-(3, 5, 'Artisan (Specify)',											11,	10,	25,		50,		2,		5,	1,	0.125,	2),
-(3, 5, 'Blacksmith',												11,	1,	25,		50,		3,		8,	1,	0.25,	1),
-(3, 5, 'Brewery',													11,	1,	50,		50,		2,		8,	1,	0.5,	3),
-(3, 5, 'Docks/Piers',												11,	6,	100,	50,		7.5,	15,	2,	0.5,	-1),
-(3, 5, 'Forge',														11,	11,	50,		50,		5,		10,	2,	0.5,	0),
-(3, 5, 'Laboratory (Potions)',										11,	1,	25,		75,		8,		5,	2,	0.125,	-2),
-(3, 5, 'Laboratory (Scrolls)',										11,	1,	25,		75,		8,		5,	2,	0.125,	-2),
-(3, 5, 'Laboratory (Alchemy)',										11,	1,	25,		50,		6,		5,	2,	0.125,	-1),
-(3, 5, 'Laboratory (Traps)',										11,	1,	25,		50,		6,		5,	2,	0.125,	-1),
-(3, 5, 'Glassworks',												10,	1,	50,		50,		5,		10,	2,	0.25,	1),
-(3, 5, 'Silkworms (Caterpillar)',									2,	1,	50,		50,		7,		10,	3,	0.5,	1),
-(3, 5, 'Silkworms (Spiders)',										2,	1,	50,		125,	12,		10,	4,	0.5,	2),
-(3, 5, 'Winery',													11,	12,	75,		75,		5,		10,	2,	0.5,	1),
-(3, 5, 'Distillery',												11,	13,	75,		75,		6,		10,	2,	0.5,	0),
-(3, 5, 'Sawmill',													11,	14,	50,		25,		4,		15,	2,	0.5,	0),
-(3, 5, 'Flour mill',												11,	7,	25,		25,		2,		5,	1,	0.5,	1),
-(3, 5, 'Bakery',													11,	15,	25,		25,		1,		4,	1,	0.125,	2),
-(3, 5, 'Butcher',													11,	16,	25,		25,		1,		4,	1,	0.125,	2),
-(3, 5, 'Tannery',													11,	16,	25,		50,		8,		8,	1,	0.5,	-2),
-(3, 5, 'Shipyard',													11,	6,	75,		75,		10,		30,	4,	1,		0),
+(3, 5, 'Artisan (Specify)',											11,	10,	25,		50,		2,		5,	1,	0.125,	2,	0),
+(3, 5, 'Blacksmith',												11,	1,	25,		50,		3,		8,	1,	0.25,	1,	0),
+(3, 5, 'Brewery',													11,	1,	50,		50,		2,		8,	1,	0.5,	3,	0),
+(3, 5, 'Docks/Piers',												11,	6,	100,	50,		7.5,	15,	2,	0.5,	-1,	0),
+(3, 5, 'Forge',														11,	11,	50,		50,		5,		10,	2,	0.5,	0,	0),
+(3, 5, 'Laboratory (Potions)',										11,	1,	25,		75,		8,		5,	2,	0.125,	-2,	0),
+(3, 5, 'Laboratory (Scrolls)',										11,	1,	25,		75,		8,		5,	2,	0.125,	-2,	0),
+(3, 5, 'Laboratory (Alchemy)',										11,	1,	25,		50,		6,		5,	2,	0.125,	-1,	0),
+(3, 5, 'Laboratory (Traps)',										11,	1,	25,		50,		6,		5,	2,	0.125,	-1,	0),
+(3, 5, 'Glassworks',												10,	1,	50,		50,		5,		10,	2,	0.25,	1,	0),
+(3, 5, 'Silkworms (Caterpillar)',									2,	1,	50,		50,		7,		10,	3,	0.5,	1,	0),
+(3, 5, 'Silkworms (Spiders)',										2,	1,	50,		125,	12,		10,	4,	0.5,	2,	0),
+(3, 5, 'Winery',													11,	12,	75,		75,		5,		10,	2,	0.5,	1,	0),
+(3, 5, 'Distillery',												11,	13,	75,		75,		6,		10,	2,	0.5,	0,	0),
+(3, 5, 'Sawmill',													11,	14,	50,		25,		4,		15,	2,	0.5,	0,	0),
+(3, 5, 'Flour mill',												11,	7,	25,		25,		2,		5,	1,	0.5,	1,	0),
+(3, 5, 'Bakery',													11,	15,	25,		25,		1,		4,	1,	0.125,	2,	0),
+(3, 5, 'Butcher',													11,	16,	25,		25,		1,		4,	1,	0.125,	2,	0),
+(3, 5, 'Tannery',													11,	16,	25,		50,		8,		8,	1,	0.5,	-2,	0),
+(3, 5, 'Shipyard',													11,	6,	75,		75,		10,		30,	4,	1,		0,	0),
 
-(4, 5, 'Merchant (Specify)',										11,	10,	25,		25,		3,		4,	1,	0.125,	0),
-(4, 5, 'Inn',														11,	1,	50,		50,		6,		10,	1,	0.5,	0),
-(4, 5, 'Stables',													11,	1,	25,		25,		2,		6,	1,	0.5,	0),
-(4, 5, 'Tavern',													11,	1,	25,		25,		1,		5,	1,	0.25,	3),
-(4, 5, 'Barber',													11,	1,	25,		25,		2,		3,	1,	0.125,	0),
-(4, 5, 'Guild (Bards)',												11,	1,	25,		10,		1,		5,	1,	0.125,	3),
-(4, 5, 'Build (Duelist)',											11,	1,	50,		25,		3,		5,	2,	0.5,	0),
-(4, 5, 'Guild (Healers)',											11,	1,	50,		50,		5,		5,	2,	0.25,	-1),
-(4, 5, 'Guild (Mages)',												11,	1,	50,		50,		5,		5,	2,	0.25,	-2),
-(4, 5, 'Guild (Smiths)',											11,	1,	50,		25,		3,		8,	2,	0.5,	1),
-(4, 5, 'Guild (Alchemists)',										11,	1,	50,		25,		3,		5,	2,	0.5,	0),
+(4, 5, 'Merchant (Specify)',										11,	10,	25,		25,		3,		4,	1,	0.125,	0,	0),
+(4, 5, 'Inn',														11,	1,	50,		50,		6,		10,	1,	0.5,	0,	0),
+(4, 5, 'Stables',													11,	1,	25,		25,		2,		6,	1,	0.5,	0,	0),
+(4, 5, 'Tavern',													11,	1,	25,		25,		1,		5,	1,	0.25,	3,	0),
+(4, 5, 'Barber',													11,	1,	25,		25,		2,		3,	1,	0.125,	0,	0),
+(4, 5, 'Guild (Bards)',												11,	1,	25,		10,		1,		5,	1,	0.125,	3,	0),
+(4, 5, 'Build (Duelist)',											11,	1,	50,		25,		3,		5,	2,	0.5,	0,	0),
+(4, 5, 'Guild (Healers)',											11,	1,	50,		50,		5,		5,	2,	0.25,	-1,	0),
+(4, 5, 'Guild (Mages)',												11,	1,	50,		50,		5,		5,	2,	0.25,	-2,	0),
+(4, 5, 'Guild (Smiths)',											11,	1,	50,		25,		3,		8,	2,	0.5,	1,	0),
+(4, 5, 'Guild (Alchemists)',										11,	1,	50,		25,		3,		5,	2,	0.5,	0,	0),
 
-(5, 5, 'Barracks (Sleeps 20)',										11,	1,	50,		0,		0,		0,	1,	0.5,	0),
-(5, 5, 'Soldiers (20)',												11,	17,	0,		0,		-20,	0,	0,	0,		2),
-(5, 5, 'Military Outpost (Sleeps 40)',								11,	1,	75,		0,		0,		0,	2,	1,		0),
-(5, 5, 'Roads (Infrastructure per existing acre)',					11,	1,	20,		0,		-1,		4,	2,	0,		2),
-(5, 5, 'Educational Academy (Specify)',								11,	1,	75,		50,		2,		10,	2,	0.5,	4),
-(5, 5, 'School',													11,	1,	25,		25,		0,		5,	1,	0.5,	1),
-(5, 5, 'Village Hall (50)',											11,	1,	50,		30,		1,		8,	2,	0.25,	3),
-(5, 5, 'Town Hall (100)',											11,	1,	75,		30,		2,		10,	2,	0.5,	5),
-(5, 5, 'Marketplace',												11,	1,	10,		10,		0,		4,	1,	0.5,	2),
-(5, 5, 'Graveyard',													11,	1,	25,		25,		0,		2,	1,	1,		1),
-(5, 5, 'Manor House',												11,	1,	50,		0,		-2,		8,	2,	0.5,	0),
-(5, 5, 'Summer House',												11,	1,	25,		0,		-2,		5,	2,	0.5,	0),
-(5, 5, 'Protected Well',											11,	18,	25,		0,		0,		0,	1,	0,		0),
-(5, 5, 'Walls (6" Wood)',											11,	1,	50,		0,		-2,		3,	2,	0,		1),
-(5, 5, 'Walls (10" Wood)',											11,	1,	100,	0,		-4,		5,	2,	0,		1),
-(5, 5, 'Walls (6" Stone)',											11,	1,	100,	0,		-5,		5,	4,	0,		2),
-(5, 5, 'Walls (10" Stone)',											11,	1,	200,	0,		-8,		6,	4,	0,		3)
+(5, 5, 'Barracks (Sleeps 20)',										11,	1,	50,		0,		0,		0,	1,	0.5,	0,	0),
+(5, 5, 'Soldiers (20)',												11,	17,	0,		0,		-20,	0,	0,	0,		2,	0),
+(5, 5, 'Military Outpost (Sleeps 40)',								11,	1,	75,		0,		0,		0,	2,	1,		0,	0),
+(5, 5, 'Roads (Infrastructure per existing acre)',					11,	1,	20,		0,		-1,		4,	2,	0,		2,	0),
+(5, 5, 'Educational Academy (Specify)',								11,	1,	75,		50,		2,		10,	2,	0.5,	4,	0),
+(5, 5, 'School',													11,	1,	25,		25,		0,		5,	1,	0.5,	1,	0),
+(5, 5, 'Village Hall (50)',											11,	1,	50,		30,		1,		8,	2,	0.25,	3,	0),
+(5, 5, 'Town Hall (100)',											11,	1,	75,		30,		2,		10,	2,	0.5,	5,	0),
+(5, 5, 'Marketplace',												11,	1,	10,		10,		0,		4,	1,	0.5,	2,	0),
+(5, 5, 'Graveyard',													11,	1,	25,		25,		0,		2,	1,	1,		1,	0),
+(5, 5, 'Manor House',												11,	1,	50,		0,		-2,		8,	2,	0.5,	0,	0),
+(5, 5, 'Summer House',												11,	1,	25,		0,		-2,		5,	2,	0.5,	0,	0),
+(5, 5, 'Protected Well',											11,	18,	25,		0,		0,		0,	1,	0,		0,	0),
+(5, 5, 'Walls (6" Wood)',											11,	1,	50,		0,		-2,		3,	2,	0,		1,	0),
+(5, 5, 'Walls (10" Wood)',											11,	1,	100,	0,		-4,		5,	2,	0,		1,	0),
+(5, 5, 'Walls (6" Stone)',											11,	1,	100,	0,		-5,		5,	4,	0,		2,	0),
+(5, 5, 'Walls (10" Stone)',											11,	1,	200,	0,		-8,		6,	4,	0,		3,	0)
 
 CREATE TABLE UserCharacter
 (
@@ -401,19 +402,19 @@ CREATE TABLE Plot
 
 INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
-PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax)
+PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue)
 VALUES
-(3, 37, 5, 3, '2,2,3;2,2,3;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
-(3, 38, 4, 3, '2,2,2;2,3,3;2,3,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
-(3, 39, 4, 3, '2,3,2;2,2,3;3,2,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
-(3, 40, 4, 3, '2,3,2;2,2,3;2,3,2;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
-(3, 41, 6, 3, '2,2,2;3,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
-(3, 42, 6, 3, '3,3,3;2,2,2;2,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -50, 0, 80, 0, 1, 0, 0, 0, 0),
-(4, 43, 4, 9, '2,2,2,2,2,2,2,3,2;2,2,3,2,2,2,2,2,2;3,2,2,2,2,2,2,2,2;2,2,3,3,2,2,2,2,2;2,2,3,2,2,2,3,3,2;2,3,2,2,2,2,2,2,3;2,3,2,2,2,2,2,3,2;2,2,2,2,2,3,2,3,2;2,2,2,3,2,2,2,2,2;', '0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;0,0,0,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;-1,-1,-1,-1,-1,-1,-1,-1,-1;', 0, -25, 0, 80, 0, 9, 0, 0, 0, 0),
-(4, 44, 4, 3, '2,2,2;2,2,2;2,2,3;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 1, 0, 0, 0, 0),
-(4, 45, 4, 3, '3,2,2;2,2,2;3,2,2;', '0,0,0;0,0,0;0,0,0;', 0, -25, 0, 80, 0, 0, 0, 1, 0, 0),
-(1, 46, 1, 3, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 5, 0, 0, 0, 0, 0, 0, 1, 0, 0),
-(1, 47, 1, 3, '0,0,0;0,0,0;-1,-1,-1;', '0,0,0;0,0,0;0,0,0;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+(3, 37, 5, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 38, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 39, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 40, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 41, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 42, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 43, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 44, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 45, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1, 46, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1, 47, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 CREATE TABLE Tile
 (
@@ -466,6 +467,22 @@ CREATE TABLE EventLog
 	EventLogEffectSilver INT,
 	EventLogEffectHappiness INT,
 	EventLogEffectIncome INT
+)
+
+CREATE TABLE IncomeLog
+(
+	IncomeLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
+	IncomeValue FLOAT,
+	IncomeDateProcessed DATE
+)
+
+CREATE TABLE EventTriggerLog
+(
+	EventTriggerLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	EventLogID INT FOREIGN KEY REFERENCES EventLog(EventLogID),
+	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
+	EventTriggerLogDateProcessed DATE
 )
 
 GO
