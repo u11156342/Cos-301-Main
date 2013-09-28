@@ -300,14 +300,14 @@ public class BuildtabPanel extends BasePanel {
                             double newpoorused = poorused + acresNeeded;
                             //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                             tain.rdb.modifyPlot(PlotID, tain.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), newpoorused, Integer.parseInt(retrievePlotDetails.get(16)));
-                            tain.rdb.useAcresOnPlot(PlotID, exused, fineused, newpoorused);
+                            tain.rdb.useAcresOnPlot(PlotID, 0, 0, acresNeeded);
                         } else if ("Fine land".equals(preReq)) {
                             System.out.println("Fine land");
                             //fine use
                             double newfineused = fineused + acresNeeded;
                             //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                             tain.rdb.modifyPlot(PlotID, tain.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), newfineused, Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
-                            tain.rdb.useAcresOnPlot(PlotID, exused, newfineused, poorused);
+                            tain.rdb.useAcresOnPlot(PlotID, 0, acresNeeded, 0);
                         } else if ("Exquisite land".equals(preReq)) {
 
                             System.out.println("Exquisite land");
@@ -315,7 +315,7 @@ public class BuildtabPanel extends BasePanel {
                             double newexused = exused + acresNeeded;
                             //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                             tain.rdb.modifyPlot(PlotID, tain.CharacterName, retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), newexused, Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)));
-                            tain.rdb.useAcresOnPlot(PlotID, newexused, fineused, poorused);
+                            tain.rdb.useAcresOnPlot(PlotID, acresNeeded, 0, 0);
                         } else {
                             //general use so need to find cheapest we can build on  
                             System.out.println("general non pre req building");
