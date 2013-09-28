@@ -74,7 +74,7 @@ public class GameBrowseGrid extends JFXPanel {
         System.out.println("done painting grid starting to paint houses");
         for (int x = 0; x < gridsize; x++) {
             for (int y = 0; y < gridsize; y++) {
-                if (gridstates[x][y] != 0) {
+                if (gridstates[x][y] != 0 && gridstates[x][y] != -1) {
                     xc = -this.scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                     yc = -this.scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2;
                     try {
