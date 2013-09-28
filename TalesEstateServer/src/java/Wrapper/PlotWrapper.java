@@ -51,19 +51,19 @@ public class PlotWrapper {
     }
 
     @GET
-    @Path("modifyPlot/{plotId}/{characterName}/{plotAmount}/{duchyName}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}/{exquisiteUsed}/{exquisiteMax}/{fineUsed}/{fineMax}/{poorUsed}/{poorMax}")
+    @Path("modifyPlot/{plotId}/{characterName}/{plotAmount}/{duchyName}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}/{exquisiteUsed}/{exquisiteMax}/{fineUsed}/{fineMax}/{poorUsed}/{poorMax}/{defenseValue}")
     @Produces("text/plain")
     public String modifyPlot(@PathParam("plotId") int plotId, @PathParam("characterName") String characterName, @PathParam("plotAmount") String plotAmount,
             @PathParam("duchyName") String duchyName, @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray,
             @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness, @PathParam("monthlyIncome") double monthlyIncome,
             @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("exquisiteUsed") double exquisiteUsed, @PathParam("exquisiteMax") int exquisiteMax,
-            @PathParam("fineUsed") double fineUsed, @PathParam("fineMax") int fineMax, @PathParam("poorUsed") double poorUsed, @PathParam("poorMax") int poorMax) {
+            @PathParam("fineUsed") double fineUsed, @PathParam("fineMax") int fineMax, @PathParam("poorUsed") double poorUsed, @PathParam("poorMax") int poorMax, @PathParam("defenseValue") double defenseValue) {
 
         characterName = characterName.replace('.', ' ');
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
 
-        if (handler.getPlotQH().modifyPlot(plotId, characterName, plotAmount, duchyName, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax, exquisiteUsed, exquisiteMax, fineUsed, fineMax, poorUsed, poorMax)) {
+        if (handler.getPlotQH().modifyPlot(plotId, characterName, plotAmount, duchyName, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax, exquisiteUsed, exquisiteMax, fineUsed, fineMax, poorUsed, poorMax, defenseValue)) {
             return "true";
         } else {
             return "false";
