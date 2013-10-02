@@ -28,8 +28,9 @@ public class Tick {
         // have to update all values so lets start with buildings that are done now
         UpdateBuildings();
 
+        System.out.println("STARTING INCOME");
         // now that the new buildings are added we start with the user income
-
+        UpdateIncome();
 
 
     }
@@ -59,9 +60,7 @@ public class Tick {
                     System.out.println("done retreiving " + retrieveBuildingDetailsById.get(0));
                     double income = Double.parseDouble(retrieveBuildingDetailsById.get(0)[6]);
                     int hapiness = Integer.parseInt(retrieveBuildingDetailsById.get(0)[10]);
-
-                    //needs to be but dont see in database
-                    double defenceValue = 0;
+                    double defenceValue = Double.parseDouble(retrieveBuildingDetailsById.get(0)[11]);
 
                     double newIncome = 0;
                     int newHappiness = 0;
@@ -77,10 +76,10 @@ public class Tick {
                     int currentHap = 0;
                     double currentDef = 0;
 
-                    rs.next();
+                    rsC.next();
 
 
-                    System.out.println("PLOT FOUND GETTING VALUES");
+                    System.out.println("PLOT FOUND GETTING VALUES "+PlotID);
                     currentInc = Double.parseDouble(rsC.getString("PlotMonthlyIncome"));
 
                     currentHap = Integer.parseInt(rsC.getString("PlotHappiness"));
@@ -137,7 +136,102 @@ public class Tick {
     }
 
     public void UpdateIncome() {
-        // this adds each propertys income to the property
+
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(cal.MONTH) + 1; //zero-based so +1 is this the current month
+        ArrayList<String[]> allreadyProcessed = new ArrayList();
+        try {
+
+            sql = "SELECT * FROM IncomeLog WHERE MONTH(IncomeDateProcessed) =" + month;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+
+
+
+            while (rs.next()) {
+                String[] line = new String[4];
+                line[0] = rs.getString("IncomeLogID");
+                line[1] = rs.getString("PlotID");
+                line[2] = rs.getString("IncomeValue");
+                line[3] = rs.getString("IncomeDateProcessed");
+                allreadyProcessed.add(line);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Error in retrieving allready processd income");
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println(allreadyProcessed.size());
+
+        try {
+       
+
+                sql = "SELECT * FROM Plot";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+
+                while (rs.next()) {
+                    int PlotID = Integer.parseInt(rs.getString("PlotID"));
+                    double Income = Double.parseDouble(rs.getString("PlotMonthlyIncome"));
+                    int AmountID = Integer.parseInt(rs.getString("PlotAmount"));
+
+                    if (!AllreadyProcessed(allreadyProcessed, PlotID)) {
+                        // insert log entry first
+                        Statement log = con.createStatement();
+                        log.execute("INSERT INTO IncomeLog(PlotID,IncomeValue,IncomeDateProcessed) VALUES (" + PlotID + "," + Income + ",CONVERT (date, SYSDATETIME()))");
+
+
+                        //first get current funds
+                        Statement current = con.createStatement();
+                        ResultSet rsC = current.executeQuery("SELECT * FROM Amount where AmountID=" + AmountID);
+
+                        rsC.next();
+
+                        int Plat = Integer.parseInt(rsC.getString("AmountPlatinum"));
+                        int Gold = Integer.parseInt(rsC.getString("AmountGold"));
+                        int Silver = Integer.parseInt(rsC.getString("AmountSilver"));
+
+
+                        double combinedSilver = Plat * 100.0 + Gold * 10.0 + Silver;
+
+                        //income van gold na silver
+                        Income = Income * 10;
+
+                        double newSilver = combinedSilver + Income;
+
+
+                        int newPlat = (int) (newSilver / 100);
+                        newSilver = newSilver - (newPlat * 100);
+                        int newGold = (int) (newSilver / 10);
+                        newSilver = newSilver - (newGold * 10);
+                        int news = (int) newSilver;
+
+
+                        //now add the income
+                        Statement IncomeUpdater = con.createStatement();
+                        IncomeUpdater.execute("UPDATE Amount SET AmountPlatinum=" + newPlat + ",AmountGold=" + newGold + ",AmountSilver=" + news + " WHERE AmountID=" + AmountID);
+                    }
+
+                
+            }
+        } catch (Exception ex) {
+            System.out.println("Error in processing income");
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public boolean AllreadyProcessed(ArrayList<String[]> processed, int tobeP) {
+        for (int i = 0; i < processed.size(); i++) {
+
+            int ptemp = Integer.parseInt(processed.get(i)[1]);
+            if (ptemp == tobeP) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public ArrayList<String[]> retrieveBuildingDetailsById(int id) {
@@ -157,7 +251,7 @@ public class Tick {
             values = new ArrayList();
 
             while (rs.next()) {
-                line = new String[11];
+                line = new String[12];
                 line[0] = rs.getString("BuildingTypeID");
                 line[1] = rs.getString("BuildingTypeOfIndustry");
                 line[2] = rs.getString("BuildingAvailabilityID");
@@ -169,6 +263,7 @@ public class Tick {
                 line[8] = rs.getString("BuildingTimeToBuild");
                 line[9] = rs.getString("BuildingSizeRequired");
                 line[10] = rs.getString("BuildingHappiness");
+                line[11] = rs.getString("BuildingDefenseValue");
                 values.add(line);
             }
 
