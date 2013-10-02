@@ -124,7 +124,7 @@ public class RestFullDBAdapterTest extends TestCase {
         double monthlyIncome = 0.0;
         RestFullDBAdapter instance = new RestFullDBAdapter();
         boolean expResult = true;
-        boolean result = instance.modifyPlot(plotId, characterName, "0-0-0", quality, sizeValue, groundArray, buildingArray, 0, 0.0, 0, 0, 0.0, 0, 0.0, 0, 0.0, 0);
+        boolean result = instance.modifyPlot(plotId, characterName, "0-0-0", quality, sizeValue, groundArray, buildingArray, 0, 0.0, 0, 0, 0.0, 0, 0.0, 0, 0.0, 0,0.0);
         assertEquals(expResult, result);
     }
 
