@@ -38,7 +38,9 @@ public class MainMenu extends BasePanel {
 
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
 
-        pman = new JButton(new ImageIcon(tc.ad.ImageAdapter(7)));
+        pman = new JButton(new ImageIcon(tc.ad.ImageAdapter(44)));
+        pman.setContentAreaFilled(false);
+        pman.setBorderPainted(false);
         btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(7)));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
