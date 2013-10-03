@@ -495,7 +495,7 @@ public class BuildingQueryHandler {
                 return "wild land";
             //break;
             case 9:
-                if (plot.get(0).equals("Sarkland") || plot.get(0).equals("Ragonvaldr")) {
+                if (plot.get(0).equals("Thegnheim")) {
                     break;
                 } else {
                     return "not on bay of maresco";
