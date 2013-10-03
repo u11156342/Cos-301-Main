@@ -252,7 +252,8 @@ VALUES
 (0, 0, 0, 0, 'Mine silver 0.125.png'),
 (0, 0, 0, 0, 'stables 0.5.png'),
 (0, 0, 0, 0, 'timber plantation 0.125.png'),
-(0, 0, 0, 0, 'Vineyard 0.125.png')
+(0, 0, 0, 0, 'Vineyard 0.125.png'),
+(0, 0, 0, 0, 'playerManagement.png')
 
 
 
