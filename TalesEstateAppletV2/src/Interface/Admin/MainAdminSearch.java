@@ -96,13 +96,13 @@ public class MainAdminSearch extends BasePanel {
                 String selectedDuchy = duchylist[duchy.getSelectedIndex()];
                 String selectedQuality = qualitylist[quality.getSelectedIndex()];
 
-                if ("Any".equals(selectedChar)) {
+                if ("any".equals(selectedChar.toLowerCase())) {
                     selectedChar = "";
                 }
-                if ("Any".equals(selectedDuchy)) {
+                if ("any".equals(selectedDuchy.toLowerCase())) {
                     selectedDuchy = "";
                 }
-                if ("Any".equals(selectedQuality)) {
+                if ("any".equals(selectedQuality.toLowerCase())) {
                     selectedQuality = "";
                 }
 

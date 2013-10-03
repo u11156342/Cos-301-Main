@@ -28,7 +28,7 @@ public class SearchInterface extends BasePanel {
     }
 
     public void init(final TransferContainer tc) {
-        ResultProperties mmenu = new ResultProperties(tc.JFXPANEL_WIDTH_INT - 500, properties.size() * 60, properties, tc);
+        ResultProperties mmenu = new ResultProperties(tc.JFXPANEL_WIDTH_INT - 500, properties.size() * 100, properties, tc);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);

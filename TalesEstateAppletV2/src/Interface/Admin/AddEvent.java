@@ -42,7 +42,7 @@ public class AddEvent extends BasePanel {
     JLabel des = new JLabel("Event Description");
     JLabel exsplain = new JLabel("These values will modify current values, 0 is nothing happens, -4 is 4 less and so on");
     JLabel l1 = new JLabel("Happiness Modifier");
-    JLabel l2 = new JLabel("Income Modifier");
+    JLabel l2 = new JLabel("Income Modifier %");
     JLabel l3 = new JLabel("Platinum Modifier");
     JLabel l4 = new JLabel("Gold Modifier");
     JLabel l5 = new JLabel("Silver Modifier");
@@ -166,6 +166,15 @@ public class AddEvent extends BasePanel {
                         }
                     }                   
 
+                    if("".equals(ename))
+                    {
+                        ename="-";
+                    }
+                    
+                    if("".equals(validurl))
+                    {
+                        validurl="-";
+                    }
                     
                     if (tc.rdb.addEvent(PID, ename,validurl, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()), Integer.parseInt(haps[happinessmod.getSelectedIndex()]), Integer.parseInt(incomemod.getText()))) {
                         tc.cardlayout.show(tc.contentpane, "AdminS");

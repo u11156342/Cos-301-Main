@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
@@ -109,9 +110,17 @@ public class MainSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
+                
+                if(result.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(size, "No results where found");
+                }
+                else
+                {
                 SearchInterface si = new SearchInterface("mainS", result, tc);
                 tc.mainapplet.add(si, si.getName());
                 tc.cardlayout.show(tc.contentpane, "mainS");
+                }
             }
         });
 
