@@ -43,7 +43,7 @@ public class Tick {
     public void UpdateBuildings() {
         // updates all uncompleted buildings build last month to completed and adjusts the owners stats
         Calendar cal = Calendar.getInstance();
-        int month = cal.get(cal.MONTH) + 1;  
+        int month = cal.get(cal.MONTH) + 1;
 
         try {
             sql = "SELECT * FROM BuildLog WHERE MONTH(BuildLogDateTimeBuilt) =" + month + " AND BuildLogCompleted='false'";
@@ -135,7 +135,7 @@ public class Tick {
 
         int day = cal.get(cal.DAY_OF_MONTH);
 
-        if (day == 1) {
+        if (day != 1) { //must be ==1
             ArrayList<String[]> allreadyProcessed = new ArrayList();
             try {
 
@@ -162,77 +162,78 @@ public class Tick {
 
             try {
 
-                sql = "SELECT * FROM Plot";
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
+                String sql2 = "SELECT * FROM Plot";
+                Statement stmt2 = con.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(sql2);
 
-                while (rs.next()) {
-                    int PlotID = Integer.parseInt(rs.getString("PlotID"));
-                    double Income = Double.parseDouble(rs.getString("PlotMonthlyIncome"));
-                    int AmountID = Integer.parseInt(rs.getString("PlotAmount"));
+                while (rs2.next()) {
+                    int PlotID = Integer.parseInt(rs2.getString("PlotID"));
+                    double Income = Double.parseDouble(rs2.getString("PlotMonthlyIncome"));
+                    int AmountID = Integer.parseInt(rs2.getString("PlotAmount"));
 
 
-                    if (!AllreadyProcessed(allreadyProcessed, PlotID)) {
+                    //  if (!AllreadyProcessed(allreadyProcessed, PlotID)) {
 
-                        // first need to check if there is an event for the plot in this month where its income is increased
+                    // first need to check if there is an event for the plot in this month where its income is increased
 
-                        Statement checkLogs = con.createStatement();
-                        ResultSet check = checkLogs.executeQuery("SELECT * FROM EventTriggerLog WHERE MONTH(EventTriggerLogDateProcessed)=" + month + " AND PlotID=" + PlotID);
+                    
+                    Statement checkLogs = con.createStatement();
+                    ResultSet check = checkLogs.executeQuery("SELECT * FROM EventTriggerLog WHERE MONTH(EventTriggerLogDateProcessed)=" + month + " AND PlotID=" + PlotID);
 
-                        if (check.isLast()) {
-                            //no entry so do nothing
-                        } else {
-                            check.next();
-                            int eventID = Integer.parseInt(check.getString("EventLogID"));
+                   
+                    if (check.next()) {
+                        //no entry so do nothing
+                        int eventID = Integer.parseInt(check.getString("EventLogID"));
 
-                            Statement eventDetails = con.createStatement();
-                            ResultSet event = eventDetails.executeQuery("SELECT * FROM EventLog where EventLogID=" + eventID);
-                            event.next();
+                        Statement eventDetails = con.createStatement();
+                        ResultSet event = eventDetails.executeQuery("SELECT * FROM EventLog where EventLogID=" + eventID);
+                        event.next();
 
-                            int incomeModPer = Integer.parseInt(event.getString("EventLogEffectIncome"));
+                        int incomeModPer = Integer.parseInt(event.getString("EventLogEffectIncome"));
 
-                            if (incomeModPer != 0) {
-                                Income = Income / 100;
-                                Income = Income * (100 + incomeModPer);
-                            }
+                        if (incomeModPer != 0) {
+                            Income = Income / 100;
+                            Income = Income * (100 + incomeModPer);
                         }
-
-
-                        // insert log entry first
-                        Statement log = con.createStatement();
-                        log.execute("INSERT INTO IncomeLog(PlotID,IncomeValue,IncomeDateProcessed) VALUES (" + PlotID + "," + Income + ",CONVERT (date, SYSDATETIME()))");
-
-
-                        //first get current funds
-                        Statement current = con.createStatement();
-                        ResultSet rsC = current.executeQuery("SELECT * FROM Amount where AmountID=" + AmountID);
-
-                        rsC.next();
-
-                        int Plat = Integer.parseInt(rsC.getString("AmountPlatinum"));
-                        int Gold = Integer.parseInt(rsC.getString("AmountGold"));
-                        int Silver = Integer.parseInt(rsC.getString("AmountSilver"));
-
-
-                        double combinedSilver = Plat * 100.0 + Gold * 10.0 + Silver;
-
-                        //income van gold na silver
-                        Income = Income * 10;
-
-                        double newSilver = combinedSilver + Income;
-
-
-                        int newPlat = (int) (newSilver / 100);
-                        newSilver = newSilver - (newPlat * 100);
-                        int newGold = (int) (newSilver / 10);
-                        newSilver = newSilver - (newGold * 10);
-                        int news = (int) newSilver;
-
-
-                        //now add the income
-                        Statement IncomeUpdater = con.createStatement();
-                        IncomeUpdater.execute("UPDATE Amount SET AmountPlatinum=" + newPlat + ",AmountGold=" + newGold + ",AmountSilver=" + news + " WHERE AmountID=" + AmountID);
                     }
+                   
+
+
+                    // insert log entry first
+                    Statement log = con.createStatement();
+                    log.execute("INSERT INTO IncomeLog(PlotID,IncomeValue,IncomeDateProcessed) VALUES (" + PlotID + "," + Income + ",CONVERT (date, SYSDATETIME()))");
+
+
+                    //first get current funds
+                    Statement current = con.createStatement();
+                    ResultSet rsC = current.executeQuery("SELECT * FROM Amount where AmountID=" + AmountID);
+
+                    rsC.next();
+
+                    int Plat = Integer.parseInt(rsC.getString("AmountPlatinum"));
+                    int Gold = Integer.parseInt(rsC.getString("AmountGold"));
+                    int Silver = Integer.parseInt(rsC.getString("AmountSilver"));
+
+
+                    double combinedSilver = Plat * 100.0 + Gold * 10.0 + Silver;
+
+                    //income van gold na silver
+                    Income = Income * 10;
+
+                    double newSilver = combinedSilver + Income;
+
+
+                    int newPlat = (int) (newSilver / 100);
+                    newSilver = newSilver - (newPlat * 100);
+                    int newGold = (int) (newSilver / 10);
+                    newSilver = newSilver - (newGold * 10);
+                    int news = (int) newSilver;
+
+
+                    //now add the income
+                    Statement IncomeUpdater = con.createStatement();
+                    IncomeUpdater.execute("UPDATE Amount SET AmountPlatinum=" + newPlat + ",AmountGold=" + newGold + ",AmountSilver=" + news + " WHERE AmountID=" + AmountID);
+                    //   }
 
 
                 }
@@ -403,7 +404,7 @@ public class Tick {
                 while (rs.next()) {
                     int EventLog = Integer.parseInt(rs.getString("EventLogID"));
 
-                    System.out.println("found event "+EventLog);
+                    System.out.println("found event " + EventLog);
                     if (!AllreadyProcessed(allreadyProcessed, EventLog)) {
                         System.out.println("processing");
                         int PlotID = Integer.parseInt(rs.getString("PlotID"));
@@ -462,7 +463,7 @@ public class Tick {
 
 
 
-              
+
 
                         int currentHapiness = Integer.parseInt(PlotResultSet.getString("PlotHappiness"));
 
