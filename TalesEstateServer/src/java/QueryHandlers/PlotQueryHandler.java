@@ -381,7 +381,7 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotAcrePoor"));//15
             value.add(rs.getString("PlotAcrePoorMax"));//16
             value.add(rs.getString("PlotDefenseValue"));//17
-            
+
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
             stmt = con.createStatement();
@@ -503,7 +503,7 @@ public class PlotQueryHandler {
      * Empty fields will yield all results.
      */
     public ArrayList<String[]> searchPlotBy(String characterName, String duchy, int size, String quality) {
-        ArrayList<String[]> values = null;
+        ArrayList<String[]> values = new ArrayList();
         int characterID = 0, duchyID = 0, qualityID = 0;
         String[] line;
 
@@ -532,9 +532,14 @@ public class PlotQueryHandler {
 
 
             //Get ID's
-            if (!characterName.equals("")) {
-                sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
-                        + "LOWER(UserCharacterName) like '%" + characterName.toLowerCase() + "%'";
+           // if (!characterName.equals("")) {
+
+                if ("".equals(characterName.toLowerCase())) {
+                    sql = "SELECT UserCharacterID FROM UserCharacter";
+                } else {
+                    sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
+                            + "LOWER(UserCharacterName) like '%" + characterName.toLowerCase() + "%'";
+                }
                 stmt = con.createStatement();
                 rs = stmt.executeQuery(sql);
                 while (rs.next()) {
@@ -600,12 +605,11 @@ public class PlotQueryHandler {
                         line[17] = rs2.getString("PlotDefenseValue");
                         values.add(line);
                     }
-                }
+               // }
             }
 
             return values;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Could not execute function searchPlotBy()");
             System.out.println(e.getMessage());
         }
