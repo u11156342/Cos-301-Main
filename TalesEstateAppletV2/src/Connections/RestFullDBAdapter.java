@@ -231,6 +231,7 @@ public class RestFullDBAdapter {
             System.out.println(ex.getMessage());
         }
 
+        temp=temp.replaceAll("@",""+'\n');
         return Conv.FromUrl(temp);
     }
 
