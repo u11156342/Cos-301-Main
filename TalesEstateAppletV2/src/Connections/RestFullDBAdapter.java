@@ -3,8 +3,18 @@ package Connections;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class RestFullDBAdapter {
 
@@ -12,19 +22,70 @@ public class RestFullDBAdapter {
     int serverPort = 8080;
     String server = "/TalesEstateServer/resources/";
     Converter Conv = new Converter();
+    SecretKeySpec key;
+    Cipher aes;
+
+    public RestFullDBAdapter() {
+
+        try {
+            aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            String passphrase = "correct horse battery staple";
+            MessageDigest digest = MessageDigest.getInstance("SHA");
+            digest.update(passphrase.getBytes());
+            SecretKeySpec key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
+            aes.init(Cipher.ENCRYPT_MODE, key);
+
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RestFullDBAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(RestFullDBAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(RestFullDBAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String DoServerRequest(String path) {
+
+        String temp = "";
+
+        try {
+
+
+
+            byte[] ciphertext = aes.doFinal(path.getBytes());
+            for (int i = 0; i < ciphertext.length; i++) {
+                System.out.println(ciphertext[i]);
+            }
+            String enc = "";
+            for (int i = 0; i < ciphertext.length; i++) {
+                enc = enc + "@" + ciphertext[i];
+            }
+
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
+            System.out.println("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
+            System.out.println(new String(ciphertext));
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+
+                temp = temp+ inputLine;
+                
+            }
+            in.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return temp;
+    }
 
     public boolean registerEstateCharacter(String characterName) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -39,22 +100,11 @@ public class RestFullDBAdapter {
     public int retrieveCharacterID(String userName) {
         String temp = "";
         try {
-            String tt = "";
-
             userName = userName.replace(' ', '.');
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterID" + "/" + userName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterID" + "/" + userName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
 
         return Integer.parseInt(temp);
     }
@@ -62,15 +112,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> retrieveAllCharacters() {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveAllCharacters");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveAllCharacters");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -123,15 +165,7 @@ public class RestFullDBAdapter {
     public boolean checkLogin(String userID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "UserWrapper/" + "checkLogin" + "/" + userID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "UserWrapper/" + "checkLogin" + "/" + userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -439,11 +473,11 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax,double defenceValue) {
+    public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax, double defenceValue) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyPlot" + "/" + plotId + "/" + characterName + "/" + plotAmount + "/" + duchyName + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax + "/" + exquisiteUsed + "/" + exquisiteMax + "/" + fineUsed + "/" + fineMax + "/" + poorUsed + "/" + poorMax+"/"+defenceValue);
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyPlot" + "/" + plotId + "/" + characterName + "/" + plotAmount + "/" + duchyName + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax + "/" + exquisiteUsed + "/" + exquisiteMax + "/" + fineUsed + "/" + fineMax + "/" + poorUsed + "/" + poorMax + "/" + defenceValue);
             System.out.println(url);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
