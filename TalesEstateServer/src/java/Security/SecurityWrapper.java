@@ -39,7 +39,7 @@ public class SecurityWrapper {
         System.out.println(Request);
         try {
 
-            StringTokenizer tokens = new StringTokenizer(Request, "@");
+            StringTokenizer tokens = new StringTokenizer(Request, "`");
             byte[] bt = new byte[tokens.countTokens()];
             int c = 0;
             while (tokens.hasMoreTokens()) {
@@ -50,7 +50,7 @@ public class SecurityWrapper {
 
             }
 
-            String passphrase = "correct horse battery staple";
+            String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
             MessageDigest digest = MessageDigest.getInstance("SHA");
             digest.update(passphrase.getBytes());
             SecretKeySpec key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
@@ -79,7 +79,13 @@ public class SecurityWrapper {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-            return temp;
+            aes.init(Cipher.ENCRYPT_MODE, key);
+            byte[] ciphertext = aes.doFinal(temp.getBytes());
+            String enc = "";
+            for (int i = 0; i < ciphertext.length; i++) {
+                enc = enc + "`" + ciphertext[i];
+            }
+            return enc;
 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(SecurityWrapper.class.getName()).log(Level.SEVERE, null, ex);
