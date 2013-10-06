@@ -77,7 +77,7 @@ public class PlayerManagementMenu extends JPanel {
                         if (amountz == 0) {
                             return;
                         }
-                        if (gold >= amountz) {
+                        if (gold >= amountz && amountz > 0) {
 
                             //make my gold less
                             int tempa = Integer.parseInt(amount1.get(0)) * 100 + Integer.parseInt(amount1.get(1)) * 10 + Integer.parseInt(amount1.get(2));
@@ -104,6 +104,10 @@ public class PlayerManagementMenu extends JPanel {
 
 
                         }
+                        else
+                        {
+                            JOptionPane.showConfirmDialog(donateGoldToChar, "Amount is invalid,please try again");
+                        }
                     } catch (Exception ex) {
                     }
 
@@ -122,7 +126,7 @@ public class PlayerManagementMenu extends JPanel {
             }
         });
         //maby later
-       // add(donateGoldToPlayer, c);
+        // add(donateGoldToPlayer, c);
 
 
 
