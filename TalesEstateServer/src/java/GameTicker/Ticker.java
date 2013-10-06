@@ -36,6 +36,6 @@ public class Ticker {
             public void run() {
                 tick.pulse(con);
             }
-        }, 0,10 * 1000);
+        }, 0,60*10 * 1000);
     }
 }

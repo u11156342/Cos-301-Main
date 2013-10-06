@@ -3,8 +3,18 @@ package Connections;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class RestFullDBAdapter {
 
@@ -12,19 +22,74 @@ public class RestFullDBAdapter {
     int serverPort = 8080;
     String server = "/TalesEstateServer/resources/";
     Converter Conv = new Converter();
+    SecretKeySpec key;
+    Cipher aes;
+
+    public RestFullDBAdapter() {
+
+        try {
+            aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
+            MessageDigest digest = MessageDigest.getInstance("SHA");
+            digest.update(passphrase.getBytes());
+            key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
+
+
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RestFullDBAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(RestFullDBAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String DoServerRequest(String path) {
+
+        String temp = "";
+
+        try {
+
+
+            aes.init(Cipher.ENCRYPT_MODE, key);
+            byte[] ciphertext = aes.doFinal(path.getBytes());
+            String enc = "";
+            for (int i = 0; i < ciphertext.length; i++) {
+                enc = enc + "`" + ciphertext[i];
+            }
+
+
+            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
+            //  System.out.println("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
+            //  System.out.println(new String(ciphertext));
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine = in.readLine();
+
+            aes.init(Cipher.DECRYPT_MODE, key);
+
+            StringTokenizer tokens = new StringTokenizer(inputLine, "`");
+            byte[] bt = new byte[tokens.countTokens()];
+            int c1 = 0;
+            while (tokens.hasMoreTokens()) {
+                String tok = tokens.nextToken();
+
+                bt[c1] = (byte) Integer.parseInt(tok);
+                c1++;
+
+            }
+            temp = new String(aes.doFinal(bt));
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return temp;
+    }
 
     public boolean registerEstateCharacter(String characterName) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -39,22 +104,11 @@ public class RestFullDBAdapter {
     public int retrieveCharacterID(String userName) {
         String temp = "";
         try {
-            String tt = "";
-
             userName = userName.replace(' ', '.');
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterID" + "/" + userName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterID" + "/" + userName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
 
         return Integer.parseInt(temp);
     }
@@ -62,15 +116,8 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> retrieveAllCharacters() {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveAllCharacters");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveAllCharacters");
+            System.out.println("ALL CHARS " + temp);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -123,15 +170,7 @@ public class RestFullDBAdapter {
     public boolean checkLogin(String userID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "UserWrapper/" + "checkLogin" + "/" + userID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "UserWrapper/" + "checkLogin" + "/" + userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -146,15 +185,7 @@ public class RestFullDBAdapter {
     public boolean checkHasCharacter(String userID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "UserWrapper/" + "checkHasCharacter" + "/" + userID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "UserWrapper/" + "checkHasCharacter" + "/" + userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -170,14 +201,8 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
 
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "UserWrapper/" + "retrieveCharactersOwnedByUser/" + userID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "UserWrapper/" + "retrieveCharactersOwnedByUser/" + userID);
+            System.out.println(temp);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -188,15 +213,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> queryPlotPrice(String duchy, String quality) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "queryPlotPrice/" + duchy + "/" + quality);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "queryPlotPrice/" + duchy + "/" + quality);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -209,13 +226,7 @@ public class RestFullDBAdapter {
         try {
 
             URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PriceWrapper/" + "retrieveMonthlyUpkeep/" + duchy + "/" + quality);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "queryPlotPrice/" + duchy + "/" + quality);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -227,16 +238,7 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax);
-            System.out.println(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -253,14 +255,7 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "getCharacterAmounts/" + characterName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "getCharacterAmounts/" + characterName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -272,16 +267,7 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "modifyAmount" + "/" + characterName + "/" + amountPlatinum + "/" + amountGold + "/" + amountSilver);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "modifyAmount" + "/" + characterName + "/" + amountPlatinum + "/" + amountGold + "/" + amountSilver);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -298,15 +284,7 @@ public class RestFullDBAdapter {
         String temp = "";
 
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "retrievePlotsOwnedByCharacter/" + characterID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "retrievePlotsOwnedByCharacter/" + characterID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -317,15 +295,7 @@ public class RestFullDBAdapter {
     public ArrayList<String> getCurrentAmount(int plotID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "getCurrentAmount/" + plotID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "getCurrentAmount/" + plotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -336,16 +306,7 @@ public class RestFullDBAdapter {
     public boolean modifyAmount(int inPlotID, int amountPlatinum, int amountGold, int amountSilver) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyAmount" + "/" + inPlotID + "/" + amountPlatinum + "/" + amountGold + "/" + amountSilver);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyAmount" + "/" + inPlotID + "/" + amountPlatinum + "/" + amountGold + "/" + amountSilver);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -361,16 +322,7 @@ public class RestFullDBAdapter {
     public ArrayList<String> retrievePlotDetails(int plotID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "retrievePlotDetails/" + plotID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "retrievePlotDetails/" + plotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -381,16 +333,7 @@ public class RestFullDBAdapter {
     public boolean expandPlot(int plotID, String quality, int[][] groundArray) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray));
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            inputLine = in.readLine();
-            temp = temp + inputLine;
-
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -406,14 +349,7 @@ public class RestFullDBAdapter {
     public String getStatus(int propertyId) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "Wrapper/" + "StatusReport/" + propertyId);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "Wrapper/" + "StatusReport/" + propertyId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -424,14 +360,7 @@ public class RestFullDBAdapter {
     public String getSuperStatusReport(int propertyId) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "Wrapper/" + "SuperStatusReport/" + propertyId);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "Wrapper/" + "SuperStatusReport/" + propertyId);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -439,19 +368,11 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax,double defenceValue) {
+    public boolean modifyPlot(int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax, double defenceValue) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyPlot" + "/" + plotId + "/" + characterName + "/" + plotAmount + "/" + duchyName + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax + "/" + exquisiteUsed + "/" + exquisiteMax + "/" + fineUsed + "/" + fineMax + "/" + poorUsed + "/" + poorMax+"/"+defenceValue);
-            System.out.println(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "modifyPlot" + "/" + plotId + "/" + characterName + "/" + plotAmount + "/" + duchyName + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax + "/" + exquisiteUsed + "/" + exquisiteMax + "/" + fineUsed + "/" + fineMax + "/" + poorUsed + "/" + poorMax + "/" + defenceValue);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -466,14 +387,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> listBuildingBy(String duchy, String industry) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "BuildingWrapper/" + "listBuildingBy/" + duchy + "/" + industry);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "BuildingWrapper/" + "listBuildingBy/" + duchy + "/" + industry);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -484,15 +398,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> retrieveBuildingDetailsById(int buildingID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "BuildingWrapper/" + "retrieveBuildingDetailsById/" + buildingID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "BuildingWrapper/" + "retrieveBuildingDetailsById/" + buildingID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -503,15 +409,7 @@ public class RestFullDBAdapter {
     public void logBuildingBuilt(int characterID, int plotiD, int buildingID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "LogWrapper/" + "logBuildingBuilt/" + characterID + "/" + plotiD + "/" + buildingID);
-            System.out.println("http://" + serverURL + ":" + serverPort + server + "LogWrapper/" + "logBuildingBuilt/" + characterID + "/" + plotiD + "/" + buildingID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "logBuildingBuilt/" + characterID + "/" + plotiD + "/" + buildingID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -520,15 +418,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter(int characterID, int plotid) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "BuildingWrapper/" + "retrieveAllBuildingsOwnedByCharacter/" + characterID + "/" + plotid);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "BuildingWrapper/" + "retrieveAllBuildingsOwnedByCharacter/" + characterID + "/" + plotid);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -539,15 +429,7 @@ public class RestFullDBAdapter {
     public ArrayList<String> retrieveDuchyList() {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "DuchyWrapper/" + "retrieveDuchyList");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "DuchyWrapper/" + "retrieveDuchyList");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -573,14 +455,7 @@ public class RestFullDBAdapter {
             if ("".equals(quality)) {
                 quality = quality + "-";
             }
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "searchPlotBy/" + characterName + "/" + duchy + "/" + size + "/" + quality);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "searchPlotBy/" + characterName + "/" + duchy + "/" + size + "/" + quality);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -592,14 +467,7 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterIDExtra/" + characterName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterIDExtra/" + characterName);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -610,14 +478,7 @@ public class RestFullDBAdapter {
     public String checkBuildingPrerequisites(int plotID, int buildingID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "BuildingWrapper/" + "checkBuildingPrerequisites/" + plotID + "/" + buildingID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "BuildingWrapper/" + "checkBuildingPrerequisites/" + plotID + "/" + buildingID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -628,15 +489,7 @@ public class RestFullDBAdapter {
     public ArrayList<String> getPlotAccess(int plotID, int userID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "getPlotAccess/" + plotID + "/" + userID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "getPlotAccess/" + plotID + "/" + userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -647,14 +500,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> getAllAccess(int plotID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "getAllAccess/" + plotID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "getAllAccess/" + plotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -665,14 +511,7 @@ public class RestFullDBAdapter {
     public String retrieveCharacterName(int characterID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterName/" + characterID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "retrieveCharacterName/" + characterID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -684,14 +523,7 @@ public class RestFullDBAdapter {
     public String addPlotAccess(int plotID, int UserId, boolean deposit, boolean withdraw, boolean buy, boolean place, boolean exspand, boolean status) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotAccess/" + plotID + "/" + UserId + "/" + deposit + "/" + withdraw + "/" + buy + "/" + place + "/" + exspand + "/" + status);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotAccess/" + plotID + "/" + UserId + "/" + deposit + "/" + withdraw + "/" + buy + "/" + place + "/" + exspand + "/" + status);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -701,16 +533,7 @@ public class RestFullDBAdapter {
     public boolean removeAccess(int plotId, int UserID) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "removeAccess" + "/" + plotId + "/" + UserID);
-            System.out.println(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "removeAccess" + "/" + plotId + "/" + UserID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -725,14 +548,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> AllPlotsIHaveAccess(int UserID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "AllPlotsIHaveAccess/" + UserID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "AllPlotsIHaveAccess/" + UserID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -743,16 +559,7 @@ public class RestFullDBAdapter {
     public boolean useAcresOnPlot(int plotId, double acreExquisite, double acreFine, double acrePoor) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "PlotWrapper/" + "useAcresOnPlot" + "/" + plotId + "/" + acreExquisite + "/" + acreFine + "/" + acrePoor);
-            System.out.println(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "useAcresOnPlot" + "/" + plotId + "/" + acreExquisite + "/" + acreFine + "/" + acrePoor);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -767,16 +574,7 @@ public class RestFullDBAdapter {
     public boolean addEvent(int plotId, String eventName, String eventDescription, int platinumMod, int goldMod, int silverMod, int happinessMod, int incomeMod) {
         String temp = "";
         try {
-
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "EventWrapper/" + "addEvent" + "/" + plotId + "/" + eventName + "/" + eventDescription + "/" + platinumMod + "/" + goldMod + "/" + silverMod + "/" + happinessMod + "/" + incomeMod);
-            System.out.println(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "EventWrapper/" + "addEvent" + "/" + plotId + "/" + eventName + "/" + eventDescription + "/" + platinumMod + "/" + goldMod + "/" + silverMod + "/" + happinessMod + "/" + incomeMod);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -791,14 +589,7 @@ public class RestFullDBAdapter {
     public ArrayList<String[]> getEvent(int month, int PlotID) {
         String temp = "";
         try {
-            URL url = new URL("http://" + serverURL + ":" + serverPort + server + "EventWrapper/" + "getEvent/" + month + "/" + PlotID);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                temp = temp + "\n" + inputLine;
-            }
-            in.close();
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "EventWrapper/" + "getEvent/" + month + "/" + PlotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
