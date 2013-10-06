@@ -51,6 +51,8 @@ public class TransferContainer {
     public PlayInterface visual;
     public RightsInterface ri;
     public PlayerManagementInterface pmI;
+    
+    public int BuildingRef=5;
 
     public TransferContainer() {
         cardlayout = new CardLayout();

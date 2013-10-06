@@ -22,10 +22,12 @@ public class PlayInterface extends BasePanel {
     int[][] tiles;
     int[][] buildings;
     JScrollPane playMapScrollPane;
+    TransferContainer t;
 
     public PlayInterface(String play, TransferContainer tc) {
         super(play);
         System.out.println("play interface");
+        t=tc;
 
     }
 
@@ -44,7 +46,7 @@ public class PlayInterface extends BasePanel {
 
         VisualMap playIn = null;
         try {
-            playIn = new VisualMap(size);
+            playIn = new VisualMap(size,t);
         } catch (IOException ex) {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }

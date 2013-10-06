@@ -231,7 +231,7 @@ public class RestFullDBAdapter {
             System.out.println(ex.getMessage());
         }
 
-        temp=temp.replaceAll("@",""+'\n');
+        temp = temp.replaceAll("@", "" + '\n');
         return Conv.FromUrl(temp);
     }
 
@@ -331,10 +331,10 @@ public class RestFullDBAdapter {
         return Conv.FromUrl(temp);
     }
 
-    public boolean expandPlot(int plotID, String quality, int[][] groundArray) {
+    public boolean expandPlot(int plotID, String quality, int[][] groundArray,int[][] buildingArray) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray));
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray)+"/"+this.convertToArray(buildingArray));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -596,5 +596,14 @@ public class RestFullDBAdapter {
         }
 
         return Conv.ArrFromUrl(temp);
+    }
+
+    public void DoExspand(int pId, double Upkeep, int workerMax) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "DoExspand/" + pId + "/" + Upkeep+"/"+workerMax);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
