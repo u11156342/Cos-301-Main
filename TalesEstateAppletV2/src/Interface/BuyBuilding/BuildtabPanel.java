@@ -292,7 +292,7 @@ public class BuildtabPanel extends BasePanel {
                     if (buySucess && checkCounter == 4) {
                         //if this is reached then the person has all the req to build,need to update all the values
                         //log the building
-                        tain.rdb.logBuildingBuilt(Integer.parseInt(retrievePlotDetails.get(1)), buildingsID[buildings.getSelectedIndex()], PlotID);
+                        tain.rdb.logBuildingBuilt(tain.rdb.retrieveCharacterID(retrievePlotDetails.get(1)), buildingsID[buildings.getSelectedIndex()], PlotID);
                         // now we need to consume the acres
 
                         // consume workers

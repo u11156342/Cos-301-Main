@@ -416,8 +416,10 @@ public class MainPlaySideMenu extends JPanel {
         listBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, pId);
+                
+                ArrayList<String> retrievePlotDetails1 = tc.rdb.retrievePlotDetails(pId);
+                
+                ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.rdb.retrieveCharacterID(retrievePlotDetails1.get(1)), pId);
                 textZone.setText("");
                 StringBuilder html = new StringBuilder();
                 html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
