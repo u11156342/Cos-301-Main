@@ -65,8 +65,9 @@ public class SecurityWrapper {
             try {
 
                 URL url = new URL("http://" + cleartext);
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                 System.out.println("http://" + cleartext);
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     if (!"".equals(temp)) {
