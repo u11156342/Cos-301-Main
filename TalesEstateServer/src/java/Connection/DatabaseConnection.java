@@ -43,7 +43,7 @@ public class DatabaseConnection {
 
 
 
-            connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=TalesProd;integratedSecurity=true";
+            connectionURL = "jdbc:sqlserver://10.0.0.104:1433;databaseName=TalesProd;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class DatabaseConnection {
     public Connection openConnectionEstate() {
 
         try {
-            connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=TalesEstate;integratedSecurity=true";
+            connectionURL = "jdbc:sqlserver://10.0.0.104:1433;databaseName=TalesEstate;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());
         } catch (Exception e) {
