@@ -875,7 +875,7 @@ public class PlotQueryHandler {
      * in the PlotQueryHandler to generate random water tiles. (To be added
      * later).
      */
-    public boolean expandPlot(int plotID, String quality, int[][] groundArray) {
+    public boolean expandPlot(int plotID, String quality, int[][] groundArray, int[][] buildingArray) {
         int exquisite, fine, poor;
         String gArray = "";
 
@@ -913,7 +913,9 @@ public class PlotQueryHandler {
                         + "PlotAcreExquisiteMax = " + exquisite + ", "
                         + "PlotAcreFineMax = " + fine + ", "
                         + "PlotAcrePoorMax = " + poor + ","
-                        + "PlotGroundArray = '" + gArray + "' "
+                        + "PlotGroundArray = '" + gArray + "', "
+                        + "PlotBuildingArray = '" + convertToArray(buildingArray) + "', "
+                        + "PlotSize = '" + groundArray.length + "' "
                         + "WHERE PlotID = " + plotID;
                 System.out.println(sql);
                 stmt = con.createStatement();
@@ -1276,5 +1278,17 @@ public class PlotQueryHandler {
 
         return null;
     }
+
     //-----------------------------------------------------------------------//
+    public void DoExspand(int pId, double Upkeep, int workerMax) {
+
+        try {
+            stmt = con.createStatement();
+            stmt.execute("UPDATE Plot set PlotMonthlyIncome=" + Upkeep + ",PlotWorkerMax=" + workerMax + " where PlotID=" + pId);
+
+        } catch (Exception e) {
+            System.out.println("Error in function DoExspand():");
+            System.out.println(e.getMessage());
+}
+    }
 }

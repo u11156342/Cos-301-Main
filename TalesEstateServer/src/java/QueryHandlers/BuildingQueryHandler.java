@@ -201,7 +201,7 @@ public class BuildingQueryHandler {
             values = new ArrayList();
 
             while (rs.next()) {
-                line = new String[12];
+                line = new String[13];
                 line[0] = rs.getString("BuildingTypeID");
                 line[1] = rs.getString("BuildingTypeOfIndustry");
                 line[2] = rs.getString("BuildingAvailabilityID");
@@ -214,6 +214,7 @@ public class BuildingQueryHandler {
                 line[9] = rs.getString("BuildingSizeRequired");
                 line[10] = rs.getString("BuildingHappiness");
                 line[11] = rs.getString("BuildingDefenseValue");
+                line[12] = rs.getString("PictureID");
                 values.add(line);
             }
 

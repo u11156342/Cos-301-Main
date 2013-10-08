@@ -161,12 +161,13 @@ public class PlotWrapper {
     }
 
     @GET
-    @Path("expandPlot/{plotID}/{quality}/{groundArray}")
+    @Path("expandPlot/{plotID}/{quality}/{groundArray}/{barray}")
     @Produces("text/html")
-    public String expandPlot(@PathParam("plotID") int plotID, @PathParam("quality") String quality, @PathParam("groundArray") String groundArray) {
+    public String expandPlot(@PathParam("plotID") int plotID, @PathParam("quality") String quality, @PathParam("groundArray") String groundArray, @PathParam("barray") String barray) {
         System.out.println(plotID);
         groundArray = groundArray.replace('_', ';');
-        if (handler.getPlotQH().expandPlot(plotID, quality, handler.getPlotQH().convertFromArray(groundArray))) {
+        barray = barray.replace('_', ';');
+        if (handler.getPlotQH().expandPlot(plotID, quality, handler.getPlotQH().convertFromArray(groundArray),handler.getPlotQH().convertFromArray(barray))) {
             return "true";
         } else {
             return "false";
@@ -245,5 +246,14 @@ public class PlotWrapper {
     @Produces("text/html")
     public String RemoveAccess(@PathParam("userID") int userID) {
         return converter.ArrToUrl(handler.getPlotQH().AllPlotsIHaveAccess(userID));
+    }
+
+    @GET
+    @Path("DoExspand/{pId}/{Upkeep}/{workerMax}")
+    @Produces("text/html")
+    public String DoExspand(@PathParam("pId") int pId, @PathParam("Upkeep") String Upkeep, @PathParam("workerMax") int workerMax) {
+        System.out.println("CALLLED");
+        handler.getPlotQH().DoExspand(pId, Double.parseDouble(Upkeep), workerMax);
+        return "true";
     }
 }
