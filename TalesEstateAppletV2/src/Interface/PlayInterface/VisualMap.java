@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JScrollPane;
+import talesestateappletv2.TransferContainer;
 
 public class VisualMap extends JFXPanel {
 
@@ -27,18 +28,24 @@ public class VisualMap extends JFXPanel {
     int globalwidth;
     int globalheight;
     Graphics2D g2d;
+        int tempx = 0;
+    int tempy = 0;
+    TransferContainer tc;
 
-    public VisualMap(int size) throws IOException {
+    public VisualMap(int size,TransferContainer t) throws IOException {
+        tc=t;
     }
 
     @Override
     public void paint(final Graphics g) {
 
-        gridsize = tileStates.length;
+        
         wdOfcell = 160;
         htOfcell = 80;
         globalwidth = wdOfcell * tileStates.length;
         globalheight = globalheight * tileStates.length;
+        gridsize = tileStates.length;
+
         if (tempplacinggrid == null) {
             tempplacinggrid = new int[tileStates.length][tileStates.length];
         }
@@ -102,15 +109,14 @@ public class VisualMap extends JFXPanel {
 
         final VisualMap ref = this;
 
+
         this.addMouseMotionListener(new MouseMotionListener() {
-            int tempx = 0;
-            int tempy = 0;
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()));
+                scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()) / 2);
                 tempx = e.getX();
-                scroller.getVerticalScrollBar().setValue(scroller.getVerticalScrollBar().getValue() + (tempy - e.getY()));
+                scroller.getVerticalScrollBar().setValue(scroller.getVerticalScrollBar().getValue() + (tempy - e.getY()) / 2);
                 tempy = e.getY();
             }
             // some idea of how we can show placing
@@ -146,7 +152,7 @@ public class VisualMap extends JFXPanel {
                                         tempplacinggrid[b][n] = 0;
                                     }
                                 }
-                                tempplacinggrid[x][y] = 5;
+                                tempplacinggrid[x][y] = tc.BuildingRef;
                             }
 
 
@@ -193,7 +199,7 @@ public class VisualMap extends JFXPanel {
 
 
                             if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
-                                gridstates[x][y] = 5;
+                                gridstates[x][y] = tc.BuildingRef;
                             }
 
 

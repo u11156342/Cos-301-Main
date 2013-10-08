@@ -43,7 +43,7 @@ public class VisualSideMenu extends JPanel {
             tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             build[a] = tempresult.get(0)[1];
             buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
-            PicID[a] = Integer.parseInt(tempresult.get(a)[12]);
+            PicID[a] = Integer.parseInt(tempresult.get(0)[12]);
         }
 
 
