@@ -182,6 +182,7 @@ public class MainPlaySideMenu extends JPanel {
         }
 
         Report.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -189,6 +190,7 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -242,6 +244,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -295,6 +298,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -360,9 +364,9 @@ public class MainPlaySideMenu extends JPanel {
 
 
 
-                        tc.rdb.expandPlot(pId, picked, tilesz, buildings);
+                        tc.rdb.expandPlot(pId, picked, tilesz);
 
-
+                        //ok so now the property is exspanded in terms of acres and stuff but I still need to edit max workers and income
 
                         int workerMax;
                         int quality;
@@ -393,8 +397,7 @@ public class MainPlaySideMenu extends JPanel {
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
                         // modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
-                        //tc.rdb.modifyPlot(pId, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
-                        tc.rdb.DoExspand(pId, Upkeep, workerMax);
+                        tc.rdb.modifyPlot(pId, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
@@ -415,6 +418,7 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -458,6 +462,7 @@ public class MainPlaySideMenu extends JPanel {
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -466,24 +471,23 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                tc.visual=new PlayInterface("visual",tc);
-                tc.mainapplet.add(tc.visual,tc.visual.getName());
-                tc.visual.init(tc, pId);
-                tc.cardlayout.show(tc.contentpane, "visual");
+                PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
+                card.init(tc, pId);
+                tc.cardlayout.show(tc.contentpane, card.getName());
             }
         });
 
         RightsManagement.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                tc.ri = new RightsInterface("right");
-                tc.mainapplet.add(tc.ri, tc.ri.getName());
-                tc.ri.init(tc, pId);
-                tc.cardlayout.show(tc.contentpane, "right");
+                RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
+                card.init(tc, pId);
+                tc.cardlayout.show(tc.contentpane, card.getName());
             }
         });
 

@@ -7,7 +7,10 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,7 +51,12 @@ public class RestFullDBAdapter {
 
         try {
 
+            Calendar cal = Calendar.getInstance();
+            DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String ID = Format.format(cal.getTime());
 
+            path=ID+"+"+path;
+            
             aes.init(Cipher.ENCRYPT_MODE, key);
             byte[] ciphertext = aes.doFinal(path.getBytes());
             String enc = "";
@@ -331,10 +339,10 @@ public class RestFullDBAdapter {
         return Conv.FromUrl(temp);
     }
 
-    public boolean expandPlot(int plotID, String quality, int[][] groundArray,int[][] buildingArray) {
+    public boolean expandPlot(int plotID, String quality, int[][] groundArray) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray)+"/"+this.convertToArray(buildingArray));
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -596,14 +604,5 @@ public class RestFullDBAdapter {
         }
 
         return Conv.ArrFromUrl(temp);
-    }
-
-    public void DoExspand(int pId, double Upkeep, int workerMax) {
-        String temp = "";
-        try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "DoExspand/" + pId + "/" + Upkeep+"/"+workerMax);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 }

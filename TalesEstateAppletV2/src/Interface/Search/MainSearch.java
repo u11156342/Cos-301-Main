@@ -17,9 +17,11 @@ import talesestateappletv2.TransferContainer;
 
 public class MainSearch extends BasePanel {
 
-    public MainSearch(String name, final TransferContainer tc) {
+    public MainSearch(String name) {
         super(name);
+    }
 
+    public void init(final TransferContainer tc) {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -110,16 +112,16 @@ public class MainSearch extends BasePanel {
                 }
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
-                
-                if(result.isEmpty())
-                {
+
+                if (result.isEmpty()) {
                     JOptionPane.showMessageDialog(size, "No results where found");
-                }
-                else
-                {
-                SearchInterface si = new SearchInterface("mainS", result, tc);
-                tc.mainapplet.add(si, si.getName());
-                tc.cardlayout.show(tc.contentpane, "mainS");
+                } else {
+
+                    SearchInterface card = tc.Cmanager.getSearchInterfacesCard();
+                    card.init(tc, result);
+                    tc.cardlayout.show(tc.contentpane, card.getName());
+
+
                 }
             }
         });

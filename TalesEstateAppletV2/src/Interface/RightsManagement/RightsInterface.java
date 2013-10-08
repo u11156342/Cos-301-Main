@@ -76,7 +76,7 @@ public class RightsInterface extends BasePanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "MPlay");
+                tc.cardlayout.show(tc.contentpane, tc.Cmanager.MainPlayInterfaces[tc.Cmanager.currentMainPlayInterfaceCard].getName());
             }
         });
         add(back, BorderLayout.SOUTH);

@@ -30,19 +30,17 @@ public class AdminMenu extends BasePanel {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                MainAdminSearch admin;
-                admin = new MainAdminSearch("Admin", tc);
-                tc.mainapplet.add(admin, admin.getName());
-                tc.cardlayout.show(tc.contentpane, "Admin");
+                MainAdminSearch admin=tc.Cmanager.getMainAdminSearchesCard();
+                admin.init(tc);
+                tc.cardlayout.show(tc.contentpane,admin.getName());
             }
         });
 
         ManageCharacterGold.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                ManageGold mg = new ManageGold("CGold", tc);
-                tc.mainapplet.add(mg, mg.getName());
-                tc.cardlayout.show(tc.contentpane, "CGold");
+                ManageGold mg = tc.Cmanager.getManageGoldIntersCard();
+                tc.cardlayout.show(tc.contentpane, mg.getName());
             }
         });
 

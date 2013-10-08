@@ -59,9 +59,10 @@ public class ResultUnit extends JPanel {
         Browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BrowseInterface bi=new BrowseInterface("Browse",tc,propertyID,size,tiles,buildings);
-                tc.mainapplet.add(bi,bi.getName());
-                tc.cardlayout.show(tc.contentpane,"Browse");
+                BrowseInterface bi=tc.Cmanager.getBrowseInterfacesCard();
+                //public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz)
+                bi.init(tc,propertyID,size,tiles,buildings);
+                tc.cardlayout.show(tc.contentpane,bi.getName());
                 
             }
         });

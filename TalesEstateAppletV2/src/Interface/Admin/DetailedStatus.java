@@ -25,13 +25,16 @@ public class DetailedStatus extends BasePanel {
     public JTextPane textZone = new JTextPane();
     JButton back = new JButton("back");
 
-    public DetailedStatus(String name, int Pid, final TransferContainer tc) {
+    public DetailedStatus(String name) {
         super(name);
-        
+    }
+
+    public void init(int Pid, final TransferContainer tc) {
+
         JScrollPane stats = new JScrollPane(textZone);
-       
+
         stats.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        
+
         textZone.setContentType("text/html");
         String t = tc.rdb.getSuperStatusReport(Pid);
 
@@ -41,9 +44,10 @@ public class DetailedStatus extends BasePanel {
         this.add(stats, BorderLayout.CENTER);
 
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "AdminS");
+                tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
             }
         });
         add(back, BorderLayout.SOUTH);

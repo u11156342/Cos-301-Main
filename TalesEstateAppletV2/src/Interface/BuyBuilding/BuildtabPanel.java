@@ -364,7 +364,7 @@ public class BuildtabPanel extends BasePanel {
 
                     }
                     tr.listBuildings.doClick();
-                    tain.cardlayout.show(tain.contentpane, "MPlay");
+                    tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
                 }
             }
         });

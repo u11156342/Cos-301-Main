@@ -4,6 +4,7 @@
  */
 package talesestateappletv2;
 
+import CardManager.CardManager;
 import Interface.Admin.AdminMenu;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.BuyInterface;
@@ -53,9 +54,9 @@ public class TalesEstateAppletV2 extends JApplet {
                 tContain.JFXPANEL_HEIGHT_INT = JFXPANEL_HEIGHT_INT;
                 tContain.mainframe = new JFrame("ToT Estate System");
                 tContain.mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                me= new TalesEstateAppletV2();
+                me = new TalesEstateAppletV2();
                 tContain.mainapplet = me;
-                
+
                 tContain.mainapplet.init();
                 tContain.mainframe.setContentPane(tContain.mainapplet.getContentPane());
                 tContain.mainframe.pack();
@@ -79,7 +80,7 @@ public class TalesEstateAppletV2 extends JApplet {
 
         tContain.CSelect = new CharSelectMenu("Char", tContain);
 
-        tContain.MainMenu = new MainMenu("MainMenu", tContain,me);
+        tContain.MainMenu = new MainMenu("MainMenu", tContain, me);
         tContain.MainMenu.addNextActionListener(buttonListener, tContain);
 
         tContain.CSelect.addNextActionListener(tContain, tContain.MainMenu);
@@ -88,8 +89,8 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.Buy = new BuyInterface("Buy", tContain);
         tContain.Buy.addNextActionListener(buttonListener);
 
-        tContain.search = new MainSearch("Search", tContain);
-
+        tContain.search = new MainSearch("Search");
+        tContain.search.init(tContain);
 
         tContain.mProp = new MyPropertiesInterface("MyProp", tContain);
 
@@ -99,25 +100,70 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.mp = new MainPlayInterface("MPlay");
 
         tContain.visual = new PlayInterface("visual", tContain);
-        
+
         tContain.Build = new BuildtabPanel("Build", tContain);
 
 
         tContain.ri = new RightsInterface("right");
 
-        tContain.pmI=new PlayerManagementInterface("PlayerMan");
+        tContain.pmI = new PlayerManagementInterface("PlayerMan");
 
         add(tContain.CSelect, tContain.CSelect.getName());
         add(tContain.MainMenu, tContain.MainMenu.getName());
         add(tContain.Buy, tContain.Buy.getName());
         add(tContain.search, tContain.search.getName());
-       // add(tContain.mProp, tContain.mProp.getName());
+        // add(tContain.mProp, tContain.mProp.getName());
         add(tContain.am, tContain.am.getName());
-      //  add(tContain.mp, tContain.mp.getName());
+        //  add(tContain.mp, tContain.mp.getName());
         add(tContain.Build, tContain.Build.getName());
         add(tContain.visual, tContain.visual.getName());
-       // add(tContain.ri, tContain.ri.getName());
+        // add(tContain.ri, tContain.ri.getName());
         add(tContain.pmI, tContain.pmI.getName());
+
+
+
+
+        for (int c = 0; c < tContain.Cmanager.MyProperties.length; c++) {
+            add(tContain.Cmanager.MyProperties[c], tContain.Cmanager.MyProperties[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.SearchInterfaces.length; c++) {
+            add(tContain.Cmanager.SearchInterfaces[c], tContain.Cmanager.SearchInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.MainAdminSearches.length; c++) {
+            add(tContain.Cmanager.MainAdminSearches[c], tContain.Cmanager.MainAdminSearches[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.ManageGoldInters.length; c++) {
+            add(tContain.Cmanager.ManageGoldInters[c], tContain.Cmanager.ManageGoldInters[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.AdminSearchInterfaces.length; c++) {
+            add(tContain.Cmanager.AdminSearchInterfaces[c], tContain.Cmanager.AdminSearchInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.DetailedStatuses.length; c++) {
+            add(tContain.Cmanager.DetailedStatuses[c], tContain.Cmanager.DetailedStatuses[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.AddEvents.length; c++) {
+            add(tContain.Cmanager.AddEvents[c], tContain.Cmanager.AddEvents[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.BrowseInterfaces.length; c++) {
+            add(tContain.Cmanager.BrowseInterfaces[c], tContain.Cmanager.BrowseInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.MainPlayInterfaces.length; c++) {
+            add(tContain.Cmanager.MainPlayInterfaces[c], tContain.Cmanager.MainPlayInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.RightsInterfaces.length; c++) {
+            add(tContain.Cmanager.RightsInterfaces[c], tContain.Cmanager.RightsInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.AddPlayere.length; c++) {
+            add(tContain.Cmanager.AddPlayere[c], tContain.Cmanager.AddPlayere[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.PlayInterfaces.length; c++) {
+            add(tContain.Cmanager.PlayInterfaces[c], tContain.Cmanager.PlayInterfaces[c].getName());
+        }
+
+
+
+
+
 
         revalidate();
         repaint();

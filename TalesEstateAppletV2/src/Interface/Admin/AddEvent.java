@@ -48,10 +48,11 @@ public class AddEvent extends BasePanel {
     JLabel l5 = new JLabel("Silver Modifier");
     JLabel l6 = new JLabel("Defense Modifier");
 
-    public AddEvent(String name, final TransferContainer tc, final int PID) {
+    public AddEvent(String name) {
         super(name);
+    }
 
-
+    public void init(final TransferContainer tc, final int PID) {
         incomemod.setText("0");
         platmod.setText("0");
         goldmod.setText("0");
@@ -143,46 +144,42 @@ public class AddEvent extends BasePanel {
         c.gridy = 13;
 
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 String ename = JOptionPane.showInputDialog("What is the events name? ");
 
                 try {
-                    String desu= description.getText();
-                    
-                    String valid="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=";
-                    
-                    String validurl="";
-                    for (int i = 0; i < desu.length(); i++) {
-                        
-                        if(valid.contains(""+desu.charAt(i)))
-                        {
-                            validurl=validurl+desu.charAt(i);
-                        }
-                        else
-                        {
-                            validurl=validurl+".";
-                        }
-                    }                   
+                    String desu = description.getText();
 
-                    if("".equals(ename))
-                    {
-                        ename="-";
+                    String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=";
+
+                    String validurl = "";
+                    for (int i = 0; i < desu.length(); i++) {
+
+                        if (valid.contains("" + desu.charAt(i))) {
+                            validurl = validurl + desu.charAt(i);
+                        } else {
+                            validurl = validurl + ".";
+                        }
                     }
-                    
-                    if("".equals(validurl))
-                    {
-                        validurl="-";
+
+                    if ("".equals(ename)) {
+                        ename = "-";
                     }
-                    
-                    if (tc.rdb.addEvent(PID, ename,validurl, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()), Integer.parseInt(haps[happinessmod.getSelectedIndex()]), Integer.parseInt(incomemod.getText()))) {
-                        tc.cardlayout.show(tc.contentpane, "AdminS");
+
+                    if ("".equals(validurl)) {
+                        validurl = "-";
+                    }
+
+                    if (tc.rdb.addEvent(PID, ename, validurl, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()), Integer.parseInt(haps[happinessmod.getSelectedIndex()]), Integer.parseInt(incomemod.getText()))) {
+                       tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
                     } else {
                         JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");
                     }
                 } catch (Exception ex) {
-                     JOptionPane.showMessageDialog(platmod, "An error has occured, please make sure all data types are correct");
+                    JOptionPane.showMessageDialog(platmod, "An error has occured, please make sure all data types are correct");
                 }
 
             }
@@ -195,9 +192,10 @@ public class AddEvent extends BasePanel {
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "AdminS");
+                tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
             }
         });
         c.gridx = 1;

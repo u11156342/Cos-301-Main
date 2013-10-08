@@ -16,16 +16,16 @@ public class AdminSearchInterface extends BasePanel {
     public ArrayList<String[]> properties;
     JButton title;
 
-    public AdminSearchInterface(String name, TransferContainer tc, ArrayList<String[]> prop) {
+    public AdminSearchInterface(String name, TransferContainer tc) {
         super(name);
-        properties = prop;
+
         title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
-        init(tc);
     }
 
-    public void init(final TransferContainer t) {
+    public void init(final TransferContainer t, ArrayList<String[]> prop) {
+        properties = prop;
         PlayerPropertiesAdmin mmenu = new PlayerPropertiesAdmin(t.JFXPANEL_WIDTH_INT - 500, properties.size() * 100, t, properties);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
@@ -35,9 +35,10 @@ public class AdminSearchInterface extends BasePanel {
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                t.cardlayout.show(t.contentpane, "AMain");
+                t.cardlayout.show(t.contentpane,t.Cmanager.MainAdminSearches[t.Cmanager.currentMainAdminSearchCard].getName());
             }
         });
         add(back, BorderLayout.SOUTH);

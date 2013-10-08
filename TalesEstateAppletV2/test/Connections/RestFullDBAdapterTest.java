@@ -180,7 +180,7 @@ public class RestFullDBAdapterTest extends TestCase {
 
         int[][] array = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         int[][] array2 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-        boolean res = instance.expandPlot(plotID, "fine", array2,array);
+        boolean res = instance.expandPlot(plotID, "fine", array2);
         assertEquals(res, true);
     }
 

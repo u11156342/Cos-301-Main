@@ -107,6 +107,7 @@ public class AddPlayerForm extends JPanel {
         c.gridx = 0;
         JButton add = new JButton("Add");
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -137,10 +138,9 @@ public class AddPlayerForm extends JPanel {
                 }
 
                 tc.rdb.addPlotAccess(PlotID, tc.rdb.retrieveCharacterID(playerName), Deposit, Withdraw, Building, Plot_visual, Plot_exspansion, Plot_status);
-                tc.ri = new RightsInterface("right");
-                tc.mainapplet.add(tc.ri, tc.ri.getName());
-                tc.ri.init(tc, PlotID);
-                tc.cardlayout.show(tc.contentpane, "right");
+                RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
+                card.init(tc, PlotID);
+                tc.cardlayout.show(tc.contentpane, card.getName());
             }
         });
         add(add, c);
@@ -148,9 +148,10 @@ public class AddPlayerForm extends JPanel {
         c.gridy = 8;
         JButton Cansel = new JButton("Cansel");
         Cansel.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "right");
+                tc.cardlayout.show(tc.contentpane,tc.Cmanager.RightsInterfaces[tc.Cmanager.currentRightsInterfaceCard].getName());
             }
         });
         add(Cansel, c);

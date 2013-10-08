@@ -163,7 +163,7 @@ public class ManageGold extends BasePanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tain.cardlayout.show(tain.contentpane, "AMain");
+                tain.cardlayout.show(tain.contentpane, tc.Cmanager.MainAdminSearches[tc.Cmanager.currentMainAdminSearchCard].getName());
             }
         });
         c.gridx = 0;

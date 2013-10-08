@@ -46,13 +46,13 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                 int selectedIndex = commands.getSelectedIndex();
 
                 if (selectedIndex == 0) {
-                    DetailedStatus ds = new DetailedStatus("stats", propertyID, t);
-                    t.mainapplet.add(ds, ds.getName());
-                    t.cardlayout.show(t.contentpane, "stats");
+                    DetailedStatus ds = t.Cmanager.getDetailedStatusCard();
+                    ds.init(propertyID, t);   
+                    t.cardlayout.show(t.contentpane, ds.getName());
                 } else if (selectedIndex == 1) {
-                    AddEvent ev = new AddEvent("event", t,propertyID);
-                    t.mainapplet.add(ev, ev.getName());
-                    t.cardlayout.show(t.contentpane, "event");
+                    AddEvent ev = t.Cmanager.getAddEventCard();
+                    ev.init(t, propertyID);
+                    t.cardlayout.show(t.contentpane, ev.getName());
                 } else if (selectedIndex == 2) {
                     System.out.println(propertyID);
                     ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
@@ -61,9 +61,9 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
                     buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));
 
-                    BrowseInterface bi = new BrowseInterface("Browse", t, propertyID, size, tiles, buildings);
-                    t.mainapplet.add(bi, bi.getName());
-                    t.cardlayout.show(t.contentpane, "Browse");
+                    BrowseInterface bi = t.Cmanager.getBrowseInterfacesCard();
+                    bi.init(t, propertyID, size, tiles, buildings);
+                    t.cardlayout.show(t.contentpane, bi.getName());
                 }
             }
         });

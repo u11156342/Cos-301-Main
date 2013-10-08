@@ -29,6 +29,7 @@ public class VisualSideMenu extends JPanel {
     public VisualSideMenu(final int PropertyId, final TransferContainer tc) {
         PropertyID = PropertyId;
 
+
         ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(PropertyID);
         ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.rdb.retrieveCharacterID(retrievePlotDetails.get(1)), PropertyId);
 
@@ -36,20 +37,18 @@ public class VisualSideMenu extends JPanel {
         buildID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
         PicID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
 
-
         ArrayList<String[]> tempresult;
 
         for (int a = 0; a < build.length; a++) {
             tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             build[a] = tempresult.get(0)[1];
             buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
-            PicID[a]=Integer.parseInt(tempresult.get(0)[12]);
+            PicID[a] = Integer.parseInt(tempresult.get(a)[12]);
         }
 
 
         buildingTokens = new JList(build);
-        buildingTokens.setFixedCellWidth(300);
-        buildingTokens.setPreferredSize(new Dimension(200, build.length * 30));
+        buildingTokens.setPreferredSize(new Dimension(150, build.length * 30));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         tokenscroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
@@ -63,7 +62,6 @@ public class VisualSideMenu extends JPanel {
         c.insets = new Insets(30, 0, 0, 0);
         c.gridy = 1;
         add(tokenscroll, c);
-
         buildingTokens.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -71,8 +69,5 @@ public class VisualSideMenu extends JPanel {
                 JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
             }
         });
-
-
-
     }
 }

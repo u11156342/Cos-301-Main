@@ -4,6 +4,7 @@
  */
 package talesestateappletv2;
 
+import CardManager.CardManager;
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.Admin.AdminMenu;
@@ -51,10 +52,15 @@ public class TransferContainer {
     public PlayInterface visual;
     public RightsInterface ri;
     public PlayerManagementInterface pmI;
-    
+    public CardManager Cmanager;
     public int BuildingRef=5;
 
     public TransferContainer() {
         cardlayout = new CardLayout();
+        Cinit();
+    }
+    public void Cinit()
+    {
+        Cmanager=new CardManager(this);
     }
 }

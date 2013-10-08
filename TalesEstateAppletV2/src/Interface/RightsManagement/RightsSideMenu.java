@@ -54,10 +54,9 @@ public class RightsSideMenu extends JPanel {
                 }
 
                 if (!"".equals(picked) && picked != null) {
-                    AddPlayer pfr = new AddPlayer("pla");
+                    AddPlayer pfr = tc.Cmanager.getAddPlayereCard();
                     pfr.init(tc, picked, PlotID);
-                    tc.mainapplet.add(pfr, pfr.getName());
-                    tc.cardlayout.show(tc.contentpane, "pla");
+                    tc.cardlayout.show(tc.contentpane, pfr.getName());
                 }
 
             }
@@ -92,11 +91,10 @@ public class RightsSideMenu extends JPanel {
 
                 if (!"".equals(picked) && picked != null) {
 
+                    RightsInterface card=tc.Cmanager.getRightsInterfacesCard();
                     tc.rdb.removeAccess(PlotID, tc.rdb.retrieveCharacterID(picked));
-                    tc.ri = new RightsInterface("right");
-                    tc.mainapplet.add(tc.ri, tc.ri.getName());
-                    tc.ri.init(tc, PlotID);
-                    tc.cardlayout.show(tc.contentpane, "right");
+                    card.init(tc, PlotID);
+                    tc.cardlayout.show(tc.contentpane, card.getName());
                 }
 
             }

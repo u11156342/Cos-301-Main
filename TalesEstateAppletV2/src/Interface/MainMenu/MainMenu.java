@@ -41,6 +41,7 @@ public class MainMenu extends BasePanel {
         pman = new JButton(new ImageIcon(tc.ad.ImageAdapter(44)));
         pman.setContentAreaFilled(false);
         pman.setBorderPainted(false);
+        pman.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(7)));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
@@ -121,12 +122,14 @@ public class MainMenu extends BasePanel {
 
     public void addNextActionListener(ActionListener buttonListener, final TransferContainer tc) {
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "Buy");
             }
         });
         pman.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.pmI.init(tc);
@@ -136,21 +139,25 @@ public class MainMenu extends BasePanel {
         });
 
         btn2.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                tc.mProp = new MyPropertiesInterface("MyProp", tc);
-                applet.add(tc.mProp, tc.mProp.getName());
-                tc.mProp.init();
-                tc.cardlayout.show(tc.contentpane, "MyProp");
+
+
+                MyPropertiesInterface card = tc.Cmanager.getMyPropertiesCard();
+                card.init();
+                tc.cardlayout.show(tc.contentpane, card.getName());
             }
         });
         btn3.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "Search");
             }
         });
         btn4.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "AMain");

@@ -82,24 +82,23 @@ public class PlayerOwnPanel extends JPanel {
         statusArea.append("" + '\n');
 
         play.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                tain.mp = new MainPlayInterface("MPlay");
-                tain.mainapplet.add(tain.mp, tain.mp.getName());
-
-                tc.mp.buildings = buildings;
-                tc.mp.duchy = duchy;
-                tc.mp.propertyID = propertyID;
-                tc.mp.tiles = tiles;
-                tc.mp.amount = amount;
-                tc.mp.quality = quality;
-                tc.mp.IsOwner = own;
-                tc.mp.init(tain, propertyID);
+                MainPlayInterface card = tain.Cmanager.getMainPlayInterfaceCard();
+                card.buildings = buildings;
+                card.duchy = duchy;
+                card.propertyID = propertyID;
+                card.tiles = tiles;
+                card.amount = amount;
+                card.quality = quality;
+                card.IsOwner = own;
+                card.init(tain, propertyID);
 
 
 
-                tain.cardlayout.show(tain.contentpane, "MPlay");
+                tain.cardlayout.show(tain.contentpane, card.getName());
             }
 
             @Override

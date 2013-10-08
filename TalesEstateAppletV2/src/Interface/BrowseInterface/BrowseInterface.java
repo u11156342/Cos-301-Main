@@ -21,20 +21,18 @@ public class BrowseInterface extends BasePanel {
     int[][] tiles;
     int[][] buildings;
 
-    public BrowseInterface(String play, TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz) {
+    public BrowseInterface(String play) {
         super(play);
+    }
+
+    public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz) {
+
 
         size = sizes;
 
         propertyID = propertyIDz;
         tiles = tilesz;
         buildings = buildingsz;
-
-        init(tc);
-
-    }
-
-    public void init(final TransferContainer t) {
 
         GameBrowseGrid playIn = null;
         try {
@@ -48,7 +46,7 @@ public class BrowseInterface extends BasePanel {
 
         playIn.setPreferredSize(new Dimension(playIn.wdOfcell * size + 100, playIn.htOfcell * size + 100));
         JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        playMapScrollPane.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT, t.JFXPANEL_HEIGHT_INT * 3 / 4));
+        playMapScrollPane.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT, tc.JFXPANEL_HEIGHT_INT * 3 / 4));
         playMapScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         ((GameBrowseGrid) playIn).setScrollP(playMapScrollPane);
 
@@ -56,10 +54,11 @@ public class BrowseInterface extends BasePanel {
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                t.cardlayout.show(t.contentpane, "MainMenu");
-               // t.cardlayout.show(t.contentpane, "MPlay");
+                tc.cardlayout.show(tc.contentpane, "MainMenu");
+                // t.cardlayout.show(t.contentpane, "MPlay");
             }
         });
 
