@@ -13,6 +13,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.security.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +34,8 @@ import javax.crypto.spec.SecretKeySpec;
 @Stateless
 @Path("/SecurityWrapper")
 public class SecurityWrapper {
+
+    ArrayList<Date> requests = new ArrayList();
 
     @GET
     @Path("ServerRequest/{Request}")
@@ -50,6 +56,8 @@ public class SecurityWrapper {
 
             }
 
+
+
             String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
             MessageDigest digest = MessageDigest.getInstance("SHA");
             digest.update(passphrase.getBytes());
@@ -60,14 +68,34 @@ public class SecurityWrapper {
             aes.init(Cipher.DECRYPT_MODE, key);
             String cleartext = new String(aes.doFinal(bt));
 
+            //cleartext also contains the Id that needs to be taken out
+            //id + cleartext
+
+            int index = cleartext.indexOf("+");
+            String ID = cleartext.substring(0, index);
+            cleartext = cleartext.substring(index + 1);
+            System.out.println("ID " + ID);
+            System.out.println(cleartext);
+            try {
+
+                Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(ID);
+
+//                if (requests.contains(date)) {
+//                    return "SECURITY ERROR";
+//                } else {
+//                    requests.add(date);
+//                }
+            } catch (ParseException ex) {
+                Logger.getLogger(SecurityWrapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
 
             String temp = "";
             try {
 
                 URL url = new URL("http://" + cleartext);
-                System.out.println("http://" + cleartext);
                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-                
+                System.out.println("http://" + cleartext);
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     if (!"".equals(temp)) {
