@@ -1,5 +1,7 @@
 package Connection;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.ResultSet;
@@ -13,37 +15,35 @@ public class DatabaseConnection {
     private Connection con = null;  //Connection used by all functions
     private Driver d = null;
     private String connectionURL = "";
+    private BufferedReader reader;
+    private String ServerIP;
 
     public DatabaseConnection() {
+        try {
+            reader = new BufferedReader(new FileReader("ServerConfig.txt"));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+               // System.out.println(line);
+                if (line.contains("databaseIP")) {
+                    ServerIP = line.substring(line.indexOf("=") + 1);
+                }
+            }
+
+            //System.out.println(folderLocation);
+        } catch (Exception ex) {
+        }
+      //  System.out.println(ServerIP);
     }
 
     public Connection openConnectionProd() {
-        
-//        try{
-//        String content = "This is the content to write into file 22";
-//
-//        File file = new File("findme.txt");
-//
-//        // if file doesnt exists, then create it
-//        if (!file.exists()) {
-//            file.createNewFile();
-//        }
-//
-//        FileWriter fw = new FileWriter(file.getAbsoluteFile());
-//        BufferedWriter bw = new BufferedWriter(fw);
-//        bw.write(content);
-//        bw.close();
-//        }
-//        catch (Exception ex)
-//        {
-//            System.out.println(ex.getMessage());
-//        }
+
+
 
         try {
 
 
 
-            connectionURL = "jdbc:sqlserver://10.0.0.104:1433;databaseName=TalesProd;integratedSecurity=true";
+            connectionURL = "jdbc:sqlserver://" + ServerIP + ":1433;databaseName=TalesProd;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class DatabaseConnection {
     public Connection openConnectionEstate() {
 
         try {
-            connectionURL = "jdbc:sqlserver://10.0.0.104:1433;databaseName=TalesEstate;integratedSecurity=true";
+            connectionURL = "jdbc:sqlserver://" + ServerIP + ":1433;databaseName=TalesEstate;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());
         } catch (Exception e) {
