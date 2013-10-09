@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package QueryHandlers;
+
 import Connection.DatabaseConnection;
 import Wrapper.Wrapper;
 import java.sql.Connection;
@@ -24,77 +25,74 @@ import javax.ws.rs.PathParam;
  * @author User
  */
 public class requeryhandler {
+
     String lname = "";
-        private DatabaseConnection db = null;
-         private Statement stmt = null;
+    private DatabaseConnection db = null;
+    private Statement stmt = null;
     private ResultSet rs = null;
-          private Connection conEstate = null; 
-          String sql = "";
-   public requeryhandler() throws SQLException
-    {
-     
-            
+    private Connection conEstate = null;
+    String sql = "";
+
+    public requeryhandler() throws SQLException {
     }
-   public String getid(String name) throws SQLException, MalformedURLException, IOException
-   {   QueryHandler handler = new QueryHandler(0);
-    ArrayList<String> userList  = new ArrayList();
-     db = new DatabaseConnection();
-    lname = name;
-       conEstate = db.openConnectionEstate();
-       
-       
-         sql = "SELECT UserCharacterID FROM UserCharacter where UserCharacterName='"+name +"';";
+
+    public String getid(String name) throws SQLException, MalformedURLException, IOException {
+        QueryHandler handler = new QueryHandler(0);
+        ArrayList<String> userList = new ArrayList();
+        db = new DatabaseConnection();
+        lname = name;
+        conEstate = db.openConnectionEstate();
+
+
+        sql = "SELECT UserCharacterID FROM UserCharacter where UserCharacterName='" + name + "';";
+        stmt = conEstate.createStatement();
+        rs = stmt.executeQuery(sql);
+
+        while (rs.next()) {
+            userList.add(rs.getString("UserCharacterID"));
+        }
+
+
+        if (!userList.isEmpty()) {
+
+            String owner = userList.get(0);
+
+            String completereturn = "";
+            sql = "SELECT PlotID FROM Plot where PlotOwnedBy ='" + owner + "';";
             stmt = conEstate.createStatement();
             rs = stmt.executeQuery(sql);
-          
-               while (rs.next()) {
-                userList.add(rs.getString("UserCharacterID"));
-            }
-               
-               
-            if(!userList.isEmpty())
-            {  
-         
-            String owner = userList.get(0);
-            
-            String completereturn ="";
-             sql = "SELECT PlotID FROM Plot where PlotOwnedBy ='"+owner +"';";
-             stmt = conEstate.createStatement();
-            rs = stmt.executeQuery(sql);
-                 while (rs.next()) 
-                 {
-                     // rs.getString("PlotID")
-                    
-                   //  URL url = new URL("http://localhost:8080/TalesEstateServer/resources/Wrapper/StatusReport/"+   rs.getString("PlotID"));
-         //InputStream is = url.openConnection().getInputStream();
+            while (rs.next()) {
+                // rs.getString("PlotID")
 
-    //BufferedReader reader = new BufferedReader( new InputStreamReader( is )  );
+                //  URL url = new URL("http://localhost:8080/TalesEstateServer/resources/Wrapper/StatusReport/"+   rs.getString("PlotID"));
+                //InputStream is = url.openConnection().getInputStream();
 
-    String line =StatusReport(Integer.parseInt(rs.getString("PlotID")));
-   
-      line=  line.replaceAll("<head>","");
-          line=  line.replaceAll("</head>","");
-         line=  line.replaceAll("<html>","");
-          line=  line.replaceAll("</html>","");
-        line = line.replaceAll("<body>","<p>");
-          line = line.replaceAll("</body>","</p>");
-       completereturn = completereturn +line;
-    
-        
-                 }
-            
-        
-            
-            return "<html>"+"<head></head>"+"<body>"+completereturn+"</body>"+"</html>";
+                //BufferedReader reader = new BufferedReader( new InputStreamReader( is )  );
+
+                String line = StatusReport(Integer.parseInt(rs.getString("PlotID")));
+
+                line = line.replaceAll("<head>", "");
+                line = line.replaceAll("</head>", "");
+                line = line.replaceAll("<html>", "");
+                line = line.replaceAll("</html>", "");
+                line = line.replaceAll("<body>", "<p>");
+                line = line.replaceAll("</body>", "</p>");
+                completereturn = completereturn + line;
+
+
             }
-                else
-                return "error";
-   
-   }
-    
-    
-     public String StatusReport(@PathParam("PropertyId") int PropertyId) {
- QueryHandler handler = new QueryHandler(0);
+
+
+
+            return "<html>" + "<head></head>" + "<body>" + completereturn + "</body>" + "</html>";
+        } else {
+            return "error";
+        }
+
+    }
+
+    public String StatusReport(@PathParam("PropertyId") int PropertyId) {
+        QueryHandler handler = new QueryHandler(0);
         ArrayList<String> details = handler.getPlotQH().retrievePlotDetails(PropertyId);
 
         StringBuilder html = new StringBuilder();
@@ -214,5 +212,4 @@ public class requeryhandler {
 
 
     }
-    
 }
