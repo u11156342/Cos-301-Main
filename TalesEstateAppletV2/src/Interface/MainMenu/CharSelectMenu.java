@@ -92,7 +92,6 @@ public class CharSelectMenu extends BasePanel {
     }
 
     public void addNextActionListener(final TransferContainer tc, final MainMenu ref) {
-
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {

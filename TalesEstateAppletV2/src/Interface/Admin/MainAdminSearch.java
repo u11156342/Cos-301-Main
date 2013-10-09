@@ -134,7 +134,7 @@ public class MainAdminSearch extends BasePanel {
 
         add(btn, c);
         JButton back = new JButton("Back");
-
+back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(
                 new ActionListener() {
             @Override

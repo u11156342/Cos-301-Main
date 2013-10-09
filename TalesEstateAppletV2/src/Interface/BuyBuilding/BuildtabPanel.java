@@ -64,10 +64,11 @@ public class BuildtabPanel extends BasePanel {
         tabbedPane.addTab("Improvements", null, panel5);
         add(tabbedPane, BorderLayout.CENTER);
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tain.cardlayout.show(tain.contentpane, "MainMenu");
+                tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
             }
         });
 
@@ -139,10 +140,10 @@ public class BuildtabPanel extends BasePanel {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         buildings.setPreferredSize(new Dimension(200, 50));
         Button bbutton = new Button("Build");
-        bbutton.setPreferredSize(new Dimension(50, 50));
         c.gridx = 1;
 
         bbutton.setPreferredSize(new Dimension(150, 60));
+        
         bbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

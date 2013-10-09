@@ -29,12 +29,22 @@ public class PictureQueryHandler {
         try 
         {
             reader = new BufferedReader(new FileReader("ServerConfig.txt"));
-            folderLocation = reader.readLine();
+            String line="";
+            while((line=reader.readLine())!=null)
+            {
+                System.out.println(line);
+                if(line.contains("imagepath"))
+                {
+                  folderLocation = line.substring(line.indexOf("=")+1);  
+                }
+            }
+            
             //System.out.println(folderLocation);
         } catch (Exception ex) {
+          
             Logger.getLogger(PictureQueryHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.out.println(folderLocation);
         con = c;
         pictures = new ArrayList();
 

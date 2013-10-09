@@ -42,7 +42,10 @@ public class MainSearch extends BasePanel {
         final JComboBox quality = new JComboBox(qualitylist);
         final JTextField size = new JTextField();
         size.setPreferredSize(new Dimension(100, 25));
+        quality.setPreferredSize(new Dimension(100, 25));
 
+        
+        
         JLabel clabe = new JLabel("Character name");
         JLabel dlabe = new JLabel("Duchy");
         JLabel qlabe = new JLabel("Quality");
@@ -131,6 +134,7 @@ public class MainSearch extends BasePanel {
         add(btn, c);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

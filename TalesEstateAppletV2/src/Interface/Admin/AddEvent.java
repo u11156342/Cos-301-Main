@@ -144,7 +144,6 @@ public class AddEvent extends BasePanel {
         c.gridy = 13;
 
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -174,7 +173,7 @@ public class AddEvent extends BasePanel {
                     }
 
                     if (tc.rdb.addEvent(PID, ename, validurl, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()), Integer.parseInt(haps[happinessmod.getSelectedIndex()]), Integer.parseInt(incomemod.getText()))) {
-                       tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
+                        tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
                     } else {
                         JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");
                     }
@@ -186,13 +185,13 @@ public class AddEvent extends BasePanel {
         });
 
 
-
+        add.setPreferredSize(new Dimension(150, 60));
         add(add, c);
 
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());

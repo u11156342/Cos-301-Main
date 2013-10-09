@@ -42,9 +42,8 @@ public class DetailedStatus extends BasePanel {
         textZone.setEditable(false);
 
         this.add(stats, BorderLayout.CENTER);
-
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
