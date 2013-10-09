@@ -76,7 +76,7 @@ public class RestFullDBAdapterTest extends TestCase {
         }
 
         if (found == false) {
-         //   fail("building not found");
+            //   fail("building not found");
         }
     }
 
@@ -124,7 +124,7 @@ public class RestFullDBAdapterTest extends TestCase {
         double monthlyIncome = 0.0;
         RestFullDBAdapter instance = new RestFullDBAdapter();
         boolean expResult = true;
-        boolean result = instance.modifyPlot(plotId, characterName, "0-0-0", quality, sizeValue, groundArray, buildingArray, 0, 0.0, 0, 0, 0.0, 0, 0.0, 0, 0.0, 0,0.0);
+        boolean result = instance.modifyPlot(plotId, characterName, "0-0-0", quality, sizeValue, groundArray, buildingArray, 0, 0.0, 0, 0, 0.0, 0, 0.0, 0, 0.0, 0, 0.0);
         assertEquals(expResult, result);
     }
 
@@ -180,7 +180,7 @@ public class RestFullDBAdapterTest extends TestCase {
 
         int[][] array = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         int[][] array2 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-        boolean res = instance.expandPlot(plotID, "fine", array2);
+        boolean res = instance.expandPlot(plotID, "fine", array2, array);
         assertEquals(res, true);
     }
 

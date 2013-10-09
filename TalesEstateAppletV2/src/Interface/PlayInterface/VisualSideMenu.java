@@ -43,12 +43,13 @@ public class VisualSideMenu extends JPanel {
             tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
             build[a] = tempresult.get(0)[1];
             buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
-            PicID[a] = Integer.parseInt(tempresult.get(0)[12]);
+            PicID[a]=Integer.parseInt(tempresult.get(0)[12]);
         }
 
 
         buildingTokens = new JList(build);
-        buildingTokens.setPreferredSize(new Dimension(150, build.length * 30));
+        buildingTokens.setFixedCellWidth(300);
+        buildingTokens.setPreferredSize(new Dimension(200, build.length * 30));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         tokenscroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

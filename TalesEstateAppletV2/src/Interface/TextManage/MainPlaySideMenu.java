@@ -364,7 +364,7 @@ public class MainPlaySideMenu extends JPanel {
 
 
 
-                        tc.rdb.expandPlot(pId, picked, tilesz);
+                        tc.rdb.expandPlot(pId, picked, tilesz, buildings);
 
                         //ok so now the property is exspanded in terms of acres and stuff but I still need to edit max workers and income
 
@@ -397,7 +397,8 @@ public class MainPlaySideMenu extends JPanel {
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
                         // modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
-                        tc.rdb.modifyPlot(pId, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
+                        //tc.rdb.modifyPlot(pId, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
+                        tc.rdb.DoExspand(pId, Upkeep, workerMax);
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
