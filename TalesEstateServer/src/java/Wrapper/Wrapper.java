@@ -37,75 +37,132 @@ public class Wrapper {
         StringBuilder html = new StringBuilder();
         html.append("<html>");
         html.append("<head>");
+        
+        /* CSS for page
+         */
+        html.append("<style type=\"text/css\">");
+        html.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
+        html.append("h1{"
+                + "text-align: center;"
+                + "}");
+        html.append("table{"
+                + "width: 90%;"
+                + "}");
+        html.append("td{"
+                + "width: 50%;"
+                + "}");
+        html.append("hr{"
+                + ""
+                + "}");
+        html.append(".hilight{"
+                + "font-size: 12px;"
+                + "}");
+        html.append(".sheading{"
+                + "font-size: 14px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append(".ssheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append("</style>");
         html.append("</head>");
-
+        
         html.append("<body>");
-
-        html.append("<h1> <font color=\"blue\">Estate Details</font></h1>");
-
+        html.append("<h1>Status report</h1>");
+        
         html.append("<table>");
-        html.append("	<tr>");
-        html.append("		<td>Character Name </td><td>").append(details.get(1)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Estate Number </td><td>").append(details.get(0)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Duchy </td><td>").append(details.get(3)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+                html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td class=\"hilight\">Estate Number:</td><td>").append(details.get(0)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td class=\"hilight\">Duchy:</td><td>").append(details.get(3)).append("</td>");
+            html.append("</tr>");
+        html.append("</table>");
+        
+        
+        html.append("<br/>");
+        
+        html.append("<table>");
+            html.append("<tr>");
+                html.append("<td class=\"sheading\">Acres</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Acres</td><td></td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+                html.append("<td>Poor:</td><td>").append(details.get(15)).append("/").append(details.get(16)).append("</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Poor</td><td>").append(details.get(15)).append("/").append(details.get(16)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+                html.append("<td>Fine:</td><td>").append(details.get(13)).append("/").append(details.get(14)).append("</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Fine</td><td>").append(details.get(13)).append("/").append(details.get(14)).append("</td>");
-        html.append("	</tr>");
-
-        html.append("	<tr>");
-        html.append("		<td>Exquisit</td><td>").append(details.get(11)).append("/").append(details.get(12)).append("</td>");
-        html.append("	</tr>");
-
+            html.append("<tr>");
+                html.append("<td>Exquisite:</td><td>").append(details.get(11)).append("/").append(details.get(12)).append("</td>");
+            html.append("</tr>");
         html.append("</table>");
 
-        html.append("<br>");
-
-        html.append("<h1> <font color=\"blue\">Happiness and Workers</font></h1>");
-
-        html.append("<table border=\"1\">");
-        html.append("	<tr>");
-        html.append("		<td>Happiness</td><td>").append(details.get(7)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Workers Currently Employed </td><td>").append(details.get(9)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Maximum workers </td><td>").append(details.get(10)).append("</td>");
-        html.append("	</tr>");
-
+        html.append("<br/>");
+            
+        html.append("<table>");
+            html.append("<tr>");
+                html.append("<td class=\"sheading\">Happiness and Workers</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Happiness:</td><td>").append(details.get(7)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Workers employed:</td><td>").append(details.get(9)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Maximum workers:</td><td>").append(details.get(10)).append("</td>");
+            html.append("</tr>");
+        html.append("</table>");
+        
+        html.append("<br/>");
+        
         ArrayList<String> money = handler.getPlotQH().getCurrentAmount(PropertyId);
-        html.append("</table>");
-        html.append("<br>");
         html.append("<table>");
-        html.append("	<tr>");
-        html.append("		<td>Funds in Estate </td><td></td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Platinum </td><td>").append(money.get(0)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Gold </td><td>").append(money.get(1)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Silver</td><td>").append(money.get(2)).append("</td>");
-        html.append("	</tr>");
-
+            html.append("<tr>");
+                html.append("<td class=\"sheading\">Estate funds</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Platinum:</td><td>").append(money.get(0)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Gold:</td><td>").append(money.get(1)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+                html.append("<td>Silver:</td><td>").append(money.get(2)).append("</td>");
+            html.append("</tr>");
         html.append("</table>");
-        html.append("</br>");
+        
+        html.append("<br/>");
 
         Calendar cal = Calendar.getInstance();
         int month = cal.get(cal.MONTH) + 1; //zero-based
@@ -114,42 +171,43 @@ public class Wrapper {
 
         if (event != null) {
             if (event.size() > 0) {
-                html.append("<h1> <font color=\"blue\">Events</font></h1>");
+                html.append("<p class=\"sheading\">Events</p>");
+                html.append("<br/><hr/>");
+                
                 for (int i = 0; i < event.size(); i++) {
-                    html.append("<br>");
-                    html.append("Name : ").append(event.get(i)[2]).append("");
-                    html.append("<br>");
-                    html.append("<p> Description : ").append(event.get(i)[3]).append("</p>");
-                    html.append("<br>");
-                    html.append("<table border=\"1\">");
-                    html.append("	<tr>");
-                    html.append("<td>Platinum Effect</td><td>").append(event.get(i)[5]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Gold Effect</td><td>").append(event.get(i)[6]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Silver Effect</td><td>").append(event.get(i)[7]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Happiness Effect</td><td>").append(event.get(i)[8]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Income Effect</td><td>").append(event.get(i)[9]).append("</td>");
-                    html.append("	</tr>");
+                    html.append("<table>");
+                    html.append("<tr><td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2]).append("</td></tr>");
+                    html.append("<tr><td class=\"ssheading\">Description:</td><td>").append(event.get(i)[3].replace("~", " ")).append("</td></tr>");
+                    
+                        html.append("<tr>");
+                            html.append("<td>Platinum Effect:</td><td>").append(event.get(i)[5]).append("</td>");
+                        html.append("</tr>");
+                        
+                        html.append("<tr>");
+                            html.append("<td>Gold Effect:</td><td>").append(event.get(i)[6]).append("</td>");
+                        html.append("</tr>");
+                        
+                        html.append("<tr>");
+                            html.append("<td>Silver Effect:</td><td>").append(event.get(i)[7]).append("</td>");
+                        html.append("</tr>");
+                        
+                        html.append("<tr>");
+                            html.append("<td>Happiness Effect:</td><td>").append(event.get(i)[8]).append("</td>");
+                        html.append("</tr>");
+                        
+                        html.append("<tr>");
+                            html.append("<td>Income Effect:</td><td>").append(event.get(i)[9]).append("%</td>");
+                        html.append("</tr>");
                     html.append("</table>");
+                    html.append("<hr/>");
                 }
             }
         }
 
         html.append("</body>");
-
-
         html.append("</html>");
 
         return html.toString();
-
-
     }
 
     @GET
@@ -162,75 +220,130 @@ public class Wrapper {
         StringBuilder html = new StringBuilder();
         html.append("<html>");
         html.append("<head>");
+        
+        /* CSS for page
+         */
+        html.append("<style type=\"text/css\">");
+        html.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
+        html.append("h1{"
+                + "text-align: center;"
+                + "}");
+        html.append("table{"
+                + "width: 90%;"
+                + "}");
+        html.append("td{"
+                + "width: 50%;"
+                + "}");
+        html.append("hr{"
+                + ""
+                + "}");
+        html.append(".hilight{"
+                + "font-size: 12px;"
+                + "}");
+        html.append(".sheading{"
+                + "font-size: 14px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append(".ssheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append("</style>");
         html.append("</head>");
 
         html.append("<body>");
-
-        html.append("<h1> <font color=\"blue\">Estate Details</font></h1>");
+        
+        html.append("<h1>Status report</h1>");
 
         html.append("<table>");
-        html.append("	<tr>");
-        html.append("		<td>Character Name </td><td>").append(details.get(1)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Estate Number </td><td>").append(details.get(0)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Duchy </td><td>").append(details.get(3)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+            html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1)).append("</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Acres</td><td></td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+            html.append("<td class=\"hilight\">Estate Number:</td><td>").append(details.get(0)).append("</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Poor</td><td>").append(details.get(15)).append("/").append(details.get(16)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+            html.append("<td class=\"hilight\">Duchy:</td><td>").append(details.get(3)).append("</td>");
+            html.append("</tr>");
+        html.append("</table>");
+        
+        html.append("<br/>");
+        
+        html.append("<table>");
+            html.append("<tr>");
+            html.append("<td class=\"sheading\">Acres</td><td></td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Fine</td><td>").append(details.get(13)).append("/").append(details.get(14)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+            html.append("<td>Poor:</td><td>").append(details.get(15)).append("/").append(details.get(16)).append("</td>");
+            html.append("</tr>");
 
-        html.append("	<tr>");
-        html.append("		<td>Exquisit</td><td>").append(details.get(11)).append("/").append(details.get(12)).append("</td>");
-        html.append("	</tr>");
+            html.append("<tr>");
+            html.append("<td>Fine:</td><td>").append(details.get(13)).append("/").append(details.get(14)).append("</td>");
+            html.append("</tr>");
 
+            html.append("<tr>");
+            html.append("<td>Exquisite:</td><td>").append(details.get(11)).append("/").append(details.get(12)).append("</td>");
+            html.append("</tr>");
         html.append("</table>");
 
-        html.append("<br>");
+        html.append("<br/>");
 
-        html.append("<h1> <font color=\"blue\">Happiness, Workers and Events</font></h1>");
+        html.append("<h1>Happiness, Workers and Events</h1>");
 
-        html.append("<table border=\"1\">");
-        html.append("	<tr>");
-        html.append("		<td>Happiness</td><td>").append(details.get(7)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Workers Currently Employed </td><td>").append(details.get(9)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Maximum workers </td><td>").append(details.get(10)).append("</td>");
-        html.append("	</tr>");
-
+        html.append("<table>");
+            html.append("<tr><td class=\"sheading\">Happiness and workers</td></tr>");
+            html.append("<tr>");
+            html.append("<td>Happiness:</td><td>").append(details.get(7)).append("</td>");
+            html.append("</tr>");
+            html.append("<tr>");
+            html.append("<td>Workers employed:</td><td>").append(details.get(9)).append("</td>");
+            html.append("</tr>");
+            html.append("<tr>");
+            html.append("<td>Maximum workers:</td><td>").append(details.get(10)).append("</td>");
+            html.append("</tr>");
+        html.append("</table>");
+        
+        html.append("<br/>");
+        
         ArrayList<String> money = handler.getPlotQH().getCurrentAmount(PropertyId);
-        html.append("</table>");
-        html.append("<br>");
+        
         html.append("<table>");
-        html.append("	<tr>");
-        html.append("		<td>Funds in Estate </td><td></td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Platinum </td><td>").append(money.get(0)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Gold </td><td>").append(money.get(1)).append("</td>");
-        html.append("	</tr>");
-        html.append("	<tr>");
-        html.append("		<td>Silver</td><td>").append(money.get(2)).append("</td>");
-        html.append("	</tr>");
-
+            html.append("<tr>");
+            html.append("<td class=\"sheading\">Estate funds</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+            html.append("<td>Platinum:</td><td>").append(money.get(0)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+            html.append("<td>Gold:</td><td>").append(money.get(1)).append("</td>");
+            html.append("</tr>");
+            
+            html.append("<tr>");
+            html.append("<td>Silver:</td><td>").append(money.get(2)).append("</td>");
+            html.append("</tr>");
         html.append("</table>");
-        html.append("</br>");
+        
+        html.append("<br/>");
 
         Calendar cal = Calendar.getInstance();
         int month = cal.get(cal.MONTH) + 1; //zero-based
@@ -239,64 +352,66 @@ public class Wrapper {
 
         if (event != null) {
             if (event.size() > 0) {
-                html.append("<h1> <font color=\"blue\">Events</font></h1>");
+                html.append("<p class=\"sheading\">Events<p>");
+                html.append("<br/><hr/>");
+                
                 for (int i = 0; i < event.size(); i++) {
-                    html.append("<br>");
-                    html.append("Name : ").append(event.get(i)[2]).append("");
-                    html.append("<br>");
-                    html.append("<p> Description : ").append(event.get(i)[3]).append("</p>");
-                    html.append("<br>");
-                    html.append("<table border=\"1\">");
-                    html.append("	<tr>");
-                    html.append("<td>Platinum Effect</td><td>").append(event.get(i)[5]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Gold Effect</td><td>").append(event.get(i)[6]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Silver Effect</td><td>").append(event.get(i)[7]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Happiness Effect</td><td>").append(event.get(i)[8]).append("</td>");
-                    html.append("	</tr>");
-                    html.append("	<tr>");
-                    html.append("<td>Income Effect</td><td>").append(event.get(i)[9]).append("</td>");
-                    html.append("	</tr>");
+                    html.append("<table>");
+                        html.append("<tr></td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2]).append("</td></tr>");
+                        html.append("<tr></td class=\"ssheading\">Description:</td><td>").append(event.get(i)[3].replace("~", " ")).append("</td></tr>");
+
+                        html.append("<tr>");
+                        html.append("<td>Platinum Effect:</td><td>").append(event.get(i)[5]).append("</td>");
+                        html.append("</tr>");
+
+                        html.append("<tr>");
+                        html.append("<td>Gold Effect:</td><td>").append(event.get(i)[6]).append("</td>");
+                        html.append("</tr>");
+
+                        html.append("<tr>");
+                        html.append("<td>Silver Effect:</td><td>").append(event.get(i)[7]).append("</td>");
+                        html.append("</tr>");
+
+                        html.append("<tr>");
+                        html.append("<td>Happiness Effect:</td><td>").append(event.get(i)[8]).append("</td>");
+                        html.append("</tr>");
+
+                        html.append("<tr>");
+                        html.append("<td>Income Effect:</td><td>").append(event.get(i)[9]).append("</td>");
+                        html.append("</tr>");
                     html.append("</table>");
+                    html.append("<hr/>");
                 }
             }
         }
 
-        html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
-        html.append("<table border=\"1\">");
-        html.append("<th>Building ID</th>");
-        html.append("<th>Building name </th>");
-        html.append("<th>Income</th>");
-        html.append("<th>Happiness</th>");
+        html.append("<table>");
+            html.append("<tr><td class=\"sheading\">Estate buildings</td></tr>");
+        
+            html.append("<th>Building ID</th>");
+            html.append("<th>Building name </th>");
+            html.append("<th>Income</th>");
+            html.append("<th>Happiness</th>");
 
-        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
-        ArrayList<String[]> tempresult;
-        for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
-            tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
-            html.append("	<tr>");
-            html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
-            html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");
-            html.append(" <td>").append(tempresult.get(0)[6]).append("</td>");
-            html.append(" <td>").append(tempresult.get(0)[10]).append("</td>");
-            html.append("	</tr>");
+            ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
+            ArrayList<String[]> tempresult;
+            
+            for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
+                tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
+                html.append("<tr>");
+                html.append("<td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
+                html.append("<td>").append(tempresult.get(0)[1]).append("</td>");
+                html.append("<td>").append(tempresult.get(0)[6]).append("</td>");
+                html.append("<td>").append(tempresult.get(0)[10]).append("</td>");
+                html.append("</tr>");
 
-        }
-
+            }
         html.append("</table>");
 
         html.append("</body>");
-
-
         html.append("</html>");
 
         return html.toString();
-
-
     }
 
     @GET

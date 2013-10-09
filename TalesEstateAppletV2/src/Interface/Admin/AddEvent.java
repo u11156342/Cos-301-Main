@@ -161,7 +161,7 @@ public class AddEvent extends BasePanel {
                         if (valid.contains("" + desu.charAt(i))) {
                             validurl = validurl + desu.charAt(i);
                         } else {
-                            validurl = validurl + ".";
+                            validurl = validurl + "~";
                         }
                     }
 
