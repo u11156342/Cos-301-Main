@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+body
+{
+background-color:blue;
+}
+</style>
+<script>
+    function setURL(){
+    var dt_value = document.getElementById("dt_id").value;
+   
+
+    var sjdurl =  "http://localhost:8080/TalesEstateServer/resources/mobilereq/getdetails/"+dt_value;
+    alert(sjdurl);
+
+document.getElementById('myframe').src=sjdurl;
+
+
+
+    }
+</script>
+</head>
+<body>
+<image style="text-align:centre; margin-left:40%;" src="Untitled.png"></image>
+<div style="text-align:left;margin-left:40%;">
+        <label for="dt_id">Please Enter a characters name:</label>
+        <input type="Text" id="dt_id" maxlength="25" size="25"/>
+
+        <input style="margin-left:35%;"type='button' onclick='setURL()' value='SUBMIT'> 
+</div>
+<iframe src="about:blank" name="myframe"  style="text-align:left;margin-left:40%;"id="myframe"></iframe>
+
+</body>
+</html>
