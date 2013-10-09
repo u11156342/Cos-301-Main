@@ -61,15 +61,17 @@ public class MobileQueryHandler {
             stmt = conEstate.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
+                System.out.println(rs.getString("PlotID"));
                 // rs.getString("PlotID")
 
-                URL url = new URL("http://localhost:8080/TalesEstateServer/resources/Wrapper/StatusReport/" + rs.getString("PlotID"));
+                URL url = new URL("http://localhost:8080/TalesEstateServer/resources/Wrapper/SuperStatusReport/" + rs.getString("PlotID"));
                 InputStream is = url.openConnection().getInputStream();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
                 // String line = StatusReport(Integer.parseInt(rs.getString("PlotID")));
                 String line = reader.readLine();
+                
                 line = line.replaceAll("<head>", "");
                 line = line.replaceAll("</head>", "");
                 line = line.replaceAll("<html>", "");
