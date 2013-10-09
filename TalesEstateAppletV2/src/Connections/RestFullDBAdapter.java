@@ -1,6 +1,11 @@
 package Connections;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
@@ -18,6 +23,7 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
 
 public class RestFullDBAdapter {
 
@@ -27,9 +33,29 @@ public class RestFullDBAdapter {
     Converter Conv = new Converter();
     SecretKeySpec key;
     Cipher aes;
+    BufferedReader reader = null;
+    String ServerIP = "";
 
     public RestFullDBAdapter() {
 
+
+
+//        try {
+//            reader = new BufferedReader(new FileReader("AppletConfig.txt"));
+//            String line = "";
+//            while ((line = reader.readLine()) != null) {
+//                System.out.println(line);
+//                if (line.contains("serverIP")) {
+//                    ServerIP = line.substring(line.indexOf("=") + 1);
+//                }
+//            }
+//
+//            //System.out.println(folderLocation);
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "Applet Config not found");
+//        }
+        System.out.println(ServerIP);
+       // serverURL = ServerIP;
         try {
             aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
             String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
@@ -339,10 +365,10 @@ public class RestFullDBAdapter {
         return Conv.FromUrl(temp);
     }
 
-    public boolean expandPlot(int plotID, String quality, int[][] groundArray,int[][] buildingArray) {
+    public boolean expandPlot(int plotID, String quality, int[][] groundArray, int[][] buildingArray) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray)+"/"+this.convertToArray(buildingArray));
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "expandPlot" + "/" + plotID + "/" + quality + "/" + this.convertToArray(groundArray) + "/" + this.convertToArray(buildingArray));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -609,7 +635,7 @@ public class RestFullDBAdapter {
     public void DoExspand(int pId, double Upkeep, int workerMax) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "DoExspand/" + pId + "/" + Upkeep+"/"+workerMax);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "DoExspand/" + pId + "/" + Upkeep + "/" + workerMax);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -43,6 +43,7 @@ public class MyPropertiesInterface extends BasePanel {
         add(title, BorderLayout.NORTH);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

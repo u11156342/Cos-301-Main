@@ -27,6 +27,8 @@ public class AdminMenu extends BasePanel {
         super(name);
 
 
+        search.setPreferredSize(new Dimension(150, 60));
+        ManageCharacterGold.setPreferredSize(new Dimension(150, 60));
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -56,6 +58,7 @@ public class AdminMenu extends BasePanel {
         add(ManageCharacterGold, c);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

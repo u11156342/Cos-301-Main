@@ -7,6 +7,7 @@ package Interface.Admin;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -104,6 +105,7 @@ public class ManageGold extends BasePanel {
         c.gridy = 0;
         c.gridwidth = 2;
 
+        c.insets=new Insets(30,0,0,0);
         add(findPlayer, c);
         c.gridwidth = 1;
 
@@ -138,18 +140,15 @@ public class ManageGold extends BasePanel {
         add(silmod, c);
 
         JButton modify = new JButton("Modify");
-
+        modify.setPreferredSize(new Dimension(150, 60));
         modify.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {   
-                try
-                {
-                tc.rdb.modifyAmount(username, Integer.parseInt(platmod.getText()),Integer.parseInt(goldmod.getText()),Integer.parseInt(silmod.getText()));
-                JOptionPane.showMessageDialog(playername, "Funds Updated");
-                }
-                catch(Exception ex)
-                {
-                   JOptionPane.showMessageDialog(playername, "Only enter valid integers"); 
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    tc.rdb.modifyAmount(username, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()));
+                    JOptionPane.showMessageDialog(playername, "Funds Updated");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(playername, "Only enter valid integers");
                 }
             }
         });
@@ -160,10 +159,11 @@ public class ManageGold extends BasePanel {
         add(modify, c);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tain.cardlayout.show(tain.contentpane, tc.Cmanager.MainAdminSearches[tc.Cmanager.currentMainAdminSearchCard].getName());
+                tain.cardlayout.show(tain.contentpane, "AMain");
             }
         });
         c.gridx = 0;

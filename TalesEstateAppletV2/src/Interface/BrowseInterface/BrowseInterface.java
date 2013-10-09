@@ -53,6 +53,7 @@ public class BrowseInterface extends BasePanel {
         add(playMapScrollPane, BorderLayout.CENTER);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
 
             @Override

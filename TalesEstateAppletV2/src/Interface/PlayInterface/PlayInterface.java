@@ -70,6 +70,7 @@ public class PlayInterface extends BasePanel {
         add(menuscroll, BorderLayout.EAST);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

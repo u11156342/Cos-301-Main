@@ -5,6 +5,7 @@
 package Interface.PlayerManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ public class PlayerManagementInterface extends BasePanel {
         add(pmm, BorderLayout.CENTER);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
