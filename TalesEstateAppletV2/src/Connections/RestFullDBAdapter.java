@@ -46,7 +46,7 @@ public class RestFullDBAdapter {
 //            JOptionPane.showMessageDialog(null, "Applet Config not found");
 //        }
         System.out.println(ServerIP);
-       // serverURL = ServerIP;
+        // serverURL = ServerIP;
         try {
             aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
             String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
@@ -71,6 +71,18 @@ public class RestFullDBAdapter {
             Calendar cal = Calendar.getInstance();
             DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String ID = Format.format(cal.getTime());
+
+
+
+            //check for inconsistensies in the path
+            String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;= ";
+
+            for (int i = 0; i < path.length(); i++) {
+                if (valid.contains("" + path.charAt(i))) {
+                } else {
+                    path = path.replaceAll("" + path.charAt(i), ".");
+                }
+            }
 
             path = ID + "+" + path;
 
@@ -260,7 +272,7 @@ public class RestFullDBAdapter {
         return Conv.FromUrl(temp);
     }
 
-    public boolean addPlotToCharacter(String characterName, String duchyName,String abby,String name, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
+    public boolean addPlotToCharacter(String characterName, String duchyName, String abby, String name, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
