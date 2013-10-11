@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,7 +85,8 @@ public class RestFullDBAdapter {
                 }
             }
 
-            path = ID + "+" + path;
+            Random r = new Random(100000);
+            path = r.nextInt() + "+" + ID + "+" + path;
 
             aes.init(Cipher.ENCRYPT_MODE, key);
             byte[] ciphertext = aes.doFinal(path.getBytes());
@@ -642,5 +644,45 @@ public class RestFullDBAdapter {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void LogPlot(String desc) {
+        String temp = "";
+        desc = desc.replace(" ", ".");
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "PlotLog/" + desc);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void LogChar(String desc) {
+        String temp = "";
+        desc = desc.replace(" ", ".");
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "CharacterLog/" + desc);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String getLogPlot(int num) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getPlotLog/" + num);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
+    }
+
+    public String getLogChar(int num) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getCharacterLog/" + num);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
     }
 }
