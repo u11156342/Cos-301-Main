@@ -40,7 +40,12 @@ public class PlayerManagementMenu extends JPanel {
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
 
+                if("".equals(attempt) || attempt==null)
+                {
+                    return;
+                }
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
+
 
                 System.out.println("a o " + retrieveCharacterIDExtra.size());
                 String[] characters;

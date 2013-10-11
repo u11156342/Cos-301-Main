@@ -189,7 +189,7 @@ public class BuyInterface extends BasePanel {
 
                     if (stat == 0) {
 
-                        System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
+                       // System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
                         if (userCash >= buildingCost) {
                             int workerMax = 0;
                             double Upkeep = 0;
@@ -238,7 +238,7 @@ public class BuyInterface extends BasePanel {
                             String plotName = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Wat is the name of your property?");
 
                             Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(3)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(4))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(5)) / 10));
-                            tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
+                            tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby,plotName, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
                             tain.mProp.init();
                             tain.cardlayout.show(tain.contentpane, "MainMenu");
 

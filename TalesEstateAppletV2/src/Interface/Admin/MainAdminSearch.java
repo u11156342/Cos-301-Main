@@ -44,7 +44,7 @@ public class MainAdminSearch extends BasePanel {
         JLabel clabe = new JLabel("Character name");
         JLabel dlabe = new JLabel("Duchy");
         JLabel qlabe = new JLabel("Quality");
-        JLabel slabe = new JLabel("Size");
+        JLabel slabe = new JLabel("Size ");
         RestFullAdapter picAdapter = new RestFullAdapter();
         JButton title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
 
@@ -100,7 +100,10 @@ public class MainAdminSearch extends BasePanel {
 
                     try {
                         s = Integer.parseInt(size.getText());
+                        s = s * 1;
                     } catch (java.lang.NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(size, "Not a valid size");
+                        return;
                     }
                 }
                 String selectedChar = charc.getText();
@@ -134,7 +137,7 @@ public class MainAdminSearch extends BasePanel {
 
         add(btn, c);
         JButton back = new JButton("Back");
-back.setPreferredSize(new Dimension(150, 60));
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(
                 new ActionListener() {
             @Override

@@ -42,9 +42,9 @@ public class ManageGold extends BasePanel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        platmod.setPreferredSize(new Dimension(150, 60));
-        goldmod.setPreferredSize(new Dimension(150, 60));
-        silmod.setPreferredSize(new Dimension(150, 60));
+        platmod.setPreferredSize(new Dimension(100, 40));
+        goldmod.setPreferredSize(new Dimension(100, 40));
+        silmod.setPreferredSize(new Dimension(100, 40));
 
 
         playername.setPreferredSize(new Dimension(100, 40));
@@ -88,9 +88,16 @@ public class ManageGold extends BasePanel {
 
                         //  JOptionPane.showMessageDialog(ref, "Player found");
                         character.setText("Working with : " + picked);
+                        try
+                        {
                         platAmount = Integer.parseInt(characterAmounts.get(0));
                         goldAmount = Integer.parseInt(characterAmounts.get(1));
                         silverAmount = Integer.parseInt(characterAmounts.get(2));
+                        }
+                        catch(Exception ex)
+                        {
+                            
+                        }
 
                         platmod.setText("" + platAmount);
                         goldmod.setText("" + goldAmount);

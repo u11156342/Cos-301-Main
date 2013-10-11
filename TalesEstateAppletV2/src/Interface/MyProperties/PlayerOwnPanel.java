@@ -17,7 +17,7 @@ import javax.swing.JTextPane;
 import talesestateappletv2.TransferContainer;
 
 public class PlayerOwnPanel extends JPanel {
-    
+
     public JTextPane statusArea = new JTextPane();
     JButton exspand = new JButton("Exspand plot");
     JButton play = new JButton("play");
@@ -33,56 +33,55 @@ public class PlayerOwnPanel extends JPanel {
     public int wc;
     public int wm;
     TransferContainer tain;
-    
+
     PlayerOwnPanel(TransferContainer tc) {
         tain = tc;
         exspand = new JButton(new ImageIcon(tc.ad.ImageAdapter(16)));
         exspand.setCursor(new Cursor(Cursor.HAND_CURSOR));
         play = new JButton(new ImageIcon(tc.ad.ImageAdapter(17)));
         play.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
+
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
-        
+
+        statusArea.setPreferredSize(new Dimension(400, 440));
         c.gridx = 0;
         c.gridy = 0;
-        c.gridheight = 2;
-        c.gridwidth = 2;
-        
+        c.gridheight = 3;
+        c.gridwidth = 4;
+
         add(statusArea, c);
         c.gridheight = 1;
         c.gridwidth = 1;
-        
-        c.gridx = 2;
-        c.gridy = 0;
-        c.gridx = 2;
-        c.gridy = 1;
+
+        c.gridx = 4;
+        c.gridy = 2;
         add(play, c);
     }
-    
+
     public void init(final TransferContainer tc, final boolean own) {
-        
+
         StringBuilder text = new StringBuilder();
         text.append("<html>");
         text.append("<head>");
         text.append("<style type=\"text/css\">");
-            text.append(".sheading{"
+        text.append(".sheading{"
                 + "font-size: 10px;"
                 + "font-weight: bold;"
                 + "}");
-            text.append("tr{"
+        text.append("tr{"
                 + "height: 10px;"
                 + "}");
-            text.append("td{"
-                    + "height: 10px;"
-                    + "}");
-            text.append("table{"
-                    + "border-collapse: collapse;"
-                    + "border-spacing: 0;"
-                    + "}");
+        text.append("td{"
+                + "height: 10px;"
+                + "}");
+        text.append("table{"
+                + "border-collapse: collapse;"
+                + "border-spacing: 0;"
+                + "}");
         text.append("</style>");
         text.append("</head>");
 
@@ -105,17 +104,16 @@ public class PlayerOwnPanel extends JPanel {
         text.append("</table>");
         text.append("</body>");
         text.append("</html>");
-        
+
         statusArea.setContentType("text/html");
-        statusArea.setPreferredSize(new Dimension(200, 340));
         statusArea.setText(text.toString());
-        
-        
-        
+
+
+
         play.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
                 MainPlayInterface card = tain.Cmanager.getMainPlayInterfaceCard();
                 card.buildings = buildings;
                 card.duchy = duchy;
@@ -125,24 +123,24 @@ public class PlayerOwnPanel extends JPanel {
                 card.quality = quality;
                 card.IsOwner = own;
                 card.init(tain, propertyID);
-                
-                
-                
+
+
+
                 tain.cardlayout.show(tain.contentpane, card.getName());
             }
-            
+
             @Override
             public void mousePressed(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseExited(MouseEvent e) {
             }

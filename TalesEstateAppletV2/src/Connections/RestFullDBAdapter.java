@@ -260,7 +260,7 @@ public class RestFullDBAdapter {
         return Conv.FromUrl(temp);
     }
 
-    public boolean addPlotToCharacter(String characterName, String duchyName,String abby, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
+    public boolean addPlotToCharacter(String characterName, String duchyName,String abby,String name, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');

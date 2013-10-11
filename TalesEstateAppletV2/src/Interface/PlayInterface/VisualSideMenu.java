@@ -67,7 +67,7 @@ public class VisualSideMenu extends JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tc.BuildingRef = PicID[buildingTokens.getSelectedIndex()];
-                JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
+                //JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
             }
         });
     }

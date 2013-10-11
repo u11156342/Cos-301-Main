@@ -488,7 +488,7 @@ public class MainPlaySideMenu extends JPanel {
                 html.append("<body>");
                 html.append("<h1>Estate buildings</h1>");
 
-                if (retrieveAllBuildingsOwnedByCharacter.size() == 0) {
+                if (retrieveAllBuildingsOwnedByCharacter.isEmpty()) {
                     html.append("<p>There are currently no buildings bought for this estate.</p>");
                 } else {
                     html.append("<table>");

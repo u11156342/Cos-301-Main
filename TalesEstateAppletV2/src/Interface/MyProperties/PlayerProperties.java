@@ -21,14 +21,16 @@ public class PlayerProperties extends JPanel {
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
         ArrayList<String[]> AllPlotsIHaveAccess = tc.rdb.AllPlotsIHaveAccess(tc.CharacterID);
         
+       // this.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT,300*result.size()));
+        
         System.out.println("retrieving plots " + (result.size() + AllPlotsIHaveAccess.size()));
         playersCurrentProperties = new PlayerOwnPanel[(result.size() + AllPlotsIHaveAccess.size())];
         int amount = result.size() + AllPlotsIHaveAccess.size();
-        h = amount * 200;
+        h = amount * 310;
         
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 350));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 460));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
@@ -58,7 +60,7 @@ public class PlayerProperties extends JPanel {
             System.out.println("adding right prop");
             playersCurrentProperties[i] = new PlayerOwnPanel(tc);
             
-            playersCurrentProperties[i].setPreferredSize(new Dimension(300, 350));
+            playersCurrentProperties[i].setPreferredSize(new Dimension(300, 460));
             
             ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
             
