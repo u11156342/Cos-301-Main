@@ -28,18 +28,18 @@ public class VisualMap extends JFXPanel {
     int globalwidth;
     int globalheight;
     Graphics2D g2d;
-        int tempx = 0;
+    int tempx = 0;
     int tempy = 0;
     TransferContainer tc;
 
-    public VisualMap(int size,TransferContainer t) throws IOException {
-        tc=t;
+    public VisualMap(int size, TransferContainer t) throws IOException {
+        tc = t;
     }
 
     @Override
     public void paint(final Graphics g) {
 
-        
+
         wdOfcell = 160;
         htOfcell = 80;
         globalwidth = wdOfcell * tileStates.length;
@@ -111,7 +111,6 @@ public class VisualMap extends JFXPanel {
 
 
         this.addMouseMotionListener(new MouseMotionListener() {
-
             @Override
             public void mouseDragged(MouseEvent e) {
                 scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()) / 2);

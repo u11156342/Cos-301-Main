@@ -7,6 +7,7 @@ package Interface.PlayerManagement;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class PlayerManagementMenu extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
 
         c.gridx = 0;
+        c.insets=new Insets(10,0,0,0);
         c.gridy = 0;
         donateGoldToChar.setPreferredSize(new Dimension(250, 60));
 

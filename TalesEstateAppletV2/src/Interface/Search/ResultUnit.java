@@ -51,10 +51,10 @@ public class ResultUnit extends JPanel {
         
         final ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(propertyID);               
         
-        statusArea.setPreferredSize(new Dimension(160,100));
+        statusArea.setPreferredSize(new Dimension(150,100));
         statusArea.append("Owner : " + retrievePlotDetails.get(1)+ "\n");
         statusArea.append("Plot Duchy : " + retrievePlotDetails.get(3)+ "\n");
-        statusArea.append("Plot Size : " + retrievePlotDetails.get(4)+ "\n");
+        statusArea.append("Plot Size : " + (Integer.parseInt(retrievePlotDetails.get(4))/3)+ " acres\n");
 
         Browse.addActionListener(new ActionListener() {
             @Override

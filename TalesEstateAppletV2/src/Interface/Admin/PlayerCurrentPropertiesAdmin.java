@@ -17,7 +17,7 @@ import talesestateappletv2.TransferContainer;
 public class PlayerCurrentPropertiesAdmin extends JPanel {
 
     public JTextArea statusArea = new JTextArea();
-    String[] coms = {"Status", "Add event", "View Property"};
+    String[] coms = {"Status", "Add event", "View Plot"};
     JComboBox commands = new JComboBox(coms);
     JButton bt = new JButton("next");
     String owner;
@@ -35,7 +35,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setColumns(4);
         statusArea.setEditable(false);
-        statusArea.setPreferredSize(new Dimension(170, 50));
+        statusArea.setPreferredSize(new Dimension(170, 95));
 
         //init();
 
