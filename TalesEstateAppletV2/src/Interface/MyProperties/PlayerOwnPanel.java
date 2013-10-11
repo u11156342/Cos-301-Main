@@ -66,16 +66,45 @@ public class PlayerOwnPanel extends JPanel {
     public void init(final TransferContainer tc, final boolean own) {
         
         StringBuilder text = new StringBuilder();
-        
-        text.append("Located in ").append(duchy).append("<br>");
-        text.append("" + '\n');
-        text.append("Funds => Platinum : ").append(amount.get(0)).append(" Gold : ").append(amount.get(1)).append(" Silver : ").append(amount.get(2)).append("<br>");
-        text.append("Income => Gold : ").append(income).append("<br>");
-        text.append("Happiness => ").append(hap).append("<br>");
-        text.append("Workers =>").append(wc).append("/").append(wm).append("<br>");
-        text.append("Poor acres : ").append(quality.get(0)[1]).append("/").append(quality.get(0)[2]).append("<br>");
-        text.append("Fine acres : ").append(quality.get(1)[1]).append("/").append(quality.get(1)[2]).append("<br>");
-        text.append("Exquisite acres : ").append(quality.get(2)[1]).append("/").append(quality.get(2)[2]).append("<br>");
+        text.append("<html>");
+        text.append("<head>");
+        text.append("<style type=\"text/css\">");
+            text.append(".sheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+            text.append("tr{"
+                + "height: 10px;"
+                + "}");
+            text.append("td{"
+                    + "height: 10px;"
+                    + "}");
+            text.append("table{"
+                    + "border-collapse: collapse;"
+                    + "border-spacing: 0;"
+                    + "}");
+        text.append("</style>");
+        text.append("</head>");
+
+        text.append("<body>");
+        text.append("<table>");
+        text.append("<tr><td class=\"sheading\">Duchy:</td><td>").append(duchy).append("</td></tr>");
+        text.append("<tr><td class=\"sheading\">Estate funds</td></tr>");
+        text.append("<tr><td>Platinum throne:</td><td>").append(amount.get(0)).append("</td></tr>");
+        text.append("<tr><td>Gold crown:</td><td>").append(amount.get(1)).append("</td></tr>");
+        text.append("<tr><td>Silver:</td><td>").append(amount.get(2)).append("</td></tr>");
+        //text.append("<tr><td class=\"sheading\">Income</td></tr>");
+        text.append("<tr><td>Gold:</td><td>").append(income).append("</td></tr>");
+        text.append("<tr><td class=\"sheading\">Estate status</td></tr>");
+        text.append("<tr><td>Happiness:</td><td>").append(hap).append("</td></tr>");
+        text.append("<tr><td>Workers:</td><td>").append(wc).append("/").append(wm).append("</td></tr>");
+        //text.append("<tr><td class=\"sheading\">Estate acres</td></tr>");
+        text.append("<tr><td>Poor:</td><td>").append(quality.get(0)[1]).append("/").append(quality.get(0)[2]).append("</td></tr>");
+        text.append("<tr><td>Fine:</td><td>").append(quality.get(1)[1]).append("/").append(quality.get(1)[2]).append("</td></tr>");
+        text.append("<tr><td>Exquisite:</td><td>").append(quality.get(2)[1]).append("/").append(quality.get(2)[2]).append("</td></tr>");
+        text.append("</table>");
+        text.append("</body>");
+        text.append("</html>");
         
         statusArea.setContentType("text/html");
         statusArea.setPreferredSize(new Dimension(200, 280));
