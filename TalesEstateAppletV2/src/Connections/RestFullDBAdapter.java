@@ -75,7 +75,7 @@ public class RestFullDBAdapter {
 
 
             //check for inconsistensies in the path
-            String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;= ";
+            String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=/";
 
             for (int i = 0; i < path.length(); i++) {
                 if (valid.contains("" + path.charAt(i))) {
