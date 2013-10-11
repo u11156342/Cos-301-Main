@@ -171,12 +171,50 @@ public class AddEvent extends BasePanel {
                     if ("".equals(validurl)) {
                         validurl = "-";
                     }
+                    int pm = 0;
+                    int gm = 0;
+                    int sm = 0;
+                    int h = 0;
+                    int i = 0;
 
-                    if (tc.rdb.addEvent(PID, ename, validurl, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()), Integer.parseInt(haps[happinessmod.getSelectedIndex()]), Integer.parseInt(incomemod.getText()))) {
-                        tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
-                    } else {
-                        JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");
+
+                    boolean paramCheck = true;
+                    try {
+                        pm = Integer.parseInt(platmod.getText());
+                        gm = Integer.parseInt(goldmod.getText());
+                        sm = Integer.parseInt(silmod.getText());
+
+                    } catch (Exception ex) {
+                        paramCheck = false;
+                        JOptionPane.showMessageDialog(platmod, "Please only enter valid numbers in the modifications");
                     }
+
+                    try {
+                        h = Integer.parseInt(haps[happinessmod.getSelectedIndex()]);
+
+                    } catch (Exception ex) {
+                        paramCheck = false;
+                        JOptionPane.showMessageDialog(platmod, "Please only enter valid numbers for hapiness");
+                    }
+
+                    try {
+                        i = Integer.parseInt(incomemod.getText());
+
+                    } catch (Exception ex) {
+                        paramCheck = false;
+                        JOptionPane.showMessageDialog(platmod, "Please only enter valid numbers for income percentage");
+                    }
+
+
+
+                    if (paramCheck) {
+                        if (tc.rdb.addEvent(PID, ename, validurl, pm, gm, sm, h, i)) {
+                            tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
+                        } else {
+                            JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");
+                        }
+                    }
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(platmod, "An error has occured, please make sure all data types are correct");
                 }

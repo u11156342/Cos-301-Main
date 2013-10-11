@@ -8,6 +8,7 @@ import CardManager.CardManager;
 import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.Admin.AdminMenu;
+import Interface.Admin.GlobalStatus;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
@@ -56,6 +57,7 @@ public class TransferContainer {
     public CardManager Cmanager;
     public int BuildingRef=5;
     public CharacterLog clog;
+    public GlobalStatus gstatus;
 
     public TransferContainer() {
         cardlayout = new CardLayout();

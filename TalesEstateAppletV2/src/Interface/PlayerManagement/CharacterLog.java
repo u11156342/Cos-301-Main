@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JViewport;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -35,7 +37,10 @@ public class CharacterLog extends BasePanel {
         add(Title, BorderLayout.NORTH);
 
         textZone.setEditable(false);
-        add(textZone, BorderLayout.CENTER);
+        JScrollPane scrollText = new JScrollPane(textZone);
+        scrollText.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+
+        add(scrollText, BorderLayout.CENTER);
 
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));

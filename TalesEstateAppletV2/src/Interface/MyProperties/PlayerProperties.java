@@ -28,7 +28,7 @@ public class PlayerProperties extends JPanel {
         
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 300));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 350));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
@@ -58,7 +58,7 @@ public class PlayerProperties extends JPanel {
             System.out.println("adding right prop");
             playersCurrentProperties[i] = new PlayerOwnPanel(tc);
             
-            playersCurrentProperties[i].setPreferredSize(new Dimension(300, 300));
+            playersCurrentProperties[i].setPreferredSize(new Dimension(300, 350));
             
             ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
             

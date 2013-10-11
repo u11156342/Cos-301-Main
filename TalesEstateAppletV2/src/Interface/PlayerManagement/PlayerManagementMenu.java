@@ -136,7 +136,7 @@ public class PlayerManagementMenu extends JPanel {
         CharacterLog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.clog.init(tc);
+                
                 tc.cardlayout.show(tc.contentpane, "cLog");
 
             }

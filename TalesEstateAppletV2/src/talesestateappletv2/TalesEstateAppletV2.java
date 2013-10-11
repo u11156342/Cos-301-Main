@@ -6,6 +6,7 @@ package talesestateappletv2;
 
 import CardManager.CardManager;
 import Interface.Admin.AdminMenu;
+import Interface.Admin.GlobalStatus;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
@@ -110,6 +111,12 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.pmI = new PlayerManagementInterface("PlayerMan");
 
         tContain.clog = new CharacterLog("cLog");
+        tContain.clog.init(tContain);
+
+
+        tContain.gstatus = new GlobalStatus("gStatus");
+
+        tContain.gstatus.init(tContain);
 
         add(tContain.CSelect, tContain.CSelect.getName());
         add(tContain.MainMenu, tContain.MainMenu.getName());
@@ -123,6 +130,7 @@ public class TalesEstateAppletV2 extends JApplet {
         // add(tContain.ri, tContain.ri.getName());
         add(tContain.pmI, tContain.pmI.getName());
         add(tContain.clog, tContain.clog.getName());
+        add(tContain.gstatus, tContain.gstatus.getName());
 
 
 

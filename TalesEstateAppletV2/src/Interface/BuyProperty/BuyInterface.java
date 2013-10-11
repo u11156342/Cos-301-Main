@@ -237,7 +237,7 @@ public class BuyInterface extends BasePanel {
                             }
                             String plotName = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Wat is the name of your property?");
 
-                            Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(0)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(1))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(2)) / 10));
+                            Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(3)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(4))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(5)) / 10));
                             tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
                             tain.mProp.init();
                             tain.cardlayout.show(tain.contentpane, "MainMenu");

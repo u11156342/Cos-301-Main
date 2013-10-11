@@ -139,7 +139,7 @@ back.setPreferredSize(new Dimension(150, 60));
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "MainMenu");
+                tc.cardlayout.show(tc.contentpane, "AMain");
             }
         });
         c.gridy = 6;

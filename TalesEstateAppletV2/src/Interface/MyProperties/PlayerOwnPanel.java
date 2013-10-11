@@ -93,12 +93,12 @@ public class PlayerOwnPanel extends JPanel {
         text.append("<tr><td>Platinum throne:</td><td>").append(amount.get(0)).append("</td></tr>");
         text.append("<tr><td>Gold crown:</td><td>").append(amount.get(1)).append("</td></tr>");
         text.append("<tr><td>Silver:</td><td>").append(amount.get(2)).append("</td></tr>");
-        //text.append("<tr><td class=\"sheading\">Income</td></tr>");
+        text.append("<tr><td class=\"sheading\">Income</td></tr>");
         text.append("<tr><td>Gold:</td><td>").append(income).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Estate status</td></tr>");
         text.append("<tr><td>Happiness:</td><td>").append(hap).append("</td></tr>");
         text.append("<tr><td>Workers:</td><td>").append(wc).append("/").append(wm).append("</td></tr>");
-        //text.append("<tr><td class=\"sheading\">Estate acres</td></tr>");
+        text.append("<tr><td class=\"sheading\">Estate acres</td></tr>");
         text.append("<tr><td>Poor:</td><td>").append(quality.get(0)[1]).append("/").append(quality.get(0)[2]).append("</td></tr>");
         text.append("<tr><td>Fine:</td><td>").append(quality.get(1)[1]).append("/").append(quality.get(1)[2]).append("</td></tr>");
         text.append("<tr><td>Exquisite:</td><td>").append(quality.get(2)[1]).append("/").append(quality.get(2)[2]).append("</td></tr>");
@@ -107,7 +107,7 @@ public class PlayerOwnPanel extends JPanel {
         text.append("</html>");
         
         statusArea.setContentType("text/html");
-        statusArea.setPreferredSize(new Dimension(200, 280));
+        statusArea.setPreferredSize(new Dimension(200, 340));
         statusArea.setText(text.toString());
         
         

@@ -26,7 +26,7 @@ import talesestateappletv2.TransferContainer;
  */
 public class MainPlaySideMenu extends JPanel {
 
-    public JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement;
+    public JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement, PropertyLog;
     final MainPlaySideMenu ref = this;
     int size;
     int[][] tiles;
@@ -46,6 +46,7 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings = new JButton("Add Building");
         VisualInterface = new JButton("Visual Interface");
         RightsManagement = new JButton("Rights Management");
+        PropertyLog = new JButton("Estate Log");
 
         ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(pId);
         tiles = tc.rdb.convertFromArray(retrievePlotDetails.get(5));
@@ -95,6 +96,11 @@ public class MainPlaySideMenu extends JPanel {
             c.gridy = 7;
             RightsManagement.setPreferredSize(new Dimension(150, 60));
             add(RightsManagement, c);
+
+            c.gridy = 8;
+            PropertyLog.setPreferredSize(new Dimension(150, 60));
+            add(PropertyLog, c);
+
         } else {
             ArrayList<String> plotAccess = tc.rdb.getPlotAccess(pId, tc.CharacterID);
             System.out.println(plotAccess);
@@ -182,7 +188,6 @@ public class MainPlaySideMenu extends JPanel {
         }
 
         Report.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -190,7 +195,6 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -244,7 +248,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -298,7 +301,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -419,7 +421,6 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -428,7 +429,7 @@ public class MainPlaySideMenu extends JPanel {
                 ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.rdb.retrieveCharacterID(retrievePlotDetails1.get(1)), pId);
                 textZone.setText("");
                 StringBuilder html = new StringBuilder();
-                
+
                 html.append("<html>");
                 html.append("<head>");
 
@@ -478,19 +479,18 @@ public class MainPlaySideMenu extends JPanel {
                         + "text-align: center;"
                         + "}");
                 html.append("th{"
-                + "text-align: left;"
-                + "}");
-                
+                        + "text-align: left;"
+                        + "}");
+
                 html.append("</style>");
                 html.append("</head>");
 
                 html.append("<body>");
                 html.append("<h1>Estate buildings</h1>");
-                    
-                if(retrieveAllBuildingsOwnedByCharacter.size() == 0) {
+
+                if (retrieveAllBuildingsOwnedByCharacter.size() == 0) {
                     html.append("<p>There are currently no buildings bought for this estate.</p>");
-                }
-                else {
+                } else {
                     html.append("<table>");
                     html.append("<th>Building ID</th>");
                     html.append("<th>Building name </th>");
@@ -514,9 +514,9 @@ public class MainPlaySideMenu extends JPanel {
                         }
 
                         html.append("</tr>");
-                    }  
+                    }
                 }
-                
+
                 html.append("</table>");
                 textZone.setText(html.toString());
             }
@@ -525,7 +525,6 @@ public class MainPlaySideMenu extends JPanel {
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -534,7 +533,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -545,7 +543,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         RightsManagement.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
@@ -553,6 +550,15 @@ public class MainPlaySideMenu extends JPanel {
                 tc.cardlayout.show(tc.contentpane, card.getName());
             }
         });
+
+        PropertyLog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
 
     }
 }

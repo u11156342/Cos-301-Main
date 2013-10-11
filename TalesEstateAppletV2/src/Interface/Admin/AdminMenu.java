@@ -74,7 +74,7 @@ public class AdminMenu extends BasePanel {
         GlobalStatus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "MainMenu");
+                tc.cardlayout.show(tc.contentpane, "gStatus");
             }
         });
         c.gridy = 3;

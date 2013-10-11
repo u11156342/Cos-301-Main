@@ -33,6 +33,7 @@ public class ManageGold extends BasePanel {
     JLabel l4 = new JLabel("Platinum : ");
     JLabel l5 = new JLabel("Gold : ");
     JLabel l6 = new JLabel("Silver : ");
+    JLabel character = new JLabel("");
     String username;
 
     public ManageGold(String name, final TransferContainer tc) {
@@ -41,13 +42,14 @@ public class ManageGold extends BasePanel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        platmod.setPreferredSize(new Dimension(100, 40));
-        goldmod.setPreferredSize(new Dimension(100, 40));
-        silmod.setPreferredSize(new Dimension(100, 40));
+        platmod.setPreferredSize(new Dimension(150, 60));
+        goldmod.setPreferredSize(new Dimension(150, 60));
+        silmod.setPreferredSize(new Dimension(150, 60));
 
 
         playername.setPreferredSize(new Dimension(100, 40));
         final ManageGold ref = this;
+        findPlayer.setPreferredSize(new Dimension(150, 60));
         findPlayer.addActionListener(new ActionListener() {
             ArrayList<String> characterAmounts;
             int platAmount = 0;
@@ -83,7 +85,9 @@ public class ManageGold extends BasePanel {
                     } catch (Exception ex) {
                     }
                     if (characterAmounts != null && !characterAmounts.isEmpty()) {
-                        JOptionPane.showMessageDialog(ref, "Player found");
+
+                        //  JOptionPane.showMessageDialog(ref, "Player found");
+                        character.setText("Working with : " + picked);
                         platAmount = Integer.parseInt(characterAmounts.get(0));
                         goldAmount = Integer.parseInt(characterAmounts.get(1));
                         silverAmount = Integer.parseInt(characterAmounts.get(2));
@@ -105,8 +109,12 @@ public class ManageGold extends BasePanel {
         c.gridy = 0;
         c.gridwidth = 2;
 
-        c.insets=new Insets(30,0,0,0);
+        c.insets = new Insets(30, 0, 0, 0);
         add(findPlayer, c);
+
+        c.gridy = 1;
+        add(character, c);
+
         c.gridwidth = 1;
 
         //c.gridwidth = 0;
