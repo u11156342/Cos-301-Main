@@ -173,13 +173,13 @@ public class LogQueryHandler {
         }
     }
 
-    public ArrayList<String[]> getPlotLog(int number) {
+    public ArrayList<String[]> getPlotLog(int number, int PlotID) {
 
         ArrayList<String[]> list = new ArrayList();
         String line[];
         try {
 
-            sql = "SELECT * FROM PlotLog WHERE MONTH(PlotLogDateTime)=" + number;
+            sql = "SELECT * FROM PlotLog WHERE MONTH(PlotLogDateTime)=" + number + " AND PlotID=" + PlotID;
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -187,7 +187,7 @@ public class LogQueryHandler {
 
             while (rs.next()) {
                 line = new String[3];
-                line[0] = rs.getString("PlotLogID");
+                line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotLogDateTime");
                 line[2] = rs.getString("PlotLogMessage");
                 list.add(line);
@@ -200,12 +200,12 @@ public class LogQueryHandler {
         return list;
     }
 
-    public ArrayList<String[]> getCharacterLog(int number) {
+    public ArrayList<String[]> getCharacterLog(int number, int CharaterID) {
         ArrayList<String[]> list = new ArrayList();
         String line[];
         try {
 
-            sql = "SELECT * FROM CharacterLog WHERE MONTH(CharacterLogDateTime)=" + number;
+            sql = "SELECT * FROM CharacterLog WHERE MONTH(CharacterLogDateTime)=" + number + " AND CharacterID=" + CharaterID;
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -213,9 +213,10 @@ public class LogQueryHandler {
 
             while (rs.next()) {
                 line = new String[3];
-                line[0] = rs.getString("CharacterLogID");
+                line[0] = rs.getString("CharacterID");
                 line[1] = rs.getString("CharacterLogDateTime");
                 line[2] = rs.getString("CharacterLogMessage");
+                System.out.println(line[2]);
                 list.add(line);
             }
         } catch (Exception e) {
@@ -226,11 +227,12 @@ public class LogQueryHandler {
         return list;
     }
 
-    public void CharacterLog(String description) {
+    public void CharacterLog(int characterID, String description) {
 
+      //  description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
-            sql = "INSERT INTO PlotLog(PlotLogDateTime,PlotLogMessage) VALUES (GETDATE()," + description + ")";
+            sql = "INSERT INTO CharacterLog(CharacterID,CharacterLogDateTime,CharacterLogMessage) VALUES (" + characterID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println("Error when executing CharacterLog()");
@@ -238,10 +240,11 @@ public class LogQueryHandler {
         }
     }
 
-    public void PlotLog(String description) {
+    public void PlotLog(int plotID, String description) {
+       // description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
-            sql = "INSERT INTO CharacterLog(CharacterLogDateTime,CharacterLogMessage) VALUES (GETDATE()," + description + ")";
+            sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println("Error when executing PlotLog()");

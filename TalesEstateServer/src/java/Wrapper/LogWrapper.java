@@ -36,32 +36,32 @@ public class LogWrapper {
     }
 
     @GET
-    @Path("PlotLog/{description}")
+    @Path("PlotLog/{PlotID}/{description}")
     @Produces("text/html")
-    public String PlotLog(@PathParam("description") String description) {
+    public String PlotLog(@PathParam("PlotID") int PlotID, @PathParam("description") String description) {
 
-        handler.getLogQH().PlotLog(description);
+        handler.getLogQH().PlotLog(PlotID, description);
         return "";
     }
 
     @GET
-    @Path("CharacterLog/{description}")
+    @Path("CharacterLog/{CharID}/{description}")
     @Produces("text/html")
-    public String CharacterLog(@PathParam("description") String description) {
-        handler.getLogQH().CharacterLog(description);
+    public String CharacterLog(@PathParam("CharID") int CharID, @PathParam("description") String description) {
+        handler.getLogQH().CharacterLog(CharID, description);
         return "";
     }
 
     @GET
-    @Path("getPlotLog/{num}")
+    @Path("getPlotLog/{num}/{plot}")
     @Produces("text/html")
-    public String getPlotLog(@PathParam("num") int number) {
-        ArrayList<String[]> temp = handler.getLogQH().getPlotLog(number);
+    public String getPlotLog(@PathParam("num") int number, @PathParam("plot") int plot) {
+        ArrayList<String[]> temp = handler.getLogQH().getPlotLog(number, plot);
 
         StringBuilder html = new StringBuilder();
 
         for (int i = 0; i < temp.size(); i++) {
-            html.append(temp.get(i)[0]).append(temp.get(i)[1]).append(temp.get(i)[2]);
+            html.append(temp.get(i)[1]).append(temp.get(i)[2].replaceAll("\\*", " "));
             html.append("<br>");
         }
 
@@ -69,15 +69,15 @@ public class LogWrapper {
     }
 
     @GET
-    @Path("getCharacterLog/{num}")
+    @Path("getCharacterLog/{num}/{chars}")
     @Produces("text/html")
-    public String getCharacterLog(@PathParam("num") int number) {
-        ArrayList<String[]> temp = handler.getLogQH().getCharacterLog(number);
+    public String getCharacterLog(@PathParam("num") int number, @PathParam("chars") int chars) {
+        ArrayList<String[]> temp = handler.getLogQH().getCharacterLog(number, chars);
 
         StringBuilder html = new StringBuilder();
 
         for (int i = 0; i < temp.size(); i++) {
-            html.append(temp.get(i)[0]).append(temp.get(i)[1]).append(temp.get(i)[2]);
+            html.append(temp.get(i)[1]).append(temp.get(i)[2].replaceAll("\\*", " "));
             html.append("<br>");
         }
 
