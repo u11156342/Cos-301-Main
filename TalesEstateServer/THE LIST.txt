@@ -1,0 +1,91 @@
+///////////////////////////////////////////////////////
+NEW THINGS AND OLD THINGS LET ME KNOW IF WE MISSING SHIT
+//////////////////////////////////////////////////////
+
+-change names of gold plat and silver to their names all over the server
+
+-add baronies and  as well
+
+-make income show on status page
+
+-let admin build water
+
+-income at the end of the month for month passed
+
+-events at the end of the month
+
+-duplicate character names
+
+-get gold from her server
+
+-update the gold on her server
+
+-plot log
+
+-admin global status view
+
+-seperation of admin from normal users
+
+-complete the rest of the css on html in app
+
+-import estates from excel
+
+-do all unit tests 
+
+
+
+-Happiness Limit Break 
+
+
+Happiness +30 or higher
+	
+
++25% income to Estate and beneficial impact on random event rolls?
+
+Happiness +20 or higher
+	
+
++25% income to Estate
+
+Happiness +10 or higher
+	
+
++10% income to Estate
+
+Happiness -1 to +10
+	
+
+No effect
+
+Happiness -2 or less
+	
+
+-10% income to Estate
+
+Happiness -4 or less
+	
+
+-50% income to Estate
+
+Happiness -5 or less
+	
+
+-50% income to Estate and 10% chance to rebel each month (halting production completely until dealt with (How do Estate Owners deal with revolts??)
+
+Happiness -8 or less
+	
+
+As above but revolt chance rises to 20% each month.
+
+Happiness -10 or less
+	
+
+As above but revolt chance rises to 50% each month.
+ 
+Please put the above values in a table in SQL so I can modify if require
+
+Worker caps must be calculated per acre, not per estate.  So if you buy fine land and put a farm on it, the additional workers you could support are lost, they are not added to you estate (as the system currently does).  I hope this doesn't cause a major problem for you
+
+Speaking of Esatate numbers, can you add 2 fields to the estate, a name and a Estate number.  Name the players can populate, estate number the admin will add.
+
+Mobile version choose your character name aswell
