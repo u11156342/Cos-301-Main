@@ -428,34 +428,96 @@ public class MainPlaySideMenu extends JPanel {
                 ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tc.rdb.retrieveAllBuildingsOwnedByCharacter(tc.rdb.retrieveCharacterID(retrievePlotDetails1.get(1)), pId);
                 textZone.setText("");
                 StringBuilder html = new StringBuilder();
-                html.append("<h1> <font color=\"blue\">Current Plot Buildings</font></h1>");
-                html.append("<table border=\"1\">");
-                html.append("<th>Building ID</th>");
-                html.append("<th>Building name </th>");
-                html.append("<th>Income</th>");
-                html.append("<th>Happiness</th>");
-                html.append("<th>Status</th>");
+                
+                html.append("<html>");
+                html.append("<head>");
 
-                ArrayList<String[]> tempresult;
-                for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
-                    tempresult = tc.rdb.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
-                    html.append("	<tr>");
-                    html.append(" <td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
-                    html.append(" <td>").append(tempresult.get(0)[1]).append("</td>");
-                    html.append(" <td>").append(tempresult.get(0)[6]).append("</td>");
-                    html.append(" <td>").append(tempresult.get(0)[10]).append("</td>");
-                    if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(a)[2])) {
-                        html.append(" <td>").append("Uncompleted").append("</td>");
-                    } else {
-                        html.append(" <td>").append("Completed").append("</td>");
-                    }
+                /* CSS for page
+                 */
+                html.append("<style type=\"text/css\">");
+                html.append("body{"
+                        + "font-family: \"century gothic\";"
+                        + "background-color: white;"
+                        + "border-right-width: 2px;"
+                        + "border-bottom-width: 2px;"
+                        + "border-left-width: 2px;"
+                        + "border-top-width: 2px;"
+                        + "border-top-style: solid;"
+                        + "border-right-style: solid;"
+                        + "border-bottom-style: solid;"
+                        + "border-left-style: solid;"
+                        + "border-top-color: #FF0000;"
+                        + "border-right-color: #FF0000;"
+                        + "border-bottom-color: #FF0000;"
+                        + "border-left-color: #FF0000;"
+                        + "}");
+                html.append("h1{"
+                        + "text-align: center;"
+                        + "}");
+                html.append("table{"
+                        + "width: 90%;"
+                        + "}");
+                html.append("td{"
+                        + "width: 50%;"
+                        + "}");
+                html.append("hr{"
+                        + ""
+                        + "}");
+                html.append(".hilight{"
+                        + "font-size: 12px;"
+                        + "}");
+                html.append(".sheading{"
+                        + "font-size: 14px;"
+                        + "font-weight: bold;"
+                        + "}");
+                html.append(".ssheading{"
+                        + "font-size: 10px;"
+                        + "font-weight: bold;"
+                        + "}");
+                html.append("p{"
+                        + "text-align: center;"
+                        + "}");
+                html.append("th{"
+                + "text-align: left;"
+                + "}");
+                
+                html.append("</style>");
+                html.append("</head>");
 
-                    html.append("	</tr>");
-
+                html.append("<body>");
+                html.append("<h1>Estate buildings</h1>");
+                    
+                if(retrieveAllBuildingsOwnedByCharacter.size() == 0) {
+                    html.append("<p>There are currently no buildings bought for this estate.</p>");
                 }
+                else {
+                    html.append("<table>");
+                    html.append("<th>Building ID</th>");
+                    html.append("<th>Building name </th>");
+                    html.append("<th>Income</th>");
+                    html.append("<th>Happiness</th>");
+                    html.append("<th>Status</th>");
 
+                    ArrayList<String[]> tempresult;
+
+                    for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
+                        tempresult = tc.rdb.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
+                        html.append("<tr>");
+                        html.append("<td>").append(retrieveAllBuildingsOwnedByCharacter.get(a)[0]).append("</td>");
+                        html.append("<td>").append(tempresult.get(0)[1]).append("</td>");
+                        html.append("<td>").append(tempresult.get(0)[6]).append("</td>");
+                        html.append("<td>").append(tempresult.get(0)[10]).append("</td>");
+                        if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(a)[2])) {
+                            html.append("<td>").append("Uncompleted").append("</td>");
+                        } else {
+                            html.append("<td>").append("Completed").append("</td>");
+                        }
+
+                        html.append("</tr>");
+                    }  
+                }
+                
                 html.append("</table>");
-
                 textZone.setText(html.toString());
             }
         });
