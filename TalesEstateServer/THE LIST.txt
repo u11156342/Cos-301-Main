@@ -4,6 +4,8 @@ NEW THINGS AND OLD THINGS LET ME KNOW IF WE MISSING ANYTHING
 
 -general input validation
 
+-check all pop-up boxes in program. (pressing cancel when confirming to buy a new plot gives error)
+
 -change names of gold plat and silver to their names all over the server
 
 -add counties and baronies as well
