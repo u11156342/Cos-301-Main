@@ -5,6 +5,7 @@
 package Interface.BuyProperty;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -236,7 +237,7 @@ public class BuyInterface extends BasePanel {
                                     buildingArray[a][b] = 0;
                                 }
                             }
-                            Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(0))*10) +(Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(1))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(2))/10));
+                            Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(0)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(1))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(2)) / 10));
                             tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
                             tain.mProp.init();
                             tain.cardlayout.show(tain.contentpane, "MainMenu");
@@ -284,6 +285,135 @@ public class BuyInterface extends BasePanel {
             public void mouseMoved(MouseEvent e) {
                 tempx = e.getX();
                 tempy = e.getY();
+
+
+                String duchy = "";
+                String abby = "";
+
+                int xcord = e.getX() + PicMenuScrollPane.getHorizontalScrollBar().getValue();
+                int ycord = e.getY() + PicMenuScrollPane.getVerticalScrollBar().getValue();
+                //Thegnheim
+                //Aiber
+                if ((xcord > 777 && xcord < 905) && (ycord > 343 && ycord < 395)) {
+                    duchy = "Thegnheim";
+                    abby = "Aiber";
+                } //Byrnholm
+                else if ((xcord > 811 && xcord < 971) && (ycord > 426 && ycord < 464)) {
+                    duchy = "Thegnheim";
+                    abby = "Byrnholm";
+                } //Nordafell
+                else if ((xcord > 691 && xcord < 805) && (ycord > 459 && ycord < 574)) {
+                    duchy = "Thegnheim";
+                    abby = "Nordafell";
+                } //Steadfield
+                else if ((xcord > 822 && xcord < 986) && (ycord > 518 && ycord < 591)) {
+                    duchy = "Thegnheim";
+                    abby = "Steadfield";
+                } //Meidmar
+                else if ((xcord > 987 && xcord < 1108) && (ycord > 417 && ycord < 613)) {
+                    duchy = "Thegnheim";
+                    abby = "Meidmar";
+                } //Langzerund
+                //kobberholm
+                else if ((xcord > 210 && xcord < 482) && (ycord > 1010 && ycord < 1116)) {
+                    duchy = "Langzerund";
+                    abby = "Kobberholm";
+                } //vinhime
+                else if ((xcord > 461 && xcord < 647) && (ycord > 789 && ycord < 882)) {
+                    duchy = "Langzerund";
+                    abby = "Vinhime";
+                } //Breister
+                else if ((xcord > 609 && xcord < 776) && (ycord > 618 && ycord < 717)) {
+                    duchy = "Langzerund";
+                    abby = "Breister";
+                } //Svaertstein
+                //Naring
+                else if ((xcord > 785 && xcord < 912) && (ycord > 626 && ycord < 676)) {
+                    duchy = "Svaerstein";
+                    abby = "Naring";
+                } //Svaertzdalr
+                else if ((xcord > 764 && xcord < 906) && (ycord > 713 && ycord < 762)) {
+                    duchy = "Svaerstein";
+                    abby = "Svaertzdalr";
+                } //kulletheim
+                else if ((xcord > 918 && xcord < 980) && (ycord > 703 && ycord < 820)) {
+                    duchy = "Svaerstein";
+                    abby = "Kulletheim";
+                } //kulletfell
+                else if ((xcord > 707 && xcord < 835) && (ycord > 838 && ycord < 912)) {
+                    duchy = "Svaerstein";
+                    abby = "Kulletfell";
+                } //kornheim
+                else if ((xcord > 846 && xcord < 961) && (ycord > 842 && ycord < 915)) {
+                    duchy = "Svaerstein";
+                    abby = "Kornheim";
+                } //Sarkland
+                //Vidarkentta
+                else if ((xcord > 1011 && xcord < 1149) && (ycord > 767 && ycord < 839)) {
+                    duchy = "Sarkland";
+                    abby = "Vidarkentta";
+                } //Granadalr
+                else if ((xcord > 939 && xcord < 1074) && (ycord > 654 && ycord < 692)) {
+                    duchy = "Sarkland";
+                    abby = "Granadalr";
+                } //Niudottir
+                else if ((xcord > 1102 && xcord < 1186) && (ycord > 654 && ycord < 742)) {
+                    duchy = "Sarkland";
+                    abby = "Niudottir";
+                } //Luxendalr
+                else if ((xcord > 998 && xcord < 1142) && (ycord > 868 && ycord < 912)) {
+                    duchy = "Sarkland";
+                    abby = "Luxendalr";
+                } //Liosto
+                else if ((xcord > 1210 && xcord < 1357) && (ycord > 888 && ycord < 967)) {
+                    duchy = "Sarkland";
+                    abby = "Liosto";
+                } //Ragonvaldr
+                //Sudurfell
+                else if ((xcord > 1018 && xcord < 1196) && (ycord > 1024 && ycord < 1208)) {
+                    duchy = "Ragonvaldr";
+                    abby = "Sudurfell";
+                } //Jarnholdt
+                else if ((xcord > 1298 && xcord < 1641) && (ycord > 1031 && ycord < 1275)) {
+                    duchy = "Ragonvaldr";
+                    abby = "Jarnholdt";
+                } //Dwergstein
+                else if ((xcord > 1669 && xcord < 1929) && (ycord > 1174 && ycord < 1342)) {
+                    duchy = "Ragonvaldr";
+                    abby = "Dwergstein";
+                } //Rotheim
+                //Sternefel
+                else if ((xcord > 672 && xcord < 905) && (ycord > 967 && ycord < 1035)) {
+                    duchy = "Rotheim";
+                    abby = "Sternefel";
+                } //Edeline
+                else if ((xcord > 908 && xcord < 1015) && (ycord > 1053 && ycord < 1154)) {
+                    duchy = "Rotheim";
+                    abby = "Edeline";
+                } //Domar
+                else if ((xcord > 658 && xcord < 870) && (ycord > 1186 && ycord < 1274)) {
+                    duchy = "Rotheim";
+                    abby = "Domar";
+                } //Gnisten-Elv
+                else if ((xcord > 458 && xcord < 663) && (ycord > 1099 && ycord < 1181)) {
+                    duchy = "Rotheim";
+                    abby = "Gnisten-Elv";
+                } //Swardtoft
+                else if ((xcord > 215 && xcord < 464) && (ycord > 1231 && ycord < 1364)) {
+                    duchy = "Rotheim";
+                    abby = "Swardtoft";
+                }
+
+
+                if(!"".equals(duchy))
+                {
+                    setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
+                else
+                {
+                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
+
             }
         });
 

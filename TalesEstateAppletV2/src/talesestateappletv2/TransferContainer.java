@@ -14,6 +14,7 @@ import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
 import Interface.MyProperties.MyPropertiesInterface;
 import Interface.PlayInterface.PlayInterface;
+import Interface.PlayerManagement.CharacterLog;
 import Interface.PlayerManagement.PlayerManagementInterface;
 import Interface.RightsManagement.RightsInterface;
 import Interface.Search.MainSearch;
@@ -54,6 +55,7 @@ public class TransferContainer {
     public PlayerManagementInterface pmI;
     public CardManager Cmanager;
     public int BuildingRef=5;
+    public CharacterLog clog;
 
     public TransferContainer() {
         cardlayout = new CardLayout();

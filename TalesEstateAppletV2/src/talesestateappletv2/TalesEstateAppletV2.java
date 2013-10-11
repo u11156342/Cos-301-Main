@@ -12,6 +12,7 @@ import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
 import Interface.MyProperties.MyPropertiesInterface;
 import Interface.PlayInterface.PlayInterface;
+import Interface.PlayerManagement.CharacterLog;
 import Interface.PlayerManagement.PlayerManagementInterface;
 import Interface.RightsManagement.RightsInterface;
 import Interface.Search.MainSearch;
@@ -108,6 +109,8 @@ public class TalesEstateAppletV2 extends JApplet {
 
         tContain.pmI = new PlayerManagementInterface("PlayerMan");
 
+        tContain.clog = new CharacterLog("cLog");
+
         add(tContain.CSelect, tContain.CSelect.getName());
         add(tContain.MainMenu, tContain.MainMenu.getName());
         add(tContain.Buy, tContain.Buy.getName());
@@ -119,6 +122,7 @@ public class TalesEstateAppletV2 extends JApplet {
         add(tContain.visual, tContain.visual.getName());
         // add(tContain.ri, tContain.ri.getName());
         add(tContain.pmI, tContain.pmI.getName());
+        add(tContain.clog, tContain.clog.getName());
 
 
 
