@@ -35,7 +35,7 @@ import javax.crypto.spec.SecretKeySpec;
 @Path("/SecurityWrapper")
 public class SecurityWrapper {
 
-    ArrayList<Date> requests = new ArrayList();
+    ArrayList<String> requests = new ArrayList();
 
     @GET
     @Path("ServerRequest/{Request}")
@@ -80,11 +80,11 @@ public class SecurityWrapper {
 
                 Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(ID);
 
-//                if (requests.contains(date)) {
-//                    return "SECURITY ERROR";
-//                } else {
-//                    requests.add(date);
-//                }
+                if (requests.contains(date+" "+cleartext)) {
+                    return "SECURITY ERROR";
+               } else {
+                    requests.add(date+" "+cleartext);
+                }
             } catch (ParseException ex) {
                 Logger.getLogger(SecurityWrapper.class.getName()).log(Level.SEVERE, null, ex);
             }

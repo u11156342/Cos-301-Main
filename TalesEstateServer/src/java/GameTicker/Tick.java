@@ -43,7 +43,7 @@ public class Tick {
     }
 
     public void UpdateBuildings() {
-        // updates all uncompleted buildings build last month to completed and adjusts the owners stats
+        // updates all buildings build in current month
         Calendar cal = Calendar.getInstance();
 
         DateFormat monthF = new SimpleDateFormat("MM");
@@ -140,6 +140,8 @@ public class Tick {
 
     public void UpdateIncome() {
 
+        //update income earned for the month
+
         Calendar cal = Calendar.getInstance();
 
         DateFormat monthF = new SimpleDateFormat("MM");
@@ -148,7 +150,8 @@ public class Tick {
         DateFormat dayF = new SimpleDateFormat("dd");
         String day = dayF.format(cal.getTime());
 
-        if ("01".equals(day)) {//first day of the month
+
+        if ("28".equals(day)) {//28 of every month
 
             ArrayList<String[]> allreadyProcessed = new ArrayList();
             try {
@@ -281,116 +284,118 @@ public class Tick {
         DateFormat dayF = new SimpleDateFormat("dd");
         String day = dayF.format(cal.getTime());
 
-        ArrayList<String[]> allreadyProcessed = new ArrayList();
-        try {
+        if ("28".equals(day)) {
+            ArrayList<String[]> allreadyProcessed = new ArrayList();
+            try {
 
-            // al the events processed this month
-            sql = "SELECT * FROM EventTriggerLog WHERE MONTH(EventTriggerLogDateProcessed) =" + month;
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
+                // al the events processed this month
+                sql = "SELECT * FROM EventTriggerLog WHERE MONTH(EventTriggerLogDateProcessed) =" + month;
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
 
-            while (rs.next()) {
-                String[] line = new String[4];
-                line[0] = rs.getString("EventTriggerLogID");
-                line[1] = rs.getString("EventLogID");
-                line[2] = rs.getString("PlotID");
-                line[3] = rs.getString("EventTriggerLogDateProcessed");
-                allreadyProcessed.add(line);
+                while (rs.next()) {
+                    String[] line = new String[4];
+                    line[0] = rs.getString("EventTriggerLogID");
+                    line[1] = rs.getString("EventLogID");
+                    line[2] = rs.getString("PlotID");
+                    line[3] = rs.getString("EventTriggerLogDateProcessed");
+                    allreadyProcessed.add(line);
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Error in retrieving allready processd events");
+                System.out.println(ex.getMessage());
             }
 
-        } catch (Exception ex) {
-            System.out.println("Error in retrieving allready processd events");
-            System.out.println(ex.getMessage());
-        }
+            System.out.println(allreadyProcessed.size());
 
-        System.out.println(allreadyProcessed.size());
+            try {
 
-        try {
+                sql = "SELECT * FROM EventLog";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
 
-            sql = "SELECT * FROM EventLog";
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    int EventLog = Integer.parseInt(rs.getString("EventLogID"));
 
-            while (rs.next()) {
-                int EventLog = Integer.parseInt(rs.getString("EventLogID"));
+                    System.out.println("found event " + EventLog);
+                    if (!AllreadyProcessed(allreadyProcessed, EventLog)) {
+                        System.out.println("processing");
+                        int PlotID = Integer.parseInt(rs.getString("PlotID"));
 
-                System.out.println("found event " + EventLog);
-                if (!AllreadyProcessed(allreadyProcessed, EventLog)) {
-                    System.out.println("processing");
-                    int PlotID = Integer.parseInt(rs.getString("PlotID"));
+                        String EventName = rs.getString("EventLogName");
+                        String description = rs.getString("EventLogDescription");
 
-                    String EventName = rs.getString("EventLogName");
-                    String description = rs.getString("EventLogDescription");
+                        int PlatEffect = Integer.parseInt(rs.getString("EventLogEffectPlatinum"));
+                        int GoldEffect = Integer.parseInt(rs.getString("EventLogEffectGold"));
+                        int SilverEffect = Integer.parseInt(rs.getString("EventLogEffectSilver"));
+                        int HapinessEffect = Integer.parseInt(rs.getString("EventLogEffectHappiness"));
 
-                    int PlatEffect = Integer.parseInt(rs.getString("EventLogEffectPlatinum"));
-                    int GoldEffect = Integer.parseInt(rs.getString("EventLogEffectGold"));
-                    int SilverEffect = Integer.parseInt(rs.getString("EventLogEffectSilver"));
-                    int HapinessEffect = Integer.parseInt(rs.getString("EventLogEffectHappiness"));
-
-                    //insert into log
-                    Statement log = con.createStatement();
-                    log.execute("INSERT INTO EventTriggerLog(EventLogID,PlotID,EventTriggerLogDateProcessed) VALUES (" + EventLog + "," + PlotID + ",CONVERT (date, SYSDATETIME()))");
+                        //insert into log
+                        Statement log = con.createStatement();
+                        log.execute("INSERT INTO EventTriggerLog(EventLogID,PlotID,EventTriggerLogDateProcessed) VALUES (" + EventLog + "," + PlotID + ",CONVERT (date, SYSDATETIME()))");
 
 
-                    //first get the funds of the plot I want to event on
+                        //first get the funds of the plot I want to event on
 
-                    Statement currentPlot = con.createStatement();
-                    ResultSet PlotResultSet = currentPlot.executeQuery("SELECT * FROM Plot where PlotID=" + PlotID);
+                        Statement currentPlot = con.createStatement();
+                        ResultSet PlotResultSet = currentPlot.executeQuery("SELECT * FROM Plot where PlotID=" + PlotID);
 
-                    PlotResultSet.next();
-                    int AmountID = Integer.parseInt(PlotResultSet.getString("PlotAmount"));
+                        PlotResultSet.next();
+                        int AmountID = Integer.parseInt(PlotResultSet.getString("PlotAmount"));
 
-                    Statement currentFund = con.createStatement();
-                    ResultSet fundsResultSet = currentFund.executeQuery("SELECT * FROM Amount where AmountID=" + AmountID);
+                        Statement currentFund = con.createStatement();
+                        ResultSet fundsResultSet = currentFund.executeQuery("SELECT * FROM Amount where AmountID=" + AmountID);
 
-                    fundsResultSet.next();
+                        fundsResultSet.next();
 
-                    int Plat = Integer.parseInt(fundsResultSet.getString("AmountPlatinum"));
-                    int Gold = Integer.parseInt(fundsResultSet.getString("AmountGold"));
-                    int Silver = Integer.parseInt(fundsResultSet.getString("AmountSilver"));
+                        int Plat = Integer.parseInt(fundsResultSet.getString("AmountPlatinum"));
+                        int Gold = Integer.parseInt(fundsResultSet.getString("AmountGold"));
+                        int Silver = Integer.parseInt(fundsResultSet.getString("AmountSilver"));
 
 
-                    double combinedSilver = Plat * 100.0 + Gold * 10.0 + Silver;
-                    //income van gold na silver         
+                        double combinedSilver = Plat * 100.0 + Gold * 10.0 + Silver;
+                        //income van gold na silver         
 
-                    double silverToadd = PlatEffect * 100.0 + GoldEffect * 10.0 + SilverEffect;
+                        double silverToadd = PlatEffect * 100.0 + GoldEffect * 10.0 + SilverEffect;
 
 
 
-                    double newSilver = combinedSilver + silverToadd;
+                        double newSilver = combinedSilver + silverToadd;
 
 
-                    int newPlat = (int) (newSilver / 100);
-                    newSilver = newSilver - (newPlat * 100);
-                    int newGold = (int) (newSilver / 10);
-                    newSilver = newSilver - (newGold * 10);
-                    int news = (int) newSilver;
+                        int newPlat = (int) (newSilver / 100);
+                        newSilver = newSilver - (newPlat * 100);
+                        int newGold = (int) (newSilver / 10);
+                        newSilver = newSilver - (newGold * 10);
+                        int news = (int) newSilver;
 
 
-                    //now add to plots amount
-                    Statement IncomeUpdater = con.createStatement();
-                    IncomeUpdater.execute("UPDATE Amount SET AmountPlatinum=" + newPlat + ",AmountGold=" + newGold + ",AmountSilver=" + news + " WHERE AmountID=" + AmountID);
+                        //now add to plots amount
+                        Statement IncomeUpdater = con.createStatement();
+                        IncomeUpdater.execute("UPDATE Amount SET AmountPlatinum=" + newPlat + ",AmountGold=" + newGold + ",AmountSilver=" + news + " WHERE AmountID=" + AmountID);
 
 
 
 
 
-                    int currentHapiness = Integer.parseInt(PlotResultSet.getString("PlotHappiness"));
+                        int currentHapiness = Integer.parseInt(PlotResultSet.getString("PlotHappiness"));
 
-                    int newhapiness = currentHapiness + HapinessEffect;
+                        int newhapiness = currentHapiness + HapinessEffect;
 
-                    Statement HappinessUpdater = con.createStatement();
-                    HappinessUpdater.execute("UPDATE Plot SET PlotHappiness=" + newhapiness);
+                        Statement HappinessUpdater = con.createStatement();
+                        HappinessUpdater.execute("UPDATE Plot SET PlotHappiness=" + newhapiness);
+
+                    }
+
 
                 }
 
-
+            } catch (Exception ex) {
+                System.out.println("Error in processing event");
+                System.out.println(ex.getMessage());
             }
-        } catch (Exception ex) {
-            System.out.println("Error in processing event");
-            System.out.println(ex.getMessage());
         }
-        //  }
 
     }
 //still need to implement
@@ -434,9 +439,9 @@ public class Tick {
     public boolean CheckIfBuildingIsComplete(String dateBuild, int weeks) {
 
         Calendar cal = Calendar.getInstance();
-        
+
         int days = 7 * weeks;
-        
+
         DateFormat monthF = new SimpleDateFormat("MM");
         String month = monthF.format(cal.getTime());
 
