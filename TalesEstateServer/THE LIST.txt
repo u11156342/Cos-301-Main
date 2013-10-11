@@ -20,9 +20,9 @@ NEW THINGS AND OLD THINGS LET ME KNOW IF WE MISSING SHIT
 
 -update the gold on her server
 
--plot log
+-plot log  (HEIN)
 
--admin global status view
+-admin global status view (HEIN)
 
 -seperation of admin from normal users
 
