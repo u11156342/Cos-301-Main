@@ -69,21 +69,25 @@ public class SecurityWrapper {
             String cleartext = new String(aes.doFinal(bt));
 
             //cleartext also contains the Id that needs to be taken out
-            //id + cleartext
+            //randomnum+id + cleartext
 
             int index = cleartext.indexOf("+");
-            String ID = cleartext.substring(0, index);
+            String r = cleartext.substring(0, index);
             cleartext = cleartext.substring(index + 1);
+            int index2 = cleartext.indexOf("+");
+            String ID = cleartext.substring(0, index2);
+            cleartext = cleartext.substring(index2 + 1);
             System.out.println("ID " + ID);
             System.out.println(cleartext);
             try {
-
+                System.out.println("SEC " + r + " " + ID + " " + cleartext);
                 Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(ID);
 
-                if (requests.contains(date+" "+cleartext)) {
-                    return "SECURITY ERROR";
-               } else {
-                    requests.add(date+" "+cleartext);
+                if (requests.contains(r + " " + date + " " + cleartext)) {
+
+               //+     return "SECURITY ERROR";
+                } else {
+                    requests.add(r + " " + date + " " + cleartext);
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(SecurityWrapper.class.getName()).log(Level.SEVERE, null, ex);

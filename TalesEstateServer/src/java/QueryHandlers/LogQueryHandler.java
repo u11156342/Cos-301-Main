@@ -3,6 +3,7 @@ package QueryHandlers;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -169,6 +170,82 @@ public class LogQueryHandler {
                     }
                 }
             }
+        }
+    }
+
+    public ArrayList<String[]> getPlotLog(int number) {
+
+        ArrayList<String[]> list = new ArrayList();
+        String line[];
+        try {
+
+            sql = "SELECT * FROM PlotLog WHERE MONTH(PlotLogDateTime)=" + number;
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+
+
+            while (rs.next()) {
+                line = new String[3];
+                line[0] = rs.getString("PlotLogID");
+                line[1] = rs.getString("PlotLogDateTime");
+                line[2] = rs.getString("PlotLogMessage");
+                list.add(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Error when executing getPlotLog()");
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+
+    public ArrayList<String[]> getCharacterLog(int number) {
+        ArrayList<String[]> list = new ArrayList();
+        String line[];
+        try {
+
+            sql = "SELECT * FROM CharacterLog WHERE MONTH(CharacterLogDateTime)=" + number;
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+
+
+            while (rs.next()) {
+                line = new String[3];
+                line[0] = rs.getString("CharacterLogID");
+                line[1] = rs.getString("CharacterLogDateTime");
+                line[2] = rs.getString("CharacterLogMessage");
+                list.add(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Error when executing getCharacterLog()");
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+
+    public void CharacterLog(String description) {
+
+        try {
+            stmt = con.createStatement();
+            sql = "INSERT INTO PlotLog(PlotLogDateTime,PlotLogMessage) VALUES (GETDATE()," + description + ")";
+            stmt.execute(sql);
+        } catch (Exception e) {
+            System.out.println("Error when executing CharacterLog()");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void PlotLog(String description) {
+        try {
+            stmt = con.createStatement();
+            sql = "INSERT INTO CharacterLog(CharacterLogDateTime,CharacterLogMessage) VALUES (GETDATE()," + description + ")";
+            stmt.execute(sql);
+        } catch (Exception e) {
+            System.out.println("Error when executing PlotLog()");
+            System.out.println(e.getMessage());
         }
     }
 }

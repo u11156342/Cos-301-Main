@@ -492,6 +492,7 @@ CREATE TABLE EventTriggerLog
 CREATE TABLE PlotLog
 (
 	PlotLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
 	PlotLogDateTime DATETIME,
 	PlotLogMessage VARCHAR(MAX)
 )
@@ -499,6 +500,7 @@ CREATE TABLE PlotLog
 CREATE TABLE CharacterLog
 (
 	CharacterLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	CharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
 	CharacterLogDateTime DATETIME,
 	CharacterLogMessage VARCHAR(MAX)
 )
