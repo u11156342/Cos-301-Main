@@ -398,24 +398,27 @@ CREATE TABLE Plot
 	PlotAcreFineMax INT,
 	PlotAcrePoor FLOAT,
 	PlotAcrePoorMax INT,
-	PlotDefenseValue FLOAT
+	PlotDefenseValue FLOAT,
+	PlotEstateNumber VARCHAR(20),
+	PlotEstateName VARCHAR(50)
 )
 
 INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
-PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue)
+PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
+PlotEstateName)
 VALUES
-(3, 37, 5, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 38, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 39, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 40, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 41, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 42, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 43, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 44, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 45, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1, 46, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1, 47, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+(3, 37, 5, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(3, 38, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(3, 39, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(3, 40, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(3, 41, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(3, 42, 6, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(4, 43, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(4, 44, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(4, 45, 4, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(1, 46, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(1, 47, 1, 3, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '')
 
 CREATE TABLE Tile
 (
@@ -484,6 +487,20 @@ CREATE TABLE EventTriggerLog
 	EventLogID INT FOREIGN KEY REFERENCES EventLog(EventLogID),
 	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
 	EventTriggerLogDateProcessed DATE
+)
+
+CREATE TABLE PlotLog
+(
+	PlotLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	PlotLogDateTime DATETIME,
+	PlotLogMessage VARCHAR(MAX)
+)
+
+CREATE TABLE CharacterLog
+(
+	CharacterLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	CharacterLogDateTime DATETIME,
+	CharacterLogMessage VARCHAR(MAX)
 )
 
 GO
