@@ -109,9 +109,12 @@ public class PlayerManagementMenu extends JPanel {
                             nsilver = tempa;
                             tc.rdb.modifyAmount(picked, nplat, ngold, nsilver);
 
+                            
+                            tc.rdb.LogChar(tc.CharacterID,"*you*gave*"+amountz+"*gold*to*player*"+picked);
+                            tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked),"Player*"+tc.CharacterName+"*gave*you*"+amountz+"*gold");
 
                         } else {
-                            JOptionPane.showConfirmDialog(donateGoldToChar, "Amount is invalid,please try again");
+                            JOptionPane.showMessageDialog(donateGoldToChar, "Amount is invalid,please try again");
                         }
                     } catch (Exception ex) {
                     }
@@ -142,6 +145,7 @@ public class PlayerManagementMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+                tc.clog.refres(tc);
                 tc.cardlayout.show(tc.contentpane, "cLog");
 
             }

@@ -73,7 +73,7 @@ public class RestFullDBAdapter {
             DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String ID = Format.format(cal.getTime());
 
-
+            
 
             //check for inconsistensies in the path
             String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=/";
@@ -85,6 +85,7 @@ public class RestFullDBAdapter {
                 }
             }
 
+            System.out.println(path);
             Random r = new Random(100000);
             path = r.nextInt() + "+" + ID + "+" + path;
 
@@ -646,40 +647,40 @@ public class RestFullDBAdapter {
         }
     }
 
-    public void LogPlot(String desc) {
+    public void LogPlot(int PlotID, String desc) {
         String temp = "";
-        desc = desc.replace(" ", ".");
+       // desc = desc.replace(" ", ".");
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "PlotLog/" + desc);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "PlotLog/" + PlotID + "/" + desc);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void LogChar(String desc) {
+    public void LogChar(int CharID, String desc) {
         String temp = "";
-        desc = desc.replace(" ", ".");
+       // desc = desc.replace(" ", ".");
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "CharacterLog/" + desc);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "CharacterLog/" + CharID + "/" + desc);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public String getLogPlot(int num) {
+    public String getLogPlot(int PlotID, String num) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getPlotLog/" + num);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getPlotLog/" + num + "/" + PlotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return temp;
     }
 
-    public String getLogChar(int num) {
+    public String getLogChar(int CharID, String num) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getCharacterLog/" + num);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getCharacterLog/" + num + "/" + CharID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

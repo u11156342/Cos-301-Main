@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -21,27 +24,29 @@ import talesestateappletv2.TransferContainer;
  * @author Fiyah
  */
 public class CharacterLog extends BasePanel {
-
+    
     public JTextPane textZone = new JTextPane();
-
+    
     public CharacterLog(String name) {
         super(name);
     }
-
+    
     public void init(final TransferContainer tc) {
-
+        
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
-
+        
         add(Title, BorderLayout.NORTH);
-
+        
         textZone.setEditable(false);
+        textZone.setContentType("text/html");
+        
         JScrollPane scrollText = new JScrollPane(textZone);
         scrollText.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
+        
         add(scrollText, BorderLayout.CENTER);
-
+        
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
@@ -50,7 +55,15 @@ public class CharacterLog extends BasePanel {
                 tc.cardlayout.show(tc.contentpane, "PlayerMan");
             }
         });
-
+        
         add(back, BorderLayout.SOUTH);
+    }
+    
+    public void refres(TransferContainer tc) {
+        String month = "";
+        Calendar cal = Calendar.getInstance();
+        DateFormat monthF = new SimpleDateFormat("MM");
+        month = monthF.format(cal.getTime());
+        textZone.setText(tc.rdb.getLogChar(tc.rdb.retrieveCharacterID(tc.CharacterName), month));
     }
 }
