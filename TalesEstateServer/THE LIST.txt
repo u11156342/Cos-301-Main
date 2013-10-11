@@ -32,7 +32,7 @@ NEW THINGS AND OLD THINGS LET ME KNOW IF WE MISSING SHIT
 
 -do all unit tests 
 
-
+-add custom player buildings
 
 -Happiness Limit Break 
 
