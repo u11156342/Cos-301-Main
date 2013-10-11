@@ -505,4 +505,32 @@ CREATE TABLE CharacterLog
 	CharacterLogMessage VARCHAR(MAX)
 )
 
+INSERT INTO County (CountyDuchy, CountyDescription) VALUES
+('Thegnheim', 'Aiber'),
+('Thegnheim', 'Brynholm'),
+('Thegnheim', 'Nordafell'),
+('Thegnheim', 'Steadfield'),
+('Thegnheim', 'Meidmar'),
+('Langzerund', 'Breister'),
+('Langzerund', 'Vinhime'),
+('Langzerund', 'Kobberholm'),
+('Svaerstein', 'Naring'),
+('Svaerstein', 'Svaertzdalr'),
+('Svaerstein', 'Kulletheim'),
+('Svaerstein', 'Kulletfell'),
+('Svaerstein', 'Kornheim'),
+('Sarkland', 'Granadalr'),
+('Sarkland', 'Niudottir'),
+('Sarkland', 'Vidar-kentta'),
+('Sarkland', 'Liosto'),
+('Sarkland', 'Luxendalr'),
+('Rotheim', 'Stjernefel'),
+('Rotheim', 'Edeline'),
+('Rotheim', 'Gnisten-Elv'),
+('Rotheim', 'Domar'),
+('Rotheim', 'Swardtoft'),
+('Ragonvaldr', 'Sudurfell'),
+('Ragonvaldr', 'Jarnholdt'),
+('Ragonvaldr', 'Dwergstein');
+
 GO
