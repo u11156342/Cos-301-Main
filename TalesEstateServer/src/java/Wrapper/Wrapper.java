@@ -342,17 +342,21 @@ public class Wrapper {
         
         html.append("<br/>");
 
-        html.append("<table>");
-            html.append("<tr><td class=\"sheading\">Estate buildings</td></tr>");
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
+        ArrayList<String[]> tempresult;
         
+        html.append("<table>");
+        html.append("<tr><td class=\"sheading\">Estate buildings</td></tr>");
+            
+        if(retrieveAllBuildingsOwnedByCharacter.size() == 0) {
+            html.append("<p>There are currently no buildings bought for this estate.</p>");
+        }
+        else {
             html.append("<th>Building ID</th>");
             html.append("<th>Building name </th>");
             html.append("<th>Income</th>");
             html.append("<th>Happiness</th>");
 
-            ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
-            ArrayList<String[]> tempresult;
-            
             for (int a = 0; a < retrieveAllBuildingsOwnedByCharacter.size(); a++) {
                 tempresult = handler.getBuildingQH().retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
                 html.append("<tr>");
@@ -361,8 +365,9 @@ public class Wrapper {
                 html.append("<td>").append(tempresult.get(0)[6]).append("</td>");
                 html.append("<td>").append(tempresult.get(0)[10]).append("</td>");
                 html.append("</tr>");
-
             }
+        }
+        
         html.append("</table>");
         
         Calendar cal = Calendar.getInstance();
