@@ -401,7 +401,7 @@ CREATE TABLE Plot
 	PlotDefenseValue FLOAT,
 	PlotEstateNumber VARCHAR(20),
 	PlotEstateName VARCHAR(50),
-	Baronie VARCHAR(20)
+	CountyID int FOREIGN KEY REFERENCES County(CountyID) 
 )
 
 INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 

@@ -202,7 +202,7 @@ public class PlotQueryHandler {
      */
     public boolean addPlotToCharacter(String characterName, String duchyName, String quality,
             int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
-            double monthlyIncome, int workersUsed, int workerMax,String abby,String name) {
+            double monthlyIncome, int workersUsed, int workerMax, String baronie, String name) {
         int characterID, duchyID, qualityID;
         String ground, building;
         int exquisite = 0, fine = 0, poor = 0;
@@ -252,16 +252,20 @@ public class PlotQueryHandler {
             rs.next();
             amountID = rs.getInt(1);
 
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDuchy=" + duchyName + " AND CountyDescription=" + baronie);
+            rs.next();
+            String CountyID = rs.getString("CountyID");
             sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
                     + "PlotGroundArray, PlotBuildingArray, PlotHappiness, "
                     + "PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, "
                     + "PlotAcreExquisite, PlotAcreExquisiteMax, "
                     + "PlotAcreFine, PlotAcreFineMax, "
-                    + "PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue) VALUES "
+                    + "PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue,PlotEstateName,CountyID) VALUES "
                     + "(" + characterID + ", " + amountID + ", " + duchyID + ", " + sizeValue
                     + ", '" + ground + "', '" + building + "', "
                     + +happiness + ", " + monthlyIncome + ", " + workersUsed + ", " + workerMax
-                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0)";
+                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0,"+name+","+CountyID+")";
 
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -1292,6 +1296,4 @@ public class PlotQueryHandler {
             System.out.println(e.getMessage());
         }
     }
-    
-
 }
