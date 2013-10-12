@@ -39,14 +39,14 @@ public class CharacterQueryHandler {
 
 
                 sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus) "
-                        + "VALUES ('" + characterName + "*&*" + num + "', " + "0)";
+                        + "VALUES ('" + characterName + "&*&" + num + "', " + "0)";
 
                 stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
                 rs = stmt.getGeneratedKeys();
                 rs.next();
                 num = rs.getInt(1);
 
-                sql = "UPDATE UserCharacter SET UserCharacterName='" + characterName + "*&*" + num + "' WHERE UserCharacterName='" + characterName + "*&*" + 0+"'";
+                sql = "UPDATE UserCharacter SET UserCharacterName='" + characterName + "&*&" + num + "' WHERE UserCharacterName='" + characterName + "&*&" + 0 + "'";
 
                 stmt = con.createStatement();
                 stmt.execute(sql);
@@ -214,7 +214,7 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
         
         //Convert name to unique characterId
         try {
-            sql = "SELECT ProdUserID, ProdCharacterID FROM UserCharacter WHERE characterName = "
+            sql = "SELECT ProdUserID, ProdCharacterID FROM UserCharacter WHERE UserCharacterName = "
                     + "'" + characterName + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -237,7 +237,7 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
                 difference = targetSilver - currentSilver;
             
             //insert difference into log table
-            uqh.setCharacterSilver(charID, userID, difference, "Admin modify gold");
+            uqh.setCharacterSilver(charID, userID, difference);
             
             return true;
             

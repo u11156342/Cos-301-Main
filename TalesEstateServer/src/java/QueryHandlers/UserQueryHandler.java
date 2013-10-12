@@ -179,7 +179,7 @@ public class UserQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            silver = Integer.parseInt(rs.getString("TotalSilver"));
+            silver = rs.getInt(1);
             
             return silver;
         }
@@ -192,14 +192,15 @@ public class UserQueryHandler {
         return -1;
     }
     
-    public boolean setCharacterSilver(String characterID, String userID, int silver, String note) {
+    public boolean setCharacterSilver(String characterID, String userID, int silver) {
         
         sql = "INSERT INTO CharacterSilverLog VALUES ("
+                + "NEWID(), "
                 + "'" + characterID + "', "
                 + "'" + "Estate system" + "', "
                 + "'" + userID + "', "
                 + silver + ", "
-                + note + ", "
+                + "NULL, "
                 + "GETDATE()"
                 + ");";
         try {
