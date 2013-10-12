@@ -170,11 +170,11 @@ public class UserQueryHandler {
     /* This function takes the primary key of the UserCharacter and returns
      * the amount of silver that the character has
      */
-    public int getCharacterSilver(String userCharID) {
+    public int getCharacterSilver(String characterName) {
         int silver;
         
         sql = "SELECT SUM(Quantity) AS TotalSilver FROM CharacterSilverLog WHERE "
-                + "CharacterId = " + userCharID;
+                + "CharacterId = " + characterName;
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);

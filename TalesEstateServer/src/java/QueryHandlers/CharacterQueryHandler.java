@@ -1,5 +1,6 @@
 package QueryHandlers;
 
+import Connection.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -154,34 +155,49 @@ public class CharacterQueryHandler {
     }
 
     public ArrayList<String> getCharacterAmounts(String characterName) {
-        System.out.println(characterName);
+        DatabaseConnection prod = null;
+        Connection prodCon = null;
+        UserQueryHandler uqh = null;
         ArrayList<String> result = new ArrayList();
-        int amountID = 0;
-
-        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
-                + "UserCharacterName = '" + characterName + "'";
+        int silver = 0, amPlat = 0, amGold = 0, amSil = 0;
+        String charID = "";
+        
+        prod = new DatabaseConnection();
+        prodCon = prod.openConnectionProd();
+        uqh = new UserQueryHandler(prodCon);
+        
+        //Convert name to unique characterId
         try {
+            sql = "SELECT ProdCharacterID FROM UserCharacter WHERE characterName = "
+                    + "'" + characterName + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
-
-            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM "
-                    + "Amount WHERE AmountID = " + amountID;
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            result.add(rs.getString("AmountPlatinum"));
-            result.add(rs.getString("AmountGold"));
-            result.add(rs.getString("AmountSilver"));
-
-            return result;
-        } catch (Exception e) {
-            System.out.println("Error in CharacterQueryHandler, function getCharacterAmounts()");
+            charID = rs.getString("ProdCharacterID");
+        }
+        catch(Exception e) {
+            System.out.println("Error in CharacterQueryHandler, function "
+                    + "getCharacterAmounts()");
             System.out.println(e.getMessage());
         }
 
-        return null;
+        silver = uqh.getCharacterSilver(charID);
+        
+        while(silver > 100) {
+            silver = silver - 100;
+            amPlat += 1;
+        }
+        
+        while(silver > 10) {
+            silver = silver - 10;
+            amGold += 1;
+        }
+        
+        result.add(Integer.toString(amPlat));
+        result.add(Integer.toString(amGold));
+        result.add(Integer.toString(amSil));
+        
+        return result;
     }
     
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
@@ -334,23 +350,6 @@ public class CharacterQueryHandler {
             System.out.println(e.getMessage());
         }
 
-        return false;
-    }
-    
-    public boolean addEstateCharacter(String characterName, String userID, String characterID) {
-        sql = "INSERT INTO UserCharacter VALUES "
-                + "('" + characterName + "', 0, '" + userID + "', "
-                + "'" + characterID + "')";
-        try {
-            stmt = con.createStatement();
-            stmt.execute(sql);
-            
-            return true;
-        }
-        catch(Exception e) {
-            System.out.println("Error in UserQueryHandler, function addEstateCharacter");
-            System.out.println(e.getMessage());
-        }
         return false;
     }
 }
