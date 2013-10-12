@@ -96,6 +96,7 @@ public class CharSelectMenu extends BasePanel {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.CharacterName = CharList[chars.getSelectedIndex()];
                 tc.CharacterID = tc.rdb.retrieveCharacterID(tc.CharacterName);
+                tc.CharacterName=tc.rdb.retrieveCharacterName(tc.CharacterID);
                 System.out.println(tc.CharacterID);
                 tc.rdb.registerEstateCharacter(tc.CharacterName);
                 //ref.showMenu(tc);

@@ -184,6 +184,8 @@ public class BuyInterface extends BasePanel {
                     result = tain.rdb.queryPlotPrice(duchy, picked);
                     int stat;
                     //find out how much cash the dude has
+                    String cname=tain.CharacterName;
+                    System.out.println(cname);
                     ArrayList<String> characterAmounts = tain.rdb.getCharacterAmounts(tain.CharacterName);
                     //user cash in silver
                     int userCash = Integer.parseInt(characterAmounts.get(0)) * 100 + Integer.parseInt(characterAmounts.get(1)) * 10 + Integer.parseInt(characterAmounts.get(2));
