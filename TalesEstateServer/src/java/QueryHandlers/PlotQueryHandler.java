@@ -209,10 +209,12 @@ public class PlotQueryHandler {
 
         //Resolve all ID's
         //*Fault checking
+        System.out.println("CHARACTER FUCKING ANEM "+characterName);
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
                     + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
             stmt = con.createStatement();
+            System.out.println(sql);
             rs = stmt.executeQuery(sql);
             System.out.println("s1");
             rs.next();
@@ -257,8 +259,8 @@ public class PlotQueryHandler {
             amountID = rs.getInt(1);
 
             stmt = con.createStatement();
-            System.out.println("SELECT CountyID FROM County WHERE CountyDescription=" + baronie);
-            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription=" + baronie);
+            System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie+"'");
+            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie+"'");
             
             rs.next();
             String CountyID = rs.getString("CountyID");
@@ -271,7 +273,7 @@ public class PlotQueryHandler {
                     + "(" + characterID + ", " + amountID + ", " + duchyID + ", " + sizeValue
                     + ", '" + ground + "', '" + building + "', "
                     + +happiness + ", " + monthlyIncome + ", " + workersUsed + ", " + workerMax
-                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0,"+name+","+CountyID+")";
+                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0,'"+name+"','"+CountyID+"')";
 
             stmt = con.createStatement();
             stmt.execute(sql);

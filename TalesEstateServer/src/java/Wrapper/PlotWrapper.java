@@ -36,9 +36,9 @@ public class PlotWrapper {
     public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("quality") String quality,
             @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness,
             @PathParam("monthlyIncome") double monthlyIncome, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("abby") String abby, @PathParam("name") String name) {
-
-        characterName = characterName.replaceAll(""+'.',""+ ' ');
-        name=name.replaceAll("."," ");
+         characterName = characterName.replaceAll("\\."," ");
+      //  name=name.replaceAll("\\."," ");
+        System.out.println("YES "+characterName);
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
