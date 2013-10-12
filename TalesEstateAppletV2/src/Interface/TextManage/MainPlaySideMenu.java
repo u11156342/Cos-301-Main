@@ -13,7 +13,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -238,6 +241,7 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                        tc.rdb.
                     } else {
                         JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
                     }
@@ -554,6 +558,15 @@ public class MainPlaySideMenu extends JPanel {
         PropertyLog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                String month = "";
+                Calendar cal = Calendar.getInstance();
+                DateFormat monthF = new SimpleDateFormat("MM");
+                month = monthF.format(cal.getTime());
+
+                String text = tc.rdb.getLogPlot(pId, month);
+                
+                textZone.setText(text);
 
             }
         });

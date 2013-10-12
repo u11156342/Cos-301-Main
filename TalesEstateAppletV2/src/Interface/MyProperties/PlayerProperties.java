@@ -26,7 +26,7 @@ public class PlayerProperties extends JPanel {
         System.out.println("retrieving plots " + (result.size() + AllPlotsIHaveAccess.size()));
         playersCurrentProperties = new PlayerOwnPanel[(result.size() + AllPlotsIHaveAccess.size())];
         int amount = result.size() + AllPlotsIHaveAccess.size();
-        h = amount * 310;
+        h = amount * 310*2;
         
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);

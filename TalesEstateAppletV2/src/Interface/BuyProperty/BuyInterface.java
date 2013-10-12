@@ -177,6 +177,10 @@ public class BuyInterface extends BasePanel {
                 if (!"".equals(abby) && !"".equals(duchy)) {
                     picked = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Choose what quality : ", "Chose " + abby + " located in " + duchy, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
                     ArrayList<String[]> result;
+                    if("".equals(picked) || picked==null)
+                    {
+                        return;
+                    }
                     result = tain.rdb.queryPlotPrice(duchy, picked);
                     int stat;
                     //find out how much cash the dude has
