@@ -384,8 +384,8 @@ public class Wrapper {
 
                 for (int i = 0; i < event.size(); i++) {
                     html.append("<table>");
-                    html.append("<tr></td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2]).append("</td></tr>");
-                    html.append("<tr></td class=\"ssheading\">Description:</td><td>").append(event.get(i)[3].replace("~", " ")).append("</td></tr>");
+                    html.append("<tr><td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2]).append("</td></tr>");
+                    html.append("<tr><td class=\"ssheading\">Description:</td><td>").append(event.get(i)[3].replace("~", " ")).append("</td></tr>");
 
                     html.append("<tr>");
                     html.append("<td>Platinum Effect:</td><td>").append(event.get(i)[5]).append("</td>");
@@ -600,6 +600,11 @@ public class Wrapper {
                 + "font-size: 10px;"
                 + "font-weight: bold;"
                 + "}");
+        html.append(".NegIn{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "color: red;"
+                + "}");
         html.append("</style>");
         html.append("</head>");
 
@@ -608,9 +613,13 @@ public class Wrapper {
         html.append("<table>");
         for (int i = 0; i < retrieveAllPlots.size(); i++) {
 
-            html.append("<tr></td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
-            html.append("<tr></td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
-            html.append("<tr></td>Plot Income:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            html.append("<tr><td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            if (Double.parseDouble(retrieveAllPlots.get(i)[8]) < 0) {
+                html.append("<tr><td>Plot Income:</td><td class=\"NegIn\">").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");
+            } else {
+                html.append("<tr><td>Plot Income:</td><td>").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");
+            }
 
 
         }

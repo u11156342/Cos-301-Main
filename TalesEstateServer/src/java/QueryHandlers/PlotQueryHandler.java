@@ -647,6 +647,7 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
 
             ResultSet lrs;
+            ResultSet lrs2;
             result = new ArrayList();
             while (rs.next()) {
                 line = new String[18];
@@ -679,11 +680,11 @@ public class PlotQueryHandler {
                 sql = "SELECT * FROM Amount WHERE AmountID = "
                         + line[2];
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-                line[2] = rs.getString("AmountPlatinum") + "-"
-                        + rs.getString("AmountGold") + "-"
-                        + rs.getString("AmountSilver");
+                lrs2 = stmt.executeQuery(sql);
+                lrs2.next();
+                line[2] = lrs2.getString("AmountPlatinum") + "-"
+                        + lrs2.getString("AmountGold") + "-"
+                        + lrs2.getString("AmountSilver");
 
                 sql = "SELECT DuchyName FROM Duchy WHERE "
                         + "DuchyID = " + line[3];
