@@ -57,7 +57,7 @@ public class AdminMenu extends BasePanel {
         ManageCharacterGold.setPreferredSize(new Dimension(250, 60));
 
 
-        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
+        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(48)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
 

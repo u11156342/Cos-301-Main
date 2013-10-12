@@ -125,11 +125,11 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    public boolean registerEstateCharacter(String characterName) {
+    public boolean registerEstateCharacter(String characterName,String userID) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName+"/"+userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

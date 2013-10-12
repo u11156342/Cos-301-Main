@@ -23,6 +23,8 @@ public class PlayerOwnPanel extends JPanel {
     JButton play = new JButton("play");
     public int propertyID;
     public String duchy;
+    public String county;
+    public String plotname;
     ArrayList<String[]> quality;
     public int size;
     public double income;
@@ -87,7 +89,9 @@ public class PlayerOwnPanel extends JPanel {
 
         text.append("<body>");
         text.append("<table>");
+        text.append("<tr><td class=\"sheading\">Estate Name:</td><td>").append(plotname).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Duchy:</td><td>").append(duchy).append("</td></tr>");
+        text.append("<tr><td class=\"sheading\">Countie:</td><td>").append(county).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Estate funds</td></tr>");
         text.append("<tr><td>Platinum throne:</td><td>").append(amount.get(0)).append("</td></tr>");
         text.append("<tr><td>Gold crown:</td><td>").append(amount.get(1)).append("</td></tr>");
