@@ -32,18 +32,17 @@ public class CharacterQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
 
-
             if (!rs.next()) {
-                sql = "INSERT INTO Amount VALUES(0,0,0);";
+                /*sql = "INSERT INTO Amount VALUES(0,0,0);";
                 stmt = con.createStatement();
                 stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
 
                 rs = stmt.getGeneratedKeys();
                 rs.next();
-                amountID = rs.getInt(1);
+                amountID = rs.getInt(1);*/
 
-                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterAmount, UserCharacterStatus) "
-                        + "VALUES ('" + characterName + "', " + amountID + ", 0)";
+                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus) "
+                        + "VALUES ('" + characterName + "', " + ", 0)";
                 stmt = con.createStatement();
                 stmt.execute(sql);
                 return true;
@@ -81,7 +80,7 @@ public class CharacterQueryHandler {
      * id supplied.
      */
 
-    public String retrieveCharacterName(int  characterID) {
+    public String retrieveCharacterName(int characterID) {
         try {
             sql = "SELECT UserCharacterName FROM UserCharacter WHERE "
                     + "UserCharacterID = '" + characterID + "'";
@@ -184,7 +183,7 @@ public class CharacterQueryHandler {
 
         return null;
     }
-
+    
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
         System.out.println("UPDATING GOLD TO " + amountPlatinum + " " + amountGold + " " + amountSilver);
         int amountID;
@@ -335,6 +334,23 @@ public class CharacterQueryHandler {
             System.out.println(e.getMessage());
         }
 
+        return false;
+    }
+    
+    public boolean addEstateCharacter(String characterName, String userID, String characterID) {
+        sql = "INSERT INTO UserCharacter VALUES "
+                + "('" + characterName + "', 0, '" + userID + "', "
+                + "'" + characterID + "')";
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in UserQueryHandler, function addEstateCharacter");
+            System.out.println(e.getMessage());
+        }
         return false;
     }
 }

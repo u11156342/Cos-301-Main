@@ -25,7 +25,7 @@ public class DatabaseConnection {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 if (line.contains("databaseIP")) {
-                    ServerIP = line.substring(line.indexOf("=") + 1);
+                    ServerIP = line.substring(line.indexOf("=") + 1, line.length());
                 }
             }
 
@@ -35,14 +35,8 @@ public class DatabaseConnection {
         System.out.println(ServerIP);
     }
 
-    public Connection openConnectionProd() {
-
-
-
+    public Connection openConnectionProd() {     
         try {
-
-
-
             connectionURL = "jdbc:sqlserver://" + ServerIP + ":1433;databaseName=TalesProd;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());

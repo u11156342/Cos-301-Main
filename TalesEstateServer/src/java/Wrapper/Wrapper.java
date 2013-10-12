@@ -585,23 +585,17 @@ public class Wrapper {
                 + "}");
         html.append("td{"
                 + "width: 50%;"
+                + "font-size: 10px;"
                 + "}");
         html.append("th{"
                 + "text-align: left;"
                 + "}");
-        html.append(".hilight{"
-                + "font-size: 12px;"
-                + "}");
-        html.append(".sheading{"
-                + "font-size: 14px;"
-                + "font-weight: bold;"
-                + "}");
         html.append(".ssheading{"
-                + "font-size: 10px;"
+                + "font-size: 12px;"
                 + "font-weight: bold;"
                 + "}");
         html.append(".NegIn{"
-                + "font-size: 10px;"
+                + "font-size: 12px;"
                 + "font-weight: bold;"
                 + "color: red;"
                 + "}");
@@ -610,9 +604,9 @@ public class Wrapper {
 
         html.append("<body>");
         html.append("<h1>Global Status</h1>");
-        html.append("<table>");
+        
         for (int i = 0; i < retrieveAllPlots.size(); i++) {
-
+            html.append("<table>");
             html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
             html.append("<tr><td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
             if (Double.parseDouble(retrieveAllPlots.get(i)[8]) < 0) {
@@ -620,11 +614,12 @@ public class Wrapper {
             } else {
                 html.append("<tr><td>Plot Income:</td><td>").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");
             }
-
-
+            html.append("</table>");
+            
+            if(i < (retrieveAllPlots.size() - 1))
+                html.append("<hr/>");
         }
-        html.append("</table>");
-        html.append("<hr/>");
+        
         html.append("</body>");
         html.append("</html>");
 

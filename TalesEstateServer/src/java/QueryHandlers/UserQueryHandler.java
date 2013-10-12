@@ -166,4 +166,55 @@ public class UserQueryHandler {
 
         return null;
     }
+        
+    /* This function takes the primary key of the UserCharacter and returns
+     * the amount of silver that the character has
+     */
+    public int getCharacterSilver(String userCharID) {
+        int silver;
+        
+        sql = "SELECT SUM(Quantity) AS TotalSilver FROM CharacterSilverLog WHERE "
+                + "CharacterId = " + userCharID;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            silver = Integer.parseInt(rs.getString("TotalSilver"));
+            
+            return silver;
+        }
+        catch(Exception e) {
+            System.out.println("Error in UserQueryHandler, function getCharact"
+                    + "erSilver().");
+            System.out.println(e.getMessage());
+        }
+        
+        return -1;
+    }
+    
+    public String getCharacterName(String charID) {
+        String result = "";
+        
+        sql = "SELECT CharacterName FROM CharacterProfile WHERE "
+                + "CharacterID = '" + charID + "'";
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            result = rs.getString("CharacterName");
+            if(!result.equals("")) {
+                return result;
+            }
+            else
+                throw new Exception();
+        }
+        catch(Exception e) {
+            System.out.println("Error in UserQueryHandler, function getCharac"
+                    + "terName()");
+            System.out.println(e.getMessage());
+        }
+        
+        return "";
+    }
 }

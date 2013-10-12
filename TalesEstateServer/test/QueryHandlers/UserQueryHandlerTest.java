@@ -97,4 +97,13 @@ public class UserQueryHandlerTest extends TestCase {
         
         assertEquals(true, correct);
     }
+    
+    public void testGetCharacterSilver() {
+        System.out.println("Testing getCharacterSilver()");
+        UserQueryHandler instance = new UserQueryHandler(con);
+        String charID = "68E92453-C8DD-4CD6-BA01-7CDCC020B7BB";
+        int result = instance.getCharacterSilver(charID);
+        
+        assertEquals(85, result);
+    }
 }

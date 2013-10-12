@@ -506,6 +506,13 @@ CREATE TABLE CharacterLog
 	CharacterLogMessage VARCHAR(MAX)
 )
 
+CREATE TABLE County
+(
+	CountyID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	CountyDuchy VARCHAR(10),
+	CountyDescription VARCHAR(12)
+)
+
 INSERT INTO County (CountyDuchy, CountyDescription) VALUES
 ('Thegnheim', 'Aiber'),
 ('Thegnheim', 'Brynholm'),
