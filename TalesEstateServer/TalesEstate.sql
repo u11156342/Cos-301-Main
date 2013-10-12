@@ -22,6 +22,43 @@ VALUES
 ('Rotheim'),
 ('Langzerund')
 
+CREATE TABLE County
+(
+	CountyID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	CountyDuchy VARCHAR(10),
+	CountyDescription VARCHAR(12)
+)
+
+INSERT INTO County (CountyDuchy, CountyDescription) VALUES
+('Thegnheim', 'Aiber'),
+('Thegnheim', 'Brynholm'),
+('Thegnheim', 'Nordafell'),
+('Thegnheim', 'Steadfield'),
+('Thegnheim', 'Meidmar'),
+('Langzerund', 'Breister'),
+('Langzerund', 'Vinhime'),
+('Langzerund', 'Kobberholm'),
+('Svaerstein', 'Naring'),
+('Svaerstein', 'Svaertzdalr'),
+('Svaerstein', 'Kulletheim'),
+('Svaerstein', 'Kulletfell'),
+('Svaerstein', 'Kornheim'),
+('Sarkland', 'Granadalr'),
+('Sarkland', 'Niudottir'),
+('Sarkland', 'Vidar-kentta'),
+('Sarkland', 'Liosto'),
+('Sarkland', 'Luxendalr'),
+('Rotheim', 'Stjernefel'),
+('Rotheim', 'Edeline'),
+('Rotheim', 'Gnisten-Elv'),
+('Rotheim', 'Domar'),
+('Rotheim', 'Swardtoft'),
+('Ragonvaldr', 'Sudurfell'),
+('Ragonvaldr', 'Jarnholdt'),
+('Ragonvaldr', 'Dwergstein');
+
+GO
+
 CREATE TABLE Quality
 (
 	QualityID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
