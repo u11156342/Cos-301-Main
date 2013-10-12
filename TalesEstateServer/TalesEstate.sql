@@ -290,8 +290,12 @@ VALUES
 (0, 0, 0, 0, 'stables 0.5.png'),
 (0, 0, 0, 0, 'timber plantation 0.125.png'),
 (0, 0, 0, 0, 'Vineyard 0.125.png'),
-(0, 0, 0, 0, 'playerManagement.png')
-
+(0, 0, 0, 0, 'playerManagement.png'),
+(0, 0, 0, 0, 'Add Event.png'),
+(0, 0, 0, 0, 'Global Status.png'),
+(0, 0, 0, 0, 'Manage Charcter Gold.png'),
+(0, 0, 0, 0, 'Admin Menu.png'),
+(0, 0, 0, 0, 'Player Management.png')
 
 
 /*All cost related values assumed to be gold*/
@@ -409,7 +413,7 @@ CREATE TABLE UserCharacter
 
 INSERT INTO UserCharacter(UserCharacterName, UserCharacterStatus, ProdUserID, ProdCharacterID)
 VALUES
-	('Valentina Leonora Adela Costa&*&1', 0, 'CFC3572A-ACE5-4C77-9481-5DE31FBA1C76', '5EC2CD6A-3579-4263-8582-32F831CD416C'),
+	('Valentina&*&1', 0, 'CFC3572A-ACE5-4C77-9481-5DE31FBA1C76', '5EC2CD6A-3579-4263-8582-32F831CD416C'),
 	('Jacomus Jonas&*&2', 0, '362F2E60-490D-45F0-8C00-3DBBE467BDC2', 'F33D73C2-9975-4189-9421-7EE100B870A0'),
 	('Aihre Thule&*&3', 0, 'DE47D939-8920-4CCB-B1D1-FE5FE54F2CC6', 'C20D672E-B2B0-45DE-84F1-EFDBBA139BDB'),
 	('Sinarfin&*&4', 0, '61406C2A-E382-42A9-BFD9-837E204F9154', 'A17024B5-BF5A-429A-8E90-4606D3215AB7'),
