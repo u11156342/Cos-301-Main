@@ -31,19 +31,20 @@ public class PlotWrapper {
         return converter.ArrToUrl(handler.getPlotQH().queryPlotPrice(duchy, quality));
     }
 
-    @Path("addPlotToCharacter/{characterName}/{duchyName}/{quality}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}")
+    @Path("addPlotToCharacter/{characterName}/{duchyName}/{quality}/{sizeValue}/{groundArray}/{buildingArray}/{happiness}/{monthlyIncome}/{workersUsed}/{workerMax}/{abby}/{name}")
     @Produces("text/plain")
     public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("quality") String quality,
             @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness,
-            @PathParam("monthlyIncome") double monthlyIncome, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax) {
+            @PathParam("monthlyIncome") double monthlyIncome, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("abby") String abby, @PathParam("name") String name) {
 
-        characterName = characterName.replace('.', ' ');
+        characterName = characterName.replaceAll(""+'.',""+ ' ');
+        name=name.replaceAll("."," ");
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
         System.out.println("buildingArray " + buildingArray);
         System.out.println(quality);
-        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax)) {
+        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax,abby,name)) {
             return "true";
         } else {
             return "false";
@@ -167,7 +168,7 @@ public class PlotWrapper {
         System.out.println(plotID);
         groundArray = groundArray.replace('_', ';');
         barray = barray.replace('_', ';');
-        if (handler.getPlotQH().expandPlot(plotID, quality, handler.getPlotQH().convertFromArray(groundArray),handler.getPlotQH().convertFromArray(barray))) {
+        if (handler.getPlotQH().expandPlot(plotID, quality, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(barray))) {
             return "true";
         } else {
             return "false";

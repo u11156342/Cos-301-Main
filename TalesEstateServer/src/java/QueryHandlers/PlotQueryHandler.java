@@ -202,7 +202,7 @@ public class PlotQueryHandler {
      */
     public boolean addPlotToCharacter(String characterName, String duchyName, String quality,
             int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
-            double monthlyIncome, int workersUsed, int workerMax) {
+            double monthlyIncome, int workersUsed, int workerMax,String abby,String name) {
         int characterID, duchyID, qualityID;
         String ground, building;
         int exquisite = 0, fine = 0, poor = 0;
