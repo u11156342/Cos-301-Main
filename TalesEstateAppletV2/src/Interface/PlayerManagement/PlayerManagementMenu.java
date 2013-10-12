@@ -110,7 +110,7 @@ public class PlayerManagementMenu extends JPanel {
                             tc.rdb.modifyAmount(picked, nplat, ngold, nsilver);
 
                             
-                            tc.rdb.LogChar(tc.CharacterID,"*you*gave*"+amountz+"*gold*to*player*"+picked);
+                            tc.rdb.LogChar(tc.CharacterID,tc.CharacterName+"*gave*"+amountz+"*gold*to*"+picked);
                             tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked),"Player*"+tc.CharacterName+"*gave*you*"+amountz+"*gold");
 
                         } else {

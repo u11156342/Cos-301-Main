@@ -278,8 +278,9 @@ public class RestFullDBAdapter {
     public boolean addPlotToCharacter(String characterName, String duchyName, String abby, String name, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
         String temp = "";
         try {
-            characterName = characterName.replace(' ', '.');
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax);
+            characterName = characterName.replaceAll(" ",".");
+            name=name.replaceAll(" ",".");
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax+"/"+abby+"/"+name);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

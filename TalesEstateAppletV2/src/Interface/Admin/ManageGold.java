@@ -87,7 +87,7 @@ public class ManageGold extends BasePanel {
                     if (characterAmounts != null && !characterAmounts.isEmpty()) {
 
                         //  JOptionPane.showMessageDialog(ref, "Player found");
-                        character.setText("Working with : " + picked);
+                        character.setText("Editing funds for : " + picked);
                         try
                         {
                         platAmount = Integer.parseInt(characterAmounts.get(0));

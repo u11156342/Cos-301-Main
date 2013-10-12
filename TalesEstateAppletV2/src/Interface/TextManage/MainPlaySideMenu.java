@@ -395,9 +395,9 @@ public class MainPlaySideMenu extends JPanel {
                         String pc;
                         duchy_ = retrievePlotDetails.get(3);
                         ArrayList<String> retrieveMonthlyUpkeep = tc.rdb.retrieveMonthlyUpkeep(retrievePlotDetails.get(3), picked);
-                        pc = retrieveMonthlyUpkeep.get(0);
-                        String gc = retrieveMonthlyUpkeep.get(1);
-                        String sc = retrieveMonthlyUpkeep.get(2);
+                        pc = retrieveMonthlyUpkeep.get(3);
+                        String gc = retrieveMonthlyUpkeep.get(4);
+                        String sc = retrieveMonthlyUpkeep.get(5);
 
                         Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (10 * Double.parseDouble(pc) + Double.parseDouble(gc) + Double.parseDouble(sc) / 10);
 
