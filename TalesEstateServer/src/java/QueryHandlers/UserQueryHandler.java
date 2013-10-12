@@ -174,7 +174,7 @@ public class UserQueryHandler {
         int silver;
         
         sql = "SELECT SUM(Quantity) AS TotalSilver FROM CharacterSilverLog WHERE "
-                + "CharacterId = " + characterID;
+                + "Convert(VARCHAR(255), CharacterId) = '" + characterID+"'";
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -221,7 +221,7 @@ public class UserQueryHandler {
         String result = "";
         
         sql = "SELECT CharacterName FROM CharacterProfile WHERE "
-                + "CharacterID = '" + charID + "'";
+                + "Convert(VARCHAR(255), CharacterId) = '" + charID + "'";
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);

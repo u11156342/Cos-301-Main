@@ -173,7 +173,7 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
         
         //Convert name to unique characterId
         try {
-            sql = "SELECT ProdCharacterID FROM UserCharacter WHERE characterName = "
+            sql = "SELECT ProdCharacterID FROM UserCharacter WHERE UserCharacterName = "
                     + "'" + characterName + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
