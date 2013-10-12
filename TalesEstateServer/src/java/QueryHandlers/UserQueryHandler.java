@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UserQueryHandler {
+
     private DatabaseConnection db = null;
     private Connection con = null;
     private Statement stmt = null;
@@ -40,7 +41,7 @@ public class UserQueryHandler {
     /**
      * This function prints a list of all the users in the TalesProd database
      * (not all of these users are relevant to the estate system).
-     */ 
+     */
     public void printUserList() {
         if (userList.size() > 0) {
             for (int a = 0; a < userList.size(); a++) {
@@ -65,7 +66,7 @@ public class UserQueryHandler {
     /**
      * This function checks whether a certain user has a character that is
      * registered to the estate system.
-     */ 
+     */
     public boolean checkHasCharacter(String userID) {
         String id;
         ArrayList<String> ids;
@@ -166,34 +167,34 @@ public class UserQueryHandler {
 
         return null;
     }
-        
+
     /* This function takes the primary key of the UserCharacter and returns
      * the amount of silver that the character has
      */
     public int getCharacterSilver(String characterID) {
         int silver;
-        
+
         sql = "SELECT SUM(Quantity) AS TotalSilver FROM CharacterSilverLog WHERE "
-                + "Convert(VARCHAR(255), CharacterId) = '" + characterID+"'";
+                + "Convert(VARCHAR(255), CharacterId) = '" + characterID + "'";
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             silver = rs.getInt(1);
-            
+
             return silver;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in UserQueryHandler, function getCharact"
                     + "erSilver().");
             System.out.println(e.getMessage());
         }
-        
+
         return -1;
     }
-    
+
     public boolean setCharacterSilver(String characterID, String userID, int silver) {
-        
+
+        System.out.println(characterID+" "+userID);
         sql = "INSERT INTO CharacterSilverLog VALUES ("
                 + "NEWID(), "
                 + "'" + characterID + "', "
@@ -206,41 +207,39 @@ public class UserQueryHandler {
         try {
             stmt = con.createStatement();
             stmt.execute(sql);
-            
+
             return true;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in UserQueryHandler, function setCharac"
                     + "terSilver()");
             System.out.println(e.getMessage());
         }
-        
+
         return false;
     }
-    
+
     public String getCharacterName(String charID) {
         String result = "";
-        
+
         sql = "SELECT CharacterName FROM CharacterProfile WHERE "
                 + "Convert(VARCHAR(255), CharacterId) = '" + charID + "'";
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            
+
             result = rs.getString("CharacterName");
-            if(!result.equals("")) {
+            if (!result.equals("")) {
                 return result;
-            }
-            else
+            } else {
                 throw new Exception();
-        }
-        catch(Exception e) {
+            }
+        } catch (Exception e) {
             System.out.println("Error in UserQueryHandler, function getCharac"
                     + "terName()");
             System.out.println(e.getMessage());
         }
-        
+
         return "";
     }
 }

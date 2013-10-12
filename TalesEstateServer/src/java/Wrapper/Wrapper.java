@@ -88,15 +88,21 @@ public class Wrapper {
 
         html.append("<table>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1)).append("</td>");
+        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0,details.get(1).indexOf("&*&"))).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
         html.append("<td class=\"hilight\">Estate Number:</td><td>").append(details.get(0)).append("</td>");
         html.append("</tr>");
+        html.append("<tr>");
+        html.append("<td class=\"hilight\">Estate Name:</td><td>").append(details.get(18).replaceAll("\\.", " ")).append("</td>");
+        html.append("</tr>");
 
         html.append("<tr>");
         html.append("<td class=\"hilight\">Duchy:</td><td>").append(details.get(3)).append("</td>");
+        html.append("</tr>");
+        html.append("<tr>");
+        html.append("<td class=\"hilight\">Countie:</td><td>").append(details.get(19)).append("</td>");
         html.append("</tr>");
         html.append("</table>");
 
@@ -604,7 +610,7 @@ public class Wrapper {
 
         html.append("<body>");
         html.append("<h1>Global Status</h1>");
-        
+
         for (int i = 0; i < retrieveAllPlots.size(); i++) {
             html.append("<table>");
             html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
@@ -615,11 +621,12 @@ public class Wrapper {
                 html.append("<tr><td>Plot Income:</td><td>").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");
             }
             html.append("</table>");
-            
-            if(i < (retrieveAllPlots.size() - 1))
+
+            if (i < (retrieveAllPlots.size() - 1)) {
                 html.append("<hr/>");
+            }
         }
-        
+
         html.append("</body>");
         html.append("</html>");
 

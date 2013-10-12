@@ -209,7 +209,7 @@ public class PlotQueryHandler {
 
         //Resolve all ID's
         //*Fault checking
-        System.out.println("CHARACTER FUCKING ANEM "+characterName);
+        System.out.println("CHARACTER FUCKING ANEM " + characterName);
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
                     + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
@@ -259,9 +259,9 @@ public class PlotQueryHandler {
             amountID = rs.getInt(1);
 
             stmt = con.createStatement();
-            System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie+"'");
-            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie+"'");
-            
+            System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
+            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
+
             rs.next();
             String CountyID = rs.getString("CountyID");
             sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
@@ -273,7 +273,7 @@ public class PlotQueryHandler {
                     + "(" + characterID + ", " + amountID + ", " + duchyID + ", " + sizeValue
                     + ", '" + ground + "', '" + building + "', "
                     + +happiness + ", " + monthlyIncome + ", " + workersUsed + ", " + workerMax
-                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0,'"+name+"','"+CountyID+"')";
+                    + ",0 , " + exquisite + ", 0, " + fine + ", 0, " + poor + ", 0.0,'" + name + "','" + CountyID + "')";
 
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -304,7 +304,7 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                line = new String[18];
+                line = new String[20];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
                 line[2] = rs.getString("PlotAmount");
@@ -323,7 +323,17 @@ public class PlotQueryHandler {
                 line[15] = rs.getString("PlotAcrePoor");
                 line[16] = rs.getString("PlotAcrePoorMax");
                 line[17] = rs.getString("PlotDefenseValue");
+                line[18] = (rs.getString("PlotEstateName"));//18
+                line[19] = (rs.getString("CountyID"));//19
                 values.add(line);
+
+                String sql2 = "SELECT CountyDescription FROM County WHERE "
+                        + "CountyID = " + line[19];
+                Statement stmt2 = con.createStatement();
+                ResultSet rs2t = stmt2.executeQuery(sql2);
+                rs2t.next();
+                line[19] = rs2t.getString("CountyDescription");
+
             }
 
             //Exchange ID's with values
@@ -393,6 +403,8 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotAcrePoor"));//15
             value.add(rs.getString("PlotAcrePoorMax"));//16
             value.add(rs.getString("PlotDefenseValue"));//17
+            value.add(rs.getString("PlotEstateName"));//18
+            value.add(rs.getString("CountyID"));//19
 
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
@@ -416,6 +428,14 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             value.set(3, rs.getString("DuchyName"));
+
+            sql = "SELECT CountyDescription FROM County WHERE "
+                    + "CountyID = " + value.get(19);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            value.set(19, rs.getString("CountyDescription"));
+
 
             return value;
         } catch (Exception e) {

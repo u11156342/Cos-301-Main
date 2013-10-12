@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class CharacterQueryHandler {
 
@@ -24,12 +25,13 @@ public class CharacterQueryHandler {
      * The function returns true if a character has been successfully added, and
      * false if not.
      */
-    public boolean registerEstateCharacter(String characterName) {
+    public boolean registerEstateCharacter(String characterName, String userID) {
         int amountID;
         try {
             //Check if character is already registered to the Estate system
             sql = "SELECT * FROM UserCharacter "
-                    + "WHERE Convert(VARCHAR(255), UserCharacterName) = '" + characterName + "'";
+                    + "WHERE  UserCharacterName like '" + characterName + "%' AND ProdUserID='" + userID + "'";
+            System.out.println(sql);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -37,9 +39,17 @@ public class CharacterQueryHandler {
 
                 int num = 0;
 
+                DatabaseConnection prod = new DatabaseConnection();
+                Connection prodCon = prod.openConnectionProd();
+                Statement s1 = prodCon.createStatement();
+                ResultSet unqiIDs = s1.executeQuery("SELECT CharacterID FROM CharacterProfile WHERE CharacterName='" + characterName + "'");
 
-                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus) "
-                        + "VALUES ('" + characterName + "&*&" + num + "', " + "0)";
+                unqiIDs.next();
+
+
+
+                sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus,ProdUserID,ProdCharacterID) "
+                        + "VALUES ('" + characterName + "&*&" + num + "', " + "0,'" + userID + "','" + unqiIDs.getString("CharacterID") + "')";
 
                 stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
                 rs = stmt.getGeneratedKeys();
@@ -159,18 +169,18 @@ public class CharacterQueryHandler {
         return null;
     }
 
-public ArrayList<String> getCharacterAmounts(String characterName) {
+    public ArrayList<String> getCharacterAmounts(String characterName) {
         DatabaseConnection prod = null;
         Connection prodCon = null;
         UserQueryHandler uqh = null;
         ArrayList<String> result = new ArrayList();
         int silver = 0, amPlat = 0, amGold = 0, amSil = 0;
         String charID = "";
-        
+
         prod = new DatabaseConnection();
         prodCon = prod.openConnectionProd();
         uqh = new UserQueryHandler(prodCon);
-        
+
         //Convert name to unique characterId
         try {
             sql = "SELECT ProdCharacterID FROM UserCharacter WHERE UserCharacterName = "
@@ -179,29 +189,28 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
             rs = stmt.executeQuery(sql);
             rs.next();
             charID = rs.getString("ProdCharacterID");
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in CharacterQueryHandler, function "
                     + "getCharacterAmounts()");
             System.out.println(e.getMessage());
         }
 
         silver = uqh.getCharacterSilver(charID);
-        
-        while(silver > 100) {
+
+        while (silver > 100) {
             silver = silver - 100;
             amPlat += 1;
         }
-        
-        while(silver > 10) {
+
+        while (silver > 10) {
             silver = silver - 10;
             amGold += 1;
         }
-        
+
         result.add(Integer.toString(amPlat));
         result.add(Integer.toString(amGold));
         result.add(Integer.toString(amSil));
-        
+
         return result;
     }
 
@@ -211,17 +220,18 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
         UserQueryHandler uqh = null;
         int currentSilver = 0, targetSilver = 0, difference = 0;
         String charID = "", userID = "";
-        
+
         //Convert name to unique characterId
         try {
             sql = "SELECT ProdUserID, ProdCharacterID FROM UserCharacter WHERE UserCharacterName = "
                     + "'" + characterName + "'";
+            System.out.println(sql);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             charID = rs.getString("ProdCharacterID");
             userID = rs.getString("ProdUserID");
-            
+
             //Get current silver total
             prod = new DatabaseConnection();
             prodCon = prod.openConnectionProd();
@@ -229,22 +239,21 @@ public ArrayList<String> getCharacterAmounts(String characterName) {
 
             currentSilver = uqh.getCharacterSilver(charID);
             targetSilver = (amountPlatinum * 100) + (amountGold * 10) + (amountSilver);
-            
-            if(targetSilver == currentSilver) {
+
+            if (targetSilver == currentSilver) {
                 return true;  //success
-            }
-            else
+            } else {
                 difference = targetSilver - currentSilver;
-            
+            }
+
             //insert difference into log table
             uqh.setCharacterSilver(charID, userID, difference);
-            
+
             return true;
-            
-        }
-        catch(Exception e) {
+
+        } catch (Exception e) {
             System.out.println("Error in CharacterQueryHandler, function "
-                    + "getCharacterAmounts()");
+                    + "modifyAmount()");
             System.out.println(e.getMessage());
         }
 
