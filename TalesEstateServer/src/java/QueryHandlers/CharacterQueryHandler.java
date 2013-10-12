@@ -159,18 +159,18 @@ public class CharacterQueryHandler {
         return null;
     }
 
-    public ArrayList<String> getCharacterAmounts(String characterName) {
+public ArrayList<String> getCharacterAmounts(String characterName) {
         DatabaseConnection prod = null;
         Connection prodCon = null;
         UserQueryHandler uqh = null;
         ArrayList<String> result = new ArrayList();
         int silver = 0, amPlat = 0, amGold = 0, amSil = 0;
         String charID = "";
-
+        
         prod = new DatabaseConnection();
         prodCon = prod.openConnectionProd();
         uqh = new UserQueryHandler(prodCon);
-
+        
         //Convert name to unique characterId
         try {
             sql = "SELECT ProdCharacterID FROM UserCharacter WHERE characterName = "
@@ -179,56 +179,73 @@ public class CharacterQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             charID = rs.getString("ProdCharacterID");
-        } catch (Exception e) {
+        }
+        catch(Exception e) {
             System.out.println("Error in CharacterQueryHandler, function "
                     + "getCharacterAmounts()");
             System.out.println(e.getMessage());
         }
 
         silver = uqh.getCharacterSilver(charID);
-
-        while (silver > 100) {
+        
+        while(silver > 100) {
             silver = silver - 100;
             amPlat += 1;
         }
-
-        while (silver > 10) {
+        
+        while(silver > 10) {
             silver = silver - 10;
             amGold += 1;
         }
-
+        
         result.add(Integer.toString(amPlat));
         result.add(Integer.toString(amGold));
         result.add(Integer.toString(amSil));
-
+        
         return result;
     }
 
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
-        System.out.println("UPDATING GOLD TO " + amountPlatinum + " " + amountGold + " " + amountSilver);
-        int amountID;
-        int curPlat, curGold, curSilv;
-
-        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
-                + "UserCharacterName = '" + characterName + "'";
+        DatabaseConnection prod = null;
+        Connection prodCon = null;
+        UserQueryHandler uqh = null;
+        int currentSilver = 0, targetSilver = 0, difference = 0;
+        String charID = "", userID = "";
+        
+        //Convert name to unique characterId
         try {
+            sql = "SELECT ProdUserID, ProdCharacterID FROM UserCharacter WHERE characterName = "
+                    + "'" + characterName + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
+            charID = rs.getString("ProdCharacterID");
+            userID = rs.getString("ProdUserID");
+            
+            //Get current silver total
+            prod = new DatabaseConnection();
+            prodCon = prod.openConnectionProd();
+            uqh = new UserQueryHandler(prodCon);
 
-            sql = "UPDATE Amount SET "
-                    + "AmountPlatinum = " + amountPlatinum
-                    + ", AmountGold = " + amountGold
-                    + ", AmountSilver = " + amountSilver
-                    + " WHERE AmountID = " + amountID;
-            stmt = con.createStatement();
-            stmt.execute(sql);
-
+            currentSilver = uqh.getCharacterSilver(charID);
+            targetSilver = (amountPlatinum * 100) + (amountGold * 10) + (amountSilver);
+            
+            if(targetSilver == currentSilver) {
+                return true;  //success
+            }
+            else
+                difference = targetSilver - currentSilver;
+            
+            //insert difference into log table
+            uqh.setCharacterSilver(charID, userID, difference, "Admin modify gold");
+            
             return true;
-        } catch (Exception e) {
-            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
-            e.printStackTrace();
+            
+        }
+        catch(Exception e) {
+            System.out.println("Error in CharacterQueryHandler, function "
+                    + "getCharacterAmounts()");
+            System.out.println(e.getMessage());
         }
 
         return false;

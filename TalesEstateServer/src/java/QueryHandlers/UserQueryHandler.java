@@ -170,11 +170,11 @@ public class UserQueryHandler {
     /* This function takes the primary key of the UserCharacter and returns
      * the amount of silver that the character has
      */
-    public int getCharacterSilver(String characterName) {
+    public int getCharacterSilver(String characterID) {
         int silver;
         
         sql = "SELECT SUM(Quantity) AS TotalSilver FROM CharacterSilverLog WHERE "
-                + "CharacterId = " + characterName;
+                + "CharacterId = " + characterID;
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -190,6 +190,31 @@ public class UserQueryHandler {
         }
         
         return -1;
+    }
+    
+    public boolean setCharacterSilver(String characterID, String userID, int silver, String note) {
+        
+        sql = "INSERT INTO CharacterSilverLog VALUES ("
+                + "'" + characterID + "', "
+                + "'" + "Estate system" + "', "
+                + "'" + userID + "', "
+                + silver + ", "
+                + note + ", "
+                + "GETDATE()"
+                + ");";
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in UserQueryHandler, function setCharac"
+                    + "terSilver()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
     }
     
     public String getCharacterName(String charID) {
