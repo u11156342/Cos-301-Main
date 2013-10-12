@@ -34,18 +34,23 @@ public class CharacterQueryHandler {
             rs = stmt.executeQuery(sql);
 
             if (!rs.next()) {
-                /*sql = "INSERT INTO Amount VALUES(0,0,0);";
-                stmt = con.createStatement();
-                stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
 
-                rs = stmt.getGeneratedKeys();
-                rs.next();
-                amountID = rs.getInt(1);*/
+                int num = 0;
+
 
                 sql = "INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus) "
-                        + "VALUES ('" + characterName + "', " + ", 0)";
+                        + "VALUES ('" + characterName + "*&*" + num + "', " + "0)";
+
+                stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+                rs = stmt.getGeneratedKeys();
+                rs.next();
+                num = rs.getInt(1);
+
+                sql = "UPDATE UserCharacter SET UserCharacterName='" + characterName + "*&*" + num + "' WHERE UserCharacterName='" + characterName + "*&*" + 0+"'";
+
                 stmt = con.createStatement();
                 stmt.execute(sql);
+
                 return true;
             } else {
                 return false;
@@ -66,7 +71,7 @@ public class CharacterQueryHandler {
         System.out.println(characterName);
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
-                    + "UserCharacterName = '" + characterName + "'";
+                    + "UserCharacterName like '%" + characterName + "%'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
@@ -161,11 +166,11 @@ public class CharacterQueryHandler {
         ArrayList<String> result = new ArrayList();
         int silver = 0, amPlat = 0, amGold = 0, amSil = 0;
         String charID = "";
-        
+
         prod = new DatabaseConnection();
         prodCon = prod.openConnectionProd();
         uqh = new UserQueryHandler(prodCon);
-        
+
         //Convert name to unique characterId
         try {
             sql = "SELECT ProdCharacterID FROM UserCharacter WHERE characterName = "
@@ -174,32 +179,31 @@ public class CharacterQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             charID = rs.getString("ProdCharacterID");
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in CharacterQueryHandler, function "
                     + "getCharacterAmounts()");
             System.out.println(e.getMessage());
         }
 
         silver = uqh.getCharacterSilver(charID);
-        
-        while(silver > 100) {
+
+        while (silver > 100) {
             silver = silver - 100;
             amPlat += 1;
         }
-        
-        while(silver > 10) {
+
+        while (silver > 10) {
             silver = silver - 10;
             amGold += 1;
         }
-        
+
         result.add(Integer.toString(amPlat));
         result.add(Integer.toString(amGold));
         result.add(Integer.toString(amSil));
-        
+
         return result;
     }
-    
+
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
         System.out.println("UPDATING GOLD TO " + amountPlatinum + " " + amountGold + " " + amountSilver);
         int amountID;

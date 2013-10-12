@@ -214,6 +214,7 @@ public class PlotQueryHandler {
                     + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
+            System.out.println("s1");
             rs.next();
             characterID = Integer.parseInt(rs.getString("UserCharacterID"));
 
@@ -221,6 +222,7 @@ public class PlotQueryHandler {
                     + "LOWER(DuchyName) = '" + duchyName.toLowerCase() + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
+            System.out.println("s2");
             rs.next();
             duchyID = Integer.parseInt(rs.getString("DuchyID"));
 
@@ -228,6 +230,7 @@ public class PlotQueryHandler {
                     + "LOWER(QualityDescription) = '" + quality.toLowerCase() + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
+            System.out.println("s3");
             rs.next();
             qualityID = Integer.parseInt(rs.getString("QualityID"));
 
@@ -249,11 +252,14 @@ public class PlotQueryHandler {
             stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
 
             rs = stmt.getGeneratedKeys();
+            System.out.println("asds");
             rs.next();
             amountID = rs.getInt(1);
 
             stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDuchy=" + duchyName + " AND CountyDescription=" + baronie);
+            System.out.println("SELECT CountyID FROM County WHERE CountyDescription=" + baronie);
+            rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription=" + baronie);
+            
             rs.next();
             String CountyID = rs.getString("CountyID");
             sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
