@@ -62,7 +62,7 @@ public class AdminMenu extends BasePanel {
         Title.setContentAreaFilled(false);
 
         c.gridy = 0;
-        c.insets = new Insets(50, 0, 0, 0);
+        c.insets = new Insets(100, 0, 0, 0);
         add(Title, c);
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 1;
