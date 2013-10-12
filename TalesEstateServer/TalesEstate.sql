@@ -400,7 +400,8 @@ CREATE TABLE Plot
 	PlotAcrePoorMax INT,
 	PlotDefenseValue FLOAT,
 	PlotEstateNumber VARCHAR(20),
-	PlotEstateName VARCHAR(50)
+	PlotEstateName VARCHAR(50),
+	Baronie VARCHAR(20)
 )
 
 INSERT INTO Plot(PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
