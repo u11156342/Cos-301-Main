@@ -61,7 +61,7 @@ public class LogWrapper {
         StringBuilder html = new StringBuilder();
 
         for (int i = 0; i < temp.size(); i++) {
-            html.append(temp.get(i)[1]).append(temp.get(i)[2].replaceAll("\\*", " "));
+            html.append(temp.get(i)[2]).append("   ").append(temp.get(i)[3].replaceAll("\\*", " "));
             html.append("<br>");
         }
 
@@ -77,7 +77,7 @@ public class LogWrapper {
         StringBuilder html = new StringBuilder();
 
         for (int i = 0; i < temp.size(); i++) {
-            html.append(temp.get(i)[1]).append(temp.get(i)[2].replaceAll("\\*", " "));
+            html.append(temp.get(i)[1]).append("    ").append(temp.get(i)[2].replaceAll("\\*", " "));
             html.append("<br>");
         }
 

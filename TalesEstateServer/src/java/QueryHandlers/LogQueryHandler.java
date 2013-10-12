@@ -186,10 +186,11 @@ public class LogQueryHandler {
 
 
             while (rs.next()) {
-                line = new String[3];
+                line = new String[4];
                 line[0] = rs.getString("PlotID");
-                line[1] = rs.getString("PlotLogDateTime");
-                line[2] = rs.getString("PlotLogMessage");
+                line[1]=rs.getString("CharacterID");
+                line[2] = rs.getString("PlotLogDateTime");
+                line[3] = rs.getString("PlotLogMessage");
                 list.add(line);
             }
         } catch (Exception e) {
@@ -244,7 +245,7 @@ public class LogQueryHandler {
        // description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
-            sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";
+            sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage,CharacterID) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "',"+UserID+")";
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println("Error when executing PlotLog()");

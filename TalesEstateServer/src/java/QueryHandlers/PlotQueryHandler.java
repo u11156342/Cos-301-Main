@@ -532,80 +532,80 @@ public class PlotQueryHandler {
 
 
             //Get ID's
-           // if (!characterName.equals("")) {
+            // if (!characterName.equals("")) {
 
-                if ("".equals(characterName.toLowerCase())) {
-                    sql = "SELECT UserCharacterID FROM UserCharacter";
-                } else {
-                    sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
-                            + "LOWER(UserCharacterName) like '%" + characterName.toLowerCase() + "%'";
+            if ("".equals(characterName.toLowerCase())) {
+                sql = "SELECT UserCharacterID FROM UserCharacter";
+            } else {
+                sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
+                        + "LOWER(UserCharacterName) like '%" + characterName.toLowerCase() + "%'";
+            }
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                characterID = Integer.parseInt(rs.getString("UserCharacterID"));
+
+                sql = "SELECT * FROM Plot";
+                if (characterID != 0) {
+                    sql += " WHERE PlotOwnedBy LIKE " + characterID;
                 }
+
+                if (duchyID != 0 && characterID != 0) {
+                    sql += " AND PlotDuchy LIKE " + duchyID;
+                } else if (duchyID != 0) {
+                    sql += " WHERE PlotDuchy LIKE " + duchyID;
+                }
+
+                if (size > 0 && (characterID != 0 || duchyID != 0)) {
+                    sql += " AND PlotSize LIKE " + size;
+                } else if (size > 0) {
+                    sql += " WHERE PlotSize LIKE " + size;
+                }
+
+                if (qualityID != 0 && (characterID != 0 || duchyID != 0 || size > 0)) {
+                    if (qualityID == 1) {
+                        sql += " AND PlotAcrePoorMax > 0";
+                    } else if (qualityID == 2) {
+                        sql += " AND PlotAcreFineMax > 0";
+                    } else if (qualityID == 3) {
+                        sql += " AND PlotAcreExquisiteMax > 0";
+                    }
+                } else if (qualityID != 0) {
+                    if (qualityID == 1) {
+                        sql += " WHERE PlotAcrePoorMax > 0";
+                    } else if (qualityID == 2) {
+                        sql += " WHERE PlotAcreFineMax > 0";
+                    } else if (qualityID == 3) {
+                        sql += " WHERE PlotAcreExquisiteMax > 0";
+                    }
+                }
+
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                while (rs.next()) {
-                    characterID = Integer.parseInt(rs.getString("UserCharacterID"));
+                rs2 = stmt.executeQuery(sql);
 
-                    sql = "SELECT * FROM Plot";
-                    if (characterID != 0) {
-                        sql += " WHERE PlotOwnedBy LIKE " + characterID;
-                    }
-
-                    if (duchyID != 0 && characterID != 0) {
-                        sql += " AND PlotDuchy LIKE " + duchyID;
-                    } else if (duchyID != 0) {
-                        sql += " WHERE PlotDuchy LIKE " + duchyID;
-                    }
-
-                    if (size > 0 && (characterID != 0 || duchyID != 0)) {
-                        sql += " AND PlotSize LIKE " + size;
-                    } else if (size > 0) {
-                        sql += " WHERE PlotSize LIKE " + size;
-                    }
-
-                    if (qualityID != 0 && (characterID != 0 || duchyID != 0 || size > 0)) {
-                        if (qualityID == 1) {
-                            sql += " AND PlotAcrePoorMax > 0";
-                        } else if (qualityID == 2) {
-                            sql += " AND PlotAcreFineMax > 0";
-                        } else if (qualityID == 3) {
-                            sql += " AND PlotAcreExquisiteMax > 0";
-                        }
-                    } else if (qualityID != 0) {
-                        if (qualityID == 1) {
-                            sql += " WHERE PlotAcrePoorMax > 0";
-                        } else if (qualityID == 2) {
-                            sql += " WHERE PlotAcreFineMax > 0";
-                        } else if (qualityID == 3) {
-                            sql += " WHERE PlotAcreExquisiteMax > 0";
-                        }
-                    }
-
-                    stmt = con.createStatement();
-                    rs2 = stmt.executeQuery(sql);
-
-                    while (rs2.next()) {
-                        line = new String[18];
-                        line[0] = rs2.getString("PlotID");
-                        line[1] = rs2.getString("PlotOwnedBy");
-                        line[2] = rs2.getString("PlotAmount");
-                        line[3] = rs2.getString("PlotDuchy");
-                        line[4] = rs2.getString("PlotSize");
-                        line[5] = rs2.getString("PlotGroundArray");
-                        line[6] = rs2.getString("PlotBuildingArray");
-                        line[7] = rs2.getString("PlotHappiness");
-                        line[8] = rs2.getString("PlotMonthlyIncome");
-                        line[9] = rs2.getString("PlotWorkersUsed");
-                        line[10] = rs2.getString("PlotWorkerMax");
-                        line[11] = rs2.getString("PlotAcreExquisite");
-                        line[12] = rs2.getString("PlotAcreExquisiteMax");
-                        line[13] = rs2.getString("PlotAcreFine");
-                        line[14] = rs2.getString("PlotAcreFineMax");
-                        line[15] = rs2.getString("PlotAcrePoor");
-                        line[16] = rs2.getString("PlotAcrePoorMax");
-                        line[17] = rs2.getString("PlotDefenseValue");
-                        values.add(line);
-                    }
-               // }
+                while (rs2.next()) {
+                    line = new String[18];
+                    line[0] = rs2.getString("PlotID");
+                    line[1] = rs2.getString("PlotOwnedBy");
+                    line[2] = rs2.getString("PlotAmount");
+                    line[3] = rs2.getString("PlotDuchy");
+                    line[4] = rs2.getString("PlotSize");
+                    line[5] = rs2.getString("PlotGroundArray");
+                    line[6] = rs2.getString("PlotBuildingArray");
+                    line[7] = rs2.getString("PlotHappiness");
+                    line[8] = rs2.getString("PlotMonthlyIncome");
+                    line[9] = rs2.getString("PlotWorkersUsed");
+                    line[10] = rs2.getString("PlotWorkerMax");
+                    line[11] = rs2.getString("PlotAcreExquisite");
+                    line[12] = rs2.getString("PlotAcreExquisiteMax");
+                    line[13] = rs2.getString("PlotAcreFine");
+                    line[14] = rs2.getString("PlotAcreFineMax");
+                    line[15] = rs2.getString("PlotAcrePoor");
+                    line[16] = rs2.getString("PlotAcrePoorMax");
+                    line[17] = rs2.getString("PlotDefenseValue");
+                    values.add(line);
+                }
+                // }
             }
 
             return values;
@@ -1289,6 +1289,8 @@ public class PlotQueryHandler {
         } catch (Exception e) {
             System.out.println("Error in function DoExspand():");
             System.out.println(e.getMessage());
-}
+        }
     }
+    
+
 }

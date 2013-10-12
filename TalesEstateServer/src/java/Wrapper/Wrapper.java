@@ -547,4 +547,78 @@ public class Wrapper {
 
 
     }
+
+    @GET
+    @Path("GlobalStatus")
+    @Produces("text/html")
+    public String GlobalStatus() {
+        StringBuilder html = new StringBuilder();
+        //retrieve all plots
+        ArrayList<String[]> retrieveAllPlots = handler.getPlotQH().retrieveAllPlots();
+        html.append("<html>");
+        html.append("<head>");
+
+        /* CSS for page
+         */
+        html.append("<style type=\"text/css\">");
+        html.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
+        html.append("h1{"
+                + "text-align: center;"
+                + "}");
+        html.append("table{"
+                + "width: 90%;"
+                + "}");
+        html.append("td{"
+                + "width: 50%;"
+                + "}");
+        html.append("th{"
+                + "text-align: left;"
+                + "}");
+        html.append(".hilight{"
+                + "font-size: 12px;"
+                + "}");
+        html.append(".sheading{"
+                + "font-size: 14px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append(".ssheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append("</style>");
+        html.append("</head>");
+
+        html.append("<body>");
+        html.append("<h1>Global Status</h1>");
+        html.append("<table>");
+        for (int i = 0; i < retrieveAllPlots.size(); i++) {
+
+            html.append("<tr></td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            html.append("<tr></td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            html.append("<tr></td>Plot Income:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+
+
+        }
+        html.append("</table>");
+        html.append("<hr/>");
+        html.append("</body>");
+        html.append("</html>");
+
+        return html.toString();
+    }
 }
