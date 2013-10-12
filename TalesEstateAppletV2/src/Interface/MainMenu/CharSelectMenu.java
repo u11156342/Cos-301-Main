@@ -1,6 +1,5 @@
 package Interface.MainMenu;
 
-import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
