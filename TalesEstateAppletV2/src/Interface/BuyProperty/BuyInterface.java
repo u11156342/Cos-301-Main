@@ -115,7 +115,7 @@ public class BuyInterface extends BasePanel {
                 //Vidarkentta
                 else if ((xcord > 1011 && xcord < 1149) && (ycord > 767 && ycord < 839)) {
                     duchy = "Sarkland";
-                    abby = "Vidarkentta";
+                    abby = "Vidar-kentta";
                 } //Granadalr
                 else if ((xcord > 939 && xcord < 1074) && (ycord > 654 && ycord < 692)) {
                     duchy = "Sarkland";
@@ -149,7 +149,7 @@ public class BuyInterface extends BasePanel {
                 //Sternefel
                 else if ((xcord > 672 && xcord < 905) && (ycord > 967 && ycord < 1035)) {
                     duchy = "Rotheim";
-                    abby = "Sternefel";
+                    abby = "Stjernefel";
                 } //Edeline
                 else if ((xcord > 908 && xcord < 1015) && (ycord > 1053 && ycord < 1154)) {
                     duchy = "Rotheim";
