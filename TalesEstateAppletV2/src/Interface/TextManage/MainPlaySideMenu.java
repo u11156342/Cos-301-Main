@@ -241,7 +241,7 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
-                        tc.rdb.
+                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*deposited*"+amountz+"*gold", tc.CharacterID);
                     } else {
                         JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
                     }
@@ -294,6 +294,7 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
+                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*withdrew*"+amountz+"*gold", tc.CharacterID);
                     } else {
                         JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
                     }
@@ -408,6 +409,8 @@ public class MainPlaySideMenu extends JPanel {
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
+                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*exspanded*the*plot*with*a*"+picked+"*acre", tc.CharacterID);
+                        
                         Report.doClick();
 
                     } else {

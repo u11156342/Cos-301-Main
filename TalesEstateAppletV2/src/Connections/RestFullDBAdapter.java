@@ -73,7 +73,7 @@ public class RestFullDBAdapter {
             DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String ID = Format.format(cal.getTime());
 
-            
+
 
             //check for inconsistensies in the path
             String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=/";
@@ -647,11 +647,11 @@ public class RestFullDBAdapter {
         }
     }
 
-    public void LogPlot(int PlotID, String desc) {
+    public void LogPlot(int PlotID, String desc, int UserID) {
         String temp = "";
-       // desc = desc.replace(" ", ".");
+        desc = desc.replace(" ", "*");
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "PlotLog/" + PlotID + "/" + desc);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "PlotLog/" + PlotID + "/" + desc + "/" + UserID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -659,7 +659,7 @@ public class RestFullDBAdapter {
 
     public void LogChar(int CharID, String desc) {
         String temp = "";
-       // desc = desc.replace(" ", ".");
+        desc = desc.replace(" ", "*");
         try {
             temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "CharacterLog/" + CharID + "/" + desc);
         } catch (Exception ex) {
@@ -681,6 +681,16 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             temp = DoServerRequest(serverURL + ":" + serverPort + server + "LogWrapper/" + "getCharacterLog/" + num + "/" + CharID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
+    }
+
+    public String GlobalStatus() {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "Wrapper/" + "GlobalStatus");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -53,4 +53,8 @@ public class GlobalStatus extends BasePanel {
 
         add(back, BorderLayout.SOUTH);
     }
+
+    void refresh(TransferContainer tc) {
+        textZone.setText(tc.rdb.GlobalStatus());
+    }
 }

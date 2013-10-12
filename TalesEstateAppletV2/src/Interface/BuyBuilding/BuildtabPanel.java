@@ -362,6 +362,8 @@ public class BuildtabPanel extends BasePanel {
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
                         tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
+                        
+                        tain.rdb.LogPlot(PlotID, "Player*"+tain.CharacterName+"*purchased*a*"+r2s.get(0)[1]+"*on*the*plot", tain.CharacterID);
 
                     }
                     tr.listBuildings.doClick();
