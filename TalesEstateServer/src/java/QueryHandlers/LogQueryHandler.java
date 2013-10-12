@@ -240,7 +240,7 @@ public class LogQueryHandler {
         }
     }
 
-    public void PlotLog(int plotID, String description) {
+    public void PlotLog(int plotID, String description,int UserID) {
        // description = description.replace(".", " ");
         try {
             stmt = con.createStatement();

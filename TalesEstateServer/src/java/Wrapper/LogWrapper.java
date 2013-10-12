@@ -36,11 +36,11 @@ public class LogWrapper {
     }
 
     @GET
-    @Path("PlotLog/{PlotID}/{description}")
+    @Path("PlotLog/{PlotID}/{description}/{Userid}")
     @Produces("text/html")
-    public String PlotLog(@PathParam("PlotID") int PlotID, @PathParam("description") String description) {
+    public String PlotLog(@PathParam("PlotID") int PlotID, @PathParam("description") String description, @PathParam("Userid") int Userid) {
 
-        handler.getLogQH().PlotLog(PlotID, description);
+        handler.getLogQH().PlotLog(PlotID, description,Userid);
         return "";
     }
 
