@@ -55,6 +55,7 @@ public class GlobalStatus extends BasePanel {
     }
 
     void refresh(TransferContainer tc) {
+        textZone.setContentType("text/html");
         textZone.setText(tc.rdb.GlobalStatus());
     }
 }
