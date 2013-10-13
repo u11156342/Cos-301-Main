@@ -297,7 +297,7 @@ public class BuildingQueryHandler {
         ArrayList<String[]> results = new ArrayList();
         String[] line;
 
-        sql = "SELECT BuildLogBuildingID, BuildLogTimeToComplete, "
+        sql = "SELECT BuildLogPlaced,BuildLogID,BuildLogBuildingID, BuildLogTimeToComplete, "
                 + "BuildLogCompleted FROM BuildLog WHERE "
                 + "BuildLogCharacterID = " + charid + " AND "
                 + "BuildLogPlotID = " + plotid;
@@ -313,10 +313,12 @@ public class BuildingQueryHandler {
         try {
 
             while (rs.next()) {
-                line = new String[3];
-                line[0]=rs.getString("BuildLogBuildingID");
-                line[1]=rs.getString("BuildLogTimeToComplete");
-                line[2]=rs.getString("BuildLogCompleted");
+                line = new String[5];
+                line[0] = rs.getString("BuildLogBuildingID");
+                line[1] = rs.getString("BuildLogTimeToComplete");
+                line[2] = rs.getString("BuildLogCompleted");
+                line[3] = rs.getString("BuildLogID");
+                line[4] = rs.getString("BuildLogPlaced");
                 results.add(line);
             }
         } catch (Exception e) {
@@ -591,4 +593,6 @@ public class BuildingQueryHandler {
 
         return "-1";
     }
+
+
 }

@@ -429,7 +429,7 @@ public class PlotQueryHandler {
             rs.next();
             value.set(3, rs.getString("DuchyName"));
 
-           
+
             sql = "SELECT CountyDescription FROM County WHERE "
                     + "CountyID = " + value.get(19);
             stmt = con.createStatement();
@@ -1322,6 +1322,30 @@ public class PlotQueryHandler {
 
         } catch (Exception e) {
             System.out.println("Error in function DoExspand():");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void PlaceBuilding(int PlotID, int[][] buildings) {
+        sql = "UPDATE Plot SET PlotBuildingArray='" + convertToArray(buildings) + "' WHERE PlotID=" + PlotID;
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+
+        } catch (Exception e) {
+            System.out.println("Error in function PlaceBuilding():");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void MarkBuildingAsPlaced(int BuildLogID) {
+        sql = "UPDATE BuildLog SET BuildLogPlaced='1' WHERE BuildLogID=" + BuildLogID;
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+
+        } catch (Exception e) {
+            System.out.println("Error in function MarkBuildingAsPlaced():");
             System.out.println(e.getMessage());
         }
     }
