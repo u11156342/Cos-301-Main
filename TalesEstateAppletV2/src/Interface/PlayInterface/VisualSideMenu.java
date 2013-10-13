@@ -26,23 +26,32 @@ public class VisualSideMenu extends JPanel {
     String[] build;
     int[] buildID;
     int[] PicID;
+    int[] LogIDs;
 
     public VisualSideMenu(final int PropertyId, final TransferContainer tc) {
         PropertyID = PropertyId;
+    }
 
-        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, PropertyId);
+    public void init(final TransferContainer tc) {
+
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, PropertyID);
 
         build = new String[retrieveAllBuildingsOwnedByCharacter.size()];
         buildID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
         PicID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
+        LogIDs = new int[retrieveAllBuildingsOwnedByCharacter.size()];
 
         ArrayList<String[]> tempresult;
 
         for (int a = 0; a < build.length; a++) {
-            tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
-            build[a] = tempresult.get(0)[1];
-            buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
-            PicID[a] = Integer.parseInt(tempresult.get(0)[12]);
+
+            if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(a)[4])) {
+                tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
+                build[a] = tempresult.get(0)[1];
+                buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
+                PicID[a] = Integer.parseInt(tempresult.get(0)[12]);
+                LogIDs[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[3]);
+            }
         }
 
 
@@ -67,6 +76,7 @@ public class VisualSideMenu extends JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tc.BuildingRef = PicID[buildingTokens.getSelectedIndex()];
+                tc.BuildingLogReference = LogIDs[buildingTokens.getSelectedIndex()];
                 //JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
             }
         });

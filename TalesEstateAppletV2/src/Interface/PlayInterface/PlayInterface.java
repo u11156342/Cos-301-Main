@@ -52,6 +52,7 @@ public class PlayInterface extends BasePanel {
 
         playIn.gridstates = buildings;
         playIn.tileStates = tiles;
+        playIn.PlotID=propertyID;
         playIn.setPreferredSize(new Dimension(360 * size + 100, 180 * size + 100));
 
         playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -62,6 +63,8 @@ public class PlayInterface extends BasePanel {
         add(playMapScrollPane, BorderLayout.CENTER);
 
         VisualSideMenu menu = new VisualSideMenu(propertyID, t);
+        t.reference=menu;
+        menu.init(t);
         menu.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT / 5-100, t.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane menuscroll = new JScrollPane(menu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         menuscroll.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT / 5, t.JFXPANEL_HEIGHT_INT - 100));

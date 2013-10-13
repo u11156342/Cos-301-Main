@@ -15,6 +15,7 @@ import Interface.MainMenu.CharSelectMenu;
 import Interface.MainMenu.MainMenu;
 import Interface.MyProperties.MyPropertiesInterface;
 import Interface.PlayInterface.PlayInterface;
+import Interface.PlayInterface.VisualSideMenu;
 import Interface.PlayerManagement.CharacterLog;
 import Interface.PlayerManagement.PlayerManagementInterface;
 import Interface.RightsManagement.RightsInterface;
@@ -58,7 +59,8 @@ public class TransferContainer {
     public int BuildingRef=5;
     public CharacterLog clog;
     public GlobalStatus gstatus;
-
+    public int BuildingLogReference=0;
+    public VisualSideMenu reference;
     public TransferContainer() {
         cardlayout = new CardLayout();
         Cinit();

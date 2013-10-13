@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import talesestateappletv2.TransferContainer;
@@ -36,6 +37,8 @@ public class VisualMap extends JFXPanel {
     TransferContainer tc;
     int oldvalue = 0;
     int currentZoom = 0;
+    public int PlotID;
+    public boolean placed = false;
 
     public VisualMap(int size, TransferContainer t) throws IOException {
         tc = t;
@@ -50,7 +53,7 @@ public class VisualMap extends JFXPanel {
                     oldvalue = e.getWheelRotation();
                 } else {
                     int r = e.getWheelRotation();
-                    r=r*-1;
+                    r = r * -1;
                     currentZoom = currentZoom + r;
 
                     if (currentZoom == -5) {
@@ -200,7 +203,7 @@ public class VisualMap extends JFXPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-
+                placed = false;
                 tempx = e.getX();
                 tempy = e.getY();
 
@@ -274,7 +277,21 @@ public class VisualMap extends JFXPanel {
 
 
                             if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+
                                 gridstates[x][y] = tc.BuildingRef;
+                                //builds
+                                if (!placed) {
+                                    placed = true;
+                                    tc.rdb.PlaceBuilding(PlotID, gridstates);
+                                    tc.rdb.MarkBuildingAsPlaced(tc.BuildingLogReference);
+
+                                    tc.BuildingRef = 5;
+
+                                    tc.reference.buildingTokens = new JList();
+                                    tc.reference.init(tc);
+                                    tc.reference.repaint();
+                                }
+                                return;
                             }
 
 
@@ -284,6 +301,8 @@ public class VisualMap extends JFXPanel {
                     move = move - (wdOfcell / 2);
                     move2 = move2 + (htOfcell / 2);
                 }
+
+
             }
 
             @Override
