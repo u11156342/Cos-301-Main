@@ -429,6 +429,7 @@ public class PlotQueryHandler {
             rs.next();
             value.set(3, rs.getString("DuchyName"));
 
+           
             sql = "SELECT CountyDescription FROM County WHERE "
                     + "CountyID = " + value.get(19);
             stmt = con.createStatement();
