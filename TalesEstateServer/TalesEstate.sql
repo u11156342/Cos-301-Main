@@ -489,7 +489,8 @@ CREATE TABLE BuildLog
 	BuildLogBuildingID INT FOREIGN KEY REFERENCES Building(BuildingID),
 	BuildLogDateTimeBuilt DATETIME,
 	BuildLogTimeToComplete INT,
-	BuildLogCompleted BIT
+	BuildLogCompleted BIT,
+	BuildLogPlaced BIT DEFAULT 0
 )
 
 CREATE TABLE PlotAccess
