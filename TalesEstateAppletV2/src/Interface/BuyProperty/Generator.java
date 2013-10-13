@@ -25,12 +25,12 @@ public class Generator {
 
             workingsize = tiles.length;
         }
-        
-        System.out.println("size : "+size);
-        System.out.println("working size "+workingsize);
-        System.out.println("tiles l "+tiles.length);
 
-      //  printArray(tiles);
+        System.out.println("size : " + size);
+        System.out.println("working size " + workingsize);
+        System.out.println("tiles l " + tiles.length);
+
+        //  printArray(tiles);
 
         for (int a = 0; a < workingsize; a++) {
 
@@ -131,22 +131,29 @@ public class Generator {
         //1 semi_fertile
         //2 fertile
         //3 water
+        if (quality == 1) {
+            return 0;
+        } else if (quality == 2) {
+            return 1;
+        } else if (quality == 3) {
+            return 2;
+        }
 
         //poor
         if (quality == 1) {
-            probability[0] = 0.70;
-            probability[1] = 0.70;
-            probability[2] = 0.70;
+            probability[0] = 1.00;
+            probability[1] = 1.00;
+            probability[2] = 1.00;
             probability[3] = 1.00;
         } else if (quality == 2) {
             probability[0] = 0.0;
-            probability[1] = 0.65;
-            probability[2] = 0.65;
+            probability[1] = 1.00;
+            probability[2] = 1.00;
             probability[3] = 1.00;
         } else if (quality == 3) {
             probability[0] = 0.0;
             probability[1] = 0.0;
-            probability[2] = 0.80;
+            probability[2] = 1.00;
             probability[3] = 1.00;
         }
 
@@ -181,7 +188,7 @@ public class Generator {
                 temp = 3;
                 break;
         }
-        
-        return this.ExspandGenerate(get,temp,size,tiles);
+
+        return this.ExspandGenerate(get, temp, size, tiles);
     }
 }
