@@ -1,6 +1,7 @@
 package Interface.PlayInterface;
 
 import Connections.RestFullDBAdapter;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,48 +26,57 @@ public class VisualSideMenu extends JPanel {
     String[] build;
     int[] buildID;
     int[] PicID;
+    int[] LogIDs;
 
     public VisualSideMenu(final int PropertyId, final TransferContainer tc) {
         PropertyID = PropertyId;
+    }
 
+    public void init(final TransferContainer tc) {
 
-        ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(PropertyID);
-        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.rdb.retrieveCharacterID(retrievePlotDetails.get(1)), PropertyId);
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = wrapper.retrieveAllBuildingsOwnedByCharacter(tc.CharacterID, PropertyID);
 
         build = new String[retrieveAllBuildingsOwnedByCharacter.size()];
         buildID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
         PicID = new int[retrieveAllBuildingsOwnedByCharacter.size()];
+        LogIDs = new int[retrieveAllBuildingsOwnedByCharacter.size()];
 
         ArrayList<String[]> tempresult;
 
         for (int a = 0; a < build.length; a++) {
-            tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
-            build[a] = tempresult.get(0)[1];
-            buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
-            PicID[a]=Integer.parseInt(tempresult.get(0)[12]);
+
+            if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(a)[4])) {
+                tempresult = wrapper.retrieveBuildingDetailsById(Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]));
+                build[a] = tempresult.get(0)[1];
+                buildID[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[0]);
+                PicID[a] = Integer.parseInt(tempresult.get(0)[12]);
+                LogIDs[a] = Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(a)[3]);
+            }
         }
 
 
         buildingTokens = new JList(build);
-        buildingTokens.setFixedCellWidth(300);
-        buildingTokens.setPreferredSize(new Dimension(200, build.length * 30));
+        buildingTokens.setFixedCellWidth(170);
+
+        //  buildingTokens.setPreferredSize(new Dimension(200, tc.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         tokenscroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        tokenscroll.setPreferredSize(new Dimension(150, 200));
-        setLayout(new GridBagLayout());
+        //  tokenscroll.setPreferredSize(new Dimension(210, tc.JFXPANEL_HEIGHT_INT-90));
+        // setLayout(new GridBagLayout());
 
-        GridBagConstraints c = new GridBagConstraints();
+        //  GridBagConstraints c = new GridBagConstraints();
 
-        c.gridy = 0;
-        add(title, c);
-        c.insets = new Insets(30, 0, 0, 0);
-        c.gridy = 1;
-        add(tokenscroll, c);
+        // c.gridy = 0;
+        //  add(title, c);
+        //  c.insets = new Insets(30, 0, 0, 0);
+        // c.gridy = 1;
+        add(tokenscroll, BorderLayout.CENTER);
         buildingTokens.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 tc.BuildingRef = PicID[buildingTokens.getSelectedIndex()];
+                tc.BuildingLogReference = LogIDs[buildingTokens.getSelectedIndex()];
                 //JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
             }
         });

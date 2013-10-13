@@ -24,12 +24,12 @@ public class CharacterWrapper {
     Converter converter = new Converter();
 
     @GET
-    @Path("registerEstateCharacter/{characterName}")
+    @Path("registerEstateCharacter/{characterName}/{userID}")
     @Produces("text/plain")
-    public String registerEstateCharacter(@PathParam("characterName") String characterName) {
+    public String registerEstateCharacter(@PathParam("characterName") String characterName,@PathParam("userID") String userID) {
 
         characterName = characterName.replace('.', ' ');
-        if (handler.getCharacterQH().registerEstateCharacter(characterName)) {
+        if (handler.getCharacterQH().registerEstateCharacter(characterName,userID)) {
             return "true";
         } else {
             return "false";

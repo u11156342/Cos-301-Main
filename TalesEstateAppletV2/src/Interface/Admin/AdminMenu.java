@@ -57,12 +57,12 @@ public class AdminMenu extends BasePanel {
         ManageCharacterGold.setPreferredSize(new Dimension(250, 60));
 
 
-        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
+        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(48)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
 
         c.gridy = 0;
-        c.insets = new Insets(50, 0, 0, 0);
+        c.insets = new Insets(100, 0, 0, 0);
         add(Title, c);
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 1;

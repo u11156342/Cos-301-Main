@@ -30,7 +30,7 @@ public class GlobalStatus extends BasePanel {
 
     public void init(final TransferContainer tc) {
 
-        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
+        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(46)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
 

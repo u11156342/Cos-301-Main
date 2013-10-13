@@ -4,6 +4,9 @@ import Connections.RestFullDBAdapter;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,17 +33,16 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         if (amount == 0) {
             h = 300;
-            
+
         }
-        if(amount==1)
-        {
-            h=300;
+        if (amount == 1) {
+            h = 300;
+        } else {
+            h = amount * 450;
         }
-        else
-        h = amount * 75;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this, tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 120));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(450, 200));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
 
             playersCurrentProperties[a].init(tc);
@@ -48,10 +50,10 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         JComponent panel1 = makePanel("Panel #1", 1);
         panel1.setPreferredSize(new Dimension(w, h));
-        add(panel1,BorderLayout.CENTER);
+        add(panel1, BorderLayout.CENTER);
 
 
-        
+
     }
 
     protected JComponent makePanel(String text, int type) {

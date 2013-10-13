@@ -36,15 +36,15 @@ public class PlotWrapper {
     public String addPlotToCharacter(@PathParam("characterName") String characterName, @PathParam("duchyName") String duchyName, @PathParam("quality") String quality,
             @PathParam("sizeValue") int sizeValue, @PathParam("groundArray") String groundArray, @PathParam("buildingArray") String buildingArray, @PathParam("happiness") int happiness,
             @PathParam("monthlyIncome") double monthlyIncome, @PathParam("workersUsed") int workersUsed, @PathParam("workerMax") int workerMax, @PathParam("abby") String abby, @PathParam("name") String name) {
-
-        characterName = characterName.replaceAll(""+'.',""+ ' ');
-        name=name.replaceAll("."," ");
+        characterName = characterName.replaceAll("\\.", " ");
+        //  name=name.replaceAll("\\."," ");
+        System.out.println("YES " + characterName);
         groundArray = groundArray.replace('_', ';');
         buildingArray = buildingArray.replace('_', ';');
         System.out.println("groundArray " + groundArray);
         System.out.println("buildingArray " + buildingArray);
         System.out.println(quality);
-        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax,abby,name)) {
+        if (handler.getPlotQH().addPlotToCharacter(characterName, duchyName, quality, sizeValue, handler.getPlotQH().convertFromArray(groundArray), handler.getPlotQH().convertFromArray(buildingArray), happiness, monthlyIncome, workersUsed, workerMax, abby, name)) {
             return "true";
         } else {
             return "false";
@@ -255,6 +255,34 @@ public class PlotWrapper {
     public String DoExspand(@PathParam("pId") int pId, @PathParam("Upkeep") String Upkeep, @PathParam("workerMax") int workerMax) {
         System.out.println("CALLLED");
         handler.getPlotQH().DoExspand(pId, Double.parseDouble(Upkeep), workerMax);
+        return "true";
+    }
+
+    @GET
+    @Path("PlaceBuilding/{PlotID}/{Buildings}")
+    @Produces("text/html")
+    public String PlaceBuilding(@PathParam("PlotID") int PlotID, @PathParam("Buildings") String Buildings) {
+        Buildings = Buildings.replace('_', ';');
+        try {
+            handler.getPlotQH().PlaceBuilding(PlotID, handler.getPlotQH().convertFromArray(Buildings));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return "false";
+        }
+        return "true";
+    }
+
+    @GET
+    @Path("MarkBuildingAsPlaced/{BuildLogID}")
+    @Produces("text/html")
+    public String MarkBuildingAsPlaced(@PathParam("BuildLogID") int BuildLogID) {
+
+        try {
+            handler.getPlotQH().MarkBuildingAsPlaced(BuildLogID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return "false";
+        }
         return "true";
     }
 }

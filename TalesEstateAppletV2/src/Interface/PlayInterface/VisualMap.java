@@ -5,10 +5,14 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import talesestateappletv2.TransferContainer;
 
@@ -31,17 +35,92 @@ public class VisualMap extends JFXPanel {
     int tempx = 0;
     int tempy = 0;
     TransferContainer tc;
+    int oldvalue = 0;
+    int currentZoom = 0;
+    public int PlotID;
+    public boolean placed = false;
 
     public VisualMap(int size, TransferContainer t) throws IOException {
         tc = t;
+        wdOfcell = 160;
+        htOfcell = 80;
+
+        this.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+
+                if (oldvalue == 0) {
+                    oldvalue = e.getWheelRotation();
+                } else {
+                    int r = e.getWheelRotation();
+                    r = r * -1;
+                    currentZoom = currentZoom + r;
+
+                    if (currentZoom == -5) {
+                        wdOfcell = 60;
+                        htOfcell = 30;
+
+                    } else if (currentZoom == -4) {
+                        wdOfcell = 80;
+                        htOfcell = 40;
+
+                    } else if (currentZoom == -3) {
+                        wdOfcell = 100;
+                        htOfcell = 50;
+
+                    } else if (currentZoom == -2) {
+                        wdOfcell = 120;
+                        htOfcell = 60;
+
+                    } else if (currentZoom == -1) {
+                        wdOfcell = 140;
+                        htOfcell = 70;
+
+                    } else if (currentZoom == 0) {
+                        wdOfcell = 160;
+                        htOfcell = 80;
+
+                    } else if (currentZoom == 1) {
+                        wdOfcell = 200;
+                        htOfcell = 100;
+
+                    } else if (currentZoom == 2) {
+                        wdOfcell = 240;
+                        htOfcell = 120;
+
+                    } else if (currentZoom == 3) {
+                        wdOfcell = 280;
+                        htOfcell = 140;
+
+                    } else if (currentZoom == 4) {
+                        wdOfcell = 320;
+                        htOfcell = 160;
+
+                    } else if (currentZoom == 5) {
+                        wdOfcell = 360;
+                        htOfcell = 180;
+
+                    } else {
+                        if (currentZoom < 0) {
+                            currentZoom = -5;
+                        } else {
+                            currentZoom = 5;
+                        }
+                    }
+
+                    repaint();
+                }
+
+            }
+        });
+
     }
 
     @Override
     public void paint(final Graphics g) {
 
 
-        wdOfcell = 160;
-        htOfcell = 80;
+
         globalwidth = wdOfcell * tileStates.length;
         globalheight = globalheight * tileStates.length;
         gridsize = tileStates.length;
@@ -124,7 +203,7 @@ public class VisualMap extends JFXPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-
+                placed = false;
                 tempx = e.getX();
                 tempy = e.getY();
 
@@ -198,7 +277,21 @@ public class VisualMap extends JFXPanel {
 
 
                             if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+
                                 gridstates[x][y] = tc.BuildingRef;
+                                //builds
+                                if (!placed) {
+                                    placed = true;
+                                    tc.rdb.PlaceBuilding(PlotID, gridstates);
+                                    tc.rdb.MarkBuildingAsPlaced(tc.BuildingLogReference);
+
+                                    tc.BuildingRef = 5;
+
+                                    tc.reference.buildingTokens = new JList();
+                                    tc.reference.init(tc);
+                                    tc.reference.repaint();
+                                }
+                                return;
                             }
 
 
@@ -208,6 +301,8 @@ public class VisualMap extends JFXPanel {
                     move = move - (wdOfcell / 2);
                     move2 = move2 + (htOfcell / 2);
                 }
+
+
             }
 
             @Override
@@ -226,6 +321,8 @@ public class VisualMap extends JFXPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
+
+
 
 
     }

@@ -125,11 +125,11 @@ public class RestFullDBAdapter {
         return temp;
     }
 
-    public boolean registerEstateCharacter(String characterName) {
+    public boolean registerEstateCharacter(String characterName, String userID) {
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "CharacterWrapper/" + "registerEstateCharacter" + "/" + characterName + "/" + userID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -278,9 +278,9 @@ public class RestFullDBAdapter {
     public boolean addPlotToCharacter(String characterName, String duchyName, String abby, String name, String quality, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax) {
         String temp = "";
         try {
-            characterName = characterName.replaceAll(" ",".");
-            name=name.replaceAll(" ",".");
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax+"/"+abby+"/"+name);
+            characterName = characterName.replaceAll(" ", ".");
+            name = name.replaceAll(" ", ".");
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addPlotToCharacter" + "/" + characterName + "/" + duchyName + "/" + quality + "/" + sizeValue + "/" + convertToArray(groundArray) + "/" + convertToArray(buildingArray) + "/" + happiness + "/" + monthlyIncome + "/" + workersUsed + "/" + workerMax + "/" + abby + "/" + name);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -692,6 +692,26 @@ public class RestFullDBAdapter {
         String temp = "";
         try {
             temp = DoServerRequest(serverURL + ":" + serverPort + server + "Wrapper/" + "GlobalStatus");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
+    }
+
+    public String PlaceBuilding(int PlotID, int[][] buildings) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "PlaceBuilding/" + PlotID + "/" + convertToArray(buildings));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return temp;
+    }
+
+    public String MarkBuildingAsPlaced(int BuildLogID) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "MarkBuildingAsPlaced/" + BuildLogID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
