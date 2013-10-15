@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,8 @@ public class GameBrowseGrid extends JFXPanel {
     Graphics2D g2d;
     int tempx = 0;
     int tempy = 0;
+    int oldvalue = 0;
+    int currentZoom = 0;
     TransferContainer tc;
 
     public GameBrowseGrid(int size) throws IOException {
@@ -43,14 +47,82 @@ public class GameBrowseGrid extends JFXPanel {
         globalwidth = wdOfcell * size;
         globalheight = globalheight * size;
 
+        this.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+
+                if (oldvalue == 0) {
+                    oldvalue = e.getWheelRotation();
+                } else {
+                    int r = e.getWheelRotation();
+                    r = r * -1;
+                    currentZoom = currentZoom + r;
+
+                    if (currentZoom == -5) {
+                        wdOfcell = 60;
+                        htOfcell = 30;
+
+                    } else if (currentZoom == -4) {
+                        wdOfcell = 80;
+                        htOfcell = 40;
+
+                    } else if (currentZoom == -3) {
+                        wdOfcell = 100;
+                        htOfcell = 50;
+
+                    } else if (currentZoom == -2) {
+                        wdOfcell = 120;
+                        htOfcell = 60;
+
+                    } else if (currentZoom == -1) {
+                        wdOfcell = 140;
+                        htOfcell = 70;
+
+                    } else if (currentZoom == 0) {
+                        wdOfcell = 160;
+                        htOfcell = 80;
+
+                    } else if (currentZoom == 1) {
+                        wdOfcell = 200;
+                        htOfcell = 100;
+
+                    } else if (currentZoom == 2) {
+                        wdOfcell = 240;
+                        htOfcell = 120;
+
+                    } else if (currentZoom == 3) {
+                        wdOfcell = 280;
+                        htOfcell = 140;
+
+                    } else if (currentZoom == 4) {
+                        wdOfcell = 320;
+                        htOfcell = 160;
+
+                    } else if (currentZoom == 5) {
+                        wdOfcell = 360;
+                        htOfcell = 180;
+
+                    } else {
+                        if (currentZoom < 0) {
+                            currentZoom = -5;
+                        } else {
+                            currentZoom = 5;
+                        }
+                    }
+
+                    repaint();
+                }
+
+            }
+        });
     }
 
     @Override
     public void paint(final Graphics g) {
 
 
-        wdOfcell = 160;
-        htOfcell = 80;
+        //  wdOfcell = 160;
+        //htOfcell = 80;
         globalwidth = wdOfcell * tileStates.length;
         globalheight = globalheight * tileStates.length;
         gridsize = tileStates.length;
@@ -157,7 +229,7 @@ public class GameBrowseGrid extends JFXPanel {
                                         tempplacinggrid[b][n] = 0;
                                     }
                                 }
-                                tempplacinggrid[x][y] = tc.BuildingRef;
+//                                tempplacinggrid[x][y] = tc.BuildingRef;
                             }
 
 

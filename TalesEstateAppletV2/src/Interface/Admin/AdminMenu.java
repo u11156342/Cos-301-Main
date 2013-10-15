@@ -22,64 +22,21 @@ import talesestateappletv2.TransferContainer;
  */
 public class AdminMenu extends BasePanel {
 
-    JButton search = new JButton("Search");
-    JButton ManageCharacterGold = new JButton("Manage Character Gold");
-    JButton GlobalStatus = new JButton("Global Status");
-
     public AdminMenu(String name, final TransferContainer tc) {
         super(name);
-
-
-
-        search.setPreferredSize(new Dimension(150, 60));
-        ManageCharacterGold.setPreferredSize(new Dimension(150, 60));
-        search.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                MainAdminSearch admin = tc.Cmanager.getMainAdminSearchesCard();
-                admin.init(tc);
-                tc.cardlayout.show(tc.contentpane, admin.getName());
-            }
-        });
-
-        ManageCharacterGold.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                ManageGold mg = tc.Cmanager.getManageGoldIntersCard();
-                tc.cardlayout.show(tc.contentpane, mg.getName());
-            }
-        });
-
-        setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        search.setPreferredSize(new Dimension(250, 60));
-        ManageCharacterGold.setPreferredSize(new Dimension(250, 60));
 
 
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(48)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
 
-        c.gridy = 0;
-        c.insets = new Insets(100, 0, 0, 0);
-        add(Title, c);
-        c.insets = new Insets(10, 0, 0, 0);
-        c.gridy = 1;
-        add(search, c);
-        c.gridy = 2;
-        add(ManageCharacterGold, c);
+        add(Title, BorderLayout.NORTH);
 
-        GlobalStatus.setPreferredSize(new Dimension(250, 60));
-        GlobalStatus.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tc.gstatus.refresh(tc);
-                tc.cardlayout.show(tc.contentpane, "gStatus");
-            }
-        });
-        c.gridy = 3;
-        add(GlobalStatus, c);
+        AdminMenuInterface ami = new AdminMenuInterface(tc);
+        add(ami, BorderLayout.CENTER);
+
+
+
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
@@ -90,7 +47,6 @@ public class AdminMenu extends BasePanel {
         });
 
         back.setPreferredSize(new Dimension(250, 60));
-        c.gridy = 4;
-        add(back, c);
+        add(back, BorderLayout.SOUTH);
     }
 }

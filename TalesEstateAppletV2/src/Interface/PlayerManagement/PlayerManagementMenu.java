@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,7 +31,7 @@ public class PlayerManagementMenu extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
 
         c.gridx = 0;
-        c.insets=new Insets(10,0,0,0);
+        c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 0;
         donateGoldToChar.setPreferredSize(new Dimension(250, 60));
 
@@ -40,19 +41,26 @@ public class PlayerManagementMenu extends JPanel {
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
 
-                if("".equals(attempt) || attempt==null)
-                {
+                if ("".equals(attempt) || attempt == null) {
                     return;
                 }
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
 
 
-                System.out.println("a o " + retrieveCharacterIDExtra.size());
+                if (retrieveCharacterIDExtra == null) {
+                    return;
+                }
+
+                if (retrieveCharacterIDExtra.isEmpty()) {
+                    return;
+                }
+
                 String[] characters;
 
                 characters = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
-                    characters[i] = retrieveCharacterIDExtra.get(i)[1];
+                    StringTokenizer tokens = new StringTokenizer(retrieveCharacterIDExtra.get(i)[1], "&*&");
+                    characters[i] = tokens.nextToken();
                 }
 
                 String picked = "";
@@ -80,7 +88,11 @@ public class PlayerManagementMenu extends JPanel {
 
                     try {
                         double amountz = 0;
-                        amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                        try {
+                            amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                        } catch (Exception ee) {
+                            return;
+                        }
                         if (amountz == 0) {
                             return;
                         }
@@ -109,9 +121,12 @@ public class PlayerManagementMenu extends JPanel {
                             nsilver = tempa;
                             tc.rdb.modifyAmount(picked, nplat, ngold, nsilver);
 
+
+                            StringTokenizer token=new StringTokenizer(tc.CharacterName,"&*&");
+                            String firstName=token.nextToken();
                             
-                            tc.rdb.LogChar(tc.CharacterID,tc.CharacterName+"*gave*"+amountz+"*gold*to*"+picked);
-                            tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked),"Player*"+tc.CharacterName+"*gave*you*"+amountz+"*gold");
+                            tc.rdb.LogChar(tc.CharacterID, firstName + "*gave*" + amountz + "*gold*to*" + picked);
+                            tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked), "Player*" + firstName + "*gave*you*" + amountz + "*gold");
 
                         } else {
                             JOptionPane.showMessageDialog(donateGoldToChar, "Amount is invalid,please try again");
@@ -144,7 +159,7 @@ public class PlayerManagementMenu extends JPanel {
         CharacterLog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 tc.clog.refres(tc);
                 tc.cardlayout.show(tc.contentpane, "cLog");
 
