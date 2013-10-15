@@ -683,7 +683,7 @@ public class PlotQueryHandler {
             ResultSet lrs2;
             result = new ArrayList();
             while (rs.next()) {
-                line = new String[18];
+                line = new String[20];
                 line[0] = rs.getString("PlotID");
                 line[1] = rs.getString("PlotOwnedBy");
                 line[2] = rs.getString("PlotAmount");
@@ -702,6 +702,8 @@ public class PlotQueryHandler {
                 line[15] = rs.getString("PlotAcrePoor");
                 line[16] = rs.getString("PlotAcrePoorMax");
                 line[17] = rs.getString("PlotDefenseValue");
+                line[18] = rs.getString("PlotEstateName");//18
+                line[19] = rs.getString("CountyID");//19
 
                 sql = "SELECT UserCharacterName FROM UserCharacter "
                         + "WHERE UserCharacterID = " + line[1];
