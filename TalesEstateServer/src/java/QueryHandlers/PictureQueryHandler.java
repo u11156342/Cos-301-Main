@@ -32,7 +32,7 @@ public class PictureQueryHandler {
             String line="";
             while((line=reader.readLine())!=null)
             {
-                System.out.println(line);
+           //     System.out.println(line);
                 if(line.contains("imagepath"))
                 {
                   folderLocation = line.substring(line.indexOf("=")+1);  
@@ -44,7 +44,7 @@ public class PictureQueryHandler {
           
             Logger.getLogger(PictureQueryHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(folderLocation);
+     //   System.out.println(folderLocation);
         con = c;
         pictures = new ArrayList();
 
@@ -69,7 +69,7 @@ public class PictureQueryHandler {
         {
             try 
             {
-                System.out.println("Loading picture " + folderLocation + "\\" + pictures.get(a));
+                //System.out.println("Loading picture " + folderLocation + "\\" + pictures.get(a));
                 loadedPictures[a] = ImageIO.read(new File(folderLocation + pictures.get(a)));
             } catch (IOException ex) {
                 System.out.println("Error when loading pictures in PictureQueryHandler constructor");

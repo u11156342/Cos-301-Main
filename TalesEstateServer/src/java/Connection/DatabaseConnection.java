@@ -23,7 +23,7 @@ public class DatabaseConnection {
             reader = new BufferedReader(new FileReader("ServerConfig.txt"));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+               // System.out.println(line);
                 if (line.contains("databaseIP")) {
                     ServerIP = line.substring(line.indexOf("=") + 1, line.length());
                 }
@@ -32,7 +32,7 @@ public class DatabaseConnection {
             //System.out.println(folderLocation);
         } catch (Exception ex) {
         }
-        System.out.println(ServerIP);
+      //  System.out.println(ServerIP);
     }
 
     public Connection openConnectionProd() {     

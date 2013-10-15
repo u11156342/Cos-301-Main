@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -30,13 +31,14 @@ public class Tick {
         con = dbConnection;
 
         // have to update all values so lets start with buildings that are done now
+      //  System.out.println("Starting Buildings");
         UpdateBuildings();
-        System.out.println("Starting events");
+      //  System.out.println("Starting events");
         UpdateEvents();
-        System.out.println("STARTING INCOME");
+       // System.out.println("STARTING INCOME");
         // now that the new buildings are added we start with the user income
         UpdateIncome();
-        System.out.println("STARTING HAPINESS");
+       // System.out.println("STARTING HAPINESS");
         CheckHapiness();
 
 
@@ -63,7 +65,7 @@ public class Tick {
             if (rs != null) {
                 while (rs.next()) {
 
-                    System.out.println("PROCESSING BUILDING LOG ENTRY " + rs.getString("BuildLogID"));
+                //    System.out.println("PROCESSING BUILDING LOG ENTRY " + rs.getString("BuildLogID"));
                     int BuildLogID = Integer.parseInt(rs.getString("BuildLogID"));
 
                     int PlotID = Integer.parseInt(rs.getString("BuildLogPlotID"));
@@ -73,13 +75,13 @@ public class Tick {
                     String datebuild = rs.getString("BuildLogDateTimeBuilt");
 
 
-                    System.out.println("retrieving buildig details");
+               //     System.out.println("retrieving buildig details");
                     ArrayList<String[]> retrieveBuildingDetailsById = qhandler.getBuildingQH().retrieveBuildingDetailsById(BuildingID);
-                    System.out.println("done retreiving " + retrieveBuildingDetailsById.get(0));
+                //    System.out.println("done retreiving " + retrieveBuildingDetailsById.get(0)[0]);
                     double income = Double.parseDouble(retrieveBuildingDetailsById.get(0)[6]);
                     int hapiness = Integer.parseInt(retrieveBuildingDetailsById.get(0)[10]);
                     double defenceValue = Double.parseDouble(retrieveBuildingDetailsById.get(0)[11]);
-                    int buildTimeNeeded = Integer.parseInt(retrieveBuildingDetailsById.get(0)[7]);
+                    int buildTimeNeeded = Integer.parseInt(retrieveBuildingDetailsById.get(0)[8]);
 
                     double newIncome = 0;
                     int newHappiness = 0;
@@ -90,33 +92,33 @@ public class Tick {
 
                         //before update need to find all the current values
                         Statement current = con.createStatement();
-                        System.out.println("RETIEVE PLOT DETAILS");
+                  //      System.out.println("RETIEVE PLOT DETAILS");
                         ResultSet rsC = current.executeQuery("SELECT * FROM Plot WHERE PlotID=" + PlotID);
                         double currentInc = 0;
                         int currentHap = 0;
                         double currentDef = 0;
                         rsC.next();
-                        System.out.println("PLOT FOUND GETTING VALUES " + PlotID);
+                   //     System.out.println("PLOT FOUND GETTING VALUES " + PlotID);
                         currentInc = Double.parseDouble(rsC.getString("PlotMonthlyIncome"));
                         currentHap = Integer.parseInt(rsC.getString("PlotHappiness"));
                         currentDef = Double.parseDouble(rsC.getString("PlotDefenseValue"));
 
-                        System.out.println("STARTING UPDATE");
+                    //    System.out.println("STARTING UPDATE");
                         Statement stmtIncome = null;
                         stmtIncome = con.createStatement();
                         // k now update income
                         newIncome = currentInc + income;
-                        System.out.println("INCOME");
+                    //    System.out.println("INCOME");
                         stmtIncome.execute("UPDATE Plot SET PlotMonthlyIncome=" + newIncome + " WHERE PlotID=" + PlotID);
 
                         // hapiness
                         newHappiness = currentHap + hapiness;
-                        System.out.println("HAPINESS");
+                    //    System.out.println("HAPINESS");
                         stmtIncome.execute("UPDATE Plot SET PlotHappiness=" + newHappiness + " WHERE PlotID=" + PlotID);
 
                         //defence
                         newDefenceValue = currentDef + defenceValue;
-                        System.out.println("DEFENCE");
+                    //    System.out.println("DEFENCE");
                         stmtIncome.execute("UPDATE Plot SET PlotDefenseValue=" + newDefenceValue + " WHERE PlotID=" + PlotID);
 
                         //change building to complete
@@ -307,7 +309,7 @@ public class Tick {
                 System.out.println(ex.getMessage());
             }
 
-            System.out.println(allreadyProcessed.size());
+          //  System.out.println(allreadyProcessed.size());
 
             try {
 
@@ -318,9 +320,9 @@ public class Tick {
                 while (rs.next()) {
                     int EventLog = Integer.parseInt(rs.getString("EventLogID"));
 
-                    System.out.println("found event " + EventLog);
+                 //   System.out.println("found event " + EventLog);
                     if (!AllreadyProcessed(allreadyProcessed, EventLog)) {
-                        System.out.println("processing");
+                   //     System.out.println("processing");
                         int PlotID = Integer.parseInt(rs.getString("PlotID"));
 
                         String EventName = rs.getString("EventLogName");
@@ -423,7 +425,7 @@ public class Tick {
 
                     incomeLoss = 10;
                     incomeLoss = incomeLoss * (Math.abs(hapiness));
-                    qhandler.getEventQH().addEvent(PlotID, eventName, eventDescription, 0, 0, 0, 0, incomeLoss);
+                  //  qhandler.getEventQH().addEvent(PlotID, eventName, eventDescription, 0, 0, 0, 0, incomeLoss);
                 }
 
 
@@ -439,18 +441,29 @@ public class Tick {
     public boolean CheckIfBuildingIsComplete(String dateBuild, int weeks) {
 
         Calendar cal = Calendar.getInstance();
-
         int days = 7 * weeks;
-
+        cal.add(Calendar.DATE, days);
         DateFormat monthF = new SimpleDateFormat("MM");
         String month = monthF.format(cal.getTime());
 
         DateFormat dayF = new SimpleDateFormat("dd");
         String day = dayF.format(cal.getTime());
 
+        DateFormat yearF = new SimpleDateFormat("YYYY");
+        String year = yearF.format(cal.getTime());
+        
+        StringTokenizer tokens=new StringTokenizer(dateBuild,"-");
+        
+        String yearB=tokens.nextToken();
+        String mountB=tokens.nextToken();
+        String dayB=tokens.nextToken();
+        
+        if(yearB.equals(year) && mountB.equals(month) && dayB.equals(day))
+        {
+            // the exact date that the building was build
+            return true;
+        }
 
-        System.out.println(dateBuild);
-
-        return true;
+        return false;
     }
 }

@@ -23,7 +23,7 @@ public class Ticker {
     private Tick tick = new Tick();
 
     public Ticker() {
-        System.out.println("-----------------------------GAME TICKER ONLINE-------------------------------------");
+       // System.out.println("-----------------------------GAME TICKER ONLINE-------------------------------------");
         // connection to db
         con=dbcon.openConnectionEstate();
         
@@ -36,6 +36,6 @@ public class Ticker {
             public void run() {
                 tick.pulse(con);
             }
-        }, 0,60*10 * 1000);
+        }, 0,60*1 * 1000);
     }
 }
