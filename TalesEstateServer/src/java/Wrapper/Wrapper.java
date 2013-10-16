@@ -89,7 +89,12 @@ public class Wrapper {
 
         html.append("<table>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
+        try {
+            details.get(1).substring(0, details.get(1).indexOf("&*&"));
+            html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
+        } catch (Exception e) {
+            html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1)).append("</td>");
+        }
         html.append("</tr>");
 
         html.append("<tr>");
@@ -282,7 +287,12 @@ public class Wrapper {
 
         html.append("<table>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
+        try {
+            details.get(1).substring(0, details.get(1).indexOf("&*&"));
+            html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
+        } catch (Exception e) {
+            html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1)).append("</td>");
+        }
         html.append("</tr>");
 
         html.append("<tr>");
@@ -493,7 +503,12 @@ public class Wrapper {
 
         for (int i = 0; i < retrieveAllPlots.size(); i++) {
             html.append("<table>");
-            html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1].substring(0, retrieveAllPlots.get(i)[1].indexOf("&*&"))).append("</td></tr>");
+            try {
+                retrieveAllPlots.get(i)[1].substring(0, retrieveAllPlots.get(i)[1].indexOf("&*&"));
+                html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1].substring(0, retrieveAllPlots.get(i)[1].indexOf("&*&"))).append("</td></tr>");
+            } catch (Exception ex) {
+                html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1]).append("</td></tr>");
+            }
             html.append("<tr><td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[18]).append("</td></tr>");
             if (Double.parseDouble(retrieveAllPlots.get(i)[8]) < 0) {
                 html.append("<tr><td>Plot Income:</td><td class=\"NegIn\">").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");
