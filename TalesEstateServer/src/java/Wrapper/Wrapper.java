@@ -38,7 +38,8 @@ public class Wrapper {
         html.append("<html>");
         html.append("<head>");
 
-        /* CSS for page
+        /*
+         * CSS for page
          */
         html.append("<style type=\"text/css\">");
         html.append("body{"
@@ -88,7 +89,7 @@ public class Wrapper {
 
         html.append("<table>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0,details.get(1).indexOf("&*&"))).append("</td>");
+        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
@@ -229,7 +230,8 @@ public class Wrapper {
         html.append("<html>");
         html.append("<head>");
 
-        /* CSS for page
+        /*
+         * CSS for page
          */
         html.append("<style type=\"text/css\">");
         html.append("body{"
@@ -280,7 +282,7 @@ public class Wrapper {
 
         html.append("<table>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0,details.get(1).indexOf("&*&"))).append("</td>");
+        html.append("<td class=\"hilight\">Character Name:</td><td>").append(details.get(1).substring(0, details.get(1).indexOf("&*&"))).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
@@ -288,7 +290,14 @@ public class Wrapper {
         html.append("</tr>");
 
         html.append("<tr>");
+        html.append("<td class=\"hilight\">Estate Name:</td><td>").append(details.get(18)).append("</td>");
+        html.append("</tr>");
+
+        html.append("<tr>");
         html.append("<td class=\"hilight\">Duchy:</td><td>").append(details.get(3)).append("</td>");
+        html.append("</tr>");
+        html.append("<tr>");
+        html.append("<td class=\"hilight\">Countie:</td><td>").append(details.get(19)).append("</td>");
         html.append("</tr>");
         html.append("</table>");
 
@@ -424,8 +433,6 @@ public class Wrapper {
         return html.toString();
     }
 
-    
-
     @GET
     @Path("GlobalStatus")
     @Produces("text/html")
@@ -436,7 +443,8 @@ public class Wrapper {
         html.append("<html>");
         html.append("<head>");
 
-        /* CSS for page
+        /*
+         * CSS for page
          */
         html.append("<style type=\"text/css\">");
         html.append("body{"
@@ -485,7 +493,7 @@ public class Wrapper {
 
         for (int i = 0; i < retrieveAllPlots.size(); i++) {
             html.append("<table>");
-            html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1].substring(0,retrieveAllPlots.get(i)[1].indexOf("&*&"))).append("</td></tr>");
+            html.append("<tr><td class=\"ssheading\">Owner:</td><td>").append(retrieveAllPlots.get(i)[1].substring(0, retrieveAllPlots.get(i)[1].indexOf("&*&"))).append("</td></tr>");
             html.append("<tr><td>Plot Name:</td><td>").append(retrieveAllPlots.get(i)[18]).append("</td></tr>");
             if (Double.parseDouble(retrieveAllPlots.get(i)[8]) < 0) {
                 html.append("<tr><td>Plot Income:</td><td class=\"NegIn\">").append(retrieveAllPlots.get(i)[8]).append("</td></tr>");

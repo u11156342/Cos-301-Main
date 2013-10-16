@@ -405,6 +405,7 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotDefenseValue"));//17
             value.add(rs.getString("PlotEstateName"));//18
             value.add(rs.getString("CountyID"));//19
+            value.add("");
 
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);

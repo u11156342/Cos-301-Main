@@ -442,6 +442,7 @@ public class Tick {
 
         Calendar cal = Calendar.getInstance();
         int days = 7 * weeks;
+        days=days*-1;
         cal.add(Calendar.DATE, days);
         DateFormat monthF = new SimpleDateFormat("MM");
         String month = monthF.format(cal.getTime());
@@ -457,6 +458,7 @@ public class Tick {
         String yearB=tokens.nextToken();
         String mountB=tokens.nextToken();
         String dayB=tokens.nextToken();
+        System.out.println("Building was build on "+dateBuild+" and it will be completed when "+year+"-"+month+"-"+day+" equals "+dateBuild);
         
         if(yearB.equals(year) && mountB.equals(month) && dayB.equals(day))
         {
