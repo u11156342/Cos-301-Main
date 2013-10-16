@@ -295,7 +295,9 @@ VALUES
 (0, 0, 0, 0, 'Global Status.png'),
 (0, 0, 0, 0, 'Manage Charcter Gold.png'),
 (0, 0, 0, 0, 'Admin Menu.png'),
-(0, 0, 0, 0, 'Player Management.png')
+(0, 0, 0, 0, 'Player Management.png'),
+(0, 0, 0, 0, 'AddBuilding.png')
+
 
 
 /*All cost related values assumed to be gold*/
