@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class RestFullAdapter {
 
-    String serverURL = "localhost";
+    String serverURL = "216.172.99.153";
     int serverPort = 8080;
 
     public RestFullAdapter() {    

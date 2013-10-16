@@ -20,7 +20,7 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     JButton btn;
-    String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";
    // String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {

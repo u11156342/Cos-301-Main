@@ -19,7 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class RestFullDBAdapter {
 
-    String serverURL = "localhost";
+    String serverURL = "216.172.99.153";
     int serverPort = 8080;
     String server = "/TalesEstateServer/resources/";
     Converter Conv = new Converter();
