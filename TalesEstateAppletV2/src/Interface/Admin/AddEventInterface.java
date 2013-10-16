@@ -72,76 +72,33 @@ public class AddEventInterface extends JPanel {
         add.setPreferredSize(new Dimension(100, 40));
         cansel.setPreferredSize(new Dimension(100, 40));
 
-        
 
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridheight = 1;
-        c.insets = new Insets(10, 10, 10, 10);
+        c.gridy = 0;
         add(des, c);
-
-        c.gridy = 2;
-
-        c.gridheight = 4;
-        c.gridwidth = 5;
-
-        // description.setPreferredSize(new Dimension(500, 300));
+        description.setPreferredSize(new Dimension(500, 300));
         add(descriptionPane, c);
-
-        c.gridwidth = 1;
-        c.gridheight = 1;
-
-        c.gridy = 7;
-        //  add(exsplain, c);
-
-        c.gridx = 0;
-        c.gridy = 8;
-        c.gridwidth = 1;
-        c.gridheight = 1;
+        c.gridy = 1;
         add(l1, c);
-        c.gridx = 1;
         add(happinessmod, c);
-
-
-        c.gridy = 9;
-        c.gridx = 0;
+        c.gridy = 2;
         add(l2, c);
-        c.gridx = 1;
-        c.gridy = 9;
         add(incomemod, c);
-
-        c.gridy = 10;
-        c.gridx = 0;
+        c.gridy = 3;
         add(l3, c);
-        c.gridx = 1;
-        c.gridy = 10;
         add(platmod, c);
-
-        c.gridy = 11;
-        c.gridx = 0;
+        c.gridy = 4;
         add(l4, c);
-        c.gridx = 1;
-        c.gridy = 11;
         add(goldmod, c);
-
-        c.gridy = 12;
-        c.gridx = 0;
+        c.gridy = 5;
         add(l5, c);
-        c.gridx = 1;
-        c.gridy = 12;
         add(silmod, c);
-
-        c.gridy = 13;
-        c.gridx = 0;
-        //add(l6, c);
-        c.gridx = 1;
-        c.gridy = 13;
-        //add(defmod, c);
-
-        c.gridx = 0;
-        c.gridy = 14;
-
+        c.gridy = 6;
+        add(l6, c);
+        add(defmod, c);
+        c.gridy = 7;
+        c.gridwidth=2;
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 

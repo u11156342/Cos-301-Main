@@ -8,16 +8,12 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import talesestateappletv2.TransferContainer;
 
 public class PlayerCurrentPropertiesAdmin extends JPanel {
 
-    public JTextArea statusArea = new JTextArea();
+    public JTextPane statusArea = new JTextPane();
     String[] coms = {"Status", "Add event", "View Plot"};
     JComboBox commands = new JComboBox(coms);
     JButton bt = new JButton("next");
@@ -36,11 +32,12 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         //   statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         //   statusArea.setColumns(4);
         statusArea.setEditable(false);
-        statusArea.setPreferredSize(new Dimension(300, 100));
+        statusArea.setPreferredSize(new Dimension(300, 250));
 
         //init();
 
         bt.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = commands.getSelectedIndex();
@@ -61,6 +58,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
                     buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));
 
+                    t.lastAdminBrowse=true;
                     BrowseInterface bi = t.Cmanager.getBrowseInterfacesCard();
                     bi.init(t, propertyID, size, tiles, buildings);
                     t.cardlayout.show(t.contentpane, bi.getName());
@@ -74,17 +72,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
 //        c.gridheight = 2;
 //        c.gridwidth = 2;
 
-        add(statusArea, BorderLayout.CENTER);
-//        c.gridheight = 1;
-//        c.gridwidth = 1;
-//
-//        c.gridx = 2;
-//        c.gridy = 0;
 
-        JPanel temp = new JPanel();
-        temp.add(bt, BorderLayout.SOUTH);
-        temp.add(commands, BorderLayout.CENTER);
-        add(temp, BorderLayout.EAST);
 //        c.gridx = 2;
 //        c.gridy = 1;
         //   add(bt, BorderLayout.SOUTH);
@@ -97,10 +85,88 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
 
 
-        statusArea.append("Owner : " + retrievePlotDetails.get(1) + "\n");
-        statusArea.append("Located in " + retrievePlotDetails.get(3) + "\n");
-        statusArea.append("Happiness : " + retrievePlotDetails.get(7) + "\n");
-        statusArea.append("Income : " + retrievePlotDetails.get(8) + "\n");
+        StringBuilder html = new StringBuilder();
+        statusArea.setContentType("text/html");
+        html.append("<html>");
+        html.append("<head>");
+
+        /*
+         * CSS for page
+         */
+        html.append("<style type=\"text/css\">");
+        html.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
+        html.append("h1{"
+                + "text-align: center;"
+                + "}");
+        html.append("table{"
+                + "width: 90%;"
+                + "}");
+        html.append("td{"
+                + "width: 50%;"
+                + "}");
+        html.append("th{"
+                + "text-align: left;"
+                + "}");
+        html.append(".hilight{"
+                + "font-size: 12px;"
+                + "}");
+        html.append(".sheading{"
+                + "font-size: 14px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append(".ssheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append("</style>");
+        html.append("</head>");
+
+        html.append("<body>");
+
+        html.append("<table>");
+        html.append("<tr><td class=\"ssheading\">Owner</td><td>").append(retrievePlotDetails.get(1).substring(0, retrievePlotDetails.get(1).indexOf("&*&"))).append("</td></tr>");
+        html.append("<tr><td class=\"ssheading\">Estate Number</td><td> ").append(retrievePlotDetails.get(0)).append("</td></tr>");
+        html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18)).append("</td></tr>");
+        html.append("<tr><td class=\"ssheading\">Duchy</td><td> ").append(retrievePlotDetails.get(3)).append("</td></tr>");
+        try {
+            html.append("<tr><td class=\"ssheading\">Countie</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
+        } catch (Exception e) {
+        }
+        html.append("<tr><td class=\"ssheading\">Happiness</td><td>").append(retrievePlotDetails.get(7)).append("</td></tr>");
+        html.append("<tr><td class=\"ssheading\">Income</td><td>").append(retrievePlotDetails.get(8)).append("</td></tr>");
+        html.append("</table>");
+        html.append("</body>");
+        html.append("</html>");
+
+        statusArea.setText(html.toString());
+
+        add(statusArea, BorderLayout.NORTH);
+//        c.gridheight = 1;
+//        c.gridwidth = 1;
+//
+//        c.gridx = 2;
+//        c.gridy = 0;
+
+        JPanel temp = new JPanel();
+
+        temp.add(commands, BorderLayout.SOUTH);
+        temp.add(bt, BorderLayout.CENTER);
+        add(temp, BorderLayout.SOUTH);
 
 
     }

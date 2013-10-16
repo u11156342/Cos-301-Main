@@ -31,18 +31,10 @@ public class PlayerPropertiesAdmin extends JPanel {
         playersCurrentProperties = new PlayerCurrentPropertiesAdmin[result.size()];
         amount = result.size();
 
-        if (amount == 0) {
-            h = 300;
-
-        }
-        if (amount == 1) {
-            h = 300;
-        } else {
-            h = amount * 450;
-        }
+        h=amount*350;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this, tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(450, 200));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(450, 300));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
 
             playersCurrentProperties[a].init(tc);
@@ -62,7 +54,7 @@ public class PlayerPropertiesAdmin extends JPanel {
             JPanel panel = new JPanel(false);
 
             for (int a = 0; a < playersCurrentProperties.length; a++) {
-                playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
+             //   playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(playersCurrentProperties[a]);
             }
             return panel;

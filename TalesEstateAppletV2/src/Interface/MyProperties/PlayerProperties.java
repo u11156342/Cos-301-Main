@@ -26,11 +26,11 @@ public class PlayerProperties extends JPanel {
         System.out.println("retrieving plots " + (result.size() + AllPlotsIHaveAccess.size()));
         playersCurrentProperties = new PlayerOwnPanel[(result.size() + AllPlotsIHaveAccess.size())];
         int amount = result.size() + AllPlotsIHaveAccess.size();
-        h = amount * 490 * 2;
+        h = amount * 600;
 
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 510));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(400, 620));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);

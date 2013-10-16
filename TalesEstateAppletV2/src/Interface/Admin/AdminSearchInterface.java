@@ -1,6 +1,7 @@
 package Interface.Admin;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class AdminSearchInterface extends BasePanel {
         title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
+      //  title.setEnabled(false);
     }
 
     public void init(final TransferContainer t, ArrayList<String[]> prop) {
@@ -34,6 +36,7 @@ public class AdminSearchInterface extends BasePanel {
         add(title, BorderLayout.NORTH);
 
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
 
             @Override

@@ -35,6 +35,7 @@ public class PlayerOwnPanel extends JPanel {
     public int wc;
     public int wm;
     TransferContainer tain;
+    GridBagConstraints c = new GridBagConstraints();
 
     PlayerOwnPanel(TransferContainer tc) {
         tain = tc;
@@ -44,24 +45,12 @@ public class PlayerOwnPanel extends JPanel {
         play.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        
 
-        statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        //statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
 
-        statusArea.setPreferredSize(new Dimension(400, 440));
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 3;
-        c.gridwidth = 4;
 
-        add(statusArea, c);
-        c.gridheight = 1;
-        c.gridwidth = 1;
-
-        c.gridx = 4;
-        c.gridy = 2;
-        add(play, c);
     }
 
     public void init(final TransferContainer tc, final boolean own) {
@@ -115,6 +104,7 @@ public class PlayerOwnPanel extends JPanel {
 
 
         play.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -149,5 +139,19 @@ public class PlayerOwnPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
+
+        statusArea.setPreferredSize(new Dimension(400, 440));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 3;
+        c.gridwidth = 4;
+
+        add(statusArea, c);
+        c.gridheight = 1;
+        c.gridwidth = 1;
+
+        c.gridx = 4;
+        c.gridy = 2;
+        add(play, c);
     }
 }

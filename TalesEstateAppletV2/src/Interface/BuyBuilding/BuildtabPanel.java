@@ -37,6 +37,12 @@ public class BuildtabPanel extends BasePanel {
 
     public void init(int pId, String duchy_, MainPlaySideMenu tr) {
 
+
+
+        JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(13)));
+        Title.setContentAreaFilled(false);
+        Title.setBorderPainted(false);
+        add(Title, BorderLayout.NORTH);
         PlotID = pId;
         duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -62,10 +68,14 @@ public class BuildtabPanel extends BasePanel {
 
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements, tr);
         tabbedPane.addTab("Improvements", null, panel5);
+
+
+
         add(tabbedPane, BorderLayout.CENTER);
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
@@ -78,9 +88,20 @@ public class BuildtabPanel extends BasePanel {
 
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr, final MainPlaySideMenu tr) {
         JPanel panel = new JPanel(false);
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c2 = new GridBagConstraints();
+
+        StringBuilder html = new StringBuilder();
+
+        final JTextPane buildingIn = new JTextPane();
 
 
-        final JTextArea buildingIn = new JTextArea();
+        buildingIn.setPreferredSize(new Dimension(500, 300));
+        c2.gridy = 0;
+        c2.gridwidth = 5;
+        panel.add(buildingIn, c2);
+
+        buildingIn.setContentType("text/html");
 
         String[] buildingsList;
         final int[] buildingsID;
@@ -96,55 +117,165 @@ public class BuildtabPanel extends BasePanel {
             buildingsList[a] = results1.get(a)[1];
         }
 
-        JPanel buildingsPanel = new JPanel();
-        buildingsPanel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+
+
+
+
+
+        c2.gridy = 1;
+
+
         final JComboBox buildings = new JComboBox(buildingsList);
         result2 = tain.rdb.retrieveBuildingDetailsById(buildingsID[0]);
-        String temp = "";
-        temp = temp + "Building Cost : " + result2.get(0)[4] + '\n';
-        temp = temp + "Building Setup Cost : " + result2.get(0)[5] + '\n';
-        temp = temp + "Building Monthly Income : " + result2.get(0)[6] + '\n';
-        temp = temp + "Building Requirements : " + result2.get(0)[3] + '\n';
-        temp = temp + "Building Workers Needed : " + result2.get(0)[7] + '\n';
-        temp = temp + "Building Time To Build : " + result2.get(0)[8] + '\n';
-        temp = temp + "Building Size Required : " + result2.get(0)[9] + '\n';
-        temp = temp + "Building Happiness : " + result2.get(0)[10] + '\n';
-        temp = temp + "Building Defence Value : " + result2.get(0)[11];
 
-        buildingIn.append(temp);
+        html.append("<html>");
+        html.append("<head>");
+        html.append("<style type=\"text/css\">");
+        html.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
+        html.append("h1{"
+                + "text-align: center;"
+                + "}");
+        html.append("table{"
+                + "width: 90%;"
+                + "}");
+        html.append("td{"
+                + "width: 50%;"
+                + "}");
+        html.append("hr{"
+                + ""
+                + "}");
+        html.append(".hilight{"
+                + "font-size: 12px;"
+                + "}");
+        html.append(".sheading{"
+                + "font-size: 14px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append(".ssheading{"
+                + "font-size: 10px;"
+                + "font-weight: bold;"
+                + "}");
+        html.append("</style>");
+        html.append("</head>");
+
+        html.append("<body>");
+        html.append("<table>");
+        html.append("<tr><td>Building Cost : </td><td>").append(result2.get(0)[4]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Setup Cost : </td><td>").append(result2.get(0)[5]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Monthly Income : </td><td>").append(result2.get(0)[6]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Requirements : </td><td>").append(result2.get(0)[3]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Workers Needed : </td><td>").append(result2.get(0)[7]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Time To Build : </td><td>").append(result2.get(0)[8]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Size Required : </td><td>").append(result2.get(0)[9]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Happiness : </td><td>").append(result2.get(0)[10]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Defence Value : </td><td>").append(result2.get(0)[11]).append("</td></tr>").append("<br>");
+
+        html.append("</table>");
+        html.append("</body>");
+        html.append("</html>");
+
+
+        buildingIn.setText(html.toString());
         buildingIn.setEditable(false);
         buildings.addItemListener(new ItemListener() {
+
             @Override
             public void itemStateChanged(ItemEvent e) {
-                buildingIn.setText("");
+
                 int id = buildingsID[buildings.getSelectedIndex()];
                 ArrayList<String[]> r2 = tain.rdb.retrieveBuildingDetailsById(id);
-                String temp = "";
-                temp = temp + "Building Cost : " + r2.get(0)[4] + '\n';
-                temp = temp + "Building Setup Cost : " + r2.get(0)[5] + '\n';
-                temp = temp + "Building Monthly Income : " + r2.get(0)[6] + '\n';
-                temp = temp + "Building Requirements : " + r2.get(0)[3] + '\n';
-                temp = temp + "Building Workers Needed : " + r2.get(0)[7] + '\n';
-                temp = temp + "Building Time To Build : " + r2.get(0)[8] + '\n';
-                temp = temp + "Building Size Required : " + r2.get(0)[9] + '\n';
-                temp = temp + "Building Happiness : " + r2.get(0)[10] + '\n';
-                temp = temp + "Building Defence Value : " + r2.get(0)[11];
-                buildingIn.append(temp);
+                StringBuilder html2 = new StringBuilder();
+                html2.append("<html>");
+                html2.append("<head>");
+                html2.append("<style type=\"text/css\">");
+                html2.append("body{"
+                        + "font-family: \"century gothic\";"
+                        + "background-color: white;"
+                        + "border-right-width: 2px;"
+                        + "border-bottom-width: 2px;"
+                        + "border-left-width: 2px;"
+                        + "border-top-width: 2px;"
+                        + "border-top-style: solid;"
+                        + "border-right-style: solid;"
+                        + "border-bottom-style: solid;"
+                        + "border-left-style: solid;"
+                        + "border-top-color: #FF0000;"
+                        + "border-right-color: #FF0000;"
+                        + "border-bottom-color: #FF0000;"
+                        + "border-left-color: #FF0000;"
+                        + "}");
+                html2.append("h1{"
+                        + "text-align: center;"
+                        + "}");
+                html2.append("table{"
+                        + "width: 90%;"
+                        + "}");
+                html2.append("td{"
+                        + "width: 50%;"
+                        + "}");
+                html2.append("hr{"
+                        + ""
+                        + "}");
+                html2.append(".hilight{"
+                        + "font-size: 12px;"
+                        + "}");
+                html2.append(".sheading{"
+                        + "font-size: 14px;"
+                        + "font-weight: bold;"
+                        + "}");
+                html2.append(".ssheading{"
+                        + "font-size: 10px;"
+                        + "font-weight: bold;"
+                        + "}");
+                html2.append("</style>");
+                html2.append("</head>");
+
+                html2.append("<body>");
+                html2.append("<table>");
+                html2.append("<tr><td>Building Cost : </td><td>").append(r2.get(0)[4]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Setup Cost : </td><td>").append(r2.get(0)[5]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Monthly Income : </td><td>").append(r2.get(0)[6]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Requirements : </td><td>").append(r2.get(0)[3]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Workers Needed : </td><td>").append(r2.get(0)[7]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Time To Build : </td><td>").append(r2.get(0)[8]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Size Required : </td><td>").append(r2.get(0)[9]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Happiness : </td><td>").append(r2.get(0)[10]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Defence Value : </td><td>").append(r2.get(0)[11]).append("</td></tr>").append("<br>");
+
+                html2.append("</table>");
+                html2.append("</body>");
+                html2.append("</html>");
+                buildingIn.setText(html2.toString());
             }
         });
-        Object comp = buildings.getUI().getAccessibleChild(buildings, 0);
-        JPopupMenu popup = (JPopupMenu) comp;
-        JScrollPane scrollPane = (JScrollPane) popup.getComponent(0);
-        scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        buildings.setPreferredSize(new Dimension(200, 50));
+//        Object comp = buildings.getUI().getAccessibleChild(buildings, 0);
+//        JPopupMenu popup = (JPopupMenu) comp;
+//        JScrollPane scrollPane = (JScrollPane) popup.getComponent(0);
+//        scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
+//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        buildings.setPreferredSize(new Dimension(500, 50));
         Button bbutton = new Button("Build");
-        c.gridx = 1;
+
 
         bbutton.setPreferredSize(new Dimension(150, 60));
-        
+
         bbutton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -362,8 +493,8 @@ public class BuildtabPanel extends BasePanel {
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
                         tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
-                        
-                        tain.rdb.LogPlot(PlotID, "Player*"+tain.CharacterName+"*purchased*a*"+r2s.get(0)[1]+"*on*the*plot", tain.CharacterID);
+
+                        tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
 
                     }
                     tr.listBuildings.doClick();
@@ -371,14 +502,10 @@ public class BuildtabPanel extends BasePanel {
                 }
             }
         });
-        buildingsPanel.add(bbutton, c);
-        c.gridx = 2;
-        buildingsPanel.add(buildings, c);
-        JPanel buildingInfo = new JPanel();
-        buildingIn.setPreferredSize(new Dimension(250, 160));
-        buildingInfo.add(buildingIn);
-        panel.add(buildingsPanel);
-        panel.add(buildingInfo);
+
+        panel.add(buildings, c2);
+        c2.gridy = 2;
+        panel.add(bbutton, c2);
 
         return panel;
     }

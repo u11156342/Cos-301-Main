@@ -61,8 +61,10 @@ public class TransferContainer {
     public GlobalStatus gstatus;
     public int BuildingLogReference=0;
     public VisualSideMenu reference;
+    public boolean lastAdminBrowse;
     public TransferContainer() {
         cardlayout = new CardLayout();
+        lastAdminBrowse=false;
         Cinit();
     }
     public void Cinit()

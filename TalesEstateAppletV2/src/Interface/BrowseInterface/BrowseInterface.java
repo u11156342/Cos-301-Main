@@ -55,10 +55,17 @@ public class BrowseInterface extends BasePanel {
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane, "MainMenu");
-                // t.cardlayout.show(t.contentpane, "MPlay");
+
+                if (tc.lastAdminBrowse) {
+                    tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
+                } else {
+                    tc.cardlayout.show(tc.contentpane,tc.Cmanager.SearchInterfaces[tc.Cmanager.currentSearchInterfaceCard].getName());
+                }
+                // tc.cardlayout.show(tc.contentpane, "MainMenu");
+                // 
             }
         });
 
