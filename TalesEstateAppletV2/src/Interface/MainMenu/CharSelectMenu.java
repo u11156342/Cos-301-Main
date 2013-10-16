@@ -20,14 +20,14 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     JButton btn;
-      String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
-    //String UserId = "";
+    //String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name);
 
-      //  CookieReader cr = new CookieReader();
-        //UserId = cr.userID;
+        CookieReader cr = new CookieReader();
+        UserId = cr.userID;
 
         if ("".equals(UserId)) {
             JOptionPane.showMessageDialog(btn, "You need to log into the site first");
