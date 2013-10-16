@@ -39,7 +39,7 @@ public class BuildtabPanel extends BasePanel {
 
 
 
-        JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(13)));
+        JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(50)));
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
         add(Title, BorderLayout.NORTH);
