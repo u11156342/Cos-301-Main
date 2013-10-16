@@ -37,7 +37,7 @@ public class MyPropertiesInterface extends BasePanel {
 
         PlayerProperties mmenu = new PlayerProperties(tain);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        mainMenuScrollPane.setPreferredSize(new Dimension(tain.JFXPANEL_WIDTH_INT - 50, tain.JFXPANEL_HEIGHT_INT - 50));
+        //mainMenuScrollPane.setPreferredSize(new Dimension(tain.JFXPANEL_WIDTH_INT - 50, tain.JFXPANEL_HEIGHT_INT - 50));
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);
         add(title, BorderLayout.NORTH);
@@ -51,7 +51,7 @@ public class MyPropertiesInterface extends BasePanel {
             }
         });
         add(back, BorderLayout.SOUTH);
-                
-       // tain.cardlayout.show(tain.contentpane, "MainMenu");
+
+        // tain.cardlayout.show(tain.contentpane, "MainMenu");
     }
 }

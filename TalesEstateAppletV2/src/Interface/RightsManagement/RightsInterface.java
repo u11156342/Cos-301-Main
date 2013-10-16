@@ -136,6 +136,7 @@ public class RightsInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
         JButton back = new JButton("Back");
+        back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

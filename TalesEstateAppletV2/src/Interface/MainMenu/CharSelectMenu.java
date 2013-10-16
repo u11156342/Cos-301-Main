@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import talesestateappletv2.BasePanel;
+import talesestateappletv2.CookieReader;
 import talesestateappletv2.TransferContainer;
 
 public class CharSelectMenu extends BasePanel {
@@ -18,10 +20,19 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     JButton btn;
-    String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+      String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    //String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name);
+
+      //  CookieReader cr = new CookieReader();
+        //UserId = cr.userID;
+
+        if ("".equals(UserId)) {
+            JOptionPane.showMessageDialog(btn, "You need to log into the site first");
+            return;
+        }
 
         JPanel container = new JPanel();
 
@@ -96,7 +107,7 @@ public class CharSelectMenu extends BasePanel {
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
                 tc.CharacterName = CharList[chars.getSelectedIndex()];
-                tc.rdb.registerEstateCharacter(tc.CharacterName,UserId);
+                tc.rdb.registerEstateCharacter(tc.CharacterName, UserId);
                 tc.CharacterID = tc.rdb.retrieveCharacterID(tc.CharacterName);
                 tc.CharacterName = tc.rdb.retrieveCharacterName(tc.CharacterID);
                 System.out.println(tc.CharacterID);

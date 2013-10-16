@@ -15,7 +15,7 @@ public class PlayerProperties extends JPanel {
     PlayerOwnPanel[] playersCurrentProperties;
 
     PlayerProperties(TransferContainer tc) {
-        w = tc.JFXPANEL_WIDTH_INT - 300;
+        w = tc.JFXPANEL_WIDTH_INT-260;
 
 
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
@@ -30,12 +30,12 @@ public class PlayerProperties extends JPanel {
 
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(400, 620));
+            playersCurrentProperties[a].setPreferredSize(new Dimension(300, 500));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
             playersCurrentProperties[a].county = result.get(a)[19];
-            playersCurrentProperties[a].plotname = result.get(a)[18].replaceAll("\\."," ");
+            playersCurrentProperties[a].plotname = result.get(a)[18].replaceAll("\\.", " ");
             ArrayList<String[]> list = new ArrayList();
 
             String[] t1 = {"poor", result.get(a)[15], result.get(a)[16]};
@@ -62,7 +62,7 @@ public class PlayerProperties extends JPanel {
             System.out.println("adding right prop");
             playersCurrentProperties[i] = new PlayerOwnPanel(tc);
 
-            playersCurrentProperties[i].setPreferredSize(new Dimension(300, 510));
+            //  playersCurrentProperties[i].setPreferredSize(new Dimension(300, 510));
 
             ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
 
@@ -89,7 +89,7 @@ public class PlayerProperties extends JPanel {
             playersCurrentProperties[i].wc = Integer.parseInt(retrievePlotDetails.get(9));
             playersCurrentProperties[i].wm = Integer.parseInt(retrievePlotDetails.get(10));
             playersCurrentProperties[i].county = retrievePlotDetails.get(19);
-            playersCurrentProperties[i].plotname =retrievePlotDetails.get(18).replaceAll("\\."," ");
+            playersCurrentProperties[i].plotname = retrievePlotDetails.get(18).replaceAll("\\.", " ");
             playersCurrentProperties[i].init(tc, false);
         }
 
@@ -111,7 +111,7 @@ public class PlayerProperties extends JPanel {
                     playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.BLUE));
                     panel.add(playersCurrentProperties[a]);
                 } else {
-                    playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
+                    //     playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                     panel.add(playersCurrentProperties[a]);
                 }
             }

@@ -75,7 +75,6 @@ public class BuildtabPanel extends BasePanel {
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
@@ -88,8 +87,8 @@ public class BuildtabPanel extends BasePanel {
 
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr, final MainPlaySideMenu tr) {
         JPanel panel = new JPanel(false);
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints c2 = new GridBagConstraints();
+        //  panel.setLayout(new GridBagLayout());
+        //  GridBagConstraints c2 = new GridBagConstraints();
 
         StringBuilder html = new StringBuilder();
 
@@ -97,9 +96,9 @@ public class BuildtabPanel extends BasePanel {
 
 
         buildingIn.setPreferredSize(new Dimension(500, 300));
-        c2.gridy = 0;
-        c2.gridwidth = 5;
-        panel.add(buildingIn, c2);
+//        c2.gridy = 0;
+//        c2.gridwidth = 5;
+
 
         buildingIn.setContentType("text/html");
 
@@ -122,7 +121,7 @@ public class BuildtabPanel extends BasePanel {
 
 
 
-        c2.gridy = 1;
+
 
 
         final JComboBox buildings = new JComboBox(buildingsList);
@@ -193,7 +192,6 @@ public class BuildtabPanel extends BasePanel {
         buildingIn.setText(html.toString());
         buildingIn.setEditable(false);
         buildings.addItemListener(new ItemListener() {
-
             @Override
             public void itemStateChanged(ItemEvent e) {
 
@@ -275,7 +273,6 @@ public class BuildtabPanel extends BasePanel {
         bbutton.setPreferredSize(new Dimension(150, 60));
 
         bbutton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -502,10 +499,11 @@ public class BuildtabPanel extends BasePanel {
                 }
             }
         });
-
-        panel.add(buildings, c2);
-        c2.gridy = 2;
-        panel.add(bbutton, c2);
+        panel.add(buildingIn, BorderLayout.CENTER);
+        //  c2.gridy = 1;
+        panel.add(buildings, BorderLayout.EAST);
+        //    c2.gridy = 2;
+        panel.add(bbutton, BorderLayout.SOUTH);
 
         return panel;
     }

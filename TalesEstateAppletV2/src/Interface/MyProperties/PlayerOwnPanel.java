@@ -140,7 +140,7 @@ public class PlayerOwnPanel extends JPanel {
             }
         });
 
-        statusArea.setPreferredSize(new Dimension(400, 440));
+        //statusArea.setPreferredSize(new Dimension(400, 440));
         c.gridx = 0;
         c.gridy = 0;
         c.gridheight = 3;

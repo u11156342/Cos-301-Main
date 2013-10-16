@@ -35,15 +35,16 @@ public class ManageGoldPanel extends Panel {
     JLabel l6 = new JLabel("Silver : ");
     JLabel character = new JLabel("");
     String username;
+    boolean found = false;
 
     public ManageGoldPanel(final TransferContainer tc) {
         tain = tc;
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        platmod.setPreferredSize(new Dimension(100, 40));
-        goldmod.setPreferredSize(new Dimension(100, 40));
-        silmod.setPreferredSize(new Dimension(100, 40));
+        platmod.setPreferredSize(new Dimension(100, 30));
+        goldmod.setPreferredSize(new Dimension(100, 30));
+        silmod.setPreferredSize(new Dimension(100, 30));
         final ManageGoldPanel ref = this;
 
         playername.setPreferredSize(new Dimension(100, 40));
@@ -57,6 +58,7 @@ public class ManageGoldPanel extends Panel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                found = false;
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
 
@@ -97,8 +99,10 @@ public class ManageGoldPanel extends Panel {
                         platmod.setText("" + platAmount);
                         goldmod.setText("" + goldAmount);
                         silmod.setText("" + silverAmount);
+                        found = true;
                     } else {
                         JOptionPane.showMessageDialog(ref, "Player not found");
+
                     }
                 }
 
@@ -154,6 +158,9 @@ public class ManageGoldPanel extends Panel {
         modify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                if (!found) {
+                    return;
+                }
                 try {
                     tc.rdb.modifyAmount(username, Integer.parseInt(platmod.getText()), Integer.parseInt(goldmod.getText()), Integer.parseInt(silmod.getText()));
                     JOptionPane.showMessageDialog(playername, "Funds Updated");

@@ -71,6 +71,11 @@ public class TalesEstateAppletV2 extends JApplet {
 
     @Override
     public void init() {
+        
+        
+        
+        
+        
         setLayout(tContain.cardlayout);
         tContain.contentpane = this.getContentPane();
         ActionListener buttonListener = new ActionListener() {

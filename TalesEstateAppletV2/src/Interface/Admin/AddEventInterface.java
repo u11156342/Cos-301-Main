@@ -49,11 +49,11 @@ public class AddEventInterface extends JPanel {
     JLabel l6 = new JLabel("Defense Modifier");
 
     public void init(final TransferContainer tc, final int PID) {
-        incomemod.setText("0");
-        platmod.setText("0");
-        goldmod.setText("0");
-        silmod.setText("0");
-        defmod.setText("0");
+        incomemod.setText("0          ");
+        platmod.setText("0          ");
+        goldmod.setText("0          ");
+        silmod.setText("0          ");
+        defmod.setText("0          ");
         happinessmod.setSelectedIndex(5);
 
 
@@ -64,18 +64,19 @@ public class AddEventInterface extends JPanel {
         descriptionPane.setPreferredSize(new Dimension(400, 200));
         descriptionPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
-        incomemod.setPreferredSize(new Dimension(100, 40));
-        platmod.setPreferredSize(new Dimension(100, 40));
-        goldmod.setPreferredSize(new Dimension(100, 40));
-        silmod.setPreferredSize(new Dimension(100, 40));
-        defmod.setPreferredSize(new Dimension(100, 40));
-        add.setPreferredSize(new Dimension(100, 40));
-        cansel.setPreferredSize(new Dimension(100, 40));
+//        incomemod.setPreferredSize(new Dimension(100, 40));
+//        platmod.setPreferredSize(new Dimension(100, 40));
+//        goldmod.setPreferredSize(new Dimension(100, 40));
+//        silmod.setPreferredSize(new Dimension(100, 40));
+//        defmod.setPreferredSize(new Dimension(100, 40));
+//        add.setPreferredSize(new Dimension(100, 40));
+//        cansel.setPreferredSize(new Dimension(100, 40));
 
 
         c.gridy = 0;
         add(des, c);
-        description.setPreferredSize(new Dimension(500, 300));
+        //description.setPreferredSize(new Dimension(500, 300));
+        c.gridwidth = 6;
         add(descriptionPane, c);
         c.gridy = 1;
         add(l1, c);
@@ -96,9 +97,8 @@ public class AddEventInterface extends JPanel {
         add(l6, c);
         add(defmod, c);
         c.gridy = 7;
-        c.gridwidth=2;
+        c.gridwidth = 2;
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -135,9 +135,9 @@ public class AddEventInterface extends JPanel {
 
                     boolean paramCheck = true;
                     try {
-                        pm = Integer.parseInt(platmod.getText());
-                        gm = Integer.parseInt(goldmod.getText());
-                        sm = Integer.parseInt(silmod.getText());
+                        pm = Integer.parseInt(platmod.getText().replaceAll(" ",""));
+                        gm = Integer.parseInt(goldmod.getText().replaceAll(" ",""));
+                        sm = Integer.parseInt(silmod.getText().replaceAll(" ",""));
 
                     } catch (Exception ex) {
                         paramCheck = false;
@@ -153,7 +153,7 @@ public class AddEventInterface extends JPanel {
                     }
 
                     try {
-                        i = Integer.parseInt(incomemod.getText());
+                        i = Integer.parseInt(incomemod.getText().replaceAll(" ",""));
 
                     } catch (Exception ex) {
                         paramCheck = false;
