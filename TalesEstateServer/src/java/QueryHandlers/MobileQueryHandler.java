@@ -118,6 +118,7 @@ public class MobileQueryHandler {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                System.out.println("----");
                 userList.add(rs.getString("UserCharacterName"));
             }
 
@@ -178,6 +179,7 @@ public class MobileQueryHandler {
 
 
         } catch (Exception e) {
+            
             System.out.println("Error in getnames");
         }
 

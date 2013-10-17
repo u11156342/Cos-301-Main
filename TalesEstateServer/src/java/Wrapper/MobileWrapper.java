@@ -32,13 +32,13 @@ public class MobileWrapper {
     @Path("getdetails/{userName}")
     @Produces("text/html")
     public String checkLogin(@PathParam("userName") String userName) {
-     //   userName = userName.replace(".", " ");
+        //   userName = userName.replace(".", " ");
         try {
             MobileQueryHandler handler = new MobileQueryHandler();
             return handler.getnames(userName);
         } catch (Exception ex) {
         }
-        return "";
+        return "error has occured";
 
     }
 }
