@@ -326,13 +326,17 @@ public class PlotQueryHandler {
                 line[18] = (rs.getString("PlotEstateName"));//18
                 line[19] = (rs.getString("CountyID"));//19
                 values.add(line);
-
+try{
                 String sql2 = "SELECT CountyDescription FROM County WHERE "
                         + "CountyID = " + line[19];
                 Statement stmt2 = con.createStatement();
                 ResultSet rs2t = stmt2.executeQuery(sql2);
                 rs2t.next();
                 line[19] = rs2t.getString("CountyDescription");
+}catch(Exception ex)
+{
+    
+}
 
             }
 
@@ -405,14 +409,14 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotDefenseValue"));//17
             value.add(rs.getString("PlotEstateName"));//18
             value.add(rs.getString("CountyID"));//19
-
+            
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             value.set(1, rs.getString("UserCharacterName"));
-
+        
             sql = "SELECT * FROM Amount WHERE AmountID = "
                     + value.get(2);
             stmt = con.createStatement();
@@ -421,7 +425,7 @@ public class PlotQueryHandler {
             value.set(2, rs.getString("AmountPlatinum") + "-"
                     + rs.getString("AmountGold") + "-"
                     + rs.getString("AmountSilver"));
-
+           
             sql = "SELECT DuchyName FROM Duchy WHERE "
                     + "DuchyID = " + value.get(3);
             stmt = con.createStatement();
@@ -429,13 +433,20 @@ public class PlotQueryHandler {
             rs.next();
             value.set(3, rs.getString("DuchyName"));
 
+           
+            try {
+                sql = "SELECT CountyDescription FROM County WHERE "
+                        + "CountyID = " + value.get(19);
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
 
-            sql = "SELECT CountyDescription FROM County WHERE "
-                    + "CountyID = " + value.get(19);
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            value.set(19, rs.getString("CountyDescription"));
+                value.set(19, "unknown");
+
+                value.set(19, rs.getString("CountyDescription"));
+            } catch (Exception ex) {
+                value.set(19,"Unknown");
+            }
 
 
             return value;
