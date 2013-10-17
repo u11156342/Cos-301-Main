@@ -49,7 +49,7 @@ public class MobileWrapper {
         //   userName = userName.replace(".", " ");
         try {
             MobileQueryHandler handler = new MobileQueryHandler();
-            return handler.getid(userid);
+            return handler.getid(userid); 
         } catch (Exception ex) {
         }
         return "error has occured";
