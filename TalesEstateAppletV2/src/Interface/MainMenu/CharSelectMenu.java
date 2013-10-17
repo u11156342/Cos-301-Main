@@ -27,10 +27,10 @@ public class CharSelectMenu extends BasePanel {
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name);
 
-        CookieReader cr = new CookieReader();
+        CookieReader cr = new CookieReader(tc);
 
         while (cr.userIDs.isEmpty()) {
-            JOptionPane.showConfirmDialog(btn, "You need to log into the site first, press ok to continue");
+            JOptionPane.showMessageDialog(btn, "You need to log into the site first");
             return;
         }
         

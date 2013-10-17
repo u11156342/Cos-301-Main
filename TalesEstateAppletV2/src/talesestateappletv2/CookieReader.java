@@ -7,6 +7,7 @@ package talesestateappletv2;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,35 +15,36 @@ import java.util.StringTokenizer;
  */
 public class CookieReader {
 
-    String User = System.getProperty("user.dir");
+    String User = System.getProperty("user.name");
     // String FireFox = "AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\wqy4xwl0.default\\cookies.sqlite";.
-    String FireFox = "AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\";
-    String Ie = "AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\cookie:user@www.teana.co";
-    String Chrome = "AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies";
-    String Opera = "AppData\\Roaming\\Opera\\Opera\\cookies4.dat";
+    String FireFox = "\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\";
+    String Ie = "\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\cookie:user@www.teana.co";
+    String Chrome = "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies";
+    String Opera = "\\AppData\\Roaming\\Opera\\Opera\\cookies4.dat";
     public ArrayList<String> userIDs = new ArrayList();
     public String userID = "";
+    TransferContainer tain;
 
-    public CookieReader() {
-
+    public CookieReader(TransferContainer tc) {
+        tain = tc;
 
         String temp = "";
         int counter = 0;
-        for (int i = 0; i < User.length(); i++) {
-
-            if (counter < 3) {
-                temp = temp + User.charAt(i);
-            }
-
-            if (User.charAt(i) == '\\') {
-                counter++;
-            }
-        }
+//        for (int i = 0; i < User.length(); i++) {
+//
+//            if (counter < 3) {
+//                temp = temp + User.charAt(i);
+//            }
+//
+//            if (User.charAt(i) == '\\') {
+//                counter++;
+//            }
+//        }
         // System.out.println(temp);
-        TryRead(temp + Ie, 0);
-        TryRead(temp + FireFox, 1);
-        TryRead(temp + Chrome, 2);
-        TryRead(temp + Opera, 3);
+        TryRead("C:\\Users\\"+User+temp + Ie, 0);
+        TryRead("C:\\Users\\"+User+temp + FireFox, 1);
+        TryRead("C:\\Users\\"+User+temp + Chrome, 2);
+        TryRead("C:\\Users\\"+User+temp + Opera, 3);
 
         if (userIDs.isEmpty()) {
             System.out.println("NO COOKIE FOUND");
@@ -54,6 +56,7 @@ public class CookieReader {
 
         userID = "";
         BufferedReader brFireFox = null;
+        
 
         try {
 
@@ -63,6 +66,7 @@ public class CookieReader {
             //  brFireFox = new BufferedReader(new FileReader(path));
 
             if (num == 0) {
+                System.out.println(path);
                 brFireFox = new BufferedReader(new FileReader(path));
                 while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
@@ -83,7 +87,7 @@ public class CookieReader {
                 File f = new File(path);
                 File[] listFiles = f.listFiles();
                 path = listFiles[0] + "\\cookies.sqlite";
-
+System.out.println(path);
                 brFireFox = new BufferedReader(new FileReader(path));
                 while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
@@ -103,6 +107,7 @@ public class CookieReader {
 
             }
             if (num == 2) {
+                System.out.println(path);
                 brFireFox = new BufferedReader(new FileReader(path));
                 while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
@@ -155,6 +160,7 @@ public class CookieReader {
         } catch (Exception e) {
             System.out.println(path);
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(tain.mainapplet,e.getMessage());
         } finally {
             try {
                 if (brFireFox != null) {
