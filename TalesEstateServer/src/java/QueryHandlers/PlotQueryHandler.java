@@ -358,9 +358,9 @@ public class PlotQueryHandler {
                 rs.next();
                 values.get(a)[19] = rs.getString("CountyDescription");
             }
-
             return values;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.println("Could not execute function retrievePlotsOwnedByCharacter()");
             System.out.println(e.getMessage());
         }
@@ -402,14 +402,14 @@ public class PlotQueryHandler {
             value.add(rs.getString("PlotDefenseValue"));//17
             value.add(rs.getString("PlotEstateName"));//18
             value.add(rs.getString("CountyID"));//19
-            
+
             sql = "SELECT UserCharacterName FROM UserCharacter "
                     + "WHERE UserCharacterID = " + value.get(1);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             value.set(1, rs.getString("UserCharacterName"));
-        
+
             sql = "SELECT * FROM Amount WHERE AmountID = "
                     + value.get(2);
             stmt = con.createStatement();
@@ -418,7 +418,7 @@ public class PlotQueryHandler {
             value.set(2, rs.getString("AmountPlatinum") + "-"
                     + rs.getString("AmountGold") + "-"
                     + rs.getString("AmountSilver"));
-           
+
             sql = "SELECT DuchyName FROM Duchy WHERE "
                     + "DuchyID = " + value.get(3);
             stmt = con.createStatement();
@@ -432,6 +432,20 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             value.set(19, rs.getString("CountyDescription"));
+
+            try {
+                sql = "SELECT CountyDescription FROM County WHERE "
+                        + "CountyID = " + value.get(19);
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+
+                value.set(19, "unknown");
+
+                value.set(19, rs.getString("CountyDescription"));
+            } catch (Exception ex) {
+                value.set(19, "Unknown");
+            }
 
             return value;
         } 

@@ -29,13 +29,27 @@ import javax.ws.rs.Produces;
 public class MobileWrapper {
 
     @GET
-    @Path("getdetails/{userName}")
+    @Path("getnames/{userName}")
     @Produces("text/html")
-    public String checkLogin(@PathParam("userName") String userName) {
+    public String getnames(@PathParam("userName") String userName) {
         //   userName = userName.replace(".", " ");
         try {
             MobileQueryHandler handler = new MobileQueryHandler();
             return handler.getnames(userName);
+        } catch (Exception ex) {
+        }
+        return "error has occured";
+
+    }
+
+    @GET
+    @Path("getdetails/{userid}")
+    @Produces("text/html")
+    public String getid(@PathParam("userid") String userid) {
+        //   userName = userName.replace(".", " ");
+        try {
+            MobileQueryHandler handler = new MobileQueryHandler();
+            return handler.getid(userid); 
         } catch (Exception ex) {
         }
         return "error has occured";
