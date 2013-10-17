@@ -8,9 +8,9 @@ DECLARE @charid INT;
 DECLARE @amountid INT;
 DECLARE @plotid INT;
 
-INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, ProdUserID, ProdCharacterID)
+INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Valentina Leonora Adela Costa', 0, 'CFC3572A-ACE5-4C77-9481-5DE31FBA1C76', '5EC2CD6A-3579-4263-8582-32F831CD416C')
+	('Valentina Leonora Adela Costa&*&1', 0, 'CFC3572A-ACE5-4C77-9481-5DE31FBA1C76', '5EC2CD6A-3579-4263-8582-32F831CD416C', 0)
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -192,9 +192,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Christopher Luke Dean						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Jacomus Jonas', 0, '362F2E60-490D-45F0-8C00-3DBBE467BDC2', 'F33D73C2-9975-4189-9421-7EE100B870A0');
+	('Jacomus Jonas&*&2', 0, '362F2E60-490D-45F0-8C00-3DBBE467BDC2', 'F33D73C2-9975-4189-9421-7EE100B870A0', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -259,9 +259,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Rean Lubbe
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Aihre Thule', 0, 'DE47D939-8920-4CCB-B1D1-FE5FE54F2CC6', 'C20D672E-B2B0-45DE-84F1-EFDBBA139BDB');
+	('Aihre Thule&*&3', 0, 'DE47D939-8920-4CCB-B1D1-FE5FE54F2CC6', 'C20D672E-B2B0-45DE-84F1-EFDBBA139BDB', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -330,9 +330,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	A17024B5-BF5A-429A-8E90-4606D3215AB7 - charid 2*/
 	
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Sinarfin', 0, '61406C2A-E382-42A9-BFD9-837E204F9154', 'A17024B5-BF5A-429A-8E90-4606D3215AB7');
+	('Sinarfin&*&4', 0, '61406C2A-E382-42A9-BFD9-837E204F9154', 'A17024B5-BF5A-429A-8E90-4606D3215AB7', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -369,9 +369,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  /*defense modifier*/
  /*************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Antonello Clemente Graziano Atrucci', 0, 'B8D7A952-C7F9-40F7-A833-1733EC281CCD', 'CDBF3FAD-18C2-4B6C-BDE2-E8EC3D0933ED');
+	('Antonello Clemente Graziano Atrucci&*&5', 0, 'B8D7A952-C7F9-40F7-A833-1733EC281CCD', 'CDBF3FAD-18C2-4B6C-BDE2-E8EC3D0933ED', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -426,9 +426,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Douw Pretorius						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Duquesne', 0, 'BB2A3ECC-9835-4C21-AD1E-59223EFCF98B', '73559087-D8D3-4283-8578-48D2D776AF96');
+	('Duquesne&*&6', 0, 'BB2A3ECC-9835-4C21-AD1E-59223EFCF98B', '73559087-D8D3-4283-8578-48D2D776AF96', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -493,9 +493,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Christiaan Hattingh						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Hemaraja Heti Himansh', 0, '48DEFE5D-364C-4CBC-8C86-EC4AF0FF5FA4', '3846EC00-CAB9-4C69-836A-3D6B7018D2C6');
+	('Hemaraja Heti Himansh&*&7', 0, '48DEFE5D-364C-4CBC-8C86-EC4AF0FF5FA4', '3846EC00-CAB9-4C69-836A-3D6B7018D2C6', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -592,9 +592,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Yeshin Harisparid						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Ansem Siegfried', 0, '8C151ADE-BD2A-4F2B-852C-791E0A9D05B5', '00405D9B-D8F0-45AF-9166-BCAE781D07ED');
+	('Ansem Siegfried&*&8', 0, '8C151ADE-BD2A-4F2B-852C-791E0A9D05B5', '00405D9B-D8F0-45AF-9166-BCAE781D07ED', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -744,9 +744,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Mark-Anthony Fouche						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Lutz', 0, '52DE205B-01DE-463F-83B6-FBBB18E053CB', '68E92453-C8DD-4CD6-BA01-7CDCC020B7BB');
+	('Lutz&*&9', 0, '52DE205B-01DE-463F-83B6-FBBB18E053CB', '68E92453-C8DD-4CD6-BA01-7CDCC020B7BB', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
@@ -843,9 +843,9 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  * Angelique Venter						
  *******************************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
-	ProdUserID, ProdCharacterID)
+	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
-	('Ylva Smedvagn', 0, '5C3A8142-62A9-461D-B45F-1C3505E08400', 'FBC8E7D1-2136-49E2-A58B-6EA970A68BD6');
+	('Ylva Smedvagn&*&10', 0, '5C3A8142-62A9-461D-B45F-1C3505E08400', 'FBC8E7D1-2136-49E2-A58B-6EA970A68BD6', 0);
 	SET @charid = @@IDENTITY
 	
 INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
