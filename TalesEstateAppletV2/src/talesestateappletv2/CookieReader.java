@@ -41,10 +41,10 @@ public class CookieReader {
 //            }
 //        }
         // System.out.println(temp);
-        TryRead("C:\\Users\\"+User+temp + Ie, 0);
-        TryRead("C:\\Users\\"+User+temp + FireFox, 1);
-        TryRead("C:\\Users\\"+User+temp + Chrome, 2);
-        TryRead("C:\\Users\\"+User+temp + Opera, 3);
+        TryRead("C:\\Users\\" + User + temp + Ie, 0);
+        TryRead("C:\\Users\\" + User + temp + FireFox, 1);
+        TryRead("C:\\Users\\" + User + temp + Chrome, 2);
+        TryRead("C:\\Users\\" + User + temp + Opera, 3);
 
         if (userIDs.isEmpty()) {
             System.out.println("NO COOKIE FOUND");
@@ -56,7 +56,7 @@ public class CookieReader {
 
         userID = "";
         BufferedReader brFireFox = null;
-        
+
 
         try {
 
@@ -87,7 +87,7 @@ public class CookieReader {
                 File f = new File(path);
                 File[] listFiles = f.listFiles();
                 path = listFiles[0] + "\\cookies.sqlite";
-System.out.println(path);
+                System.out.println(path);
                 brFireFox = new BufferedReader(new FileReader(path));
                 while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
@@ -160,7 +160,7 @@ System.out.println(path);
         } catch (Exception e) {
             System.out.println(path);
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(tain.mainapplet,e.getMessage());
+          //  JOptionPane.showMessageDialog(tain.mainapplet, e.getMessage());
         } finally {
             try {
                 if (brFireFox != null) {
