@@ -131,6 +131,7 @@ public class GameBrowseGrid extends JFXPanel {
             tempplacinggrid = new int[tileStates.length][tileStates.length];
         }
 
+     //   System.out.println("tileStates "+tileStates[0].length);
 
         int xc = 0;
         int yc = 0;

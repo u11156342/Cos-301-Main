@@ -32,7 +32,7 @@ public class ResultUnit extends JPanel {
 
     ResultUnit(int w, ResultProperties aThis) {
 
-       // setBorder(BorderFactory.createLineBorder(Color.black));
+        // setBorder(BorderFactory.createLineBorder(Color.black));
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -40,7 +40,7 @@ public class ResultUnit extends JPanel {
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
         c.gridx = 1;
-        statusArea.setPreferredSize(new Dimension(300,200));
+        statusArea.setPreferredSize(new Dimension(300, 200));
         add(statusArea, c);
         c.gridx = 2;
         // RestFullAdapter PicAdapter = new RestFullAdapter();
@@ -108,7 +108,11 @@ public class ResultUnit extends JPanel {
         html.append("<body>");
 
         html.append("<table>");
-        html.append("<tr><td class=\"ssheading\">Owner</td><td>").append(retrievePlotDetails.get(1).substring(0, retrievePlotDetails.get(1).indexOf("&*&"))).append("</td></tr>");
+        try {
+            html.append("<tr><td class=\"ssheading\">Owner</td><td>").append(retrievePlotDetails.get(1).substring(0, retrievePlotDetails.get(1).indexOf("&*&"))).append("</td></tr>");
+        } catch (Exception e) {
+            html.append("<tr><td class=\"ssheading\">Owner</td><td>").append(retrievePlotDetails.get(1)).append("</td></tr>");
+        }
         html.append("<tr><td class=\"ssheading\">Estate Number</td><td> ").append(retrievePlotDetails.get(0)).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18)).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Duchy</td><td> ").append(retrievePlotDetails.get(3)).append("</td></tr>");
@@ -128,13 +132,13 @@ public class ResultUnit extends JPanel {
 
         // statusArea.append("Plot Size : " + (Integer.parseInt(retrievePlotDetails.get(4)))+ "\n");
 
-       
+
 
         Browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BrowseInterface bi = tc.Cmanager.getBrowseInterfacesCard();
-                tc.lastAdminBrowse=false;
+                tc.lastAdminBrowse = false;
                 //public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz)
                 bi.init(tc, propertyID, size, tiles, buildings);
                 tc.cardlayout.show(tc.contentpane, bi.getName());

@@ -18,8 +18,6 @@ public class BrowseInterface extends BasePanel {
 
     int size;
     int propertyID;
-    int[][] tiles;
-    int[][] buildings;
 
     public BrowseInterface(String play) {
         super(play);
@@ -27,22 +25,21 @@ public class BrowseInterface extends BasePanel {
 
     public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz) {
 
+      //  System.out.println(tilesz.length + " " + buildingsz.length);
 
-        size = sizes;
+        size = tilesz.length;
 
         propertyID = propertyIDz;
-        tiles = tilesz;
-        buildings = buildingsz;
-        size = tiles.length;
+
         GameBrowseGrid playIn = null;
         try {
-            playIn = new GameBrowseGrid(size,tc);
+            playIn = new GameBrowseGrid(size, tc);
         } catch (IOException ex) {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        playIn.gridstates = buildings;
-        playIn.tileStates = tiles;
+        playIn.gridstates = buildingsz;
+        playIn.tileStates = tilesz;
 
         playIn.setPreferredSize(new Dimension(360 * size + 100, 180 * size + 100));
         JScrollPane playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -55,14 +52,13 @@ public class BrowseInterface extends BasePanel {
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (tc.lastAdminBrowse) {
                     tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
                 } else {
-                    tc.cardlayout.show(tc.contentpane,tc.Cmanager.SearchInterfaces[tc.Cmanager.currentSearchInterfaceCard].getName());
+                    tc.cardlayout.show(tc.contentpane, tc.Cmanager.SearchInterfaces[tc.Cmanager.currentSearchInterfaceCard].getName());
                 }
                 // tc.cardlayout.show(tc.contentpane, "MainMenu");
                 // 

@@ -34,7 +34,13 @@ public class PlayerProperties extends JPanel {
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
+            try
+            {
             playersCurrentProperties[a].county = result.get(a)[19];
+            }catch(Exception e)
+            {
+                
+            }
             playersCurrentProperties[a].plotname = result.get(a)[18].replaceAll("\\.", " ");
             ArrayList<String[]> list = new ArrayList();
 
