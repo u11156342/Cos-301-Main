@@ -20,20 +20,21 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     JButton btn;
-  //  String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";  //luke
-    String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
-   // String UserId = "";
+    //  String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";  //luke
+    // String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name);
 
-       // CookieReader cr = new CookieReader();
-       // UserId = cr.userID;
+        CookieReader cr = new CookieReader();
 
-        if ("".equals(UserId)) {
-            JOptionPane.showMessageDialog(btn, "You need to log into the site first");
+        while (cr.userIDs.isEmpty()) {
+            JOptionPane.showConfirmDialog(btn, "You need to log into the site first, press ok to continue");
             return;
         }
+        
+        UserId=cr.userIDs.get(cr.userIDs.size()-1);
 
         JPanel container = new JPanel();
 

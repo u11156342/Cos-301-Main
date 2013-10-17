@@ -5,8 +5,8 @@
 package talesestateappletv2;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,10 +15,12 @@ import javax.swing.JOptionPane;
 public class CookieReader {
 
     String User = System.getProperty("user.dir");
-    String FireFox = "AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\wqy4xwl0.default\\cookies.sqlite";
+    // String FireFox = "AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\wqy4xwl0.default\\cookies.sqlite";.
+    String FireFox = "AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\";
     String Ie = "AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\cookie:user@www.teana.co";
     String Chrome = "AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies";
     String Opera = "AppData\\Roaming\\Opera\\Opera\\cookies4.dat";
+    public ArrayList<String> userIDs = new ArrayList();
     public String userID = "";
 
     public CookieReader() {
@@ -37,11 +39,12 @@ public class CookieReader {
             }
         }
         // System.out.println(temp);
+        TryRead(temp + Ie, 0);
         TryRead(temp + FireFox, 1);
         TryRead(temp + Chrome, 2);
         TryRead(temp + Opera, 3);
 
-        if ("".equals(userID)) {
+        if (userIDs.isEmpty()) {
             System.out.println("NO COOKIE FOUND");
         }
 
@@ -50,18 +53,18 @@ public class CookieReader {
     public void TryRead(String path, int num) {
 
         userID = "";
-
         BufferedReader brFireFox = null;
 
         try {
 
+
             String sCurrentLine;
 
-            brFireFox = new BufferedReader(new FileReader(path));
+            //  brFireFox = new BufferedReader(new FileReader(path));
 
-            while ((sCurrentLine = brFireFox.readLine()) != null) {
-
-                if (num == 1) {
+            if (num == 0) {
+                brFireFox = new BufferedReader(new FileReader(path));
+                while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
 
                         int where = sCurrentLine.indexOf("UserID");
@@ -71,10 +74,37 @@ public class CookieReader {
                             StringTokenizer tokens = new StringTokenizer(newS, "=");
                             tokens.nextToken();
                             userID = tokens.nextToken();
+                            userIDs.add(userID);
                         }
                     }
                 }
-                if (num == 2) {
+            }
+            if (num == 1) {
+                File f = new File(path);
+                File[] listFiles = f.listFiles();
+                path = listFiles[0] + "\\cookies.sqlite";
+
+                brFireFox = new BufferedReader(new FileReader(path));
+                while ((sCurrentLine = brFireFox.readLine()) != null) {
+                    if (sCurrentLine.contains("UserSettings")) {
+
+                        int where = sCurrentLine.indexOf("UserID");
+                        if (where != -1) {
+                            String newS = sCurrentLine;
+                            newS = newS.substring(where, where + 43);
+                            StringTokenizer tokens = new StringTokenizer(newS, "=");
+                            tokens.nextToken();
+                            userID = tokens.nextToken();
+                            userIDs.add(userID);
+                        }
+                    }
+                }
+
+
+            }
+            if (num == 2) {
+                brFireFox = new BufferedReader(new FileReader(path));
+                while ((sCurrentLine = brFireFox.readLine()) != null) {
                     if (sCurrentLine.contains("UserSettings")) {
 
                         String newS = sCurrentLine;
@@ -82,12 +112,21 @@ public class CookieReader {
                         newS = newS.substring(pos + 7, pos + 43);
 
                         userID = newS;
+                        userIDs.add(userID);
                     }
                 }
-                if (num == 3) {
-                    //opera
+            }
+
+            if (num == 3) {
+                brFireFox = new BufferedReader(new FileReader(path));
+
+                while ((sCurrentLine = brFireFox.readLine()) != null) {
+
+                    //  System.out.println(sCurrentLine); 
+                    //opera.
+
                     if (sCurrentLine.contains("UserSettings")) {
-                        //System.out.println(sCurrentLine);
+                        // System.out.println(sCurrentLine);
                         String newS = sCurrentLine;
 
                         int pos = newS.indexOf("UserID");
@@ -102,11 +141,14 @@ public class CookieReader {
                         StringTokenizer tokens = new StringTokenizer(newS, "=");
                         tokens.nextToken();
                         userID = tokens.nextToken();
+                        userIDs.add(userID);
 
 
                     }
+
                 }
             }
+
 
 
 
