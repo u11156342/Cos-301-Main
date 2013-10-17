@@ -201,15 +201,13 @@ public class PlotQueryHandler {
      * in the game system can own one or more plots.
      */
     public boolean addPlotToCharacter(String characterName, String duchyName, String quality,
-            int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
-            double monthlyIncome, int workersUsed, int workerMax, String baronie, String name) {
+        int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
+        double monthlyIncome, int workersUsed, int workerMax, String baronie, String name) {
         int characterID, duchyID, qualityID;
         String ground, building;
         int exquisite = 0, fine = 0, poor = 0;
 
         //Resolve all ID's
-        //*Fault checking
-        System.out.println("CHARACTER FUCKING ANEM " + characterName);
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
                     + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
@@ -259,11 +257,11 @@ public class PlotQueryHandler {
             amountID = rs.getInt(1);
 
             stmt = con.createStatement();
-            System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
+            //System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
             rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
-
             rs.next();
             String CountyID = rs.getString("CountyID");
+            
             sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
                     + "PlotGroundArray, PlotBuildingArray, PlotHappiness, "
                     + "PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, "
@@ -326,18 +324,6 @@ public class PlotQueryHandler {
                 line[18] = (rs.getString("PlotEstateName"));//18
                 line[19] = (rs.getString("CountyID"));//19
                 values.add(line);
-try{
-                String sql2 = "SELECT CountyDescription FROM County WHERE "
-                        + "CountyID = " + line[19];
-                Statement stmt2 = con.createStatement();
-                ResultSet rs2t = stmt2.executeQuery(sql2);
-                rs2t.next();
-                line[19] = rs2t.getString("CountyDescription");
-}catch(Exception ex)
-{
-    
-}
-
             }
 
             //Exchange ID's with values
@@ -364,6 +350,13 @@ try{
                 rs = stmt.executeQuery(sql);
                 rs.next();
                 values.get(a)[3] = rs.getString("DuchyName");
+                
+                sql = "SELECT CountyDescription FROM County WHERE CountyID = "
+                        + values.get(a)[19];
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(sql);
+                rs.next();
+                values.get(a)[19] = rs.getString("CountyDescription");
             }
 
             return values;
@@ -433,24 +426,16 @@ try{
             rs.next();
             value.set(3, rs.getString("DuchyName"));
 
-           
-            try {
-                sql = "SELECT CountyDescription FROM County WHERE "
-                        + "CountyID = " + value.get(19);
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-
-                value.set(19, "unknown");
-
-                value.set(19, rs.getString("CountyDescription"));
-            } catch (Exception ex) {
-                value.set(19,"Unknown");
-            }
-
+            sql = "SELECT CountyDescription FROM County WHERE "
+                    + "CountyID = " + value.get(19);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            value.set(19, rs.getString("CountyDescription"));
 
             return value;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.println("Error, could not execute function retrievePlotDetails()");
             System.out.println(e.getMessage());
         }
@@ -464,12 +449,13 @@ try{
      * parameters. PlotAmount supplied in the following format:
      * amountExquisite-amountFine-amountPoor i.e. 1-0-1
      */
+
     public boolean modifyPlot(int plotID, String characterName, String plotAmount, String duchyName,
             int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,
             int workersUsed, int workerMax, double acreE, int acreEM, double acreF, int acreFM,
-            double acreP, int acrePM, double defenseValue) {
+            double acreP, int acrePM, double defenseValue, String estateName, String county) {
 
-        int characterID, duchyID, amountID;
+        int characterID, duchyID, amountID, countyID;
         String ground, building;
         int plat, gold, silver;
 
@@ -501,12 +487,18 @@ try{
             rs = stmt.executeQuery(sql);
             rs.next();
             amountID = Integer.parseInt(rs.getString("AmountID"));
+            
+            sql = "SELECT CountyID FROM County WHERE CountyDescription = '"
+                    + county + "'";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            countyID = Integer.parseInt(rs.getString("CountyID"));
+            
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
 
             System.out.println(happiness);
-
-            //ek gaan dit edit om ni die plots te update ni
 
             sql = "UPDATE Plot SET "
                     + "PlotOwnedBy = " + characterID + ", "
@@ -519,15 +511,17 @@ try{
                     + "PlotMonthlyIncome = " + monthlyIncome + ", "
                     + "PlotWorkersUsed = " + workersUsed + ", "
                     + "PlotWorkerMax = " + workerMax + ", "
-                    + "PlotDefenseValue = " + defenseValue + " "
-                    //+ "PlotWorkerMax = " + workerMax + ", "
-                    //                    + "PlotAcreExquisite = " + acreE + ", "
-                    //                    + "PlotAcreExquisiteMax = " + acreEM + ", "
-                    //                    + "PlotAcreFine = " + acreF + ", "
-                    //                    + "PlotAcreFineMax = " + acreFM + ", "
-                    //                    + "PlotAcrePoor = " + acreP + ", "
-                    //                    + "PlotAcrePoorMax = " + acrePM + " "
+                    //+ "PlotAcreExquisite = " + acreE + ", "
+                    //+ "PlotAcreExquisiteMax = " + acreEM + ", "
+                    //+ "PlotAcreFine = " + acreF + ", "
+                    //+ "PlotAcreFineMax = " + acreFM + ", "
+                    //+ "PlotAcrePoor = " + acreP + ", "
+                    //+ "PlotAcrePoorMax = " + acrePM + ", "
+                    + "PlotDefenseValue = " + defenseValue + ", "
+                    + "PlotEstateName = " + estateName + ", "
+                    + "CountyID = " + countyID + " "
                     + "WHERE PlotID = " + plotID;
+                        
             stmt = con.createStatement();
 
             stmt.execute(sql);
@@ -628,7 +622,7 @@ try{
                 rs2 = stmt.executeQuery(sql);
 
                 while (rs2.next()) {
-                    line = new String[18];
+                    line = new String[20];
                     line[0] = rs2.getString("PlotID");
                     line[1] = rs2.getString("PlotOwnedBy");
                     line[2] = rs2.getString("PlotAmount");
@@ -647,13 +641,15 @@ try{
                     line[15] = rs2.getString("PlotAcrePoor");
                     line[16] = rs2.getString("PlotAcrePoorMax");
                     line[17] = rs2.getString("PlotDefenseValue");
+                    line[18] = rs2.getString("PlotEstateName");
+                    line[19] = rs2.getString("CountyID");
                     values.add(line);
                 }
-                // }
             }
 
             return values;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.println("Could not execute function searchPlotBy()");
             System.out.println(e.getMessage());
         }
@@ -1289,7 +1285,7 @@ try{
         return false;
     }
 
-    //returns all the plots where I have a right
+    //Returns all the plots that the userID has rights to
     public ArrayList<String[]> AllPlotsIHaveAccess(int userID) {
         ArrayList<String[]> result = new ArrayList();
         String[] line = null;

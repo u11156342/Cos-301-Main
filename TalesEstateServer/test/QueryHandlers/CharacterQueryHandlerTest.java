@@ -89,4 +89,112 @@ public class CharacterQueryHandlerTest extends TestCase {
         assertTrue(correct1);
         assertTrue(correct2);
     }
+
+    /**
+     * Test of retrieveCharacterName method, of class CharacterQueryHandler.
+     */
+    public void testRetrieveCharacterName() {
+        System.out.println("retrieveCharacterName");
+        int characterID = 0;
+        CharacterQueryHandler instance = null;
+        String expResult = "";
+        String result = instance.retrieveCharacterName(characterID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of retrieveCharacterIDExtra method, of class CharacterQueryHandler.
+     */
+    public void testRetrieveCharacterIDExtra() {
+        System.out.println("retrieveCharacterIDExtra");
+        String characterName = "";
+        CharacterQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.retrieveCharacterIDExtra(characterName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getCharacterAmounts method, of class CharacterQueryHandler.
+     */
+    public void testGetCharacterAmounts() {
+        System.out.println("getCharacterAmounts");
+        String characterName = "";
+        CharacterQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.getCharacterAmounts(characterName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modifyAmount method, of class CharacterQueryHandler.
+     */
+    public void testModifyAmount() {
+        System.out.println("modifyAmount");
+        String characterName = "";
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        CharacterQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.modifyAmount(characterName, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of depositAmount method, of class CharacterQueryHandler.
+     */
+    public void testDepositAmount() {
+        System.out.println("depositAmount");
+        String characterName = "";
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        CharacterQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.depositAmount(characterName, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of withdrawAmount method, of class CharacterQueryHandler.
+     */
+    public void testWithdrawAmount() {
+        System.out.println("withdrawAmount");
+        String characterName = "";
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        CharacterQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.withdrawAmount(characterName, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modifyStatus method, of class CharacterQueryHandler.
+     */
+    public void testModifyStatus() {
+        System.out.println("modifyStatus");
+        int characterID = 0;
+        int statusAmount = 0;
+        CharacterQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.modifyStatus(characterID, statusAmount);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

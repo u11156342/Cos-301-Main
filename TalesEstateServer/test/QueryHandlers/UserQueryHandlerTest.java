@@ -106,4 +106,34 @@ public class UserQueryHandlerTest extends TestCase {
         
         assertEquals(85, result);
     }
+
+    /**
+     * Test of setCharacterSilver method, of class UserQueryHandler.
+     */
+    public void testSetCharacterSilver() {
+        System.out.println("setCharacterSilver");
+        String characterID = "";
+        String userID = "";
+        int silver = 0;
+        UserQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.setCharacterSilver(characterID, userID, silver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getCharacterName method, of class UserQueryHandler.
+     */
+    public void testGetCharacterName() {
+        System.out.println("getCharacterName");
+        String charID = "";
+        UserQueryHandler instance = null;
+        String expResult = "";
+        String result = instance.getCharacterName(charID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

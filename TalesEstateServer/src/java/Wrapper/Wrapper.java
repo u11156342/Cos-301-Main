@@ -108,7 +108,7 @@ public class Wrapper {
         html.append("<td class=\"hilight\">Duchy:</td><td>").append(details.get(3)).append("</td>");
         html.append("</tr>");
         html.append("<tr>");
-        html.append("<td class=\"hilight\">Countie:</td><td>").append(details.get(19)).append("</td>");
+        html.append("<td class=\"hilight\">County:</td><td>").append(details.get(19)).append("</td>");
         html.append("</tr>");
         html.append("</table>");
 

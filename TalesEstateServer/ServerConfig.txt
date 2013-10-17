@@ -1,2 +1,2 @@
-imagepath=C:\\Users\\Fiyah\\Documents\\Cos-301-Main\\TalesEstateServer\\Images\\
-databaseIP=10.0.0.103
+imagepath=C:\\Users\\Vincent\\Desktop\\My Project Files\\Cos-301-Main\\TalesEstateServer\\Images\\
+databaseIP=localhost

@@ -388,4 +388,256 @@ public class PlotQueryHandlerTest extends TestCase {
         
         assertEquals(true, correct);
     }
+
+    /**
+     * Test of getCurrentAmount method, of class PlotQueryHandler.
+     */
+    public void testGetCurrentAmount() {
+        System.out.println("getCurrentAmount");
+        int plotID = 0;
+        PlotQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.getCurrentAmount(plotID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modifyAmount method, of class PlotQueryHandler.
+     */
+    public void testModifyAmount() {
+        System.out.println("modifyAmount");
+        int inPlotID = 0;
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.modifyAmount(inPlotID, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of depositAmount method, of class PlotQueryHandler.
+     */
+    public void testDepositAmount() {
+        System.out.println("depositAmount");
+        int plotID = 0;
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.depositAmount(plotID, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of withdrawAmount method, of class PlotQueryHandler.
+     */
+    public void testWithdrawAmount() {
+        System.out.println("withdrawAmount");
+        int plotID = 0;
+        int amountPlatinum = 0;
+        int amountGold = 0;
+        int amountSilver = 0;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.withdrawAmount(plotID, amountPlatinum, amountGold, amountSilver);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of expandPlot method, of class PlotQueryHandler.
+     */
+    public void testExpandPlot() {
+        System.out.println("expandPlot");
+        int plotID = 0;
+        String quality = "";
+        int[][] groundArray = null;
+        int[][] buildingArray = null;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.expandPlot(plotID, quality, groundArray, buildingArray);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAcreQualityAmounts method, of class PlotQueryHandler.
+     */
+    public void testGetAcreQualityAmounts() {
+        System.out.println("getAcreQualityAmounts");
+        int plotID = 0;
+        PlotQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.getAcreQualityAmounts(plotID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of useAcresOnPlot method, of class PlotQueryHandler.
+     */
+    public void testUseAcresOnPlot() {
+        System.out.println("useAcresOnPlot");
+        int plotID = 0;
+        double acreExquisite = 0.0;
+        double acreFine = 0.0;
+        double acrePoor = 0.0;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.useAcresOnPlot(plotID, acreExquisite, acreFine, acrePoor);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addPlotAccess method, of class PlotQueryHandler.
+     */
+    public void testAddPlotAccess() {
+        System.out.println("addPlotAccess");
+        int plotID = 0;
+        int userID = 0;
+        boolean deposit = false;
+        boolean withdraw = false;
+        boolean buy = false;
+        boolean place = false;
+        boolean expand = false;
+        boolean status = false;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.addPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modifyPlotAccess method, of class PlotQueryHandler.
+     */
+    public void testModifyPlotAccess() {
+        System.out.println("modifyPlotAccess");
+        int plotID = 0;
+        int userID = 0;
+        boolean deposit = false;
+        boolean withdraw = false;
+        boolean buy = false;
+        boolean place = false;
+        boolean expand = false;
+        boolean status = false;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.modifyPlotAccess(plotID, userID, deposit, withdraw, buy, place, expand, status);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getPlotAccess method, of class PlotQueryHandler.
+     */
+    public void testGetPlotAccess() {
+        System.out.println("getPlotAccess");
+        int plotID = 0;
+        int userID = 0;
+        PlotQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.getPlotAccess(plotID, userID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAllAccess method, of class PlotQueryHandler.
+     */
+    public void testGetAllAccess() {
+        System.out.println("getAllAccess");
+        int plotID = 0;
+        PlotQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.getAllAccess(plotID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of removeAccess method, of class PlotQueryHandler.
+     */
+    public void testRemoveAccess() {
+        System.out.println("removeAccess");
+        int PlotID = 0;
+        int userID = 0;
+        PlotQueryHandler instance = null;
+        boolean expResult = false;
+        boolean result = instance.removeAccess(PlotID, userID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of AllPlotsIHaveAccess method, of class PlotQueryHandler.
+     */
+    public void testAllPlotsIHaveAccess() {
+        System.out.println("AllPlotsIHaveAccess");
+        int userID = 0;
+        PlotQueryHandler instance = null;
+        ArrayList expResult = null;
+        ArrayList result = instance.AllPlotsIHaveAccess(userID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of DoExspand method, of class PlotQueryHandler.
+     */
+    public void testDoExspand() {
+        System.out.println("DoExspand");
+        int pId = 0;
+        double Upkeep = 0.0;
+        int workerMax = 0;
+        PlotQueryHandler instance = null;
+        instance.DoExspand(pId, Upkeep, workerMax);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of PlaceBuilding method, of class PlotQueryHandler.
+     */
+    public void testPlaceBuilding() {
+        System.out.println("PlaceBuilding");
+        int PlotID = 0;
+        int[][] buildings = null;
+        PlotQueryHandler instance = null;
+        instance.PlaceBuilding(PlotID, buildings);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MarkBuildingAsPlaced method, of class PlotQueryHandler.
+     */
+    public void testMarkBuildingAsPlaced() {
+        System.out.println("MarkBuildingAsPlaced");
+        int BuildLogID = 0;
+        PlotQueryHandler instance = null;
+        instance.MarkBuildingAsPlaced(BuildLogID);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }
