@@ -28,10 +28,12 @@ import talesestateappletv2.TransferContainer;
  */
 public class MainAdminSearchInterface extends JPanel {
 
-    public MainAdminSearchInterface(final TransferContainer tc) {
+    public MainAdminSearchInterface() {
+    }
+
+    public void init(final TransferContainer tc) {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        RestFullAdapter picAdapter = new RestFullAdapter();
         final JTextField charc = new JTextField("Any");
         charc.setPreferredSize(new Dimension(100, 25));
 
@@ -89,10 +91,11 @@ public class MainAdminSearchInterface extends JPanel {
         add(slabe, c);
         add(size, c);
 
-        JButton btn = new JButton(new ImageIcon(picAdapter.ImageAdapter(19)));
+        JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setContentAreaFilled(false);
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 

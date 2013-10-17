@@ -41,6 +41,7 @@ public class AdminMenuInterface extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 ManageGold mg = tc.Cmanager.getManageGoldIntersCard();
+                mg.init(tc);
                 tc.cardlayout.show(tc.contentpane, mg.getName());
             }
         });

@@ -41,7 +41,7 @@ public class TransferContainer {
     public String CharacterName;
     public JFrame mainframe;
     public JApplet mainapplet;
-    public RestFullAdapter ad = new RestFullAdapter();
+    public RestFullAdapter ad;
     public RestFullDBAdapter rdb = new RestFullDBAdapter();
     public Container contentpane;
     public BuyInterface Buy;
@@ -69,6 +69,7 @@ public class TransferContainer {
     }
     public void Cinit()
     {
+        ad = new RestFullAdapter(this);
         Cmanager=new CardManager(this);
     }
 }

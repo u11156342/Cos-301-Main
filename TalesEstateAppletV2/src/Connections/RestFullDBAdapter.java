@@ -73,6 +73,7 @@ public class RestFullDBAdapter {
             DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String ID = Format.format(cal.getTime());
 
+            System.out.println(ID+" "+path);
 
 
             //check for inconsistensies in the path

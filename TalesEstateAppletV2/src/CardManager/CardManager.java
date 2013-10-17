@@ -57,7 +57,7 @@ public class CardManager {
             MainAdminSearches[c] = new MainAdminSearch("Admin" + c);
         }
         for (int c = 0; c < ManageGoldInters.length; c++) {
-            ManageGoldInters[c] = new ManageGold("CGold" + c, tc);
+            ManageGoldInters[c] = new ManageGold("CGold" + c);
         }
         for (int c = 0; c < AdminSearchInterfaces.length; c++) {
             AdminSearchInterfaces[c] = new AdminSearchInterface("mainSearchInterface" + c, tc);

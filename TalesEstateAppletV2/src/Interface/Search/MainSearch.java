@@ -23,9 +23,7 @@ public class MainSearch extends BasePanel {
 
     public void init(final TransferContainer tc) {
 
-
-        RestFullAdapter picAdapter = new RestFullAdapter();
-        JButton title = new JButton(new ImageIcon(picAdapter.ImageAdapter(18)));
+        JButton title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
 
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);

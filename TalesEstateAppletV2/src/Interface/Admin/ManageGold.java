@@ -26,8 +26,11 @@ import talesestateappletv2.TransferContainer;
  */
 public class ManageGold extends BasePanel {
 
-    public ManageGold(String name, final TransferContainer tc) {
+    public ManageGold(String name) {
         super(name);
+    }
+    public void init(final TransferContainer tc)
+    {
         
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(47)));
         Title.setBorderPainted(false);

@@ -21,8 +21,7 @@ public class SearchInterface extends BasePanel {
     public SearchInterface(String name, TransferContainer tc) {
         super(name);
 
-        RestFullAdapter picAdapter = new RestFullAdapter();
-        title = new JButton(new ImageIcon(picAdapter.ImageAdapter(18)));
+        title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
     }

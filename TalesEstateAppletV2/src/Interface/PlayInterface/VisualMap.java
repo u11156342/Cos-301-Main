@@ -24,7 +24,7 @@ public class VisualMap extends JFXPanel {
     public int[][] tempplacinggrid = null;
     public int wdOfcell;
     public int htOfcell;
-    public TileManager tiles = new TileManager();
+    public TileManager tiles;
     boolean build = false;
     public JScrollPane scroller;
     int topoffset = 100;
@@ -41,11 +41,13 @@ public class VisualMap extends JFXPanel {
     public boolean placed = false;
 
     public VisualMap(int size, TransferContainer t) throws IOException {
+        tiles = new TileManager(t);
         tc = t;
         wdOfcell = 160;
         htOfcell = 80;
 
         this.addMouseWheelListener(new MouseWheelListener() {
+
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
 
@@ -190,6 +192,7 @@ public class VisualMap extends JFXPanel {
 
 
         this.addMouseMotionListener(new MouseMotionListener() {
+
             @Override
             public void mouseDragged(MouseEvent e) {
                 scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()) / 2);
@@ -261,6 +264,7 @@ public class VisualMap extends JFXPanel {
         });
 
         this.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 int clickedx = e.getX();

@@ -24,7 +24,7 @@ public class GameBrowseGrid extends JFXPanel {
     public int[][] tempplacinggrid = null;
     public int wdOfcell;
     public int htOfcell;
-    public TileManager tiles = new TileManager();
+    public TileManager tiles;
     boolean build = false;
     public JScrollPane scroller;
     int topoffset = 100;
@@ -36,9 +36,9 @@ public class GameBrowseGrid extends JFXPanel {
     int tempy = 0;
     int oldvalue = 0;
     int currentZoom = 0;
-    TransferContainer tc;
 
-    public GameBrowseGrid(int size) throws IOException {
+    public GameBrowseGrid(int size,TransferContainer tc) throws IOException {
+        tiles=new TileManager(tc);
         gridsize = size;
 
         wdOfcell = 160;
