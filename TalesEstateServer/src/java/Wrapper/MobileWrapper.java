@@ -35,14 +35,10 @@ public class MobileWrapper {
         userName = userName.replace(".", " ");
         try {
             MobileQueryHandler handler = new MobileQueryHandler();
-            return handler.getid(userName);
-        } catch (SQLException ex) {
-            Logger.getLogger(MobileWrapper.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(MobileWrapper.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MobileWrapper.class.getName()).log(Level.SEVERE, null, ex);
+            return handler.getnames(userName);
+        } catch (Exception ex) {
         }
         return "";
+
     }
 }
