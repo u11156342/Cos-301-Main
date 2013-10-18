@@ -63,7 +63,6 @@ INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
 	(@charid, @plotid, 82, '2013-09-01 00:00:00', 1, 1)
 
  /*add defense value modifier!*/
- /*add happiness percentages*/
  /****************************/
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -73,7 +72,7 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	(@plotid, 'Rebuilding', 'Rebuilding', '2013-03-31', 0, 0, 0, 1, 0),
 	(@plotid, 'Soldier training', 'Soldier training', '2013-03-31', 0, 0, 0, 0, 0),
 	(@plotid, 'Novelty run', 'Novelty run', '2013-03-31', 0, 0, 0, 0, 15),
-	(@plotid, 'Shady figures', 'Shady figures', '2013-03-31', 0, 0, 0, 0, 0),
+	(@plotid, 'Shady figures', 'Shady figures', '2013-03-31', 0, 0, 0, -1, 0),
 	(@plotid, 'Wedding', 'Orders additional income', '2013-03-31', 0, 0, 0, 0, 5),
 	(@plotid, 'Bandit raid', 'There is a bandit raid on the estate, but the soldiers see it off', '2013-03-31', 0, 0, 0, 0, 0),
 	(@plotid, 'Post bandit raid', 'The bandit raid left the workers jumpy and they loose productivity', '2013-03-31', 0, 0, 0, 0, -10)
@@ -221,9 +220,6 @@ INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
 	(@charid, @plotid, 39, '2013-09-16 00:00:00', 3, 1),
 	(@charid, @plotid, 39, '2013-09-16 00:00:00', 3, 1)
 
-/*Effect on status*/
-/******************/
-
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome)
@@ -325,10 +321,6 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  /*******************************************
  * Robin Meisal						
  *******************************************/
- 	/*E8D36515-DDB2-4467-949D-C47072BC9F54 - PC
-	C0BAB518-5BEF-4D33-9A4F-0F455E5F3CCB - charid 1 - invalid one. no userid
-	A17024B5-BF5A-429A-8E90-4606D3215AB7 - charid 2*/
-	
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
 	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
@@ -460,13 +452,11 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome)
 	VALUES
-	/*social modifier*/
 	(@plotid, 'Baron displeased', 'Baron displeased with elves, take a social track hit', '2013-06-01', 0, 0, 0, 0, 0),
 	(@plotid, 'Sarr raiders', 'Sarr raiders, protecting gypsies, damage to vinyard', '2013-07-01', 0, -5, 0, 0, 0),
 	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-08-01', 0, 0, 0, 1, 0),
 	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-09-01', 0, 0, 0, 1, 0),
 	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-10-01', 0, 0, 0, 1, 0),
-	/*Social modifier*/
 	(@plotid, 'No one home', 'Your baron comes around to congratulate you, but no one is home except an elf and Kilo…', '2013-09-01', 0, 0, 0, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
@@ -538,7 +528,6 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome)
 	VALUES
-	/*social modifier*/
 	(@plotid, 'Cheap supplies', 'Cheap supplies', '2013-03-31', 0, 0, 0, 0, 6),
 	(@plotid, 'Moral drops', 'Moral drops as Scavengers start filtering in', '2013-04-30', 0, 0, 0, -1, 0),
 	(@plotid, 'Economic hit', 'Economic hit as Scavengers filter in', '2013-05-31', 0, 0, 0, 0, -50),
@@ -630,7 +619,6 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome)
 	VALUES
-	/*social modifier*/
 	(@plotid, 'Sheep sickness', 'Sickness amoung the sheep', '2013-02-28', 0, 0, 0, 0, -1),
 	(@plotid, 'Replacement sheep', 'All the replacement sheep were pregnant', '2013-03-31', 0, 0, 0, 0, 1),
 	(@plotid, 'Happiness bought', 'Happiness Bought', '2013-04-12', 0, 0, 0, 2, 0),
@@ -786,7 +774,6 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome)
 	VALUES
-	/*social modifier*/
 	(@plotid, 'Bump in profits', 'Bump in profits as peasants drink because of wedding news', '2013-06-01', 0, 0, 0, 0, 25),
 	(@plotid, 'High sales', 'Sales remain high as wedding prep continues', '2013-07-01', 0, 0, 0, 0, 10),
 	(@plotid, 'Wedding depression', 'Wedding depression sets in', '2013-08-01', 0, 0, 0, -1, 0),

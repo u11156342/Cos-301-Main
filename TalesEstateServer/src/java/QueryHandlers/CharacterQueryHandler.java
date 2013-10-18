@@ -81,7 +81,7 @@ public class CharacterQueryHandler {
         System.out.println(characterName);
         try {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
-                    + "UserCharacterName like '%" + characterName + "%'";
+                    + "UserCharacterName LIKE '%" + characterName + "%'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
@@ -96,6 +96,9 @@ public class CharacterQueryHandler {
      * id supplied.
      */
 
+    /* This function returns a character name that responds to the unique
+     * identifier provided: characterID (UserCharacterID)
+     */
     public String retrieveCharacterName(int characterID) {
         try {
             sql = "SELECT UserCharacterName FROM UserCharacter WHERE "
@@ -169,6 +172,9 @@ public class CharacterQueryHandler {
         return null;
     }
 
+    /* This function returns the amount of platinum, gold, and silver the
+     * character currently has.
+     */
     public ArrayList<String> getCharacterAmounts(String characterName) {
         DatabaseConnection prod = null;
         Connection prodCon = null;

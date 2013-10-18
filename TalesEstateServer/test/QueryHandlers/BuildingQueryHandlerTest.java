@@ -13,71 +13,42 @@ public class BuildingQueryHandlerTest extends TestCase {
     private Connection con = db.openConnectionEstate();
     
     //Global test variables
+    Statement stmt = null;
+    ResultSet rs = null;
     private int testCharID = 0;
-    private int testAmountID = 0;
     private int testPlotID = 0;
-    
+
     public BuildingQueryHandlerTest(String testName) {
         super(testName);
+        
+        //Initialize test variables
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM UserCharacter WHERE "
+                    + "UserCharacterName LIKE 'test character%'");
+            rs.next();
+            testCharID = Integer.parseInt(rs.getString("UserCharacterID"));
+            
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Plot WHERE PlotOwnedBy = "
+                    + testCharID);
+            rs.next();
+            testPlotID = Integer.parseInt(rs.getString("PlotID"));
+        }
+        catch(Exception e) {
+            System.out.println("Error in BuildingQueryHandlerTEST constructor");
+            System.out.println(e.getMessage());
+        }
     }
     
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        
-        //Add test data to database
-        ResultSet rs = null;
-        Statement stmt = con.createStatement();
-        
-        rs = stmt.executeQuery("SELECT TOP 1 * FROM UserCharacter");
-        rs.next();
-        testCharID = Integer.parseInt(rs.getString("UserCharacterID"));
-        testCharID += 1;
-        
-        stmt.execute("INSERT INTO UserCharacter VALUES ("
-                + "'test character" + "&*&" + testCharID + "', "
-                + "0, 'T35T-ID', 'T35T-ID2', 0)");
-        stmt.execute("INSERT INTO Amount VALUES ("
-                + "50,50,50)", Statement.RETURN_GENERATED_KEYS);
-        rs = stmt.getGeneratedKeys();
-        rs.next();
-        testAmountID = rs.getInt(1);
-        
-        stmt.execute("INSERT INTO Plot VALUES ("
-                + testCharID + ", " + testAmountID + ", 1, 1, "
-                + "'0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;', "
-                + "10, 10.1, 10, 20, 1, 1, 1, 1, 1, 1, 10, 'TEST0001', "
-                + "'test estate', 1)", Statement.RETURN_GENERATED_KEYS);
-        rs = stmt.getGeneratedKeys();
-        rs.next();
-        testPlotID = rs.getInt(1);
-        
-        stmt.execute("INSERT INTO BuildLog VALUES("
-                + testCharID + ", " + testPlotID + ", "
-                + "7, '2013-10-10 00:00:00', 4, 1, 0)");
-        stmt.execute("INSERT INTO BuildLog VALUES("
-                + testCharID + ", " + testPlotID + ", "
-                + "9, '2013-10-10 00:00:00', 4, 1, 0)");
     }
     
     @Override
     protected void tearDown() throws Exception {
-        super.tearDown();
-        
-        //Remove test data from database
-        ResultSet rs = null;
-        Statement stmt = con.createStatement();
-        
-        stmt.execute("DELETE FROM BuildLog WHERE "
-                + "BuildLogCharacterID = " + testCharID);
-        
-        stmt.execute("DELETE FROM Plot WHERE "
-                + "PlotOwnedBy = " + testCharID);
-        
-        stmt.execute("DELETE FROM Amount WHERE "
-                + "AmountID = " + testAmountID);
-        stmt.execute("DELETE FROM UserCharacter WHERE "
-                + "UserCharacterID = " + testCharID);
+        super.tearDown();     
     }
     
     /**
