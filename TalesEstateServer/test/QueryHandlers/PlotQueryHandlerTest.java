@@ -963,38 +963,110 @@ public class PlotQueryHandlerTest extends TestCase {
      * Test of DoExspand method, of class PlotQueryHandler.
      */
     public void testDoExspand() {
-        System.out.println("DoExspand");
-        int pId = 0;
-        double Upkeep = 0.0;
-        int workerMax = 0;
-        PlotQueryHandler instance = null;
-        instance.DoExspand(pId, Upkeep, workerMax);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Testing DoExspand()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        instance.DoExspand(testPlotID, 5.0, 100);
+        boolean correct = false;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Plot WHERE PlotID = " + testPlotID);
+            rs.next();
+            
+            if(rs.getString("PlotMonthlyIncome").equals("5.0") &&
+                    rs.getString("PlotWorkerMax").equals("100"))
+                correct = true;
+            
+            stmt = con.createStatement();
+            stmt.executeQuery("UPDATE Plot SET PlotMonthlyIncome = 10.1, "
+                    + "PlotWorkerMax = 20 WHERE PlotID = " + testPlotID);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testDoExpand()");
+            System.out.println(e.getMessage());
+        }
+
+        assertTrue(correct);
     }
 
     /**
      * Test of PlaceBuilding method, of class PlotQueryHandler.
      */
     public void testPlaceBuilding() {
-        System.out.println("PlaceBuilding");
-        int PlotID = 0;
-        int[][] buildings = null;
-        PlotQueryHandler instance = null;
-        instance.PlaceBuilding(PlotID, buildings);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Testing PlaceBuilding()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        int[][] buildings = instance.convertFromArray("2,-1,-1;-1,3,-1;-1,-1,4;");
+        
+        instance.PlaceBuilding(testPlotID, buildings);
+        boolean correct = false;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Plot WHERE PlotID = " + testPlotID);
+            rs.next();
+            
+            if(rs.getString("PlotBuildingArray").equals("2,-1,-1;-1,3,-1;-1,-1,4;"))
+                correct = true;
+            
+            stmt = con.createStatement();
+            stmt.execute("UPDATE Plot SET PlotBuildingArray = '-1,-1,-1;-1,-1,-1;-1,-1,-1;' "
+                    + "WHERE PlotID = " + testPlotID);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testPlaceBuilding()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertTrue(correct);
     }
 
     /**
      * Test of MarkBuildingAsPlaced method, of class PlotQueryHandler.
      */
     public void testMarkBuildingAsPlaced() {
-        System.out.println("MarkBuildingAsPlaced");
-        int BuildLogID = 0;
-        PlotQueryHandler instance = null;
-        instance.MarkBuildingAsPlaced(BuildLogID);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Testing MarkBuildingAsPlaced()");
+        
+        int blogID = -1;
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        boolean correct = false;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM BuildLog WHERE BuildLogPlotID = " + testPlotID);
+            rs.next();
+            
+            blogID = Integer.parseInt(rs.getString("BuildLogID"));
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testMarkBuildingAsPlaced()");
+            System.out.println(e.getMessage());
+        }
+        
+        if(blogID != -1) {
+            instance.MarkBuildingAsPlaced(blogID);
+        }
+        else
+            System.out.println("Error in function testMarkBuildingAsPlaced():"
+                    + "Could not find a BuildLogID.");
+        
+        try { 
+           stmt = con.createStatement();
+           rs = stmt.executeQuery("SELECT * FROM BuildLog WHERE BuildLogID = " + blogID);
+           rs.next();
+           
+           if(rs.getString("BuildLogPlaced").equals("1"))
+               correct = true;
+           
+           stmt = con.createStatement();
+           stmt.execute("UPDATE BuildLog SET BuildLogPlaced = '0' WHERE BuildLogID = " + blogID);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testMarkBuildingAsPlaced()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertTrue(correct);
     }
 }
