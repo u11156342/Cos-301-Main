@@ -131,13 +131,14 @@ public class AddEventInterface extends JPanel {
                     int sm = 0;
                     int h = 0;
                     int i = 0;
+                    int d = 0;
 
 
                     boolean paramCheck = true;
                     try {
-                        pm = Integer.parseInt(platmod.getText().replaceAll(" ",""));
-                        gm = Integer.parseInt(goldmod.getText().replaceAll(" ",""));
-                        sm = Integer.parseInt(silmod.getText().replaceAll(" ",""));
+                        pm = Integer.parseInt(platmod.getText().replaceAll(" ", ""));
+                        gm = Integer.parseInt(goldmod.getText().replaceAll(" ", ""));
+                        sm = Integer.parseInt(silmod.getText().replaceAll(" ", ""));
 
                     } catch (Exception ex) {
                         paramCheck = false;
@@ -153,17 +154,25 @@ public class AddEventInterface extends JPanel {
                     }
 
                     try {
-                        i = Integer.parseInt(incomemod.getText().replaceAll(" ",""));
+                        i = Integer.parseInt(incomemod.getText().replaceAll(" ", ""));
 
                     } catch (Exception ex) {
                         paramCheck = false;
                         JOptionPane.showMessageDialog(platmod, "Please only enter valid numbers for income percentage");
                     }
 
+                    try {
+                        d = Integer.parseInt(defmod.getText().replaceAll(" ", ""));
+
+                    } catch (Exception ex) {
+                        paramCheck = false;
+                        JOptionPane.showMessageDialog(platmod, "Please only enter valid numbers for defence percentage");
+                    }
+
 
 
                     if (paramCheck) {
-                        if (tc.rdb.addEvent(PID, ename, validurl, pm, gm, sm, h, i)) {
+                        if (tc.rdb.addEvent(PID, ename, validurl, pm, gm, sm, h, i,d)) {
                             tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
                         } else {
                             JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");

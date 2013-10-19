@@ -248,6 +248,10 @@ public class BuyInterface extends BasePanel {
                                 JOptionPane.showMessageDialog(PicMenuScrollPane,"Please chose a name for your estate");
                                 return;
                             }
+                        
+                            plotName=plotName.replace(";",".");
+                            plotName=plotName.replace("/",".");
+                            plotName=plotName.replace(" ",".");
                             Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(3)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(4))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(5)) / 10));
                             tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby,plotName, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
                             tain.mProp.init();
