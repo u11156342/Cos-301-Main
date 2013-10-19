@@ -24,9 +24,10 @@ public class MainMenu extends BasePanel {
     GridBagConstraints c = new GridBagConstraints();
 
     public MainMenu(String name, TransferContainer tc, TalesEstateAppletV2 me) {
-        super(name);
+        super(name, tc);
         applet = me;
-        
+        setBackground(java.awt.Color.WHITE);
+
     }
 
     public void init(TransferContainer tc) {
@@ -57,7 +58,7 @@ public class MainMenu extends BasePanel {
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
 
-
+        container.setBackground(java.awt.Color.WHITE);
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
 
 

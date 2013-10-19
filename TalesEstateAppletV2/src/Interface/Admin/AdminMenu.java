@@ -23,7 +23,7 @@ import talesestateappletv2.TransferContainer;
 public class AdminMenu extends BasePanel {
 
     public AdminMenu(String name, final TransferContainer tc) {
-        super(name);
+        super(name,tc);
 
 
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(48)));

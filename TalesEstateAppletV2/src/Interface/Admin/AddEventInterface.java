@@ -74,32 +74,32 @@ public class AddEventInterface extends JPanel {
 
         JLabel def = new JLabel("Current defence : " + CurrentDefence);
 
-        c.gridy = -1;
-        add(def, c);
         c.gridy = 0;
+        add(def, c);
+        c.gridy = 1;
         add(des, c);
         //description.setPreferredSize(new Dimension(500, 300));
         c.gridwidth = 6;
         add(descriptionPane, c);
-        c.gridy = 1;
+        c.gridy = 2;
         add(l1, c);
         add(happinessmod, c);
-        c.gridy = 2;
+        c.gridy = 3;
         add(l2, c);
         add(incomemod, c);
-        c.gridy = 3;
+        c.gridy = 4;
         add(l3, c);
         add(platmod, c);
-        c.gridy = 4;
+        c.gridy = 5;
         add(l4, c);
         add(goldmod, c);
-        c.gridy = 5;
+        c.gridy = 6;
         add(l5, c);
         add(silmod, c);
-        c.gridy = 6;
+        c.gridy = 7;
         add(l6, c);
         add(defmod, c);
-        c.gridy = 7;
+        c.gridy = 8;
         c.gridwidth = 2;
         add.addActionListener(new ActionListener() {
             @Override

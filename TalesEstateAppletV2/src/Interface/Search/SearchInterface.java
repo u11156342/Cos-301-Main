@@ -19,7 +19,7 @@ public class SearchInterface extends BasePanel {
     JButton title;
 
     public SearchInterface(String name, TransferContainer tc) {
-        super(name);
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc, ArrayList<String[]> prop) {

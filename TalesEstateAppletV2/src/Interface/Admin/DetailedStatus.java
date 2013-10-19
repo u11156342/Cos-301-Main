@@ -24,8 +24,8 @@ public class DetailedStatus extends BasePanel {
     public JTextPane textZone = new JTextPane();
     JButton back = new JButton("back");
 
-    public DetailedStatus(String name) {
-        super(name);
+    public DetailedStatus(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(int Pid, final TransferContainer tc) {

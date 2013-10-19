@@ -54,31 +54,31 @@ public class CardManager {
             SearchInterfaces[c] = new SearchInterface("mainS" + c, tc);
         }
         for (int c = 0; c < MainAdminSearches.length; c++) {
-            MainAdminSearches[c] = new MainAdminSearch("Admin" + c);
+            MainAdminSearches[c] = new MainAdminSearch("Admin" + c, tc);
         }
         for (int c = 0; c < ManageGoldInters.length; c++) {
-            ManageGoldInters[c] = new ManageGold("CGold" + c);
+            ManageGoldInters[c] = new ManageGold("CGold" + c, tc);
         }
         for (int c = 0; c < AdminSearchInterfaces.length; c++) {
             AdminSearchInterfaces[c] = new AdminSearchInterface("mainSearchInterface" + c, tc);
         }
         for (int c = 0; c < DetailedStatuses.length; c++) {
-            DetailedStatuses[c] = new DetailedStatus("DetailedStatus" + c);
+            DetailedStatuses[c] = new DetailedStatus("DetailedStatus" + c, tc);
         }
         for (int c = 0; c < AddEvents.length; c++) {
-            AddEvents[c] = new AddEvent("AddEvent" + c);
+            AddEvents[c] = new AddEvent("AddEvent" + c, tc);
         }
         for (int c = 0; c < BrowseInterfaces.length; c++) {
-            BrowseInterfaces[c] = new BrowseInterface("BrowseInterface" + c);
+            BrowseInterfaces[c] = new BrowseInterface("BrowseInterface" + c, tc);
         }
         for (int c = 0; c < MainPlayInterfaces.length; c++) {
-            MainPlayInterfaces[c] = new MainPlayInterface("MainPlayInterface" + c);
+            MainPlayInterfaces[c] = new MainPlayInterface("MainPlayInterface" + c, tc);
         }
         for (int c = 0; c < RightsInterfaces.length; c++) {
-            RightsInterfaces[c] = new RightsInterface("RightsInterface" + c);
+            RightsInterfaces[c] = new RightsInterface("RightsInterface" + c, tc);
         }
         for (int c = 0; c < AddPlayere.length; c++) {
-            AddPlayere[c] = new AddPlayer("AddPlayer" + c);
+            AddPlayere[c] = new AddPlayer("AddPlayer" + c, tc);
         }
         for (int c = 0; c < PlayInterfaces.length; c++) {
             PlayInterfaces[c] = new PlayInterface("PlayInterfaces" + c, tc);

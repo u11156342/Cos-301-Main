@@ -23,6 +23,7 @@ import Interface.Search.MainSearch;
 import Interface.TextManage.MainPlayInterface;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.image.BufferedImage;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
@@ -56,20 +57,23 @@ public class TransferContainer {
     public RightsInterface ri;
     public PlayerManagementInterface pmI;
     public CardManager Cmanager;
-    public int BuildingRef=-1;
+    public int BuildingRef = -1;
     public CharacterLog clog;
     public GlobalStatus gstatus;
-    public int BuildingLogReference=0;
+    public int BuildingLogReference = 0;
     public VisualSideMenu reference;
     public boolean lastAdminBrowse;
+    public BufferedImage background;
+
     public TransferContainer() {
         cardlayout = new CardLayout();
-        lastAdminBrowse=false;
+        lastAdminBrowse = false;
         Cinit();
+        background = ad.ImageAdapter(4);
     }
-    public void Cinit()
-    {
+
+    public void Cinit() {
         ad = new RestFullAdapter(this);
-        Cmanager=new CardManager(this);
+        Cmanager = new CardManager(this);
     }
 }

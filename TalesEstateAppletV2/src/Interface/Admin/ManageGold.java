@@ -26,8 +26,8 @@ import talesestateappletv2.TransferContainer;
  */
 public class ManageGold extends BasePanel {
 
-    public ManageGold(String name) {
-        super(name);
+    public ManageGold(String name,TransferContainer tc) {
+        super(name,tc);
     }
     public void init(final TransferContainer tc)
     {

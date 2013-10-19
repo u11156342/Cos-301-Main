@@ -33,8 +33,8 @@ public class MainPlayInterface extends BasePanel {
     
     public boolean IsOwner;
 
-    public MainPlayInterface(String name) {
-        super(name);
+    public MainPlayInterface(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc, int Pid) {

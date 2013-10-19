@@ -17,8 +17,8 @@ import talesestateappletv2.TransferContainer;
  */
 public class AddPlayer extends BasePanel {
 
-    public AddPlayer(String name) {
-        super(name);
+    public AddPlayer(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc,String PlayerName,int PlotID) {

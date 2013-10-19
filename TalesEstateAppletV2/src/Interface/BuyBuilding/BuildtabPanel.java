@@ -31,7 +31,7 @@ public class BuildtabPanel extends BasePanel {
     TransferContainer tain;
 
     public BuildtabPanel(String build, TransferContainer tc) {
-        super(build);
+        super(build,tc);
         tain = tc;
     }
 

@@ -33,7 +33,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         statusArea.setPreferredSize(new Dimension(300, 250));
 
         //init();
-        final ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
+
 
         bt.addActionListener(new ActionListener() {
             @Override
@@ -47,12 +47,13 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     t.cardlayout.show(t.contentpane, ds.getName());
                 } else if (selectedIndex == 1) {
                     AddEvent ev = t.Cmanager.getAddEventCard();
-                    ev.init(t, propertyID, Integer.parseInt(retrievePlotDetails.get(17)));
+                    final ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
+                    ev.init(t, propertyID, (int) Double.parseDouble(retrievePlotDetails.get(17)));
                     t.cardlayout.show(t.contentpane, ev.getName());
                 } else if (selectedIndex == 2) {
                     System.out.println(propertyID);
 
-
+                    final ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
                     size = Integer.parseInt("" + retrievePlotDetails.get(4));
                     tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
                     buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));

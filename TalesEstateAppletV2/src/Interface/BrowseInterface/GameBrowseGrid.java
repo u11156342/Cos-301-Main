@@ -44,13 +44,8 @@ public class GameBrowseGrid extends JFXPanel {
         PlotID = pid;
         tain = tc;
         tiles = new TileManager(tc);
-        gridsize = size;
-
         wdOfcell = 160;
         htOfcell = 80;
-
-        globalwidth = wdOfcell * size;
-        globalheight = globalheight * size;
 
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
@@ -125,9 +120,6 @@ public class GameBrowseGrid extends JFXPanel {
     @Override
     public void paint(final Graphics g) {
 
-
-        //  wdOfcell = 160;
-        //htOfcell = 80;
         globalwidth = wdOfcell * tileStates.length;
         globalheight = globalheight * tileStates.length;
         gridsize = tileStates.length;

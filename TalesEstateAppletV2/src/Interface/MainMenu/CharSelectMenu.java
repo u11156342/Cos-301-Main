@@ -21,11 +21,11 @@ public class CharSelectMenu extends BasePanel {
     String[] CharList = null;
     JButton btn;
     //  String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";  //luke
-     String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
-   // String UserId = "";
+    String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    // String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
-        super(name);
+        super(name, tc);
 
         CookieReader cr = new CookieReader(tc);
 
@@ -33,11 +33,11 @@ public class CharSelectMenu extends BasePanel {
             JOptionPane.showMessageDialog(btn, "You need to log into the site first");
             return;
         }
-        
-      //  UserId=cr.userIDs.get(cr.userIDs.size()-1);
+        setBackground(java.awt.Color.WHITE);
+        //  UserId=cr.userIDs.get(cr.userIDs.size()-1);
 
         JPanel container = new JPanel();
-
+        container.setBackground(java.awt.Color.WHITE);
         BufferedImage tobeIcon = tc.ad.ImageAdapter(6);
         ImageIcon ic = new ImageIcon(tobeIcon);
 
@@ -114,7 +114,7 @@ public class CharSelectMenu extends BasePanel {
                 tc.CharacterName = tc.rdb.retrieveCharacterName(tc.CharacterID);
                 System.out.println(tc.CharacterID);
                 //ref.showMenu(tc);
-                tc.MainMenu.init(tc);                
+                tc.MainMenu.init(tc);
                 tc.MainMenu.addNextActionListener(tc);
                 tc.cardlayout.show(tc.contentpane, "MainMenu");
             }

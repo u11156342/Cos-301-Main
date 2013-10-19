@@ -48,7 +48,9 @@ public class TalesEstateAppletV2 extends JApplet {
             @Override
             public void run() {
                 try {
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                    //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                     
                 } catch (Exception e) {
                 }
 
@@ -73,7 +75,7 @@ public class TalesEstateAppletV2 extends JApplet {
     public void init() {
         
         
-        
+        setBackground(java.awt.Color.WHITE);
         
         
         setLayout(tContain.cardlayout);
@@ -96,7 +98,7 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.Buy = new BuyInterface("Buy", tContain);
         tContain.Buy.addNextActionListener(buttonListener);
 
-        tContain.search = new MainSearch("Search");
+        tContain.search = new MainSearch("Search",tContain);
         tContain.search.init(tContain);
 
         tContain.mProp = new MyPropertiesInterface("MyProp", tContain);
@@ -104,22 +106,22 @@ public class TalesEstateAppletV2 extends JApplet {
 
         tContain.am = new AdminMenu("AMain", tContain);
 
-        tContain.mp = new MainPlayInterface("MPlay");
+        tContain.mp = new MainPlayInterface("MPlay",tContain);
 
         tContain.visual = new PlayInterface("visual", tContain);
 
         tContain.Build = new BuildtabPanel("Build", tContain);
 
 
-        tContain.ri = new RightsInterface("right");
+        tContain.ri = new RightsInterface("right",tContain);
 
-        tContain.pmI = new PlayerManagementInterface("PlayerMan");
+        tContain.pmI = new PlayerManagementInterface("PlayerMan",tContain);
 
-        tContain.clog = new CharacterLog("cLog");
+        tContain.clog = new CharacterLog("cLog",tContain);
         tContain.clog.init(tContain);
 
 
-        tContain.gstatus = new GlobalStatus("gStatus");
+        tContain.gstatus = new GlobalStatus("gStatus",tContain);
 
         tContain.gstatus.init(tContain);
 

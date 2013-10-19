@@ -30,7 +30,7 @@ public class BuyInterface extends BasePanel {
     TransferContainer tain;
 
     public BuyInterface(String name, TransferContainer tc) {
-        super(name);
+        super(name,tc);
         tain = tc;
         init();
     }

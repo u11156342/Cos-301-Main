@@ -24,8 +24,8 @@ public class GlobalStatus extends BasePanel {
 
     public JTextPane textZone = new JTextPane();
 
-    public GlobalStatus(String name) {
-        super(name);
+    public GlobalStatus(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc) {

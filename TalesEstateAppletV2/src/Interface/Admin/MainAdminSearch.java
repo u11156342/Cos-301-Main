@@ -12,8 +12,8 @@ import talesestateappletv2.TransferContainer;
 
 public class MainAdminSearch extends BasePanel {
 
-    public MainAdminSearch(String name) {
-        super(name);
+    public MainAdminSearch(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc) {

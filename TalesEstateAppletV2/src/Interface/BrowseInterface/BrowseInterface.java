@@ -19,8 +19,8 @@ public class BrowseInterface extends BasePanel {
     int size;
     int propertyID;
 
-    public BrowseInterface(String play) {
-        super(play);
+    public BrowseInterface(String play,TransferContainer tc) {
+        super(play,tc);
     }
 
     public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz) {

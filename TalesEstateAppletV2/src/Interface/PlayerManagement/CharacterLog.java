@@ -27,8 +27,8 @@ public class CharacterLog extends BasePanel {
     
     public JTextPane textZone = new JTextPane();
     
-    public CharacterLog(String name) {
-        super(name);
+    public CharacterLog(String name,TransferContainer tc) {
+        super(name,tc);
     }
     
     public void init(final TransferContainer tc) {

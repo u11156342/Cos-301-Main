@@ -19,8 +19,8 @@ import talesestateappletv2.TransferContainer;
  */
 public class AddEvent extends BasePanel {
 
-    public AddEvent(String name) {
-        super(name);
+    public AddEvent(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc, final int PID,int def) {

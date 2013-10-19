@@ -18,7 +18,7 @@ public class AdminSearchInterface extends BasePanel {
     JButton title;
 
     public AdminSearchInterface(String name, TransferContainer tc) {
-        super(name);
+        super(name,tc);
 
        
       //  title.setEnabled(false);

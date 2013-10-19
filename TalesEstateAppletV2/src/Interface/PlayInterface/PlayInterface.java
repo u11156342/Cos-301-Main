@@ -25,7 +25,7 @@ public class PlayInterface extends BasePanel {
     TransferContainer t;
 
     public PlayInterface(String play, TransferContainer tc) {
-        super(play);
+        super(play,tc);
         t = tc;
 
     }

@@ -43,9 +43,9 @@ public class PlayerOwnPanel extends JPanel {
         exspand.setCursor(new Cursor(Cursor.HAND_CURSOR));
         play = new JButton(new ImageIcon(tc.ad.ImageAdapter(17)));
         play.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+        setBackground(java.awt.Color.WHITE);
         setLayout(new GridBagLayout());
-        
+
 
         //statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
@@ -104,7 +104,6 @@ public class PlayerOwnPanel extends JPanel {
 
 
         play.addMouseListener(new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
 

@@ -25,8 +25,9 @@ public class MyPropertiesInterface extends BasePanel {
     JButton title;
 
     public MyPropertiesInterface(String name, TransferContainer tc) {
-        super(name);
+        super(name,tc);
         tain = tc;
+        setBackground(java.awt.Color.WHITE);
     }
 
     public void init() {

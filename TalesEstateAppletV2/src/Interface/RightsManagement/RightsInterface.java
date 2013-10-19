@@ -24,8 +24,8 @@ public class RightsInterface extends BasePanel {
 
     public JTextPane textZone = new JTextPane();
 
-    public RightsInterface(String name) {
-        super(name);
+    public RightsInterface(String name,TransferContainer tc) {
+        super(name,tc);
     }
 
     public void init(final TransferContainer tc, int PlotID) {

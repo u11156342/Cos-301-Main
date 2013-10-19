@@ -15,8 +15,8 @@ public class PlayerProperties extends JPanel {
     PlayerOwnPanel[] playersCurrentProperties;
 
     PlayerProperties(TransferContainer tc) {
-        w = tc.JFXPANEL_WIDTH_INT-260;
-
+        w = tc.JFXPANEL_WIDTH_INT - 260;
+        setBackground(java.awt.Color.WHITE);
 
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
         ArrayList<String[]> AllPlotsIHaveAccess = tc.rdb.AllPlotsIHaveAccess(tc.CharacterID);
@@ -30,16 +30,13 @@ public class PlayerProperties extends JPanel {
 
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-          //  playersCurrentProperties[a].setPreferredSize(new Dimension(300, 500));
+            //  playersCurrentProperties[a].setPreferredSize(new Dimension(300, 500));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
-            try
-            {
-            playersCurrentProperties[a].county = result.get(a)[19];
-            }catch(Exception e)
-            {
-                
+            try {
+                playersCurrentProperties[a].county = result.get(a)[19];
+            } catch (Exception e) {
             }
             playersCurrentProperties[a].plotname = result.get(a)[18].replaceAll("\\.", " ");
             ArrayList<String[]> list = new ArrayList();
@@ -104,6 +101,7 @@ public class PlayerProperties extends JPanel {
 
         JComponent panel1 = makePanel("Panel #1", 1, result.size());
         panel1.setPreferredSize(new Dimension(w, h));
+        panel1.setBackground(java.awt.Color.WHITE);
         add(panel1);
     }
 
