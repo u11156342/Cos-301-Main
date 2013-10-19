@@ -43,7 +43,7 @@ public class RightsSideMenu extends JPanel {
 
                 characters = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
-                    characters[i] = retrieveCharacterIDExtra.get(i)[1];
+                    characters[i] = retrieveCharacterIDExtra.get(i)[1].substring(0,retrieveCharacterIDExtra.get(i)[1].indexOf("&*&"));
                 }
 
                 String picked = "";
@@ -79,7 +79,7 @@ public class RightsSideMenu extends JPanel {
 
                 characters = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
-                    characters[i] = retrieveCharacterIDExtra.get(i)[1];
+                    characters[i] = retrieveCharacterIDExtra.get(i)[1].substring(0,retrieveCharacterIDExtra.get(i)[1].indexOf("&*&"));
                 }
 
                 String picked = "";

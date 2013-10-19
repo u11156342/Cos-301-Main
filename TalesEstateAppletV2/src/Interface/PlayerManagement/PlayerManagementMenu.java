@@ -23,7 +23,7 @@ import talesestateappletv2.TransferContainer;
  */
 public class PlayerManagementMenu extends JPanel {
 
-    JButton donateGoldToChar = new JButton("Give gold to character");
+    JButton donateGoldToChar = new JButton("Give funds to character");
     JButton donateGoldToPlayer = new JButton("Give gold to estate");
 
     public PlayerManagementMenu(final TransferContainer tc) {
@@ -48,10 +48,12 @@ public class PlayerManagementMenu extends JPanel {
 
 
                 if (retrieveCharacterIDExtra == null) {
+                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
 
                 if (retrieveCharacterIDExtra.isEmpty()) {
+                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
 
@@ -82,7 +84,7 @@ public class PlayerManagementMenu extends JPanel {
                     }
                     ArrayList<String> amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
                     double gold = Integer.parseInt(amount1.get(0)) * 10.0 + Integer.parseInt(amount1.get(1)) + (Integer.parseInt(amount1.get(2)) * 1.0 / 10);
-                    String mes = "How much gold do you wish to give, available gold " + gold;
+                    String mes = "How much Gold crowns do you wish to give, available Gold crowns " + gold;
 
                     System.out.println("g " + giver + " r " + reciever);
 
@@ -125,8 +127,8 @@ public class PlayerManagementMenu extends JPanel {
                             StringTokenizer token=new StringTokenizer(tc.CharacterName,"&*&");
                             String firstName=token.nextToken();
                             
-                            tc.rdb.LogChar(tc.CharacterID, firstName + "*gave*" + amountz + "*gold*to*" + picked);
-                            tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked), "Player*" + firstName + "*gave*you*" + amountz + "*gold");
+                            tc.rdb.LogChar(tc.CharacterID, firstName + "*gave*" + amountz + "*Gold*crowns*to*" + picked);
+                            tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked), "Player*" + firstName + "*gave*you*" + amountz + "*Gold crowns");
 
                         } else {
                             JOptionPane.showMessageDialog(donateGoldToChar, "Amount is invalid,please try again");

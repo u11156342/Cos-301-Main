@@ -84,7 +84,7 @@ public class PlayerOwnPanel extends JPanel {
         text.append("<tr><td class=\"sheading\">Estate funds</td></tr>");
         text.append("<tr><td>Platinum throne:</td><td>").append(amount.get(0)).append("</td></tr>");
         text.append("<tr><td>Gold crown:</td><td>").append(amount.get(1)).append("</td></tr>");
-        text.append("<tr><td>Silver:</td><td>").append(amount.get(2)).append("</td></tr>");
+        text.append("<tr><td>Silver shields:</td><td>").append(amount.get(2)).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Income</td></tr>");
         text.append("<tr><td>Gold:</td><td>").append(income).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Estate status</td></tr>");

@@ -190,7 +190,7 @@ public class BuyInterface extends BasePanel {
                     //user cash in silver
                     int userCash = Integer.parseInt(characterAmounts.get(0)) * 100 + Integer.parseInt(characterAmounts.get(1)) * 10 + Integer.parseInt(characterAmounts.get(2));
                     int buildingCost = Integer.parseInt(result.get(0)[0]) * 100 + Integer.parseInt(result.get(0)[1]) * 10 + Integer.parseInt(result.get(0)[2]);
-                    stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum:" + result.get(0)[0] + " Gold:" + result.get(0)[1] + " Silver:" + result.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
+                    stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum thrones:" + result.get(0)[0] + " Gold crowns:" + result.get(0)[1] + " Silver shields:" + result.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
 
 
                     if (stat == 0) {

@@ -174,8 +174,8 @@ public class BuildtabPanel extends BasePanel {
 
         html.append("<body>");
         html.append("<table>");
-        html.append("<tr><td>Building Cost : </td><td>").append(result2.get(0)[4]).append("</td></tr>").append("<br>");
-        html.append("<tr><td>Building Setup Cost : </td><td>").append(result2.get(0)[5]).append("</td></tr>").append("<br>");
+        html.append("<tr><td>Building Cost : </td><td>").append(result2.get(0)[4]).append(" Gold crowns</td></tr>").append("<br>");
+        html.append("<tr><td>Building Setup Cost : </td><td>").append(result2.get(0)[5]).append(" Gold crowns</td></tr>").append("<br>");
         html.append("<tr><td>Building Monthly Income : </td><td>").append(result2.get(0)[6]).append("</td></tr>").append("<br>");
         html.append("<tr><td>Building Requirements : </td><td>").append(result2.get(0)[3]).append("</td></tr>").append("<br>");
         html.append("<tr><td>Building Workers Needed : </td><td>").append(result2.get(0)[7]).append("</td></tr>").append("<br>");
@@ -245,8 +245,8 @@ public class BuildtabPanel extends BasePanel {
 
                 html2.append("<body>");
                 html2.append("<table>");
-                html2.append("<tr><td>Building Cost : </td><td>").append(r2.get(0)[4]).append("</td></tr>").append("<br>");
-                html2.append("<tr><td>Building Setup Cost : </td><td>").append(r2.get(0)[5]).append("</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Cost : </td><td>").append(r2.get(0)[4]).append(" Gold crowns</td></tr>").append("<br>");
+                html2.append("<tr><td>Building Setup Cost : </td><td>").append(r2.get(0)[5]).append(" Gold crowns</td></tr>").append("<br>");
                 html2.append("<tr><td>Building Monthly Income : </td><td>").append(r2.get(0)[6]).append("</td></tr>").append("<br>");
                 html2.append("<tr><td>Building Requirements : </td><td>").append(r2.get(0)[3]).append("</td></tr>").append("<br>");
                 html2.append("<tr><td>Building Workers Needed : </td><td>").append(r2.get(0)[7]).append("</td></tr>").append("<br>");
@@ -389,7 +389,7 @@ public class BuildtabPanel extends BasePanel {
                     // amount if money in the plot
                     int silver = Integer.parseInt(currentAmount.get(0)) * 100 + Integer.parseInt(currentAmount.get(1)) * 10 + Integer.parseInt(currentAmount.get(2));
 
-                    // need to look at setup cost tho
+                    // need to look at setup cost tho/// added it to buildcost
                     if ((BuildingCost * 10) > silver) {
                         JOptionPane.showMessageDialog(ContentPane, "You need more money to buy this building");
                     } else {
@@ -491,7 +491,7 @@ public class BuildtabPanel extends BasePanel {
                         int nsilver = tempa;
                         tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
 
-                        tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
+                        tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName.substring(0,tain.CharacterName.indexOf("&*&")) + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
 
                     }
                     tr.listBuildings.doClick();

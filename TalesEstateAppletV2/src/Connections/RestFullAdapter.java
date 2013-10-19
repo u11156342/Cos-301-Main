@@ -14,7 +14,8 @@ import talesestateappletv2.TransferContainer;
 
 public class RestFullAdapter {
 
-    String serverURL = "216.172.99.153";
+    // String serverURL = "216.172.99.153";
+    String serverURL = "localhost";
     int serverPort = 8080;
     ArrayList<BufferedImage> pics = new ArrayList();
     ArrayList donePics = new ArrayList();
@@ -29,30 +30,7 @@ public class RestFullAdapter {
 
 
 
-
-        for (int i = 0; i < donePics.size(); i++) {
-            if (donePics.get(i) == id) {
-                //    JOptionPane.showMessageDialog(tain.mainapplet, pics.get(i) + " as ");
-
-                try {
-                    return pics.get(i);
-                } catch (Exception ex) {
-                    try {
-                        return ImageIO.read(new URL("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id));
-                    } catch (MalformedURLException ex1) {
-                        Logger.getLogger(RestFullAdapter.class.getName()).log(Level.SEVERE, null, ex1);
-                    } catch (IOException ex1) {
-                        Logger.getLogger(RestFullAdapter.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                }
-
-            }
-        }
-
-
-//        JOptionPane.showMessageDialog(tain.mainapplet, "Getting more");
         try {
-
 
             System.out.println("getting " + id);
             donePics.add(id);
@@ -60,10 +38,6 @@ public class RestFullAdapter {
 
             System.out.println("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id);
             BufferedImage t = ImageIO.read(new URL("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id));
-            //  BufferedImage t = ImageIO.read(new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\Penguins.jpg"));
-            pics.add(t);
-            donePics.add(id);
-//            JOptionPane.showMessageDialog(tain.mainapplet, t + " as ");
             return t;
 
 

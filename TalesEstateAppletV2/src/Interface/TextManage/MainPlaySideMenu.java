@@ -42,8 +42,8 @@ public class MainPlaySideMenu extends JPanel {
     public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p, boolean isowner) {
         pId = p;
         Report = new JButton("Status Report");
-        Deposite = new JButton("Deposit gold");
-        Withdraw = new JButton("Withdraw gold");
+        Deposite = new JButton("Deposit funds");
+        Withdraw = new JButton("Withdraw funds");
         exspand = new JButton("Exspand");
         listBuildings = new JButton("List Buildings");
         addBuildings = new JButton("Add Building");
@@ -203,7 +203,7 @@ public class MainPlaySideMenu extends JPanel {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
                 amount2 = tc.rdb.getCurrentAmount(pId);
                 double gold = Integer.parseInt(amount1.get(0)) * 10.0 + Integer.parseInt(amount1.get(1)) + (Integer.parseInt(amount1.get(2)) * 1.0 / 10);
-                String mes = "How much gold do you wish to deposit, available gold " + gold;
+                String mes = "How much Gold crowns do you wish to deposit, available Gold crowns " + gold;
                 try {
                     double amountz = 0;
                     amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
@@ -241,11 +241,12 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
-                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*deposited*"+amountz+"*gold", tc.CharacterID);
+                        tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*deposited*" + amountz + "*gold", tc.CharacterID);
                     } else {
-                        JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
+                        JOptionPane.showMessageDialog(textZone, "You do not have enough Gold crowns");
                     }
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(textZone, "Please enter a valid number");
                     System.out.println(ex.getMessage());
                 }
                 Report.doClick();
@@ -257,7 +258,7 @@ public class MainPlaySideMenu extends JPanel {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
                 amount2 = tc.rdb.getCurrentAmount(pId);
                 double gold = Integer.parseInt(amount2.get(0)) * 10.0 + Integer.parseInt(amount2.get(1)) + (Integer.parseInt(amount2.get(2)) * 1.0 / 10);
-                String mes = "How much gold do you wish to Withdraw, available gold " + gold;
+                String mes = "How much Gold crowns do you wish to Withdraw, available Gold crowns " + gold;
                 try {
                     double amountz = 0;
                     amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
@@ -294,11 +295,12 @@ public class MainPlaySideMenu extends JPanel {
                         //user 
                         tc.rdb.modifyAmount(tc.CharacterName, nplat, ngold, nsilver);
                         System.out.println(Integer.parseInt(amount1.get(0)) + " " + Integer.parseInt(amount1.get(1)) + " " + Integer.parseInt(amount1.get(2)));
-                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*withdrew*"+amountz+"*gold", tc.CharacterID);
+                        tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*withdrew*" + amountz + "*gold", tc.CharacterID);
                     } else {
-                        JOptionPane.showMessageDialog(textZone, "You do not have enough gold");
+                        JOptionPane.showMessageDialog(textZone, "You do not have enough Gold crowns");
                     }
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(textZone, "Please enter a valid number");
                     System.out.println(ex.getMessage());
                 }
                 Report.doClick();
@@ -321,7 +323,7 @@ public class MainPlaySideMenu extends JPanel {
                 cost = tc.rdb.queryPlotPrice(retrievePlotDetails.get(3), picked);
                 int stat;
 
-                stat = JOptionPane.showConfirmDialog(ref, "Will cost: Platinum:" + cost.get(0)[0] + " Gold:" + cost.get(0)[1] + " Silver:" + cost.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
+                stat = JOptionPane.showConfirmDialog(ref, "Will cost: Platinum thrones:" + cost.get(0)[0] + " Gold crowns:" + cost.get(0)[1] + " Silver shields:" + cost.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
 
                 if (stat == 0) {
 
@@ -409,8 +411,8 @@ public class MainPlaySideMenu extends JPanel {
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
-                        tc.rdb.LogPlot(pId, "Player*"+tc.CharacterName+"*exspanded*the*plot*with*a*"+picked+"*acre", tc.CharacterID);
-                        
+                        tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*exspanded*the*plot*with*a*" + picked + "*acre", tc.CharacterID);
+
                         Report.doClick();
 
                     } else {
@@ -568,7 +570,7 @@ public class MainPlaySideMenu extends JPanel {
                 month = monthF.format(cal.getTime());
 
                 String text = tc.rdb.getLogPlot(pId, month);
-                
+
                 textZone.setText(text);
 
             }

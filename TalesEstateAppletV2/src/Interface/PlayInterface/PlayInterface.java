@@ -55,7 +55,7 @@ public class PlayInterface extends BasePanel {
         playIn.PlotID=propertyID;
         playIn.setPreferredSize(new Dimension(360 * size + 100, 180 * size + 100));
 
-        playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        playMapScrollPane = new JScrollPane(playIn, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         playMapScrollPane.setPreferredSize(new Dimension((t.JFXPANEL_WIDTH_INT / 5) * 4, t.JFXPANEL_HEIGHT_INT));
         playMapScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         ((VisualMap) playIn).setScrollP(playMapScrollPane);
