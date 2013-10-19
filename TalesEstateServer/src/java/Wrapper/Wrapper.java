@@ -370,7 +370,7 @@ public class Wrapper {
 
         html.append("<br/>");
 
-        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(handler.getCharacterQH().retrieveCharacterID(details.get(1)), PropertyId);
+        ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(PropertyId);
         ArrayList<String[]> tempresult;
 
         html.append("<table>");

@@ -174,7 +174,7 @@ public class BuildingQueryHandlerTest extends TestCase {
         System.out.println("Testing retrieveAllBuildingsOwnedByCharacter()");
 
         BuildingQueryHandler instance = new BuildingQueryHandler(con);
-        ArrayList<String[]> result = instance.retrieveAllBuildingsOwnedByCharacter(testCharID, testPlotID);
+        ArrayList<String[]> result = instance.retrieveAllBuildingsOwnedByCharacter(testPlotID);
         String[] oneResult;
         Boolean correct = false;
          

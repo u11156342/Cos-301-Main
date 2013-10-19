@@ -212,9 +212,7 @@ public class PlotQueryHandler {
             sql = "SELECT UserCharacterID FROM UserCharacter WHERE "
                     + "LOWER(UserCharacterName) = '" + characterName.toLowerCase() + "'";
             stmt = con.createStatement();
-            System.out.println(sql);
             rs = stmt.executeQuery(sql);
-            System.out.println("s1");
             rs.next();
             characterID = Integer.parseInt(rs.getString("UserCharacterID"));
 
@@ -222,7 +220,6 @@ public class PlotQueryHandler {
                     + "LOWER(DuchyName) = '" + duchyName.toLowerCase() + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            System.out.println("s2");
             rs.next();
             duchyID = Integer.parseInt(rs.getString("DuchyID"));
 
@@ -230,7 +227,6 @@ public class PlotQueryHandler {
                     + "LOWER(QualityDescription) = '" + quality.toLowerCase() + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            System.out.println("s3");
             rs.next();
             qualityID = Integer.parseInt(rs.getString("QualityID"));
 
@@ -252,12 +248,10 @@ public class PlotQueryHandler {
             stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
 
             rs = stmt.getGeneratedKeys();
-            System.out.println("asds");
             rs.next();
             amountID = rs.getInt(1);
 
             stmt = con.createStatement();
-            //System.out.println("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
             rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
             rs.next();
             String CountyID = rs.getString("CountyID");
@@ -512,8 +506,6 @@ public class PlotQueryHandler {
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
 
-            System.out.println(happiness);
-
             sql = "UPDATE Plot SET "
                     + "PlotOwnedBy = " + characterID + ", "
                     + "PlotAmount = " + amountID + ", "
@@ -532,12 +524,12 @@ public class PlotQueryHandler {
                     //+ "PlotAcrePoor = " + acreP + ", "
                     //+ "PlotAcrePoorMax = " + acrePM + ", "
                     + "PlotDefenseValue = " + defenseValue + ", "
-                    + "PlotEstateName = " + estateName + ", "
+                    + "PlotEstateName = '" + estateName + "', "
                     + "CountyID = " + countyID + " "
                     + "WHERE PlotID = " + plotID;
-                        
+                    
+            //System.out.println(sql);
             stmt = con.createStatement();
-
             stmt.execute(sql);
 
             return true;
@@ -815,7 +807,6 @@ public class PlotQueryHandler {
             System.out.println("Error in PlotQueryHandler, function modifyAmount().");
             System.out.println(e.getMessage());
         }
-        System.out.println(amountPlatinum + " " + amountGold + " " + amountSilver + " " + amountID);
         sql = "UPDATE Amount SET "
                 + "AmountPlatinum = " + amountPlatinum
                 + ", AmountGold = " + amountGold
@@ -824,7 +815,6 @@ public class PlotQueryHandler {
 
 
         try {
-            System.out.println(sql);
             stmt = con.createStatement();
             stmt.execute(sql);
 
@@ -946,13 +936,13 @@ public class PlotQueryHandler {
                 rs = stmt.executeQuery(sql);
                 rs.next();
 
-                System.out.println(sql);
+                //System.out.println(sql);
                 exquisite = Integer.parseInt(rs.getString("PlotAcreExquisiteMax"));
-                System.out.println("c " + exquisite);
+                //System.out.println("c " + exquisite);
                 fine = Integer.parseInt(rs.getString("PlotAcreFineMax"));
-                System.out.println("c " + fine);
+                //System.out.println("c " + fine);
                 poor = Integer.parseInt(rs.getString("PlotAcrePoorMax"));
-                System.out.println("c " + poor);
+                //System.out.println("c " + poor);
 
                 // gArray = rs.getString("PlotGroundArray");
                 if (quality.equals("exquisite")) {
@@ -974,7 +964,7 @@ public class PlotQueryHandler {
                         + "PlotBuildingArray = '" + convertToArray(buildingArray) + "', "
                         + "PlotSize = '" + groundArray.length + "' "
                         + "WHERE PlotID = " + plotID;
-                System.out.println(sql);
+                //System.out.println(sql);
                 stmt = con.createStatement();
                 stmt.execute(sql);
                 return true;  //Update successful

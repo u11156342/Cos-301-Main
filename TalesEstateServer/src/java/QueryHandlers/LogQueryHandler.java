@@ -26,30 +26,11 @@ public class LogQueryHandler {
      * Tip: Date d = new Date();
      * Simply create the date object and send it through as the parameter.
      */
-    public void logBuildingBuilt(int characterID, int buildingID, int plotID, Date date) {
+    public void logBuildingBuilt(int buildingID, int plotID, Date date) {
         String day, month, year, hourS, time, period, ttb = "";
         int hour, resultCount = 0;
         ResultSet rs = null;
 
-        //Check if character exists
-        sql = "SELECT * FROM UserCharacter WHERE " + characterID + " = "
-                + "UserCharacterID";
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            if (rs != null) {
-                while (rs.next()) {
-                    ++resultCount;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error when executing logBuildingBuilt()");
-            System.out.println(e.getMessage());
-        }
-
-        if (resultCount == 0) {
-            System.out.println("Error in function logBuildingBuilt(): characterID does not exist.");
-        } else {
             sql = "SELECT * FROM Building WHERE " + buildingID + " = "
                     + "BuildingID";
             resultCount = 0;
@@ -153,14 +134,12 @@ public class LogQueryHandler {
                     }
 
                     time = hourS + ":" + st.nextToken() + ":" + st.nextToken() + " " + period;
-                    sql = "INSERT INTO BuildLog(BuildLogCharacterID, BuildLogPlotID, "
+                    sql = "INSERT INTO BuildLog(BuildLogPlotID, "
                             + " BuildLogBuildingID, BuildLogDateTimeBuilt, "
                             + "BuildLogTimeToComplete, BuildLogCompleted) VALUES "
-                            + "(" + characterID + ", " + plotID + ", "
+                            + "(" + plotID + ", "
                             + buildingID + ", '" + year + month + day + " " + time + "'"
                             + ", " + ttb + ", 0)";
-
-                    System.out.println(sql);
                     try {
                         stmt = con.createStatement();
                         stmt.execute(sql);
@@ -171,7 +150,6 @@ public class LogQueryHandler {
                 }
             }
         }
-    }
 
     public ArrayList<String[]> getPlotLog(int number, int PlotID) {
 
@@ -188,9 +166,8 @@ public class LogQueryHandler {
             while (rs.next()) {
                 line = new String[4];
                 line[0] = rs.getString("PlotID");
-                line[1]=rs.getString("CharacterID");
-                line[2] = rs.getString("PlotLogDateTime");
-                line[3] = rs.getString("PlotLogMessage");
+                line[1] = rs.getString("PlotLogDateTime");
+                line[2] = rs.getString("PlotLogMessage");
                 list.add(line);
             }
         } catch (Exception e) {
@@ -211,13 +188,11 @@ public class LogQueryHandler {
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
 
-
             while (rs.next()) {
                 line = new String[3];
                 line[0] = rs.getString("CharacterID");
                 line[1] = rs.getString("CharacterLogDateTime");
                 line[2] = rs.getString("CharacterLogMessage");
-                System.out.println(line[2]);
                 list.add(line);
             }
         } catch (Exception e) {
@@ -241,11 +216,11 @@ public class LogQueryHandler {
         }
     }
 
-    public void PlotLog(int plotID, String description,int UserID) {
+    public void PlotLog(int plotID, String description) {
        // description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
-            sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage,CharacterID) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "',"+UserID+")";
+            sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println("Error when executing PlotLog()");

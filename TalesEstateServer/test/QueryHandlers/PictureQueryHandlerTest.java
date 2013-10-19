@@ -28,8 +28,11 @@ public class PictureQueryHandlerTest extends TestCase {
 
     /**
      * Test of closeConnection method, of class PictureQueryHandler.
+     * 
+     * ***Note: no need to test this.
      */
     public void testCloseConnection() {
-        System.out.println("Testing closeConnection()");
+        /*System.out.println("Testing closeConnection()");
+         */
     }
 }

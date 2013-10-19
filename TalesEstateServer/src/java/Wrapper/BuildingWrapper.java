@@ -46,10 +46,9 @@ public class BuildingWrapper {
     @GET
     @Path("retrieveAllBuildingsOwnedByCharacter/{characterID}/{plotID}")
     @Produces("text/html")
-    public String retrieveAllBuildingsOwnedByCharacter(@PathParam("characterID") int characterID,
-            @PathParam("plotID") int plotID) {
+    public String retrieveAllBuildingsOwnedByCharacter(@PathParam("plotID") int plotID) {
 
-        return converter.ArrToUrl(handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(characterID, plotID));
+        return converter.ArrToUrl(handler.getBuildingQH().retrieveAllBuildingsOwnedByCharacter(plotID));
 
     }
     

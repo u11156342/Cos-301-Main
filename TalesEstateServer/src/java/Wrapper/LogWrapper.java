@@ -27,10 +27,9 @@ public class LogWrapper {
     @GET
     @Path("logBuildingBuilt/{characterID}/{plotID}/{buildingID}")
     @Produces("text/html")
-    public String logBuildingBuilt(@PathParam("characterID") int characterID,
-            @PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
+    public String logBuildingBuilt(@PathParam("plotID") int plotID, @PathParam("buildingID") int buildingID) {
 
-        handler.getLogQH().logBuildingBuilt(characterID, plotID, buildingID, new Date());
+        handler.getLogQH().logBuildingBuilt(plotID, buildingID, new Date());
         return "";
 
     }
@@ -38,9 +37,9 @@ public class LogWrapper {
     @GET
     @Path("PlotLog/{PlotID}/{description}/{Userid}")
     @Produces("text/html")
-    public String PlotLog(@PathParam("PlotID") int PlotID, @PathParam("description") String description, @PathParam("Userid") int Userid) {
+    public String PlotLog(@PathParam("PlotID") int PlotID, @PathParam("description") String description) {
 
-        handler.getLogQH().PlotLog(PlotID, description,Userid);
+        handler.getLogQH().PlotLog(PlotID, description);
         return "";
     }
 

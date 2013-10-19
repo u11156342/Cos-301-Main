@@ -40,27 +40,27 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 	(4, 5, 'Merchant (Glass Art)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
 	(3, 5, 'Artisan (Glassblower)', 11, 10, 25, 50, 2, 5 ,1, 0.125, 2, 0)
 
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 40, '2013-02-01 00:00:00', 4, 1),
-	(@charid, @plotid, 40, '2013-03-01 00:00:00', 4, 1),
-	(@charid, @plotid, 60, '2013-04-01 00:00:00', 1, 1),
-	(@charid, @plotid, 61, '2013-04-01 00:00:00', 0, 1),
-	(@charid, @plotid, 77, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 78, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 52, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 70, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 79, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 80, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 81, '2013-10-01 00:00:00', 1, 1),
-	(@charid, @plotid, 54, '2013-10-01 00:00:00', 1, 1),
-	(@charid, @plotid, 40, '2013-06-01 00:00:00', 4, 1),
-	(@charid, @plotid, 40, '2013-06-01 00:00:00', 4, 1),
-	(@charid, @plotid, 69, '2013-07-01 00:00:00', 1, 1),
-	(@charid, @plotid, 38, '2013-08-01 00:00:00', 2, 1),
-	(@charid, @plotid, 34, '2013-08-14 00:00:00', 2, 1),
-	(@charid, @plotid, 82, '2013-09-01 00:00:00', 1, 1)
+	(@plotid, 40, '2013-02-01 00:00:00', 4, 1),
+	(@plotid, 40, '2013-03-01 00:00:00', 4, 1),
+	(@plotid, 60, '2013-04-01 00:00:00', 1, 1),
+	(@plotid, 61, '2013-04-01 00:00:00', 0, 1),
+	(@plotid, 77, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 78, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 52, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 70, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 79, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 80, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 81, '2013-10-01 00:00:00', 1, 1),
+	(@plotid, 54, '2013-10-01 00:00:00', 1, 1),
+	(@plotid, 40, '2013-06-01 00:00:00', 4, 1),
+	(@plotid, 40, '2013-06-01 00:00:00', 4, 1),
+	(@plotid, 69, '2013-07-01 00:00:00', 1, 1),
+	(@plotid, 38, '2013-08-01 00:00:00', 2, 1),
+	(@plotid, 34, '2013-08-14 00:00:00', 2, 1),
+	(@plotid, 82, '2013-09-01 00:00:00', 1, 1)
 
  /*add defense value modifier!*/
  /****************************/
@@ -212,13 +212,13 @@ PlotEstateName)
 	4, 25, 40, 40, 0, 0, 0, 0, 2, 2, 0, 'SAK0002', '')
 	SET @plotid = @@IDENTITY;
 
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 39, '2013-05-01 00:00:00', 3, 1),
-	(@charid, @plotid, 39, '2013-05-22 00:00:00', 3, 1),
-	(@charid, @plotid, 39, '2013-09-16 00:00:00', 3, 1),
-	(@charid, @plotid, 39, '2013-09-16 00:00:00', 3, 1)
+	(@plotid, 39, '2013-05-01 00:00:00', 3, 1),
+	(@plotid, 39, '2013-05-22 00:00:00', 3, 1),
+	(@plotid, 39, '2013-09-16 00:00:00', 3, 1),
+	(@plotid, 39, '2013-09-16 00:00:00', 3, 1)
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -276,12 +276,12 @@ PlotEstateName)
 	2, 22, 25, 40, 0, 0, 0, 0, 1.125, 2, 0, 'SAK0003', '')
 	SET @plotid = @@IDENTITY;
 
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 39, '2013-05-01 00:00:00', 3, 1),
-	(@charid, @plotid, 40, '2013-05-01 00:00:00', 4, 1),
-	(@charid, @plotid, 36, '2013-07-01 00:00:00', 2, 1)
+	(@plotid, 39, '2013-05-01 00:00:00', 3, 1),
+	(@plotid, 40, '2013-05-01 00:00:00', 4, 1),
+	(@plotid, 36, '2013-07-01 00:00:00', 2, 1)
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -343,10 +343,10 @@ PlotEstateName)
 	2, 8.5, 10, 20, 0, 0, 0, 0, 0.5, 1, 0, 'SAK0004', '')
 	SET @plotid = @@IDENTITY;
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 40, '2013-08-01 00:00:00', 4, 1)
+	(@plotid, 40, '2013-08-01 00:00:00', 4, 1)
 
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -382,11 +382,11 @@ PlotEstateName)
 	2, 10.5, 40, 60, 0, 0, 1, 1, 1, 1, 0, 'LAN0001', '')
 	SET @plotid = @@IDENTITY;
 
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 12, '2013-05-01 00:00:00', 1, 1),
-	(@charid, @plotid, 48, '2013-09-16 00:00:00', 4, 1)
+	(@plotid, 12, '2013-05-01 00:00:00', 1, 1),
+	(@plotid, 48, '2013-09-16 00:00:00', 4, 1)
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -439,14 +439,14 @@ PlotEstateName)
 	1, 6.5, 36, 60, 0, 0, 0, 0, 2.125, 3, 0, 'LAN0002', '')
 	SET @plotid = @@IDENTITY;
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 4, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 73, '2013-09-01 00:00:00', 2, 1),
-	(@charid, @plotid, 41, '2013-09-01 00:00:00', 2, 1),
-	(@charid, @plotid, 36, '2013-09-01 00:00:00', 2, 1),
-	(@charid, @plotid, 70, '2013-09-01 00:00:00', 2, 1)
+	(@plotid, 4, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 73, '2013-09-01 00:00:00', 2, 1),
+	(@plotid, 41, '2013-09-01 00:00:00', 2, 1),
+	(@plotid, 36, '2013-09-01 00:00:00', 2, 1),
+	(@plotid, 70, '2013-09-01 00:00:00', 2, 1)
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -511,18 +511,18 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)
 	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)*/
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
 	/*Scavenger camp building details*/
-	(@charid, @plotid, 31, '2013-03-01 00:00:00', 1, 1),
-	(@charid, @plotid, 30, '2013-04-01 00:00:00', 1, 1),
-	(@charid, @plotid, 36, '2013-06-01 00:00:00', 2, 1),
-	(@charid, @plotid, 83, '2013-07-01 00:00:00', 1, 1),
-	/*(@charid, @plotid, 4, '2013-06-01 00:00:00', , 1),*/
-	/*(@charid, @plotid, 4, '2013-10-01 00:00:00', , 1),*/
-	(@charid, @plotid, 36, '2013-10-01 00:00:00', 2, 1),
-	(@charid, @plotid, 52, '2013-10-01 00:00:00', 1, 1)
+	(@plotid, 31, '2013-03-01 00:00:00', 1, 1),
+	(@plotid, 30, '2013-04-01 00:00:00', 1, 1),
+	(@plotid, 36, '2013-06-01 00:00:00', 2, 1),
+	(@plotid, 83, '2013-07-01 00:00:00', 1, 1),
+	/*(@plotid, 4, '2013-06-01 00:00:00', , 1),*/
+	/*(@plotid, 4, '2013-10-01 00:00:00', , 1),*/
+	(@plotid, 36, '2013-10-01 00:00:00', 2, 1),
+	(@plotid, 52, '2013-10-01 00:00:00', 1, 1)
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -602,18 +602,18 @@ PlotEstateName)
 	1, 30, 59, 80, 0, 0, 0, 0, 3.5, 4, 0, 'ROT0002', '')
 	SET @plotid = @@IDENTITY;
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 2, '2013-02-01 00:00:00', 1, 1),
-	(@charid, @plotid, 73, '2013-02-01 00:00:00', 2, 1),
-	(@charid, @plotid, 47, '2013-03-01 00:00:00', 1, 1),
-	(@charid, @plotid, 47, '2013-03-01 00:00:00', 1, 1),
-	(@charid, @plotid, 52, '2013-02-01 00:00:00', 1, 1),
-	(@charid, @plotid, 52, '2013-03-01 00:00:00', 1, 1),
-	(@charid, @plotid, 47, '2013-03-01 00:00:00', 1, 1),
-	(@charid, @plotid, 47, '2013-04-01 00:00:00', 1, 1),
-	(@charid, @plotid, 63, '2013-05-01 00:00:00', 2, 1)
+	(@plotid, 2, '2013-02-01 00:00:00', 1, 1),
+	(@plotid, 73, '2013-02-01 00:00:00', 2, 1),
+	(@plotid, 47, '2013-03-01 00:00:00', 1, 1),
+	(@plotid, 47, '2013-03-01 00:00:00', 1, 1),
+	(@plotid, 52, '2013-02-01 00:00:00', 1, 1),
+	(@plotid, 52, '2013-03-01 00:00:00', 1, 1),
+	(@plotid, 47, '2013-03-01 00:00:00', 1, 1),
+	(@plotid, 47, '2013-04-01 00:00:00', 1, 1),
+	(@plotid, 63, '2013-05-01 00:00:00', 2, 1)
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -759,16 +759,16 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 	VALUES
 	(3, 5, 'Artisan (Lithographer)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0)
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 63, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 36, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 36, '2013-06-01 00:00:00', 2, 1),
-	(@charid, @plotid, 84, '2013-08-01 00:00:00', 1, 1),
-	(@charid, @plotid, 63, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 36, '2013-05-01 00:00:00', 2, 1),
-	(@charid, @plotid, 52, '2013-06-01 00:00:00', 1, 1)
+	(@plotid, 63, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 36, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 36, '2013-06-01 00:00:00', 2, 1),
+	(@plotid, 84, '2013-08-01 00:00:00', 1, 1),
+	(@plotid, 63, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 36, '2013-05-01 00:00:00', 2, 1),
+	(@plotid, 52, '2013-06-01 00:00:00', 1, 1)
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
@@ -851,12 +851,12 @@ PlotEstateName)
 	3, 7.4, 33, 40, 0, 0, 0, 0, 1.75, 2, 0, 'SVR0002', '')
 	SET @plotid = @@IDENTITY;
 	
-INSERT INTO BuildLog (BuildLogCharacterID, BuildLogPlotID, BuildLogBuildingID,
+INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
 	VALUES
-	(@charid, @plotid, 11, '2013-09-16 00:00:00', 1, 1),
-	(@charid, @plotid, 70, '2013-09-16 00:00:00', 2, 1),
-	(@charid, @plotid, 52, '2013-09-16 00:00:00', 1, 1)
+	(@plotid, 11, '2013-09-16 00:00:00', 1, 1),
+	(@plotid, 70, '2013-09-16 00:00:00', 2, 1),
+	(@plotid, 52, '2013-09-16 00:00:00', 1, 1)
 
 /*No events for this character on record*/
 	

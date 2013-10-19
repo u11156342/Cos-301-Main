@@ -475,7 +475,6 @@ VALUES
 CREATE TABLE BuildLog
 (
 	BuildLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	BuildLogCharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
 	BuildLogPlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
 	BuildLogBuildingID INT FOREIGN KEY REFERENCES Building(BuildingID),
 	BuildLogDateTimeBuilt DATETIME,
@@ -531,7 +530,6 @@ CREATE TABLE PlotLog
 (
 	PlotLogID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	PlotID INT FOREIGN KEY REFERENCES Plot(PlotID),
-	CharacterID INT FOREIGN KEY REFERENCES UserCharacter(UserCharacterID),
 	PlotLogDateTime DATETIME,
 	PlotLogMessage VARCHAR(MAX)
 )
