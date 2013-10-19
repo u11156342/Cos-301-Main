@@ -52,7 +52,7 @@ public class MobileWrapperTest extends TestCase {
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         MobileWrapper instance = (MobileWrapper)container.getContext().lookup("java:global/classes/MobileWrapper");
         String expResult = "";
-        String result = instance.getid(userid);
+        String result = instance.getdetails(userid);
         assertEquals(expResult, result);
         container.close();
         // TODO review the generated test code and remove the default call to fail.

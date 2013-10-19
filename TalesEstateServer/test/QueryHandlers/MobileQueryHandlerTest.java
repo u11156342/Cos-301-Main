@@ -34,7 +34,7 @@ public class MobileQueryHandlerTest extends TestCase {
         String name = "";
         MobileQueryHandler instance = new MobileQueryHandler();
         String expResult = "";
-        String result = instance.getid(name);
+        String result = instance.getdetails(name);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

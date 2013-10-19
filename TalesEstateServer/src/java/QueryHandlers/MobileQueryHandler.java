@@ -33,8 +33,7 @@ public class MobileQueryHandler {
     public MobileQueryHandler() throws SQLException {
     }
 
-    public String getid(String name) {
-        QueryHandler handler = new QueryHandler(0);
+    public String getdetails(String name) {
         ArrayList<String> userList = new ArrayList();
         db = new DatabaseConnection();
         lname = name;
@@ -118,7 +117,7 @@ public class MobileQueryHandler {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                System.out.println("----");
+                // System.out.println("----");
                 userList.add(rs.getString("UserCharacterName"));
             }
 
@@ -136,7 +135,7 @@ public class MobileQueryHandler {
 
                 URL url = new URL("http://localhost:8080/TalesEstateServer/resources/MobileWrapper/getdetails/" + sanitize);
                 InputStream is = url.openConnection().getInputStream();
-                if (is.equals(null)) {
+                if (is == null) {
                     return "There is no information regarding your character";
                 }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -179,7 +178,7 @@ public class MobileQueryHandler {
 
 
         } catch (Exception e) {
-            
+
             System.out.println("Error in getnames");
         }
 
