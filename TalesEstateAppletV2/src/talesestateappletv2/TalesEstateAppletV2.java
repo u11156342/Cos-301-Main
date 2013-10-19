@@ -88,7 +88,7 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.CSelect = new CharSelectMenu("Char", tContain);
 
         tContain.MainMenu = new MainMenu("MainMenu", tContain, me);
-        tContain.MainMenu.addNextActionListener(buttonListener, tContain);
+        
 
         tContain.CSelect.addNextActionListener(tContain, tContain.MainMenu);
 

@@ -114,7 +114,8 @@ public class CharSelectMenu extends BasePanel {
                 tc.CharacterName = tc.rdb.retrieveCharacterName(tc.CharacterID);
                 System.out.println(tc.CharacterID);
                 //ref.showMenu(tc);
-                tc.MainMenu.init(tc);
+                tc.MainMenu.init(tc);                
+                tc.MainMenu.addNextActionListener(tc);
                 tc.cardlayout.show(tc.contentpane, "MainMenu");
             }
         });

@@ -118,7 +118,7 @@ public class MainMenu extends BasePanel {
         add(MainMenuScrollPane, BorderLayout.CENTER);
     }
 
-    public void addNextActionListener(ActionListener buttonListener, final TransferContainer tc) {
+    public void addNextActionListener(final TransferContainer tc) {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -40,7 +40,8 @@ public class ResultUnit extends JPanel {
         statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
         c.gridx = 1;
-        statusArea.setPreferredSize(new Dimension(300, 200));
+        statusArea.setContentType("text/html");
+      // statusArea.setPreferredSize(new Dimension(300, 300));
         add(statusArea, c);
         c.gridx = 2;
         // RestFullAdapter PicAdapter = new RestFullAdapter();
@@ -120,6 +121,7 @@ public class ResultUnit extends JPanel {
             html.append("<tr><td class=\"ssheading\">Countie</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
         } catch (Exception e) {
         }
+        html.append("<tr><td class=\"ssheading\">Description</td><td> ").append(tc.rdb.getDescription(propertyID)).append("</td></tr>");
         html.append("</table>");
         html.append("</body>");
         html.append("</html>");
