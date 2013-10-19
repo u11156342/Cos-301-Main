@@ -26,10 +26,10 @@ public class CharacterWrapper {
     @GET
     @Path("registerEstateCharacter/{characterName}/{userID}")
     @Produces("text/plain")
-    public String registerEstateCharacter(@PathParam("characterName") String characterName,@PathParam("userID") String userID) {
+    public String registerEstateCharacter(@PathParam("characterName") String characterName, @PathParam("userID") String userID) {
 
         characterName = characterName.replace('.', ' ');
-        if (handler.getCharacterQH().registerEstateCharacter(characterName,userID)) {
+        if (handler.getCharacterQH().registerEstateCharacter(characterName, userID)) {
             return "true";
         } else {
             return "false";
@@ -100,5 +100,17 @@ public class CharacterWrapper {
         String temp = handler.getCharacterQH().retrieveCharacterName(characterID);
         temp = temp.replace(' ', '.');
         return temp;
+    }
+
+    @GET
+    @Path("isAdmin/{userID}")
+    @Produces("text/plain")
+    public String isAdmin(@PathParam("userID") String userID) {
+        if (handler.getCharacterQH().isAdmin(userID)) {
+            return "true";
+        } else {
+            return "false";
+        }
+
     }
 }

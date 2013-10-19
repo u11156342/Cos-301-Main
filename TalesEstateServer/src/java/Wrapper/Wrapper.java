@@ -114,6 +114,12 @@ public class Wrapper {
 
         html.append("<br/>");
 
+        if ("".equals(handler.getPlotQH().getDescription(PropertyId))) {
+            html.append("<p class=\"sheading\">Events</p>");
+            html.append(handler.getPlotQH().getDescription(PropertyId));
+            html.append("</p>");
+            html.append("<br/>");
+        }
         html.append("<table>");
         html.append("<tr>");
         html.append("<td class=\"sheading\">Acres</td>");

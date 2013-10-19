@@ -201,8 +201,8 @@ public class PlotQueryHandler {
      * in the game system can own one or more plots.
      */
     public boolean addPlotToCharacter(String characterName, String duchyName, String quality,
-        int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
-        double monthlyIncome, int workersUsed, int workerMax, String baronie, String name) {
+            int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness,
+            double monthlyIncome, int workersUsed, int workerMax, String baronie, String name) {
         int characterID, duchyID, qualityID;
         String ground, building;
         int exquisite = 0, fine = 0, poor = 0;
@@ -255,7 +255,7 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery("SELECT CountyID FROM County WHERE CountyDescription='" + baronie + "'");
             rs.next();
             String CountyID = rs.getString("CountyID");
-            
+
             sql = "INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, "
                     + "PlotGroundArray, PlotBuildingArray, PlotHappiness, "
                     + "PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, "
@@ -344,7 +344,7 @@ public class PlotQueryHandler {
                 rs = stmt.executeQuery(sql);
                 rs.next();
                 values.get(a)[3] = rs.getString("DuchyName");
-                
+
                 sql = "SELECT CountyDescription FROM County WHERE CountyID = "
                         + values.get(a)[19];
                 stmt = con.createStatement();
@@ -353,8 +353,7 @@ public class PlotQueryHandler {
                 values.get(a)[19] = rs.getString("CountyDescription");
             }
             return values;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Could not execute function retrievePlotsOwnedByCharacter()");
             System.out.println(e.getMessage());
         }
@@ -442,8 +441,7 @@ public class PlotQueryHandler {
             }
 
             return value;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error, could not execute function retrievePlotDetails()");
             System.out.println(e.getMessage());
         }
@@ -457,7 +455,6 @@ public class PlotQueryHandler {
      * parameters. PlotAmount supplied in the following format:
      * amountExquisite-amountFine-amountPoor i.e. 1-0-1
      */
-
     public boolean modifyPlot(int plotID, String characterName, String plotAmount, String duchyName,
             int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,
             int workersUsed, int workerMax, double acreE, int acreEM, double acreF, int acreFM,
@@ -495,14 +492,14 @@ public class PlotQueryHandler {
             rs = stmt.executeQuery(sql);
             rs.next();
             amountID = Integer.parseInt(rs.getString("AmountID"));
-            
+
             sql = "SELECT CountyID FROM County WHERE CountyDescription = '"
                     + county + "'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             countyID = Integer.parseInt(rs.getString("CountyID"));
-            
+
             ground = convertToArray(groundArray);
             building = convertToArray(buildingArray);
 
@@ -527,7 +524,7 @@ public class PlotQueryHandler {
                     + "PlotEstateName = '" + estateName + "', "
                     + "CountyID = " + countyID + " "
                     + "WHERE PlotID = " + plotID;
-                    
+
             //System.out.println(sql);
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -654,8 +651,7 @@ public class PlotQueryHandler {
             }
 
             return values;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Could not execute function searchPlotBy()");
             System.out.println(e.getMessage());
         }
@@ -1361,5 +1357,33 @@ public class PlotQueryHandler {
             System.out.println("Error in function MarkBuildingAsPlaced():");
             System.out.println(e.getMessage());
         }
+    }
+
+    public void setDescription(String desc,int PlotID) {
+        sql = "UPDATE Plot SET PlotDescription='"+desc+"' WHERE PlotID=" + PlotID;
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+
+        } catch (Exception e) {
+            System.out.println("Error in function setDescription():");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String getDescription(int PlotID) {
+        sql = "SELECT PlotDescription FROM Plot WHERE PlotID="+PlotID;
+        try {
+            stmt = con.createStatement();
+            ResultSet executeQuery = stmt.executeQuery(sql);
+
+            executeQuery.next();
+            
+            return executeQuery.getString("PlotDescription");
+        } catch (Exception e) {
+            System.out.println("Error in function getDescription():");
+            System.out.println(e.getMessage());
+        }
+        return "";
     }
 }

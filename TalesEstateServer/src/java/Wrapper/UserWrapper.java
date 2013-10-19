@@ -50,4 +50,7 @@ public class UserWrapper {
     public String retrieveCharactersOwnedByUser(@PathParam("userID") String userID) {
         return converter.ToUrl(handler.getUserQH().retrieveCharactersOwnedByUser(userID));
     }
+    
+
+    
 }

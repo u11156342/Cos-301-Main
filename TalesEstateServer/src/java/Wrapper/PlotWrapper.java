@@ -286,4 +286,29 @@ public class PlotWrapper {
         }
         return "true";
     }
+
+    @GET
+    @Path("setDescription/{desc}/{PlotID}")
+    @Produces("text/html")
+    public void setDescription(@PathParam("desc") String desc, @PathParam("PlotID") int PlotID) {
+
+        try {
+            handler.getPlotQH().setDescription(desc, PlotID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @GET
+    @Path("getDescription/{PlotID}")
+    @Produces("text/html")
+    public String getDescription(@PathParam("PlotID") int PlotID) {
+
+        try {
+            return handler.getPlotQH().getDescription(PlotID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return "";
+        }
+    }
 }

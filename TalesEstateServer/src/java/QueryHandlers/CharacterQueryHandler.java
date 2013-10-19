@@ -388,4 +388,33 @@ public class CharacterQueryHandler {
 
         return false;
     }
+
+    public boolean isAdmin(String userID) {
+
+        try {
+            //Get current status value
+            sql = "SELECT UserCharacterAdmin FROM UserCharacter "
+                    + "WHERE UserCharacterID = " + userID;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+
+            String is = rs.getString("UserCharacterAdmin");
+
+            if (is != null) {
+                if ("true".equals(is)) {
+                    return true;
+                }
+            } else {
+                System.out.println("Error in CharacterQueryHandler, function isAdmin()");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in CharacterQueryHandler, function isAdmin()");
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
+    }
 }

@@ -436,6 +436,7 @@ CREATE TABLE Plot
 	PlotDefenseValue FLOAT,
 	PlotEstateNumber VARCHAR(20),
 	PlotEstateName VARCHAR(50),
+	PlotDescription NVARCHAR(MAX),
 	CountyID int FOREIGN KEY REFERENCES County(CountyID) 
 )
 
