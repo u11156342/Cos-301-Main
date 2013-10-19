@@ -48,7 +48,7 @@ public class AddEventInterface extends JPanel {
     JLabel l5 = new JLabel("Silver Modifier");
     JLabel l6 = new JLabel("Defense Modifier");
 
-    public void init(final TransferContainer tc, final int PID) {
+    public void init(final TransferContainer tc, final int PID, int CurrentDefence) {
         incomemod.setText("0          ");
         platmod.setText("0          ");
         goldmod.setText("0          ");
@@ -72,7 +72,10 @@ public class AddEventInterface extends JPanel {
 //        add.setPreferredSize(new Dimension(100, 40));
 //        cansel.setPreferredSize(new Dimension(100, 40));
 
+        JLabel def = new JLabel("Current defence : " + CurrentDefence);
 
+        c.gridy = -1;
+        add(def, c);
         c.gridy = 0;
         add(des, c);
         //description.setPreferredSize(new Dimension(500, 300));
@@ -172,7 +175,7 @@ public class AddEventInterface extends JPanel {
 
 
                     if (paramCheck) {
-                        if (tc.rdb.addEvent(PID, ename, validurl, pm, gm, sm, h, i,d)) {
+                        if (tc.rdb.addEvent(PID, ename, validurl, pm, gm, sm, h, i, d)) {
                             tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
                         } else {
                             JOptionPane.showMessageDialog(platmod, "Event adding failed,please make sure not to use any special characters in the description");

@@ -23,7 +23,7 @@ public class AddEvent extends BasePanel {
         super(name);
     }
 
-    public void init(final TransferContainer tc, final int PID) {
+    public void init(final TransferContainer tc, final int PID,int def) {
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(45)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
@@ -31,7 +31,7 @@ public class AddEvent extends BasePanel {
         add(Title, BorderLayout.NORTH);
 
         AddEventInterface aei = new AddEventInterface();
-        aei.init(tc, PID);
+        aei.init(tc, PID,def);
 
         add(aei, BorderLayout.CENTER);
 
