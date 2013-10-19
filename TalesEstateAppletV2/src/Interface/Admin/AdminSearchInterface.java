@@ -20,14 +20,15 @@ public class AdminSearchInterface extends BasePanel {
     public AdminSearchInterface(String name, TransferContainer tc) {
         super(name);
 
-        title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
-        title.setContentAreaFilled(false);
-        title.setBorderPainted(false);
+       
       //  title.setEnabled(false);
     }
 
     public void init(final TransferContainer t, ArrayList<String[]> prop) {
         properties = prop;
+         title = new JButton(new ImageIcon(t.ad.ImageAdapter(18)));
+        title.setContentAreaFilled(false);
+        title.setBorderPainted(false);
         PlayerPropertiesAdmin mmenu = new PlayerPropertiesAdmin(t.JFXPANEL_WIDTH_INT - 500, properties.size() * 100, t, properties);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

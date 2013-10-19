@@ -3,8 +3,6 @@ package Interface.Admin;
 import Interface.BrowseInterface.BrowseInterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import talesestateappletv2.TransferContainer;
 public class PlayerCurrentPropertiesAdmin extends JPanel {
 
     public JTextPane statusArea = new JTextPane();
-    String[] coms = {"Status", "Add event", "View Plot"};
+    String[] coms = {"Status", "Add event", "View Plot", "Set Description"};
     JComboBox commands = new JComboBox(coms);
     JButton bt = new JButton("next");
     String owner;
@@ -37,7 +35,6 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         //init();
 
         bt.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = commands.getSelectedIndex();
@@ -58,13 +55,48 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
                     buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));
 
-                    t.lastAdminBrowse=true;
+                    t.lastAdminBrowse = true;
                     BrowseInterface bi = t.Cmanager.getBrowseInterfacesCard();
                     bi.init(t, propertyID, size, tiles, buildings);
                     t.cardlayout.show(t.contentpane, bi.getName());
+                } else if (selectedIndex == 3) {
+                    String showInputDialog = JOptionPane.showInputDialog("What is the new description");
+
+                    if ("".equals(showInputDialog)) {
+                        JOptionPane.showMessageDialog(commands, "Please enter a description");
+                    } else {
+
+
+                        String desu = showInputDialog;
+
+                        String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=";
+
+                        String validurl = "";
+                        for (int i = 0; i < desu.length(); i++) {
+
+                            if (valid.contains("" + desu.charAt(i))) {
+                                validurl = validurl + desu.charAt(i);
+                            } else {
+                                validurl = validurl + "~";
+                            }
+                        }
+
+                        try {
+                            t.rdb.setDescription(validurl, propertyID);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(commands, "Something went wrong with set the description, please avoid using any special characters");
+                        }
+                    }
                 }
+
+
             }
         });
+
+
+
+
+
 
 
 //        c.gridx = 0;

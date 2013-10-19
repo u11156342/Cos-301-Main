@@ -1,14 +1,9 @@
 package Interface.MainMenu;
 
-import Connections.RestFullAdapter;
-import Connections.RestFullDBAdapter;
-import Interface.Admin.AdminMenu;
-import Interface.Admin.MainAdminSearch;
 import Interface.MyProperties.MyPropertiesInterface;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TalesEstateAppletV2;
@@ -26,11 +21,12 @@ public class MainMenu extends BasePanel {
     JButton btn3 = new JButton("Search For a Property");
     JButton btn4 = new JButton("Admin interface");
     TalesEstateAppletV2 applet;
+    GridBagConstraints c = new GridBagConstraints();
 
     public MainMenu(String name, TransferContainer tc, TalesEstateAppletV2 me) {
         super(name);
         applet = me;
-        init(tc);
+        
     }
 
     public void init(TransferContainer tc) {
@@ -60,7 +56,7 @@ public class MainMenu extends BasePanel {
         btn4.setCursor(new Cursor(Cursor.HAND_CURSOR));
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+
 
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
 
@@ -116,20 +112,20 @@ public class MainMenu extends BasePanel {
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
-        container.add(btn4, c);
+        if (tc.rdb.isAdmin(tc.CharacterID)) {
+            container.add(btn4, c);
+        }
         add(MainMenuScrollPane, BorderLayout.CENTER);
     }
 
     public void addNextActionListener(ActionListener buttonListener, final TransferContainer tc) {
         btn.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "Buy");
             }
         });
         pman.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.pmI.init(tc);
@@ -139,7 +135,6 @@ public class MainMenu extends BasePanel {
         });
 
         btn2.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
@@ -150,14 +145,12 @@ public class MainMenu extends BasePanel {
             }
         });
         btn3.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "Search");
             }
         });
         btn4.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "AMain");

@@ -20,14 +20,13 @@ public class SearchInterface extends BasePanel {
 
     public SearchInterface(String name, TransferContainer tc) {
         super(name);
-
-        title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
-        title.setContentAreaFilled(false);
-        title.setBorderPainted(false);
     }
 
     public void init(final TransferContainer tc, ArrayList<String[]> prop) {
         properties = prop;
+        title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
+        title.setContentAreaFilled(false);
+        title.setBorderPainted(false);
         ResultProperties mmenu = new ResultProperties(tc.JFXPANEL_WIDTH_INT - 400, properties.size() * 260, properties, tc);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
