@@ -1372,13 +1372,12 @@ public class PlotQueryHandler {
     }
 
     public String getDescription(int PlotID) {
+
         sql = "SELECT PlotDescription FROM Plot WHERE PlotID="+PlotID;
         try {
             stmt = con.createStatement();
             ResultSet executeQuery = stmt.executeQuery(sql);
-
             executeQuery.next();
-            
             return executeQuery.getString("PlotDescription");
         } catch (Exception e) {
             System.out.println("Error in function getDescription():");

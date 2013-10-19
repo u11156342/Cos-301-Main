@@ -400,13 +400,13 @@ public class CharacterQueryHandler {
             rs.next();
 
             String is = rs.getString("UserCharacterAdmin");
-
-            if (is != null) {
-                if ("true".equals(is)) {
-                    return true;
-                }
+            System.out.println(" it is "+is);
+            if (is == null) {
+                return false;
+            } else if ("true".equals(is.toLowerCase()) || "1".equals(is)) {
+                return true;
             } else {
-                System.out.println("Error in CharacterQueryHandler, function isAdmin()");
+                return false;
             }
 
         } catch (Exception e) {

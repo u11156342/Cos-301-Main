@@ -290,13 +290,14 @@ public class PlotWrapper {
     @GET
     @Path("setDescription/{desc}/{PlotID}")
     @Produces("text/html")
-    public void setDescription(@PathParam("desc") String desc, @PathParam("PlotID") int PlotID) {
+    public String setDescription(@PathParam("desc") String desc, @PathParam("PlotID") int PlotID) {
 
         try {
             handler.getPlotQH().setDescription(desc, PlotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return "";
     }
 
     @GET
@@ -305,7 +306,9 @@ public class PlotWrapper {
     public String getDescription(@PathParam("PlotID") int PlotID) {
 
         try {
-            return handler.getPlotQH().getDescription(PlotID);
+
+            String t = handler.getPlotQH().getDescription(PlotID);
+            return t;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return "";
