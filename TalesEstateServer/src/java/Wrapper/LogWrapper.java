@@ -60,16 +60,17 @@ public class LogWrapper {
         StringBuilder html = new StringBuilder();
 
         html.append("<h1>Estate log</h1>");
-        
+
         for (int i = 0; i < temp.size(); i++) {
             html.append("<table>");
-            html.append("<tr><td>").append(temp.get(i)[2]).append("</td><td>")
-                    .append(temp.get(i)[3].replaceAll("\\*", " ")).append(
+            System.out.println(temp.get(i));
+            html.append("<tr><td>").append(temp.get(i)[1]).append("</td><td>");
+            html.append(temp.get(i)[2].replaceAll("\\*", " ")).append(
                     "</td></tr>");
             html.append("</table>");
             html.append("<hr/>");
         }
-        
+
         return html.toString();
     }
 
@@ -82,7 +83,7 @@ public class LogWrapper {
         StringBuilder html = new StringBuilder();
 
         html.append("<h1 style=\"text-align: center;\">Character gold log</h1>");
-        
+
         for (int i = 0; i < temp.size(); i++) {
             html.append("<table style=\"width: 90%;\">");
             html.append("<tr style=\"font-size: 12px;\"><td style=\"width: 50%;\">")

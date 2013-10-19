@@ -164,15 +164,15 @@ public class Wrapper {
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Platinum:</td><td>").append(money.get(0)).append("</td>");
+        html.append("<td>Platinum thrones:</td><td>").append(money.get(0)).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Gold:</td><td>").append(money.get(1)).append("</td>");
+        html.append("<td>Gold crowns:</td><td>").append(money.get(1)).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Silver:</td><td>").append(money.get(2)).append("</td>");
+        html.append("<td>Silver shields:</td><td>").append(money.get(2)).append("</td>");
         html.append("</tr>");
         html.append("</table>");
 
@@ -356,15 +356,15 @@ public class Wrapper {
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Platinum:</td><td>").append(money.get(0)).append("</td>");
+        html.append("<td>Platinum thrones:</td><td>").append(money.get(0)).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Gold:</td><td>").append(money.get(1)).append("</td>");
+        html.append("<td>Gold crowns:</td><td>").append(money.get(1)).append("</td>");
         html.append("</tr>");
 
         html.append("<tr>");
-        html.append("<td>Silver:</td><td>").append(money.get(2)).append("</td>");
+        html.append("<td>Silver shields:</td><td>").append(money.get(2)).append("</td>");
         html.append("</tr>");
         html.append("</table>");
 
