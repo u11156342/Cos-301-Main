@@ -314,4 +314,16 @@ public class PlotWrapper {
             return "";
         }
     }
+    
+    @GET
+    @Path("getHappinessEffect/{happiness}")
+    @Produces("text/html")
+    public String getHappinessEffect(@PathParam("happiness") int happiness) {
+        try {
+            return converter.ToUrl(handler.getPlotQH().getHappinessEffect(happiness));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return "";
+        }
+    }
 }

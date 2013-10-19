@@ -25,7 +25,7 @@ SET @amountid = @@IDENTITY
 
 INSERT INTO Plot VALUES 
 (@userid, @amountid, 1, 1, '0,0,0;0,0,0;0,0,0;', '-1,-1,-1;-1,-1,-1;-1,-1,-1;',
-	10, 10.1, 10, 20, 1, 1, 1, 1, 1, 1, 10, 'TEST0001', 'test estate', 1)
+	10, 10.1, 10, 20, 1, 1, 1, 1, 1, 1, 10, 'TEST0001', 'test estate', '', 1)
 SET @plotid = @@IDENTITY
 
 INSERT INTO BuildLog VALUES(@plotid, 7, '2013-10-10 00:00:00', 4, 1, 0)

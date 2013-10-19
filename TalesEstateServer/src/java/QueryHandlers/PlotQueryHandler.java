@@ -1385,4 +1385,34 @@ public class PlotQueryHandler {
         }
         return "";
     }
+    
+    public ArrayList<String> getHappinessEffect(int happiness) {
+        ArrayList<String> result = null;
+        
+        result = new ArrayList();
+        
+        if(happiness > 1000) {  //Max amount of happiness
+            result.add("25");
+            result.add("0");
+            return result;
+        }
+        else {
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT HappinessEffectIncome, HappinessEffectRebel "
+                        + "FROM HappinessEffect WHERE HappinessEffectBottom <= " + happiness
+                        + " AND HappinessEffectTop >= " + happiness);
+                rs.next();
+                
+                result.add(rs.getString("HappinessEffectIncome"));
+                result.add(rs.getString("HappinessEffectRebel"));
+            }
+            catch(Exception e) {
+                System.out.println("Error in function getHappinessEffect()");
+                System.out.println(e.getMessage());
+            }
+
+            return result;
+        }
+    }
 }
