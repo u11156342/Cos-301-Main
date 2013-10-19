@@ -244,6 +244,9 @@ public class Wrapper {
 
         ArrayList<String> details = handler.getPlotQH().retrievePlotDetails(PropertyId);
 
+        System.out.println("DETAILS HERER ");
+        System.out.println(details.get(0));
+        System.out.println(details.get(1));
         StringBuilder html = new StringBuilder();
         html.append("<html>");
         html.append("<head>");
