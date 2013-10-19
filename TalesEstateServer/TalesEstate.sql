@@ -552,3 +552,15 @@ CREATE TABLE HappinessEffect
 	HappinessEffectRebel FLOAT
 )
 
+INSERT INTO HappinessEffect (HappinessEffectBottom, 
+	HappinessEffectTop, HappinessEffectIncome, HappinessEffectRebel)
+	VALUES
+	(30, 100, 25, 0),
+	(20, 29, 25, 0),
+	(10, 19, 10, 0),
+	(-1, 9, 0, 0),
+	(-2, 0, -10, 0),
+	(-4, -3, -50, 0),
+	(-5, -5, -50, 10),
+	(-8, -6, -50, 20),
+	(-10, -9, -50, 50)
