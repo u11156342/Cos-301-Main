@@ -555,7 +555,7 @@ CREATE TABLE HappinessEffect
 INSERT INTO HappinessEffect (HappinessEffectBottom, 
 	HappinessEffectTop, HappinessEffectIncome, HappinessEffectRebel)
 	VALUES
-	(30, 100, 25, 0),
+	(30, 1000, 25, 0),
 	(20, 29, 25, 0),
 	(10, 19, 10, 0),
 	(-1, 9, 0, 0),

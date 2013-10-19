@@ -1069,4 +1069,65 @@ public class PlotQueryHandlerTest extends TestCase {
         
         assertTrue(correct);
     }
+
+    /**
+     * Test of setDescription method, of class PlotQueryHandler.
+     */
+    public void testSetDescription() {
+        System.out.println("Testing setDescription()");
+        
+        String desc = "test description";
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        
+        instance.setDescription(desc, testPlotID);
+        boolean correct = false;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT PlotDescription FROM Plot WHERE "
+                    + "PlotID = " + testPlotID);
+            rs.next();
+            
+            if(rs.getString("PlotDescription").equals("test description"))
+                correct = true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testSetDescription()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertTrue(correct);
+    }
+
+    /**
+     * Test of getDescription method, of class PlotQueryHandler.
+     */
+    public void testGetDescription() {
+        System.out.println("Testing getDescription()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        String expResult = "test description";
+        String result = instance.getDescription(testPlotID);
+        
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getHappinessEffect method, of class PlotQueryHandler.
+     */
+    public void testGetHappinessEffect() {
+        System.out.println("Testing getHappinessEffect()");
+        
+        int happiness = -5;
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        
+        ArrayList<String> result = instance.getHappinessEffect(happiness);
+        boolean correct = false;
+        
+        if(result.get(0).equals("-50.0") &&
+                result.get(1).equals("10.0"))
+            correct = true;
+        
+        assertTrue(correct);
+    }
 }
