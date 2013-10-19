@@ -11,10 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -50,7 +48,7 @@ public class MobileQueryHandler {
             }
 
             String t = "";
-            t = t + sql;
+
             if (!userList.isEmpty()) {
 
                 String owner = userList.get(0);
@@ -87,13 +85,13 @@ public class MobileQueryHandler {
 
                 return "<html>" + "<head></head>" + "<body>" + completereturn + "</body>" + "</html>";
             } else {
-                return "User Not Found " + t;
+                return "User Not Found ";
             }
         } catch (Exception e) {
             return "Error in mobile getid";
-            
+
         }
-        
+
 
     }
 
