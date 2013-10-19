@@ -47,7 +47,6 @@ public class VisualMap extends JFXPanel {
         htOfcell = 80;
 
         this.addMouseWheelListener(new MouseWheelListener() {
-
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
 
@@ -192,7 +191,6 @@ public class VisualMap extends JFXPanel {
 
 
         this.addMouseMotionListener(new MouseMotionListener() {
-
             @Override
             public void mouseDragged(MouseEvent e) {
                 scroller.getHorizontalScrollBar().setValue(scroller.getHorizontalScrollBar().getValue() + (tempx - e.getX()) / 2);
@@ -224,16 +222,17 @@ public class VisualMap extends JFXPanel {
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
 
+                            if (tc.BuildingRef != -1) {
+                                if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
 
-                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+                                    for (int b = 0; b < tempplacinggrid.length; b++) {
+                                        for (int n = 0; n < tempplacinggrid.length; n++) {
 
-                                for (int b = 0; b < tempplacinggrid.length; b++) {
-                                    for (int n = 0; n < tempplacinggrid.length; n++) {
-
-                                        tempplacinggrid[b][n] = 0;
+                                            tempplacinggrid[b][n] = 0;
+                                        }
                                     }
+                                    tempplacinggrid[x][y] = tc.BuildingRef;
                                 }
-                                tempplacinggrid[x][y] = tc.BuildingRef;
                             }
 
 
@@ -264,7 +263,6 @@ public class VisualMap extends JFXPanel {
         });
 
         this.addMouseListener(new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 int clickedx = e.getX();
@@ -289,7 +287,7 @@ public class VisualMap extends JFXPanel {
                                     tc.rdb.PlaceBuilding(PlotID, gridstates);
                                     tc.rdb.MarkBuildingAsPlaced(tc.BuildingLogReference);
 
-                                    tc.BuildingRef = 5;
+                                    tc.BuildingRef = -1;
 
                                     tc.reference.buildingTokens = new JList();
                                     tc.reference.init(tc);

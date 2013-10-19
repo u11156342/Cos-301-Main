@@ -56,7 +56,7 @@ public class TransferContainer {
     public RightsInterface ri;
     public PlayerManagementInterface pmI;
     public CardManager Cmanager;
-    public int BuildingRef=5;
+    public int BuildingRef=-1;
     public CharacterLog clog;
     public GlobalStatus gstatus;
     public int BuildingLogReference=0;

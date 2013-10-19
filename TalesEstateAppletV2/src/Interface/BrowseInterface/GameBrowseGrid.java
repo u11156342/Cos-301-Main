@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 import talesestateappletv2.TransferContainer;
 
@@ -36,9 +37,13 @@ public class GameBrowseGrid extends JFXPanel {
     int tempy = 0;
     int oldvalue = 0;
     int currentZoom = 0;
+    TransferContainer tain;
+    int PlotID;
 
-    public GameBrowseGrid(int size,TransferContainer tc) throws IOException {
-        tiles=new TileManager(tc);
+    public GameBrowseGrid(int size, TransferContainer tc, int pid) throws IOException {
+        PlotID = pid;
+        tain = tc;
+        tiles = new TileManager(tc);
         gridsize = size;
 
         wdOfcell = 160;
@@ -131,7 +136,7 @@ public class GameBrowseGrid extends JFXPanel {
             tempplacinggrid = new int[tileStates.length][tileStates.length];
         }
 
-     //   System.out.println("tileStates "+tileStates[0].length);
+        //   System.out.println("tileStates "+tileStates[0].length);
 
         int xc = 0;
         int yc = 0;
@@ -257,6 +262,59 @@ public class GameBrowseGrid extends JFXPanel {
                 }
                 repaint();
 
+            }
+        });
+
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int clickedx = e.getX();
+                int clickedy = e.getY();
+                double move = 0;
+                double move2 = 0;
+                int xc = 0;
+                int yc = 0;
+                for (int x = 0; x < gridsize; x++) {
+                    for (int y = 0; y < gridsize; y++) {
+                        xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
+                        yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
+                        if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
+
+
+                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+                                tileStates[x][y] = 3;
+                                //builds
+
+                                tain.rdb.placeWater(PlotID, tileStates);
+
+                                return;
+                            }
+
+
+                            repaint();
+                        }
+                    }
+                    move = move - (wdOfcell / 2);
+                    move2 = move2 + (htOfcell / 2);
+                }
+
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
             }
         });
 

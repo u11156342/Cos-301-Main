@@ -75,7 +75,7 @@ public class EventQueryHandlerTest extends TestCase {
         EventQueryHandler instance = new EventQueryHandler(con);
         
         boolean added = false;
-        boolean result = instance.addEvent(plotID, eventName, eventDescription, platinumMod, goldMod, silverMod, happinessMod, incomeMod);
+        boolean result = instance.addEvent(plotID, eventName, eventDescription, platinumMod, goldMod, silverMod, happinessMod, incomeMod,0);
         String resName, resDesc;
         
         if(result) {

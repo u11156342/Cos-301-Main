@@ -29,7 +29,7 @@ import talesestateappletv2.TransferContainer;
  */
 public class MainPlaySideMenu extends JPanel {
 
-    public JButton Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement, PropertyLog;
+    public JButton Rename, Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement, PropertyLog;
     final MainPlaySideMenu ref = this;
     int size;
     int[][] tiles;
@@ -41,9 +41,10 @@ public class MainPlaySideMenu extends JPanel {
 
     public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p, boolean isowner) {
         pId = p;
+        Rename = new JButton("Rename Plot");
         Report = new JButton("Status Report");
-        Deposite = new JButton("Deposit funds");
-        Withdraw = new JButton("Withdraw funds");
+        Deposite = new JButton("Deposit Funds");
+        Withdraw = new JButton("Withdraw Funds");
         exspand = new JButton("Exspand");
         listBuildings = new JButton("List Buildings");
         addBuildings = new JButton("Add Building");
@@ -64,43 +65,48 @@ public class MainPlaySideMenu extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
 
         if (isowner) {
+
             c.gridx = 2;
             c.gridy = 0;
+            Rename.setPreferredSize(new Dimension(150, 60));
+            add(Rename, c);
+            c.gridx = 2;
+            c.gridy = 1;
             Report.setPreferredSize(new Dimension(150, 60));
             add(Report, c);
             c.gridx = 2;
-            c.gridy = 1;
+            c.gridy = 2;
             // c.insets = new Insets(30, 0, 0, 0);
             Deposite.setPreferredSize(new Dimension(150, 60));
             add(Deposite, c);
             c.gridx = 2;
-            c.gridy = 2;
+            c.gridy = 3;
             //  c.insets = new Insets(30, 0, 0, 0);
             Withdraw.setPreferredSize(new Dimension(150, 60));
             add(Withdraw, c);
             c.gridx = 2;
-            c.gridy = 3;
+            c.gridy = 4;
             // c.insets = new Insets(30, 0, 0, 0);
             exspand.setPreferredSize(new Dimension(150, 60));
             add(exspand, c);
-            c.gridy = 4;
+            c.gridy = 5;
             //  c.insets = new Insets(30, 0, 0, 0);
             listBuildings.setPreferredSize(new Dimension(150, 60));
             add(listBuildings, c);
-            c.gridy = 5;
+            c.gridy = 6;
             //  c.insets = new Insets(30, 0, 0, 0);
             addBuildings.setPreferredSize(new Dimension(150, 60));
             add(addBuildings, c);
-            c.gridy = 6;
+            c.gridy = 7;
             //  c.insets = new Insets(30, 0, 0, 0);
             VisualInterface.setPreferredSize(new Dimension(150, 60));
             add(VisualInterface, c);
 
-            c.gridy = 7;
+            c.gridy = 8;
             RightsManagement.setPreferredSize(new Dimension(150, 60));
             add(RightsManagement, c);
 
-            c.gridy = 8;
+            c.gridy = 9;
             PropertyLog.setPreferredSize(new Dimension(150, 60));
             add(PropertyLog, c);
 
@@ -528,6 +534,23 @@ public class MainPlaySideMenu extends JPanel {
 
                 html.append("</table>");
                 textZone.setText(html.toString());
+            }
+        });
+
+        Rename.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String plotName = (String) JOptionPane.showInputDialog(Rename, "Wat is the name of your property?");
+
+                if ("".equals(plotName) || plotName == null) {
+                    JOptionPane.showMessageDialog(Rename, "Please chose a name for your estate");
+                    return;
+                }
+                tc.rdb.setPlotName(pId, plotName);
+
+
+
             }
         });
 
