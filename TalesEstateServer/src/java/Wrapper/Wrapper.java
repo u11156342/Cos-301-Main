@@ -318,13 +318,16 @@ public class Wrapper {
         html.append("</table>");
 
         html.append("<br/>");
-        if (!"".equals(handler.getPlotQH().getDescription(PropertyId))) {
-            html.append("<p class=\"sheading\">Plot Description</p>");
-            html.append(handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " "));
-            html.append("</p>");
-            html.append("<br/>");
+        try {
+            String replaceAll = handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " ");
+            if (!"".equals(handler.getPlotQH().getDescription(PropertyId))) {
+                html.append("<p class=\"sheading\">Plot Description</p>");
+                html.append(handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " "));
+                html.append("</p>");
+                html.append("<br/>");
+            }
+        } catch (Exception e) {
         }
-
 
         html.append("<table>");
         html.append("<tr>");

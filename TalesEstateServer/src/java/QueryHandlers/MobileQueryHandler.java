@@ -39,8 +39,8 @@ public class MobileQueryHandler {
         lname = name;
         conEstate = db.openConnectionEstate();
 
-
-        sql = "SELECT UserCharacterID FROM UserCharacter where UserCharacterName='" + name + "';";
+        name = name.replaceAll("\\.", " ");
+        sql = "SELECT UserCharacterID FROM UserCharacter where UserCharacterName like '%" + name + "%';";
         try {
             stmt = conEstate.createStatement();
             rs = stmt.executeQuery(sql);
@@ -49,13 +49,15 @@ public class MobileQueryHandler {
                 userList.add(rs.getString("UserCharacterID"));
             }
 
-
+            String t = "";
+            t = t + sql;
             if (!userList.isEmpty()) {
 
                 String owner = userList.get(0);
 
                 String completereturn = "";
                 sql = "SELECT PlotID FROM Plot where PlotOwnedBy ='" + owner + "';";
+
                 stmt = conEstate.createStatement();
                 rs = stmt.executeQuery(sql);
                 while (rs.next()) {
@@ -85,12 +87,13 @@ public class MobileQueryHandler {
 
                 return "<html>" + "<head></head>" + "<body>" + completereturn + "</body>" + "</html>";
             } else {
-                return "error";
+                return "User Not Found " + t;
             }
         } catch (Exception e) {
-            System.out.println("Error in mobile getid");
+            return "Error in mobile getid";
+            
         }
-        return null;
+        
 
     }
 

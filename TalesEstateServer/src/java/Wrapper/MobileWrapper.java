@@ -4,16 +4,7 @@
  */
 package Wrapper;
 
-import QueryHandlers.QueryHandler;
 import QueryHandlers.MobileQueryHandler;
-import QueryHandlers.MobileQueryHandler;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
