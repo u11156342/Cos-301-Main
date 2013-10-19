@@ -15,13 +15,13 @@ public class EventWrapper {
     
     @GET
     @Path("addEvent/{plotID}/{eventName}/{eventDescription}/{platinumMod}"
-            + "/{goldMod}/{silverMod}/{happinessMod}/{incomeMod}")
+            + "/{goldMod}/{silverMod}/{happinessMod}/{incomeMod}/{defenceMod}")
     @Produces("text/plain")
     public String addEvent(@PathParam("plotID")int plotID,@PathParam("eventName") String eventName,@PathParam("eventDescription") String eventDescription,
             @PathParam("platinumMod")int platinumMod,@PathParam("goldMod") int goldMod,@PathParam("silverMod") int silverMod,@PathParam("happinessMod") int happinessMod,
-            @PathParam("incomeMod")int incomeMod) {
+            @PathParam("incomeMod")int incomeMod,@PathParam("defenceMod")int defenceMod ) {
         if(handler.getEventQH().addEvent(plotID, eventName, eventDescription,
-                platinumMod, goldMod, silverMod, happinessMod, incomeMod))
+                platinumMod, goldMod, silverMod, happinessMod, incomeMod,defenceMod))
             return "true";
         else
             return "false";

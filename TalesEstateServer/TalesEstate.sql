@@ -508,7 +508,8 @@ CREATE TABLE EventLog
 	EventLogEffectGold INT,
 	EventLogEffectSilver INT,
 	EventLogEffectHappiness INT,
-	EventLogEffectIncome INT
+	EventLogEffectIncome INT,
+	EventLogEffectDefence INT
 )
 
 CREATE TABLE IncomeLog

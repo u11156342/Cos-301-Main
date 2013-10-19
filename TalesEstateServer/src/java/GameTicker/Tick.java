@@ -414,17 +414,18 @@ public class Tick {
                 int PlotID = Integer.parseInt(plots.getString("PlotID"));
                 String eventName = "Unhappy workers";
                 String eventDescription = "Your workers are unhappy, they work at reduced production";
+                
                 int hapiness = Integer.parseInt(plots.getString("PlotHappiness"));
-                int incomeLoss = 0;
-
-                //addEvent(int plotID, String eventName, String eventDescription,
-                // int platinumMod, int goldMod, int silverMod, int happinessMod,
-                // int incomeMod)
+                
+                ArrayList<String> happinessEffect = qhandler.getPlotQH().getHappinessEffect(hapiness);
+                
+                int HapinessMod=Integer.parseInt(happinessEffect.get(0));
+                int HapinessRebel=Integer.parseInt(happinessEffect.get(1));
+                
+                double incomeLoss=0;
 
                 if (hapiness < 0) {
-
-                    incomeLoss = 10;
-                    incomeLoss = incomeLoss * (Math.abs(hapiness));
+                    
                   //  qhandler.getEventQH().addEvent(PlotID, eventName, eventDescription, 0, 0, 0, 0, incomeLoss);
                 }
 
@@ -436,7 +437,7 @@ public class Tick {
 
 
     }
-//still need to implement
+
 
     public boolean CheckIfBuildingIsComplete(String dateBuild, int weeks) {
 
@@ -458,7 +459,7 @@ public class Tick {
         String yearB=tokens.nextToken();
         String mountB=tokens.nextToken();
         String dayB=tokens.nextToken();
-        System.out.println("Building was build on "+dateBuild+" and it will be completed when "+year+"-"+month+"-"+day+" equals "+dateBuild);
+      //  System.out.println("Building was build on "+dateBuild+" and it will be completed when "+year+"-"+month+"-"+day+" equals "+dateBuild);
         
         if(yearB.equals(year) && mountB.equals(month) && dayB.equals(day))
         {
