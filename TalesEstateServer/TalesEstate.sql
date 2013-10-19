@@ -542,3 +542,13 @@ CREATE TABLE CharacterLog
 	CharacterLogDateTime DATETIME,
 	CharacterLogMessage VARCHAR(MAX)
 )
+
+CREATE TABLE HappinessEffect
+(
+	HappinessEffectID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	HappinessEffectBottom INT,
+	HappinessEffectTop INT,
+	HappinessEffectIncome FLOAT,
+	HappinessEffectRebel FLOAT
+)
+
