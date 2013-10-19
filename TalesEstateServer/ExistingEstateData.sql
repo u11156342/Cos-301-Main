@@ -21,12 +21,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 2, 6, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	22, 44.5, 102, 140, 0, 0, 1, 1, 4.5, 5, 20, 'SAK0001', '')
+	22, 44.5, 102, 140, 0, 0, 1, 1, 4.5, 5, 20, 'SAK0001', '', '', 17)
 	SET @plotid = @@IDENTITY;
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
@@ -204,12 +204,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 2, 2, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	4, 25, 40, 40, 0, 0, 0, 0, 2, 2, 0, 'SAK0002', '')
+	4, 25, 40, 40, 0, 0, 0, 0, 2, 2, 0, 'SAK0002', '', '', 17)
 	SET @plotid = @@IDENTITY;
 
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -268,12 +268,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 2, 2, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	2, 22, 25, 40, 0, 0, 0, 0, 1.125, 2, 0, 'SAK0003', '')
+	2, 22, 25, 40, 0, 0, 0, 0, 1.125, 2, 0, 'SAK0003', '', '', 15)
 	SET @plotid = @@IDENTITY;
 
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -335,12 +335,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 2, 1, 
 	'0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	2, 8.5, 10, 20, 0, 0, 0, 0, 0.5, 1, 0, 'SAK0004', '')
+	2, 8.5, 10, 20, 0, 0, 0, 0, 0.5, 1, 0, 'SAK0004', '', '', 18)
 	SET @plotid = @@IDENTITY;
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -374,12 +374,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 6, 2, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	2, 10.5, 40, 60, 0, 0, 1, 1, 1, 1, 0, 'LAN0001', '')
+	2, 10.5, 40, 60, 0, 0, 1, 1, 1, 1, 0, 'LAN0001', '', '', 6)
 	SET @plotid = @@IDENTITY;
 
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -431,12 +431,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 6, 3, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	1, 6.5, 36, 60, 0, 0, 0, 0, 2.125, 3, 0, 'LAN0002', '')
+	1, 6.5, 36, 60, 0, 0, 0, 0, 2.125, 3, 0, 'LAN0002', '', '', 7)
 	SET @plotid = @@IDENTITY;
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -496,12 +496,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 5, 4, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	1, 18.5, 35, 100, 0, 0, 1, 1, 2.375, 3, 0, 'ROT0001', '')
+	1, 18.5, 35, 100, 0, 0, 1, 1, 2.375, 3, 0, 'ROT0001', '', '', 21)
 	SET @plotid = @@IDENTITY;
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
@@ -594,12 +594,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 5, 4, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	1, 30, 59, 80, 0, 0, 0, 0, 3.5, 4, 0, 'ROT0002', '')
+	1, 30, 59, 80, 0, 0, 0, 0, 3.5, 4, 0, 'ROT0002', '', '', 19)
 	SET @plotid = @@IDENTITY;
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
@@ -745,12 +745,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 4, 2, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	6, 17.4, 33, 40, 0, 0, 0, 0, 1, 2, 0, 'SVR0001', '')
+	6, 17.4, 33, 40, 0, 0, 0, 0, 1, 2, 0, 'SVR0001', '', '', 9)
 	SET @plotid = @@IDENTITY;
 	
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
@@ -843,12 +843,12 @@ INSERT INTO Amount (AmountPlatinum, AmountGold, AmountSilver)
 INSERT INTO Plot (PlotOwnedBy, PlotAmount, PlotDuchy, PlotSize, PlotGroundArray, PlotBuildingArray, 
 PlotHappiness, PlotMonthlyIncome, PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisite, PlotAcreExquisiteMax, 
 PlotAcreFine, PlotAcreFineMax, PlotAcrePoor, PlotAcrePoorMax, PlotDefenseValue, PlotEstateNumber, 
-PlotEstateName)
+PlotEstateName, PlotDescription, CountyID)
 	VALUES
 	(@charid, @amountid, 4, 2, 
 	'0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;0,0,0;', 
 	'-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;-1,-1,-1;', 
-	3, 7.4, 33, 40, 0, 0, 0, 0, 1.75, 2, 0, 'SVR0002', '')
+	3, 7.4, 33, 40, 0, 0, 0, 0, 1.75, 2, 0, 'SVR0002', '', '', 9)
 	SET @plotid = @@IDENTITY;
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,

@@ -426,20 +426,6 @@ public class PlotQueryHandler {
             rs.next();
             value.set(19, rs.getString("CountyDescription"));
 
-            try {
-                sql = "SELECT CountyDescription FROM County WHERE "
-                        + "CountyID = " + value.get(19);
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(sql);
-                rs.next();
-
-                value.set(19, "unknown");
-
-                value.set(19, rs.getString("CountyDescription"));
-            } catch (Exception ex) {
-                value.set(19, "Unknown");
-            }
-
             return value;
         } catch (Exception e) {
             System.out.println("Error, could not execute function retrievePlotDetails()");
