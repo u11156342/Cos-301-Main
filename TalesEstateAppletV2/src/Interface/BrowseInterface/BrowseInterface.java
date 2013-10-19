@@ -33,7 +33,7 @@ public class BrowseInterface extends BasePanel {
 
         GameBrowseGrid playIn = null;
         try {
-            playIn = new GameBrowseGrid(size, tc);
+            playIn = new GameBrowseGrid(size, tc,propertyID);
         } catch (IOException ex) {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }

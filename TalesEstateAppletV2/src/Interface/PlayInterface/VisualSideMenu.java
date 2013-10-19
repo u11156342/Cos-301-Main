@@ -57,6 +57,8 @@ public class VisualSideMenu extends JPanel {
 
         buildingTokens = new JList(build);
         buildingTokens.setFixedCellWidth(170);
+        buildingTokens.setFixedCellHeight(30);
+        buildingTokens.setSize(170,tc.JFXPANEL_HEIGHT_INT);
 
         //  buildingTokens.setPreferredSize(new Dimension(200, tc.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

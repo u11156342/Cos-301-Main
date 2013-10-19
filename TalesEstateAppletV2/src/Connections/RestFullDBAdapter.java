@@ -615,10 +615,10 @@ public class RestFullDBAdapter {
         }
     }
 
-    public boolean addEvent(int plotId, String eventName, String eventDescription, int platinumMod, int goldMod, int silverMod, int happinessMod, int incomeMod,int defenceMod) {
+    public boolean addEvent(int plotId, String eventName, String eventDescription, int platinumMod, int goldMod, int silverMod, int happinessMod, int incomeMod, int defenceMod) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "EventWrapper/" + "addEvent" + "/" + plotId + "/" + eventName + "/" + eventDescription + "/" + platinumMod + "/" + goldMod + "/" + silverMod + "/" + happinessMod + "/" + incomeMod+"/"+defenceMod);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "EventWrapper/" + "addEvent" + "/" + plotId + "/" + eventName + "/" + eventDescription + "/" + platinumMod + "/" + goldMod + "/" + silverMod + "/" + happinessMod + "/" + incomeMod + "/" + defenceMod);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -753,5 +753,20 @@ public class RestFullDBAdapter {
         }
 
         return temp;
+    }
+
+    public void setPlotName(int pId, String plotName) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "setName/" + pId + "/" + plotName);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+    }
+
+    public void placeWater(int PlotID, int[][] tileStates) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
