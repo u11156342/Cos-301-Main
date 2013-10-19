@@ -314,7 +314,7 @@ public class PlotWrapper {
             return "";
         }
     }
-    
+
     @GET
     @Path("getHappinessEffect/{happiness}")
     @Produces("text/html")
@@ -325,5 +325,18 @@ public class PlotWrapper {
             System.out.println(ex.getMessage());
             return "";
         }
+    }
+
+    @GET
+    @Path("setName/{pId}/{name}")
+    @Produces("text/html")
+    public String setName(@PathParam("pId") int pId, @PathParam("name") String name) {
+        try {
+            handler.getPlotQH().setName(pId, name);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
     }
 }

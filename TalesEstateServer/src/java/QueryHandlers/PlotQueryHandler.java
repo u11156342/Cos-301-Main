@@ -1359,8 +1359,8 @@ public class PlotQueryHandler {
         }
     }
 
-    public void setDescription(String desc,int PlotID) {
-        sql = "UPDATE Plot SET PlotDescription='"+desc+"' WHERE PlotID=" + PlotID;
+    public void setDescription(String desc, int PlotID) {
+        sql = "UPDATE Plot SET PlotDescription='" + desc + "' WHERE PlotID=" + PlotID;
         try {
             stmt = con.createStatement();
             stmt.execute(sql);
@@ -1373,7 +1373,7 @@ public class PlotQueryHandler {
 
     public String getDescription(int PlotID) {
 
-        sql = "SELECT PlotDescription FROM Plot WHERE PlotID="+PlotID;
+        sql = "SELECT PlotDescription FROM Plot WHERE PlotID=" + PlotID;
         try {
             stmt = con.createStatement();
             ResultSet executeQuery = stmt.executeQuery(sql);
@@ -1385,34 +1385,43 @@ public class PlotQueryHandler {
         }
         return "";
     }
-    
+
     public ArrayList<String> getHappinessEffect(int happiness) {
         ArrayList<String> result = null;
-        
+
         result = new ArrayList();
-        
-        if(happiness > 1000) {  //Max amount of happiness
+
+        if (happiness > 1000) {  //Max amount of happiness
             result.add("25");
             result.add("0");
             return result;
-        }
-        else {
+        } else {
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT HappinessEffectIncome, HappinessEffectRebel "
                         + "FROM HappinessEffect WHERE HappinessEffectBottom <= " + happiness
                         + " AND HappinessEffectTop >= " + happiness);
                 rs.next();
-                
+
                 result.add(rs.getString("HappinessEffectIncome"));
                 result.add(rs.getString("HappinessEffectRebel"));
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Error in function getHappinessEffect()");
                 System.out.println(e.getMessage());
             }
 
             return result;
+        }
+    }
+
+    public void setName(int pId, String name) {
+        sql = "UPDATE Plot SET PlotEstateName='" + name + "' WHERE PlotID=" + pId;
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+        } catch (Exception e) {
+            System.out.println("Error in function getDescription():");
+            System.out.println(e.getMessage());
         }
     }
 }
