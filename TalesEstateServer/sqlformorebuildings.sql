@@ -971,7 +971,7 @@ INSERT INTO [TalesEstate].[dbo].[Picture]
            ,0
            ,0
            ,0
-           ,'Walls (6  Stone) 0.png')
+           ,'Walls (6 Stone) 0.png')
 GO
 INSERT INTO [TalesEstate].[dbo].[Picture]
            ([PictureDisplayHeight]
@@ -984,5 +984,5 @@ INSERT INTO [TalesEstate].[dbo].[Picture]
            ,0
            ,0
            ,0
-           ,'Walls (10  Stone) 0.png')
+           ,'Walls (10 Stone) 0.png')
 GO
