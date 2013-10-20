@@ -296,7 +296,7 @@ VALUES
 (0, 0, 0, 0, 'Manage Charcter Gold.png'),
 (0, 0, 0, 0, 'Admin Menu.png'),
 (0, 0, 0, 0, 'Player Management.png'),
-(0,0,0,0,'Farm (Cattle)(Dairy and Meat) 1.png')
+(0,0,0,0,'Farm (Cattle)(Dairy and Meat) 1.png'),
 (0, 0, 0, 0, 'well.png'),
 (0, 0, 0, 0, 'Winery 0.5.png'),
         (0
