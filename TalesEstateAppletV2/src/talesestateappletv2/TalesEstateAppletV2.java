@@ -49,7 +49,7 @@ public class TalesEstateAppletV2 extends JApplet {
             public void run() {
                 try {
                     //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                     //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
                      
                 } catch (Exception e) {
                 }

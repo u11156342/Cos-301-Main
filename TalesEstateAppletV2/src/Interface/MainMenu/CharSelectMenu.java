@@ -33,11 +33,15 @@ public class CharSelectMenu extends BasePanel {
             JOptionPane.showMessageDialog(btn, "You need to log into the site first");
             return;
         }
-        setBackground(java.awt.Color.WHITE);
+
+
+        float[] c1 = java.awt.Color.RGBtoHSB(148, 184, 255, null);
+        setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
         //  UserId=cr.userIDs.get(cr.userIDs.size()-1);
 
         JPanel container = new JPanel();
-        container.setBackground(java.awt.Color.WHITE);
+        container.setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
+        //container.setBackground(java.awt.Color.WHITE);
         BufferedImage tobeIcon = tc.ad.ImageAdapter(6);
         ImageIcon ic = new ImageIcon(tobeIcon);
 

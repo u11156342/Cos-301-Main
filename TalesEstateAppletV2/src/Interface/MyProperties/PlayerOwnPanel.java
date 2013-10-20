@@ -59,6 +59,22 @@ public class PlayerOwnPanel extends JPanel {
         text.append("<html>");
         text.append("<head>");
         text.append("<style type=\"text/css\">");
+        text.append("body{"
+                + "font-family: \"century gothic\";"
+                + "background-color: white;"
+                + "border-right-width: 2px;"
+                + "border-bottom-width: 2px;"
+                + "border-left-width: 2px;"
+                + "border-top-width: 2px;"
+                + "border-top-style: solid;"
+                + "border-right-style: solid;"
+                + "border-bottom-style: solid;"
+                + "border-left-style: solid;"
+                + "border-top-color: #FF0000;"
+                + "border-right-color: #FF0000;"
+                + "border-bottom-color: #FF0000;"
+                + "border-left-color: #FF0000;"
+                + "}");
         text.append(".sheading{"
                 + "font-size: 10px;"
                 + "font-weight: bold;"
