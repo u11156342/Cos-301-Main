@@ -73,7 +73,7 @@ public class PictureQueryHandler {
                 loadedPictures[a] = ImageIO.read(new File(folderLocation + pictures.get(a)));
             } catch (IOException ex) {
                 System.out.println("Error when loading pictures in PictureQueryHandler constructor");
-                System.out.println("Error loading " + folderLocation + "\\" + pictures.get(a));
+                System.out.println("Error loading " + folderLocation + "" + pictures.get(a));
                 System.out.println(ex.getMessage());
             }
         }

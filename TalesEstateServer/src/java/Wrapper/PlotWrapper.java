@@ -339,4 +339,45 @@ public class PlotWrapper {
         }
         return "";
     }
+
+    @GET
+    @Path("placeWater/{PlotID}/{tileStates}")
+    @Produces("text/plain")
+    public String placeWater(@PathParam("PlotID") int PlotID, @PathParam("tileStates") String tileStates) {
+        tileStates = tileStates.replace('_', ';');
+        try {
+            handler.getPlotQH().placeWater(PlotID, handler.getPlotQH().convertFromArray(tileStates));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
+
+    @GET
+    @Path("unPlaceBuilding/{PlotID}/{gridstates}")
+    @Produces("text/plain")
+    public String unPlaceBuilding(@PathParam("PlotID") int PlotID, @PathParam("gridstates") String gridstates) {
+        gridstates = gridstates.replace('_', ';');
+        try {
+            handler.getPlotQH().unPlaceBuilding(PlotID, handler.getPlotQH().convertFromArray(gridstates));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
+
+    @GET
+    @Path("MarkBuildingsAsUnPlaced/{buildingToGiveBack}/{PlotID}")
+    @Produces("text/plain")
+    public String MarkBuildingsAsUnPlaced(@PathParam("buildingToGiveBack") int buildingToGiveBack, @PathParam("PlotID") int PlotID) {
+        try {
+            handler.getPlotQH().MarkBuildingsAsUnPlaced(buildingToGiveBack, PlotID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
 }

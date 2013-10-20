@@ -27,17 +27,15 @@ public class ImageWrapper {
 
     @GET
     @Path("getImageByID/{id}")
-    @Produces("image/gif")
-    public Response getImageByID(@PathParam("id") int imageID) {
+    @Produces("text/plain")
+    public String getImageByID(@PathParam("id") int imageID) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             for (int a = 0; a < handler.getPictureQH().loadedPictures.length; a++) {
                 if (a == imageID) {
-                    ImageIO.write(handler.getPictureQH().loadedPictures[a], "gif", baos);
+                    return handler.getPictureQH().pictures.get(a);
                 }
             }
-            byte[] imageData = baos.toByteArray();
-            return Response.ok(imageData).build();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
