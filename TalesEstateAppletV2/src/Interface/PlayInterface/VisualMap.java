@@ -39,6 +39,7 @@ public class VisualMap extends JFXPanel {
     int currentZoom = 0;
     public int PlotID;
     public boolean placed = false;
+    public boolean found = false;
 
     public VisualMap(int size, TransferContainer t) throws IOException {
         tiles = new TileManager(t);
@@ -267,7 +268,7 @@ public class VisualMap extends JFXPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-               
+
 
                 int clickedx = e.getX();
                 int clickedy = e.getY();
@@ -281,39 +282,57 @@ public class VisualMap extends JFXPanel {
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
-                            if(e.getButton()==1)
-                            {
+                            if (e.getButton() == 1) {
 
-                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
+                                if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
 
-                                gridstates[x][y] = tc.BuildingRef;
-                                //builds
-                                if (!placed) {
-                                    placed = true;
-                                    tc.rdb.PlaceBuilding(PlotID, gridstates);
-                                    tc.rdb.MarkBuildingAsPlaced(tc.BuildingLogReference);
+                                    gridstates[x][y] = tc.BuildingRef;
+                                    //builds
+                                    if (!placed) {
+                                        placed = true;
+                                        tc.rdb.PlaceBuilding(PlotID, gridstates);
+                                        tc.rdb.MarkBuildingAsPlaced(tc.BuildingLogReference);
 
-                                    tc.BuildingRef = -1;
+                                        tc.BuildingRef = -1;
 
-                                    PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
-                                    card.init(tc, PlotID);
-                                    tc.cardlayout.show(tc.contentpane, card.getName());
+                                        PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
+                                        card.init(tc, PlotID);
+                                        tc.cardlayout.show(tc.contentpane, card.getName());
+                                    }
+                                    return;
+                                }
+
+
+                                repaint();
+                            } else if (e.getButton() == 3) {
+                                //building unplacing
+
+                                if (gridstates[x][y] == -1 || gridstates[x][y] == 3) {
+                                } else {
+
+                                    if (!found) {
+                                        found = true;
+                                        int buildingToGiveBack = gridstates[x][y];
+                                        gridstates[x][y] = 0;
+                                        tc.rdb.unPlaceBuilding(PlotID, gridstates);
+                                        tc.rdb.MarkBuildingsAsUnPlaced(PlotID, buildingToGiveBack);
+
+                                        PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
+                                        card.init(tc, PlotID);
+                                        tc.cardlayout.show(tc.contentpane, card.getName());
+                                    }
+
                                 }
                                 return;
                             }
-
-
-                            repaint();
-                        }
-                        }
-                        else if(e.getButton()==3)
-                        {
-                            
+                            return;
                         }
                     }
                     move = move - (wdOfcell / 2);
                     move2 = move2 + (htOfcell / 2);
                 }
+
+                found = false;
 
 
             }

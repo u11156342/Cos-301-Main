@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import talesestateappletv2.TransferContainer;
 
 public class TileManager {
-    Tile[] tiles = new Tile[100];
+    Tile[] tiles = new Tile[200];
     public BufferedImage defaultIm;
     TransferContainer t;
 

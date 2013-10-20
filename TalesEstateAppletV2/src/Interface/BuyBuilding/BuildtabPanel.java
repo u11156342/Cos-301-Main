@@ -493,9 +493,10 @@ public class BuildtabPanel extends BasePanel {
 
                         tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
                         tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
+                        tr.listBuildings.doClick();
                     }
-                    tr.listBuildings.doClick();
-                    tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
+
+                    // tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
                 }
             }
         });

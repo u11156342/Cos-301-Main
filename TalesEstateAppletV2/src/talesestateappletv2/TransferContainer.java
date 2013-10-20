@@ -70,7 +70,6 @@ public class TransferContainer {
         cardlayout = new CardLayout();
         lastAdminBrowse = false;
         Cinit();
-        background = ad.ImageAdapter(4);
     }
 
     public void Cinit() {

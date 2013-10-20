@@ -125,6 +125,7 @@ public class MainMenu extends BasePanel {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                tc.Buy.init();
                 tc.cardlayout.show(tc.contentpane, "Buy");
             }
         });

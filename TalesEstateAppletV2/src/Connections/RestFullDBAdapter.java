@@ -767,6 +767,29 @@ public class RestFullDBAdapter {
     }
 
     public void placeWater(int PlotID, int[][] tileStates) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "placeWater/" + PlotID + "/" + convertToArray(tileStates));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void unPlaceBuilding(int PlotID, int[][] gridstates) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "unPlaceBuilding/" + PlotID + "/" + convertToArray(gridstates));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void MarkBuildingsAsUnPlaced(int PlotID,int buildingToGiveBack) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "MarkBuildingsAsUnPlaced/" + buildingToGiveBack+"/"+PlotID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
