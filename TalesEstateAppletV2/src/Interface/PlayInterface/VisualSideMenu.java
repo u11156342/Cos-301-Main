@@ -58,7 +58,7 @@ public class VisualSideMenu extends JPanel {
         buildingTokens = new JList(build);
         buildingTokens.setFixedCellWidth(170);
         buildingTokens.setFixedCellHeight(30);
-        buildingTokens.setSize(170,tc.JFXPANEL_HEIGHT_INT);
+        buildingTokens.setSize(170, tc.JFXPANEL_HEIGHT_INT);
 
         //  buildingTokens.setPreferredSize(new Dimension(200, tc.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -77,8 +77,12 @@ public class VisualSideMenu extends JPanel {
         buildingTokens.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                tc.BuildingRef = PicID[buildingTokens.getSelectedIndex()];
-                tc.BuildingLogReference = LogIDs[buildingTokens.getSelectedIndex()];
+                try {
+                    tc.BuildingRef = PicID[buildingTokens.getSelectedIndex()];
+                    tc.BuildingLogReference = LogIDs[buildingTokens.getSelectedIndex()];
+                } catch (Exception ex) {
+                }
+
                 //JOptionPane.showMessageDialog(buildingTokens, tc.BuildingRef);
             }
         });

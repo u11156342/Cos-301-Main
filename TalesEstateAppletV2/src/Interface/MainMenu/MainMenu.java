@@ -26,7 +26,8 @@ public class MainMenu extends BasePanel {
     public MainMenu(String name, TransferContainer tc, TalesEstateAppletV2 me) {
         super(name, tc);
         applet = me;
-        setBackground(java.awt.Color.WHITE);
+       
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
 
     }
 
@@ -58,7 +59,8 @@ public class MainMenu extends BasePanel {
         JPanel container = new JPanel();
         container.setLayout(new GridBagLayout());
 
-        container.setBackground(java.awt.Color.WHITE);
+        
+        container.setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc.c1[1],tc.c1[2]));
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
 
 

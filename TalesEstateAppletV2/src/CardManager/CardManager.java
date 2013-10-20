@@ -43,7 +43,7 @@ public class CardManager {
     public int currentRightsInterfaceCard = -1;
     public AddPlayer[] AddPlayere = new AddPlayer[50];
     public int currentAddPlayerCard = -1;
-    public PlayInterface[] PlayInterfaces = new PlayInterface[100];
+    public PlayInterface[] PlayInterfaces = new PlayInterface[200];
     public int currentPlayInterfaceCard = -1;
 
     public CardManager(TransferContainer tc) {

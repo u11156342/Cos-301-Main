@@ -31,7 +31,7 @@ public class BuildtabPanel extends BasePanel {
     TransferContainer tain;
 
     public BuildtabPanel(String build, TransferContainer tc) {
-        super(build,tc);
+        super(build, tc);
         tain = tc;
     }
 
@@ -491,8 +491,8 @@ public class BuildtabPanel extends BasePanel {
                         int nsilver = tempa;
                         tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
 
-                        tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName.substring(0,tain.CharacterName.indexOf("&*&")) + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
-
+                        tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
+                        tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
                     }
                     tr.listBuildings.doClick();
                     tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());

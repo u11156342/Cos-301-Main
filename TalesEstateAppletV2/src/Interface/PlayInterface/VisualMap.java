@@ -208,6 +208,7 @@ public class VisualMap extends JFXPanel {
                 tempx = e.getX();
                 tempy = e.getY();
 
+
                 int clickedx = e.getX();
                 int clickedy = e.getY();
                 double move = 0;
@@ -265,6 +266,9 @@ public class VisualMap extends JFXPanel {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+               
+
                 int clickedx = e.getX();
                 int clickedy = e.getY();
                 double move = 0;
@@ -277,6 +281,8 @@ public class VisualMap extends JFXPanel {
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
+                            if(e.getButton()==1)
+                            {
 
                             if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
 
@@ -289,15 +295,20 @@ public class VisualMap extends JFXPanel {
 
                                     tc.BuildingRef = -1;
 
-                                    tc.reference.buildingTokens = new JList();
-                                    tc.reference.init(tc);
-                                    tc.reference.repaint();
+                                    PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
+                                    card.init(tc, PlotID);
+                                    tc.cardlayout.show(tc.contentpane, card.getName());
                                 }
                                 return;
                             }
 
 
                             repaint();
+                        }
+                        }
+                        else if(e.getButton()==3)
+                        {
+                            
                         }
                     }
                     move = move - (wdOfcell / 2);

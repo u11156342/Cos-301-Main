@@ -35,7 +35,7 @@ public class CharSelectMenu extends BasePanel {
         }
 
 
-        float[] c1 = java.awt.Color.RGBtoHSB(148, 184, 255, null);
+        float[] c1 = java.awt.Color.RGBtoHSB(142,117,92, null);
         setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
         //  UserId=cr.userIDs.get(cr.userIDs.size()-1);
 

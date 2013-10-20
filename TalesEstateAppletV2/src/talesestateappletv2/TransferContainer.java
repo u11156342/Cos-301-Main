@@ -64,6 +64,7 @@ public class TransferContainer {
     public VisualSideMenu reference;
     public boolean lastAdminBrowse;
     public BufferedImage background;
+    public  float[] c1 = java.awt.Color.RGBtoHSB(142, 117, 92, null);
 
     public TransferContainer() {
         cardlayout = new CardLayout();
