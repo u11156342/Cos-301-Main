@@ -504,7 +504,7 @@ public class BuildingQueryHandler {
                 }
             //break;
             case 10: //Check for suitable source
-                break;
+                return "suitable source";
             case 11: //Iron mine on plot
                 if (plot.get(2).contains("13")) {
                     break;
@@ -518,9 +518,9 @@ public class BuildingQueryHandler {
                     return "vineyard";
                 }
             case 13: //Check for primary source
-                break;
+                return "primary source";
             case 14: //Check for timber plantation. No natural image/block for this yet
-                break;
+                return "timber plantation";
             case 15: //Check for flour mill
                 if (plot.get(2).contains("44")) {
                     break;
