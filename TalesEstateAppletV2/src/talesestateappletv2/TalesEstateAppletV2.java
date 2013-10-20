@@ -34,8 +34,8 @@ import javax.swing.UIManager;
  */
 public class TalesEstateAppletV2 extends JApplet {
 
-    public static final int JFXPANEL_WIDTH_INT = 1024;
-    public static final int JFXPANEL_HEIGHT_INT = 768;
+    public static final int JFXPANEL_WIDTH_INT = 1600;
+    public static final int JFXPANEL_HEIGHT_INT = 800;
     private static JFXPanel fxContainer;
     private static TransferContainer tContain = new TransferContainer();
     private static TalesEstateAppletV2 me;
