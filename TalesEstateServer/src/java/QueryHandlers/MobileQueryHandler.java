@@ -124,7 +124,10 @@ public class MobileQueryHandler {
 
 
 
-
+if(userList.size() == 0)
+{
+    return "You have no characters registerd";
+}
             String divtop = "";
 
             for (int i = 0; i < userList.size(); i++) {
