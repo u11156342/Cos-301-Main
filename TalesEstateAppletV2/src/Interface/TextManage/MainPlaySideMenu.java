@@ -45,7 +45,7 @@ public class MainPlaySideMenu extends JPanel {
         Report = new JButton("Status Report");
         Deposite = new JButton("Deposit Funds");
         Withdraw = new JButton("Withdraw Funds");
-        exspand = new JButton("Exspand");
+        exspand = new JButton("Expand");
         listBuildings = new JButton("List Buildings");
         addBuildings = new JButton("Add Building");
         VisualInterface = new JButton("Visual Interface");
@@ -68,46 +68,46 @@ public class MainPlaySideMenu extends JPanel {
 
             c.gridx = 2;
             c.gridy = 0;
-            Rename.setPreferredSize(new Dimension(150, 60));
+            Rename.setPreferredSize(new Dimension(150, 53));
             add(Rename, c);
             c.gridx = 2;
             c.gridy = 1;
-            Report.setPreferredSize(new Dimension(150, 60));
+            Report.setPreferredSize(new Dimension(150, 53));
             add(Report, c);
             c.gridx = 2;
             c.gridy = 2;
             // c.insets = new Insets(30, 0, 0, 0);
-            Deposite.setPreferredSize(new Dimension(150, 60));
+            Deposite.setPreferredSize(new Dimension(150, 53));
             add(Deposite, c);
             c.gridx = 2;
             c.gridy = 3;
             //  c.insets = new Insets(30, 0, 0, 0);
-            Withdraw.setPreferredSize(new Dimension(150, 60));
+            Withdraw.setPreferredSize(new Dimension(150, 53));
             add(Withdraw, c);
             c.gridx = 2;
             c.gridy = 4;
             // c.insets = new Insets(30, 0, 0, 0);
-            exspand.setPreferredSize(new Dimension(150, 60));
+            exspand.setPreferredSize(new Dimension(150, 53));
             add(exspand, c);
             c.gridy = 5;
             //  c.insets = new Insets(30, 0, 0, 0);
-            listBuildings.setPreferredSize(new Dimension(150, 60));
+            listBuildings.setPreferredSize(new Dimension(150, 53));
             add(listBuildings, c);
             c.gridy = 6;
             //  c.insets = new Insets(30, 0, 0, 0);
-            addBuildings.setPreferredSize(new Dimension(150, 60));
+            addBuildings.setPreferredSize(new Dimension(150, 53));
             add(addBuildings, c);
             c.gridy = 7;
             //  c.insets = new Insets(30, 0, 0, 0);
-            VisualInterface.setPreferredSize(new Dimension(150, 60));
+            VisualInterface.setPreferredSize(new Dimension(150, 53));
             add(VisualInterface, c);
 
             c.gridy = 8;
-            RightsManagement.setPreferredSize(new Dimension(150, 60));
+            RightsManagement.setPreferredSize(new Dimension(150, 53));
             add(RightsManagement, c);
 
             c.gridy = 9;
-            PropertyLog.setPreferredSize(new Dimension(150, 60));
+            PropertyLog.setPreferredSize(new Dimension(150, 53));
             add(PropertyLog, c);
 
         } else {
@@ -197,6 +197,7 @@ public class MainPlaySideMenu extends JPanel {
         }
 
         Report.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -204,6 +205,7 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -259,6 +261,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -314,6 +317,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -436,6 +440,7 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -448,7 +453,8 @@ public class MainPlaySideMenu extends JPanel {
                 html.append("<html>");
                 html.append("<head>");
 
-                /* CSS for page
+                /*
+                 * CSS for page
                  */
                 html.append("<style type=\"text/css\">");
                 html.append("body{"
@@ -538,6 +544,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         Rename.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -557,6 +564,7 @@ public class MainPlaySideMenu extends JPanel {
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -565,6 +573,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -575,6 +584,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         RightsManagement.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
@@ -584,6 +594,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         PropertyLog.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -17,8 +17,8 @@ import talesestateappletv2.TransferContainer;
 
 public class MainSearch extends BasePanel {
 
-    public MainSearch(String name,TransferContainer tc) {
-        super(name,tc);
+    public MainSearch(String name, TransferContainer tc) {
+        super(name, tc);
     }
 
     public void init(final TransferContainer tc) {
@@ -33,11 +33,12 @@ public class MainSearch extends BasePanel {
         MainSearchInterface msi = new MainSearchInterface();
         msi.init(tc);
         add(msi, BorderLayout.CENTER);
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "MainMenu");

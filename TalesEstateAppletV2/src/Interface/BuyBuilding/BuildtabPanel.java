@@ -42,7 +42,7 @@ public class BuildtabPanel extends BasePanel {
         JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(50)));
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
-        add(Title, BorderLayout.NORTH);
+      //  add(Title, BorderLayout.NORTH);
         PlotID = pId;
         duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();

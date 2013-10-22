@@ -27,7 +27,7 @@ public class MyPropertiesInterface extends BasePanel {
     public MyPropertiesInterface(String name, TransferContainer tc) {
         super(name,tc);
         tain = tc;
-        setBackground(java.awt.Color.WHITE);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
     }
 
     public void init() {

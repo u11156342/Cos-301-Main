@@ -29,7 +29,7 @@ public class PlayerManagementMenu extends JPanel {
     public PlayerManagementMenu(final TransferContainer tc) {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        setBackground(java.awt.Color.WHITE);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
 
         c.gridx = 0;
         c.insets = new Insets(10, 0, 0, 0);

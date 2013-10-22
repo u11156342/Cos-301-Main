@@ -16,7 +16,7 @@ public class PlayerProperties extends JPanel {
 
     PlayerProperties(TransferContainer tc) {
         w = tc.JFXPANEL_WIDTH_INT - 260;
-        setBackground(java.awt.Color.WHITE);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
 
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
         ArrayList<String[]> AllPlotsIHaveAccess = tc.rdb.AllPlotsIHaveAccess(tc.CharacterID);

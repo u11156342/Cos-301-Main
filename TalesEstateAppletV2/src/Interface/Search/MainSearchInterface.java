@@ -29,8 +29,12 @@ import talesestateappletv2.TransferContainer;
  */
 public class MainSearchInterface extends JPanel {
 
+    public MainSearchInterface() {
+    }
+
     public void init(final TransferContainer tc) {
 
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         final JTextField charc = new JTextField("Any");
@@ -57,13 +61,16 @@ public class MainSearchInterface extends JPanel {
         final String[] qualitylist = {"Any", "Poor", "Fine", "Exquisite"};
         final JComboBox quality = new JComboBox(qualitylist);
         final JTextField size = new JTextField();
+
+        charc.setPreferredSize(new Dimension(100, 25));
+        duchy.setPreferredSize(new Dimension(100, 25));
         size.setPreferredSize(new Dimension(100, 25));
         quality.setPreferredSize(new Dimension(100, 25));
 
-        JLabel clabe = new JLabel("Character name");
-        JLabel dlabe = new JLabel("Duchy");
-        JLabel qlabe = new JLabel("Quality");
-        JLabel slabe = new JLabel("Size");
+        JLabel clabe = new JLabel("Character name:   ");
+        JLabel dlabe = new JLabel("Duchy:");
+        JLabel qlabe = new JLabel("Quality:");
+        JLabel slabe = new JLabel("Size:");
 
 
         c.gridy = 0;
@@ -92,9 +99,10 @@ public class MainSearchInterface extends JPanel {
 
         JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn.setContentAreaFilled(false);
+        // btn.setContentAreaFilled(false);
 
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -108,7 +116,7 @@ public class MainSearchInterface extends JPanel {
                     try {
                         s = Integer.parseInt(size.getText());
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(size,"Please enter a valid size");
+                        JOptionPane.showMessageDialog(size, "Please enter a valid size");
                         return;
                     }
                 }
@@ -128,8 +136,7 @@ public class MainSearchInterface extends JPanel {
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
 
-                if(result==null)
-                {
+                if (result == null) {
                     return;
                 }
                 if (result.isEmpty()) {

@@ -21,8 +21,8 @@ public class CharSelectMenu extends BasePanel {
     String[] CharList = null;
     JButton btn;
     //  String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";  //luke
-    String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
-    // String UserId = "";
+    // String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
+    String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name, tc);
@@ -35,9 +35,9 @@ public class CharSelectMenu extends BasePanel {
         }
 
 
-        float[] c1 = java.awt.Color.RGBtoHSB(142,117,92, null);
+        float[] c1 = java.awt.Color.RGBtoHSB(142, 117, 92, null);
         setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
-        //  UserId=cr.userIDs.get(cr.userIDs.size()-1);
+        UserId = cr.userIDs.get(cr.userIDs.size() - 1);
 
         JPanel container = new JPanel();
         container.setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
@@ -52,6 +52,7 @@ public class CharSelectMenu extends BasePanel {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         btn.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
             }
@@ -109,6 +110,7 @@ public class CharSelectMenu extends BasePanel {
 
     public void addNextActionListener(final TransferContainer tc, final MainMenu ref) {
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
