@@ -1,0 +1,5 @@
+c:\users\user\documents\visual studio 2010\Projects\cookietest\cookietest\bin\cookietest.dll
+c:\users\user\documents\visual studio 2010\Projects\cookietest\cookietest\bin\cookietest.pdb
+c:\users\user\documents\visual studio 2010\Projects\cookietest\cookietest\obj\Debug\ResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2010\Projects\cookietest\cookietest\obj\Debug\cookietest.dll
+c:\users\user\documents\visual studio 2010\Projects\cookietest\cookietest\obj\Debug\cookietest.pdb

@@ -1,0 +1,76 @@
+Farm (Cattle)(Dairy and Meat)	1
+Farm (Sheep)	1
+Farm (Grain)(Rice, Maize)	1
+Vineyard	1
+Farm (Vegetable)	1
+Farm (Work Animals)(Dray horses, Oxen, Bison etc.)	1
+Fishing Operation	1
+Hunting Operation	1
+Orchards (Fruit)	1
+Plantations (Tea, Coffee, Cocoa, Spices)	1
+Horse Stud Farm	1
+Timber Plantations	1
+Mining Operation (Iron)	1
+Mining Operation (Copper)	1
+Mining Operation (Silver)	1
+Mining Operation (Gold)	1
+Mining Operation (Lead)	1
+Mining Operation (Zinc)	1
+Mining Operation (Coal)	1
+Oil Refinery (Pitch, Lamp oil, Trade with Hoblings)	1
+Quarry	1
+Mining Operation (Diamond)	1
+Mining Operation (Malachite)	1
+Mining Operation (Ruby)	1
+Mining Operation (Sapphire)	1
+Mining Operation (Emerald)	1
+Mining Operation (Semi Precious)	1
+Clay	1
+Artisan (Specify)	0.125
+Blacksmith	0.25
+Brewery	0.5
+Docks/Piers	0.5
+Forge	0.5
+Laboratory (Potions)	0.125
+Laboratory (Scrolls)	0.125
+Laboratory (Alchemy)	0.125
+Laboratory (Traps)	0.125
+Glassworks	0.25
+Silkworms (Caterpillar)	0.5
+Silkworms (Spiders)	0.5
+Winery	0.5
+Distillery	0.5
+Sawmill	0.5
+Flour mill	0.5
+Bakery	0.125
+Butcher	0.125
+Tannery	0.5
+Shipyard	1
+Merchant (Specify)	0.125
+Inn	0.5
+Stables	0.5
+Tavern	0.25
+Barber	0.125
+Guild (Bards)	0.125
+Build (Duelist)	0.5
+Guild (Healers)	0.25
+Guild (Mages)	0.25
+Guild (Smiths)	0.5
+Guild (Alchemists)	0.5
+Barracks (Sleeps 20)	0.5
+Soldiers (20)	0
+Military Outpost (Sleeps 40)	1
+Roads (Infrastructure per existing acre)	0
+Educational Academy (Specify)	0.5
+School	0.5
+Village Hall (50)	0.25
+Town Hall (100)	0.5
+Marketplace	0.5
+Graveyard	1
+Manor House	0.5
+Summer House	0.5
+Protected Well	0
+Walls (6" Wood)	0
+Walls (10" Wood)	0
+Walls (6" Stone)	0
+Walls (10" Stone)	0

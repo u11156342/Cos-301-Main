@@ -1,0 +1,76 @@
+Farm (Cattle)(Dairy and Meat) 1.png
+Farm (Sheep) 1.png
+Farm (Grain)(Rice, Maize) 1.png
+Vineyard 1.png
+Farm (Vegetable) 1.png
+Farm (Work Animals)(Dray horses, Oxen, Bison etc.) 1.png
+Fishing Operation 1.png
+Hunting Operation 1.png
+Orchards (Fruit) 1.png
+Plantations (Tea, Coffee, Cocoa, Spices) 1.png
+Horse Stud Farm 1.png
+Timber Plantations 1.png
+Mining Operation (Iron) 1.png
+Mining Operation (Copper) 1.png
+Mining Operation (Silver) 1.png
+Mining Operation (Gold) 1.png
+Mining Operation (Lead) 1.png
+Mining Operation (Zinc) 1.png
+Mining Operation (Coal) 1.png
+Oil Refinery (Pitch, Lamp oil, Trade with Hoblings) 1.png
+Quarry 1.png
+Mining Operation (Diamond) 1.png
+Mining Operation (Malachite) 1.png
+Mining Operation (Ruby) 1.png
+Mining Operation (Sapphire) 1.png
+Mining Operation (Emerald) 1.png
+Mining Operation (Semi Precious) 1.png
+Clay 1.png
+Artisan (Specify) 0.125.png
+Blacksmith 0.25.png
+Brewery 0.5.png
+Docks Piers 0.5.png
+Forge 0.5.png
+Laboratory (Potions) 0.125.png
+Laboratory (Scrolls) 0.125.png
+Laboratory (Alchemy) 0.125.png
+Laboratory (Traps) 0.125.png
+Glassworks 0.25.png
+Silkworms (Caterpillar) 0.5.png
+Silkworms (Spiders) 0.5.png
+Winery 0.5.png
+Distillery 0.5.png
+Sawmill 0.5.png
+Flour mill 0.5.png
+Bakery 0.125.png
+Butcher 0.125.png
+Tannery 0.5.png
+Shipyard 1.png
+Merchant (Specify) 0.125.png
+Inn 0.5.png
+Stables 0.5.png
+Tavern 0.25.png
+Barber 0.125.png
+Guild (Bards) 0.125.png
+Build (Duelist) 0.5.png
+Guild (Healers) 0.25.png
+Guild (Mages) 0.25.png
+Guild (Smiths) 0.5.png
+Guild (Alchemists) 0.5.png
+Barracks (Sleeps 20) 0.5.png
+Soldiers (20) 0.png
+Military Outpost (Sleeps 40) 1.png
+Roads (Infrastructure per existing acre) 0.png
+Educational Academy (Specify) 0.5.png
+School 0.5.png
+Village Hall (50) 0.25.png
+Town Hall (100) 0.5.png
+Marketplace 0.5.png
+Graveyard 1.png
+Manor House 0.5.png
+Summer House 0.5.png
+Protected Well 0.png
+Walls (6  Wood) 0.png
+Walls (10  Wood) 0.png
+Walls (6  Stone) 0.png
+Walls (10  Stone) 0.png

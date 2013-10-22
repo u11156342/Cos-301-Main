@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+body
+{
+background-color:blue;
+}
+</style>
+<script type ="text/javascript" src="JScript.js" >
+    var sjdurl = "lol";
+    var theId = "temp";
+ var getCookies = function () {
+        var pairs = document.cookie.split(";");
+        var cookies = {};
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split("=");
+            cookies[pair[0]] = unescape(pair[2]);
+             theId = unescape(pair[2]);
+        }
+        return cookies;
+    }
+    
+      function openlink() {
+      sjdurl = "http://localhost:8080/TalesEstateServer/resources/MobileWrapper/getnames/" +theId;
+
+    document.getElementById('myframe').src=sjdurl;
+    
+    }
+
+    window.onload = function(){
+        getCookies();
+        openlink();
+    };
+</script>
+
+</head>
+
+
+<body>
+
+<iframe src="about:blank" width="75%" height="1000"  name="myframe"  style="text-align:left;"id="myframe"></iframe>
+
+</body>
+</html>
