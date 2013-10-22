@@ -25,6 +25,7 @@ public class AdminSearchInterface extends BasePanel {
     }
 
     public void init(final TransferContainer t, ArrayList<String[]> prop) {
+        setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
         properties = prop;
          title = new JButton(new ImageIcon(t.ad.ImageAdapter(18)));
         title.setContentAreaFilled(false);

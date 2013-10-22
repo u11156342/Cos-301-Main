@@ -33,6 +33,7 @@ public class GlobalStatus extends BasePanel {
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(46)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         add(Title, BorderLayout.NORTH);
 

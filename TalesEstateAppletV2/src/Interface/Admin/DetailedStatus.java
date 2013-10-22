@@ -31,6 +31,7 @@ public class DetailedStatus extends BasePanel {
     public void init(int Pid, final TransferContainer tc) {
 
         JScrollPane stats = new JScrollPane(textZone);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         stats.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 

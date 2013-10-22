@@ -30,9 +30,9 @@ public class ManageGoldPanel extends Panel {
     JTextField platmod = new JTextField();
     JTextField goldmod = new JTextField();
     JTextField silmod = new JTextField();
-    JLabel l4 = new JLabel("Platinum : ");
-    JLabel l5 = new JLabel("Gold : ");
-    JLabel l6 = new JLabel("Silver : ");
+    JLabel l4 = new JLabel("Platinum thrones : ");
+    JLabel l5 = new JLabel("Gold crowns : ");
+    JLabel l6 = new JLabel("Silver shields : ");
     JLabel character = new JLabel("");
     String username;
     boolean found = false;
@@ -42,11 +42,11 @@ public class ManageGoldPanel extends Panel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        platmod.setPreferredSize(new Dimension(100, 30));
-        goldmod.setPreferredSize(new Dimension(100, 30));
-        silmod.setPreferredSize(new Dimension(100, 30));
+        platmod.setPreferredSize(new Dimension(100, 25));
+        goldmod.setPreferredSize(new Dimension(100, 25));
+        silmod.setPreferredSize(new Dimension(100, 25));
         final ManageGoldPanel ref = this;
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         playername.setPreferredSize(new Dimension(100, 40));
 
         findPlayer.setPreferredSize(new Dimension(150, 60));
@@ -68,7 +68,7 @@ public class ManageGoldPanel extends Panel {
 
                 characters = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
-                    characters[i] = retrieveCharacterIDExtra.get(i)[1];
+                    characters[i] = retrieveCharacterIDExtra.get(i)[1].substring(0, retrieveCharacterIDExtra.get(i)[1].indexOf("&*&"));
                 }
 
                 String picked = "";

@@ -41,20 +41,21 @@ public class ResultUnit extends JPanel {
         statusArea.setEditable(false);
         c.gridx = 1;
         statusArea.setContentType("text/html");
-      // statusArea.setPreferredSize(new Dimension(300, 300));
+        // statusArea.setPreferredSize(new Dimension(300, 300));
         add(statusArea, c);
         c.gridx = 2;
         // RestFullAdapter PicAdapter = new RestFullAdapter();
         //  Browse = new JButton(new ImageIcon(PicAdapter.ImageAdapter(20)));
         // Browse.setContentAreaFilled(false);
         Browse.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         add(Browse, c);
     }
 
     public void init(final TransferContainer tc) {
 
         final ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(propertyID);
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         StringBuilder html = new StringBuilder();
         statusArea.setContentType("text/html");
         html.append("<html>");

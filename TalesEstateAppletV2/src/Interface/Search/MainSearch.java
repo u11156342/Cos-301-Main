@@ -1,17 +1,10 @@
 package Interface.Search;
 
-import Connections.RestFullAdapter;
-import Connections.RestFullDBAdapter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -19,6 +12,7 @@ public class MainSearch extends BasePanel {
 
     public MainSearch(String name, TransferContainer tc) {
         super(name, tc);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
     }
 
     public void init(final TransferContainer tc) {
@@ -33,7 +27,7 @@ public class MainSearch extends BasePanel {
         MainSearchInterface msi = new MainSearchInterface();
         msi.init(tc);
         add(msi, BorderLayout.CENTER);
-        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
+        
 
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));

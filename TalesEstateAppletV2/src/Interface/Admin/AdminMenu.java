@@ -6,9 +6,6 @@ package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -23,7 +20,7 @@ import talesestateappletv2.TransferContainer;
 public class AdminMenu extends BasePanel {
 
     public AdminMenu(String name, final TransferContainer tc) {
-        super(name,tc);
+        super(name, tc);
 
 
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(48)));
@@ -36,7 +33,7 @@ public class AdminMenu extends BasePanel {
         add(ami, BorderLayout.CENTER);
 
 
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {

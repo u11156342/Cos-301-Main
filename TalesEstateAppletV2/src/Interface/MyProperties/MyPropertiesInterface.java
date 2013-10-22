@@ -35,6 +35,7 @@ public class MyPropertiesInterface extends BasePanel {
         title = new JButton(new ImageIcon(tain.ad.ImageAdapter(12)));
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);
+        
 
         PlayerProperties mmenu = new PlayerProperties(tain);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

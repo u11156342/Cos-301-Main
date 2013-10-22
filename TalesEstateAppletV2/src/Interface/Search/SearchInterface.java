@@ -32,6 +32,7 @@ public class SearchInterface extends BasePanel {
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(mainMenuScrollPane, BorderLayout.CENTER);
         add(title, BorderLayout.NORTH);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(250, 60));
         back.addActionListener(new ActionListener() {

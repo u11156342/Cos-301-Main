@@ -3,6 +3,7 @@ package Interface.Admin;
 import Interface.BrowseInterface.BrowseInterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         //   statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         //   statusArea.setColumns(4);
         statusArea.setEditable(false);
-        statusArea.setPreferredSize(new Dimension(300, 250));
-
+        //   statusArea.setPreferredSize(new Dimension(300, 250));
+        setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
         //init();
 
 
@@ -199,8 +200,11 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
 
         JPanel temp = new JPanel();
 
-        temp.add(commands, BorderLayout.SOUTH);
-        temp.add(bt, BorderLayout.CENTER);
+        GridLayout experimentLayout = new GridLayout(0, 1);
+        temp.setLayout(experimentLayout);
+        temp.add(commands);
+        temp.add(bt);
+        temp.setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
         add(temp, BorderLayout.SOUTH);
 
 

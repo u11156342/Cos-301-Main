@@ -34,6 +34,7 @@ public class AddEvent extends BasePanel {
         aei.init(tc, PID,def);
 
         add(aei, BorderLayout.CENTER);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         JButton back = new JButton("Back");
         back.setPreferredSize(new Dimension(150, 60));

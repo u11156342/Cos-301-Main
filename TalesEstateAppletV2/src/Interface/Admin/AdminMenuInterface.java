@@ -24,8 +24,10 @@ public class AdminMenuInterface extends JPanel {
     JButton search = new JButton("Search");
     JButton ManageCharacterGold = new JButton("Manage Character Gold");
     JButton GlobalStatus = new JButton("Global Status");
+    
 
     public AdminMenuInterface(final TransferContainer tc) {
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         search.setPreferredSize(new Dimension(150, 60));
         ManageCharacterGold.setPreferredSize(new Dimension(150, 60));
         search.addActionListener(new ActionListener() {

@@ -32,6 +32,7 @@ public class MainAdminSearchInterface extends JPanel {
     }
 
     public void init(final TransferContainer tc) {
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         final JTextField charc = new JTextField("Any");
@@ -93,7 +94,7 @@ public class MainAdminSearchInterface extends JPanel {
 
         JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn.setContentAreaFilled(false);
+       // btn.setContentAreaFilled(false);
         btn.addActionListener(new ActionListener() {
 
             @Override

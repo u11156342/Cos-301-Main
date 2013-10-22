@@ -18,6 +18,7 @@ public class MainAdminSearch extends BasePanel {
 
     public void init(final TransferContainer tc) {
         JButton title = new JButton(new ImageIcon(tc.ad.ImageAdapter(18)));
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
         title.setContentAreaFilled(false);
         title.setBorderPainted(false);

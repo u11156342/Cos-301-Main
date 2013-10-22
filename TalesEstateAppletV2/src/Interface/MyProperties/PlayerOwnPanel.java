@@ -45,6 +45,7 @@ public class PlayerOwnPanel extends JPanel {
         play.setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBackground(java.awt.Color.WHITE);
         setLayout(new GridBagLayout());
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
 
 
         //statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

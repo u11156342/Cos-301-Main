@@ -6,17 +6,10 @@ package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -26,19 +19,19 @@ import talesestateappletv2.TransferContainer;
  */
 public class ManageGold extends BasePanel {
 
-    public ManageGold(String name,TransferContainer tc) {
-        super(name,tc);
+    public ManageGold(String name, TransferContainer tc) {
+        super(name, tc);
     }
-    public void init(final TransferContainer tc)
-    {
-        
+
+    public void init(final TransferContainer tc) {
+
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(47)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
-        add(Title,BorderLayout.NORTH);
-        
-        ManageGoldPanel mgp = new ManageGoldPanel(tc);
+        add(Title, BorderLayout.NORTH);
 
+        ManageGoldPanel mgp = new ManageGoldPanel(tc);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(mgp, BorderLayout.CENTER);
 
         JButton back = new JButton("Back");
@@ -49,7 +42,7 @@ public class ManageGold extends BasePanel {
                 tc.cardlayout.show(tc.contentpane, "AMain");
             }
         });
-        
-        add(back,BorderLayout.SOUTH);
+
+        add(back, BorderLayout.SOUTH);
     }
 }

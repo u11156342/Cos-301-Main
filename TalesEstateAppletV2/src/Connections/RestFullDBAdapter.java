@@ -19,8 +19,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class RestFullDBAdapter {
 
-      String serverURL = "216.172.99.153";
-   // String serverURL = "localhost";
+    // String serverURL = "216.172.99.153";
+    String serverURL = "localhost";
     int serverPort = 8080;
     String server = "/TalesEstateServer/resources/";
     Converter Conv = new Converter();
@@ -784,10 +784,10 @@ public class RestFullDBAdapter {
         }
     }
 
-    public void MarkBuildingsAsUnPlaced(int PlotID,int buildingToGiveBack) {
+    public void MarkBuildingsAsUnPlaced(int PlotID, int buildingToGiveBack) {
         String temp = "";
         try {
-            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "MarkBuildingsAsUnPlaced/" + buildingToGiveBack+"/"+PlotID);
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "MarkBuildingsAsUnPlaced/" + buildingToGiveBack + "/" + PlotID);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

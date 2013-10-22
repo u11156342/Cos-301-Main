@@ -1,19 +1,11 @@
 package Interface.Admin;
 
-import Connections.RestFullDBAdapter;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import talesestateappletv2.TransferContainer;
 
@@ -30,18 +22,22 @@ public class PlayerPropertiesAdmin extends JPanel {
         h = i0;
         playersCurrentProperties = new PlayerCurrentPropertiesAdmin[result.size()];
         amount = result.size();
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
-        h=amount*350;
+        h = amount * 350;
         for (int a = 0; a < playersCurrentProperties.length; a++) {
             playersCurrentProperties[a] = new PlayerCurrentPropertiesAdmin(w, this, tc);
-            playersCurrentProperties[a].setPreferredSize(new Dimension(450, 300));
+            // playersCurrentProperties[a].setPreferredSize(new Dimension(450, 300));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
 
             playersCurrentProperties[a].init(tc);
         }
 
         JComponent panel1 = makePanel("Panel #1", 1);
-        panel1.setPreferredSize(new Dimension(w, h));
+        GridLayout experimentLayout = new GridLayout(0, 1);
+        panel1.setLayout(experimentLayout);
+        panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
+        //  panel1.setPreferredSize(new Dimension(1000, h));
         add(panel1, BorderLayout.CENTER);
 
 
@@ -54,7 +50,7 @@ public class PlayerPropertiesAdmin extends JPanel {
             JPanel panel = new JPanel(false);
 
             for (int a = 0; a < playersCurrentProperties.length; a++) {
-             //   playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
+                //   playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(playersCurrentProperties[a]);
             }
             return panel;

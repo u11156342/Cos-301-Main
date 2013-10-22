@@ -16,8 +16,8 @@ import talesestateappletv2.TransferContainer;
 
 public class RestFullAdapter {
 
-    String serverURL = "216.172.99.153";
-    //String serverURL = "localhost";
+   // String serverURL = "216.172.99.153";
+    String serverURL = "localhost";
     int serverPort = 8080;
     ArrayList<Picture> pics = new ArrayList();
     ArrayList donePics = new ArrayList();

@@ -4,7 +4,6 @@
  */
 package Interface.Search;
 
-import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -136,6 +135,7 @@ public class MainSearchInterface extends JPanel {
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
 
+                System.out.println("SIZE "+result.size());
                 if (result == null) {
                     return;
                 }

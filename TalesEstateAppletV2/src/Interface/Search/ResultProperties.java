@@ -2,12 +2,12 @@ package Interface.Search;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import talesestateappletv2.TransferContainer;
-
 
 public class ResultProperties extends JPanel {
 
@@ -16,11 +16,12 @@ public class ResultProperties extends JPanel {
     ResultUnit[] searchedProperties;
     public int amount;
 
-    public ResultProperties(int i, int i0,  ArrayList<String[]> result,TransferContainer tc) {
+    public ResultProperties(int i, int i0, ArrayList<String[]> result, TransferContainer tc) {
 
         w = i;
         h = i0;
-        
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
+
         searchedProperties = new ResultUnit[result.size()];
         amount = result.size();
 
@@ -49,7 +50,10 @@ public class ResultProperties extends JPanel {
         }
 
         JComponent panel1 = makePanel("Panel #1", 1);
-        panel1.setPreferredSize(new Dimension(w, h));
+        GridLayout experimentLayout = new GridLayout(0, 1);
+        panel1.setLayout(experimentLayout);
+        panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
+        //panel1.setPreferredSize(new Dimension(600, h));
         add(panel1);
     }
 
@@ -60,7 +64,7 @@ public class ResultProperties extends JPanel {
 
             for (int a = 0; a < searchedProperties.length; a++) {
                 panel.add(searchedProperties[a]);
-               // searchedProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
+                // searchedProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
             }
             return panel;
         }

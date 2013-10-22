@@ -43,9 +43,9 @@ public class AddEventInterface extends JPanel {
     JLabel exsplain = new JLabel("These values will modify current values, 0 is nothing happens, -4 is 4 less and so on");
     JLabel l1 = new JLabel("Happiness Modifier");
     JLabel l2 = new JLabel("Income Modifier %");
-    JLabel l3 = new JLabel("Platinum Modifier");
-    JLabel l4 = new JLabel("Gold Modifier");
-    JLabel l5 = new JLabel("Silver Modifier");
+    JLabel l3 = new JLabel("Platinum thrones Modifier");
+    JLabel l4 = new JLabel("Gold crowns Modifier");
+    JLabel l5 = new JLabel("Silver shields Modifier");
     JLabel l6 = new JLabel("Defense Modifier");
 
     public void init(final TransferContainer tc, final int PID, int CurrentDefence) {
@@ -55,6 +55,7 @@ public class AddEventInterface extends JPanel {
         silmod.setText("0          ");
         defmod.setText("0          ");
         happinessmod.setSelectedIndex(5);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
 
 
         setLayout(new GridBagLayout());
@@ -75,7 +76,9 @@ public class AddEventInterface extends JPanel {
         JLabel def = new JLabel("Current defence : " + CurrentDefence);
 
         c.gridy = 0;
+        c.gridwidth=2;
         add(def, c);
+        c.gridwidth=2;
         c.gridy = 1;
         add(des, c);
         //description.setPreferredSize(new Dimension(500, 300));
@@ -191,6 +194,7 @@ public class AddEventInterface extends JPanel {
 
 
         add.setPreferredSize(new Dimension(150, 60));
+        c.gridwidth=2;
         add(add, c);
 
 
