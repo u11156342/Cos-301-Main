@@ -34,8 +34,10 @@ public class CharacterQueryHandler {
             System.out.println(sql);
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
+            System.out.println("registering " + characterName);
 
             if (!rs.next()) {
+
 
                 int num = 0;
 
@@ -63,6 +65,8 @@ public class CharacterQueryHandler {
 
                 return true;
             } else {
+                System.out.println("set not empty=====================================");
+                System.out.println(rs.getString("UserCharacterName"));
                 return false;
             }
 
@@ -400,7 +404,7 @@ public class CharacterQueryHandler {
             rs.next();
 
             String is = rs.getString("UserCharacterAdmin");
-            System.out.println(" it is "+is);
+            System.out.println(" it is " + is);
             if (is == null) {
                 return false;
             } else if ("true".equals(is.toLowerCase()) || "1".equals(is)) {
