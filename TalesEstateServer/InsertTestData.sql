@@ -28,10 +28,12 @@ INSERT INTO Plot VALUES
 	10, 10.1, 10, 20, 1, 1, 1, 1, 1, 1, 10, 'TEST0001', 'test estate', '', 1)
 SET @plotid = @@IDENTITY
 
-INSERT INTO BuildLog VALUES(@plotid, 7, '2013-10-10 00:00:00', 4, 1, 0)
+INSERT INTO BuildLog VALUES(@plotid, 7, '2013-10-10 00:00:00', 4, 1, 1)
         
 INSERT INTO BuildLog VALUES(@plotid, 9, '2013-10-10 00:00:00', 4, 1, 0)
                 
 INSERT INTO PlotLog VALUES(@plotid, GETDATE(), 'test plot')
 
 INSERT INTO CharacterLog VALUES(@userid, GETDATE(), 'test character log')
+
+INSERT INTO Request VALUES(@plotid, 'test need wild land', 0)

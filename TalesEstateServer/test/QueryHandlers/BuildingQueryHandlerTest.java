@@ -155,7 +155,7 @@ public class BuildingQueryHandlerTest extends TestCase {
         line[9] = "1.0";
         line[10] = "0";
         line[11] = "0.0";
-        line[12] = "5";
+        line[12] = "58";
         
         boolean correct = true;
         for(int b = 0; b < oneLine.length; b++)

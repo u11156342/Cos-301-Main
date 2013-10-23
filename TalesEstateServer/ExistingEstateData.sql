@@ -31,14 +31,14 @@ PlotEstateName, PlotDescription, CountyID)
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Artisan (Weaver)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0),
-	(3, 5, 'Artisan (Tailor)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0),
-	(4, 5, 'Merchant (Silk)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(4, 5, 'Merchant (Tailor)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(4, 5, 'Merchant (Glass Art)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(3, 5, 'Artisan (Glassblower)', 11, 10, 25, 50, 2, 5 ,1, 0.125, 2, 0)
+	(3, 5, 'Artisan (Weaver)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0),
+	(3, 5, 'Artisan (Tailor)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0),
+	(4, 5, 'Merchant (Silk)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(4, 5, 'Merchant (Tailor)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(4, 5, 'Merchant (Glass Art)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(3, 5, 'Artisan (Glassblower)', 11, 10, 25, 50, 2, 5 ,1, 0.125, 2, 0, 0)
 
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -62,20 +62,18 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	(@plotid, 34, '2013-08-14 00:00:00', 2, 1),
 	(@plotid, 82, '2013-09-01 00:00:00', 1, 1)
 
- /*add defense value modifier!*/
- /****************************/
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Bandit raid', 'Loss of 1 week of build or 10 gold', '2013-02-28', 0, -10, 0, 0, 0),
-	(@plotid, 'Rebuilding', 'Rebuilding', '2013-03-31', 0, 0, 0, 1, 0),
-	(@plotid, 'Soldier training', 'Soldier training', '2013-03-31', 0, 0, 0, 0, 0),
-	(@plotid, 'Novelty run', 'Novelty run', '2013-03-31', 0, 0, 0, 0, 15),
-	(@plotid, 'Shady figures', 'Shady figures', '2013-03-31', 0, 0, 0, -1, 0),
-	(@plotid, 'Wedding', 'Orders additional income', '2013-03-31', 0, 0, 0, 0, 5),
-	(@plotid, 'Bandit raid', 'There is a bandit raid on the estate, but the soldiers see it off', '2013-03-31', 0, 0, 0, 0, 0),
-	(@plotid, 'Post bandit raid', 'The bandit raid left the workers jumpy and they loose productivity', '2013-03-31', 0, 0, 0, 0, -10)
+	(@plotid, 'Bandit raid', 'Loss of 1 week of build or 10 gold', '2013-02-28', 0, -10, 0, 0, 0, 0),
+	(@plotid, 'Rebuilding', 'Rebuilding', '2013-03-31', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Soldier training', 'Soldier training', '2013-03-31', 0, 0, 0, 0, 0, 20),
+	(@plotid, 'Novelty run', 'Novelty run', '2013-03-31', 0, 0, 0, 0, 15, 0),
+	(@plotid, 'Shady figures', 'Shady figures', '2013-03-31', 0, 0, 0, -1, 0, 0),
+	(@plotid, 'Wedding', 'Orders additional income', '2013-03-31', 0, 0, 0, 0, 5, 0),
+	(@plotid, 'Bandit raid', 'There is a bandit raid on the estate, but the soldiers see it off', '2013-03-31', 0, 0, 0, 0, 0, 0),
+	(@plotid, 'Post bandit raid', 'The bandit raid left the workers jumpy and they loose productivity', '2013-03-31', 0, 0, 0, 0, -10, 0)
 
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -222,12 +220,12 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Overworked peasants', 'Peasants feeling over worked due to wedding demand', '2013-06-01', 0, 0, 0, -4, -10),
-	(@plotid, 'Rested peasants', 'Too much rest for the peasants', '2013-07-01', 0, 0, 0, 0, -10),
-	(@plotid, 'Local knight', 'The local knight comes round and notices your peasants lazing about.  He doesnt seem impressed', '2013-08-01', 0, 0, 0, 0, 0),
-	(@plotid, 'Rabble amoung peasants', 'Theres some rabble rousing amoung the peasants after the events in Svaerstein, but nothing except grumbles come of it', '2013-02-28', 0, 0, 0, -1, 0)
+	(@plotid, 'Overworked peasants', 'Peasants feeling over worked due to wedding demand', '2013-06-01', 0, 0, 0, -4, -10, 0),
+	(@plotid, 'Rested peasants', 'Too much rest for the peasants', '2013-07-01', 0, 0, 0, 0, -10, 0),
+	(@plotid, 'Local knight', 'The local knight comes round and notices your peasants lazing about.  He doesnt seem impressed', '2013-08-01', 0, 0, 0, 0, 0, 0),
+	(@plotid, 'Rabble amoung peasants', 'Theres some rabble rousing amoung the peasants after the events in Svaerstein, but nothing except grumbles come of it', '2013-02-28', 0, 0, 0, -1, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -285,12 +283,12 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Boom trade', 'Boom trade due to wedding', '2013-06-01', 0, 0, 0, 0, 50),
-	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-07-01', 0, 0, 0, 0, -10),
-	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-08-01', 0, 0, 0, 0, -10),
-	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-09-01', 0, 0, 0, 0, -10)
+	(@plotid, 'Boom trade', 'Boom trade due to wedding', '2013-06-01', 0, 0, 0, 0, 50, 0),
+	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-07-01', 0, 0, 0, 0, -10, 0),
+	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-08-01', 0, 0, 0, 0, -10, 0),
+	(@plotid, 'Overworked peasants', 'Overworked peasants', '2013-09-01', 0, 0, 0, 0, -10, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -358,8 +356,6 @@ INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
  /*******************************************
  * Ryan Young						
  *******************************************/
- /*defense modifier*/
- /*************************/
 INSERT INTO UserCharacter (UserCharacterName, UserCharacterStatus, 
 	ProdUserID, ProdCharacterID, UserCharacterAdmin)
 	VALUES
@@ -390,13 +386,12 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
 	(@plotid, 'Peasants unhappy', 'Peasants desperatly unhappy after a hobling overseer speaks of slavery', '2013-07-01', 0, 0, 0, -8, 0),
-	/*one below for 3 months - need defense modifier*/
-	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-08-01', 0, 0, 0, 0, 0),
-	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-09-01', 0, 0, 0, 0, 0),
-	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-10-01', 0, 0, 0, 0, 0),
+	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-08-01', 0, 0, 0, 0, 0, 2),
+	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-09-01', 0, 0, 0, 0, 0, 2),
+	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-10-01', 0, 0, 0, 0, 0, 2),
 	(@plotid, 'Grumbling and rabble', 'There is a bit of grumbling and rabble rousing after the events in Svaertstein, but nothing comes of the matter', '2013-08-01', 0, 0, 0, -1, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
@@ -450,14 +445,14 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Baron displeased', 'Baron displeased with elves, take a social track hit', '2013-06-01', 0, 0, 0, 0, 0),
-	(@plotid, 'Sarr raiders', 'Sarr raiders, protecting gypsies, damage to vinyard', '2013-07-01', 0, -5, 0, 0, 0),
-	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-08-01', 0, 0, 0, 1, 0),
-	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-09-01', 0, 0, 0, 1, 0),
-	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-10-01', 0, 0, 0, 1, 0),
-	(@plotid, 'No one home', 'Your baron comes around to congratulate you, but no one is home except an elf and Kilo…', '2013-09-01', 0, 0, 0, 0, 0)
+	(@plotid, 'Baron displeased', 'Baron displeased with elves, take a social track hit', '2013-06-01', 0, 0, 0, 0, 0, 0),
+	(@plotid, 'Sarr raiders', 'Sarr raiders, protecting gypsies, damage to vinyard', '2013-07-01', 0, -5, 0, 0, 0, 0),
+	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-08-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-09-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Tournament won', 'Your people hear of you winning another tournament and theyre pretty chuffed with "their" bravo', '2013-10-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'No one home', 'Your baron comes around to congratulate you, but no one is home except an elf and Kilo…', '2013-09-01', 0, 0, 0, 0, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -506,10 +501,10 @@ PlotEstateName, PlotDescription, CountyID)
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)
-	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)*/
+	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)
+	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)*/
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -526,15 +521,15 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Cheap supplies', 'Cheap supplies', '2013-03-31', 0, 0, 0, 0, 6),
-	(@plotid, 'Moral drops', 'Moral drops as Scavengers start filtering in', '2013-04-30', 0, 0, 0, -1, 0),
-	(@plotid, 'Economic hit', 'Economic hit as Scavengers filter in', '2013-05-31', 0, 0, 0, 0, -50),
-	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-08-01', 0, 0, 0, 0, 10),
-	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-09-01', 0, 0, 0, 0, 10),
-	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-10-01', 0, 0, 0, 0, 10),
-	(@plotid, 'Free loot', 'One of the Langzerund Sarr raids spill over into your lands, but are vehemently repulsed by Scavengers, who turn their loot over to you.  Your people very happy', '2013-09-01', 0, 20, 0, 0, 0)
+	(@plotid, 'Cheap supplies', 'Cheap supplies', '2013-03-31', 0, 0, 0, 0, 6, 0),
+	(@plotid, 'Moral drops', 'Moral drops as Scavengers start filtering in', '2013-04-30', 0, 0, 0, -1, 0, 0),
+	(@plotid, 'Economic hit', 'Economic hit as Scavengers filter in', '2013-05-31', 0, 0, 0, 0, -50, 0),
+	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-08-01', 0, 0, 0, 0, 10, 0),
+	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-09-01', 0, 0, 0, 0, 10, 0),
+	(@plotid, 'Your people work harder', 'Your people realise that you do still care for them and put in a LOT of extra work', '2013-10-01', 0, 0, 0, 0, 10, 0),
+	(@plotid, 'Free loot', 'One of the Langzerund Sarr raids spill over into your lands, but are vehemently repulsed by Scavengers, who turn their loot over to you.  Your people very happy', '2013-09-01', 0, 20, 0, 0, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -617,17 +612,17 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Sheep sickness', 'Sickness amoung the sheep', '2013-02-28', 0, 0, 0, 0, -1),
-	(@plotid, 'Replacement sheep', 'All the replacement sheep were pregnant', '2013-03-31', 0, 0, 0, 0, 1),
-	(@plotid, 'Happiness bought', 'Happiness Bought', '2013-04-12', 0, 0, 0, 2, 0),
-	(@plotid, 'Happiness boost', 'Happiness boost from money spent', '2013-04-30', 0, 0, 0, 2, 0),
-	(@plotid, 'Economic boost', 'Economic Boost from fine skins', '2013-05-31', 0, 0, 0, 0, 10),
-	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-07-01', 0, 0, 0, 1, 0),
-	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-08-01', 0, 0, 0, 1, 0),
-	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-09-01', 0, 0, 0, 1, 0),
-	(@plotid, 'Happy people', 'Nothing much to report, people are still happy. Happiness +1 extended', '2013-10-01', 0, 0, 0, 1, 0)
+	(@plotid, 'Sheep sickness', 'Sickness amoung the sheep', '2013-02-28', 0, 0, 0, 0, -1, 0),
+	(@plotid, 'Replacement sheep', 'All the replacement sheep were pregnant', '2013-03-31', 0, 0, 0, 0, 1, 0),
+	(@plotid, 'Happiness bought', 'Happiness Bought', '2013-04-12', 0, 0, 0, 2, 0, 0),
+	(@plotid, 'Happiness boost', 'Happiness boost from money spent', '2013-04-30', 0, 0, 0, 2, 0, 0),
+	(@plotid, 'Economic boost', 'Economic Boost from fine skins', '2013-05-31', 0, 0, 0, 0, 10, 0),
+	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-07-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-08-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Estate contentment', 'Settling down on estate contentment', '2013-09-01', 0, 0, 0, 1, 0, 0),
+	(@plotid, 'Happy people', 'Nothing much to report, people are still happy. Happiness +1 extended', '2013-10-01', 0, 0, 0, 1, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
@@ -755,9 +750,9 @@ PlotEstateName, PlotDescription, CountyID)
 	
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Artisan (Lithographer)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0)
+	(3, 5, 'Artisan (Lithographer)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0)
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -772,12 +767,12 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	
 INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdded,
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
-	EventLogEffectIncome)
+	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Bump in profits', 'Bump in profits as peasants drink because of wedding news', '2013-06-01', 0, 0, 0, 0, 25),
-	(@plotid, 'High sales', 'Sales remain high as wedding prep continues', '2013-07-01', 0, 0, 0, 0, 10),
-	(@plotid, 'Wedding depression', 'Wedding depression sets in', '2013-08-01', 0, 0, 0, -1, 0),
-	(@plotid, 'Care for your workers', 'Your care to your workers shows in sharp contrast due to Svaerstein general unhappiness. August penaltry wiped out 3 months early', '2013-09-01', 0, 0, 0, 0, 0)
+	(@plotid, 'Bump in profits', 'Bump in profits as peasants drink because of wedding news', '2013-06-01', 0, 0, 0, 0, 25, 0),
+	(@plotid, 'High sales', 'Sales remain high as wedding prep continues', '2013-07-01', 0, 0, 0, 0, 10, 0),
+	(@plotid, 'Wedding depression', 'Wedding depression sets in', '2013-08-01', 0, 0, 0, -1, 0, 0),
+	(@plotid, 'Care for your workers', 'Your care to your workers shows in sharp contrast due to Svaerstein general unhappiness. August penaltry wiped out 3 months early', '2013-09-01', 0, 0, 0, 0, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES

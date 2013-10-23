@@ -124,7 +124,7 @@ public class CharacterQueryHandler {
     public ArrayList<String[]> retrieveCharacterIDExtra(String characterName) {
         ArrayList<String[]> result = new ArrayList();
         String[] line = null;
-        System.out.println(characterName);
+        
         try {
             sql = "SELECT UserCharacterID,UserCharacterName FROM UserCharacter WHERE "
                     + "UserCharacterName LIKE '%" + characterName + "%'";
@@ -404,7 +404,7 @@ public class CharacterQueryHandler {
             rs.next();
 
             String is = rs.getString("UserCharacterAdmin");
-            System.out.println(" it is " + is);
+            
             if (is == null) {
                 return false;
             } else if ("true".equals(is.toLowerCase()) || "1".equals(is)) {

@@ -231,6 +231,8 @@ public class CharacterQueryHandlerTest extends TestCase {
                         + "UserCharacterID = " + characterID);
                 rs.next();
                 expResult = rs.getString("UserCharacterStatus");
+                
+                instance.modifyStatus(characterID, -5);
             }
             catch(Exception e) {
                 System.out.println("Error in testModifyStatus()");
@@ -238,5 +240,18 @@ public class CharacterQueryHandlerTest extends TestCase {
             }
         }
         assertEquals(expResult, "5");
+    }
+
+    /**
+     * Test of isAdmin method, of class CharacterQueryHandler.
+     */
+    public void testIsAdmin() {
+        System.out.println("Testing isAdmin()");
+        
+        CharacterQueryHandler instance = new CharacterQueryHandler(con);
+        boolean expResult = false;
+        boolean result = instance.isAdmin(Integer.toString(testCharID));
+        
+        assertEquals(expResult, result);
     }
 }

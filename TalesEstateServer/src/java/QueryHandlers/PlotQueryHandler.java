@@ -1464,4 +1464,86 @@ public class PlotQueryHandler {
             System.out.println(e.getMessage());
         }
     }
+    
+    public boolean addRequest(int plotID, String text) {
+        
+        sql = "INSERT INTO Request VALUES ("
+                + plotID + ", '" + text + "', 0)";
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in PlotQueryHandler, function addRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    public ArrayList<String[]> getAllOutstandingRequests(int plotID) {
+        ArrayList<String[]> result = null;
+        String[] line = null;
+        
+        result = new ArrayList();
+        sql = "SELECT * FROM Request WHERE RequestPlotID = " + plotID
+                    + " AND RequestApproved = 0";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+            while(rs.next()) {
+                line = new String[2];
+                line[0] = rs.getString("RequestID");
+                line[1] = rs.getString("RequestText");
+                result.add(line);
+            }
+            
+            return result;
+        }
+        catch(Exception e) {
+            System.out.println("Error in PlotQueryHandler, function getAllOutstandingRequests()");
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    public boolean approveRequest(int requestID) {
+        
+        sql = "UPDATE Request SET RequestApproved = 1 "
+                + "WHERE RequestID = " + requestID;
+        
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in PlotQueryHandler, function approveRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    public boolean deleteRequest(int requestID) {
+        sql = "DELETE FROM Request WHERE RequestID = " + requestID;
+        
+        try {
+            stmt = con.createStatement();
+            stmt.execute(sql);
+            
+            return true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in function deleteRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
 }
