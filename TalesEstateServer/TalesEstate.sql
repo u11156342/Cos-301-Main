@@ -360,7 +360,25 @@ VALUES
 (0, 0, 0, 0, 'Walls (6  Wood) 0.png'),
 (0, 0, 0, 0, 'Walls (10  Wood) 0.png'),
 (0, 0, 0, 0, 'Walls (6 Stone) 0.png'),
-(0, 0, 0, 0, 'Walls (10 Stone) 0.png')
+(0, 0, 0, 0, 'Walls (10 Stone) 0.png'),
+(0, 0, 0, 0, 'add building.png'),
+(0, 0, 0, 0, 'Add Event.png'),
+(0, 0, 0, 0, 'add.png'),
+(0, 0, 0, 0, 'admin requests.png'),
+(0, 0, 0, 0, 'back.png'),
+(0, 0, 0, 0, 'character name.png'),
+(0, 0, 0, 0, 'chracter log.png'),
+(0, 0, 0, 0, 'duchy.png'),
+(0, 0, 0, 0, 'find player.png'),
+(0, 0, 0, 0, 'golbal status2.png'),
+(0, 0, 0, 0, 'gold.png'),
+(0, 0, 0, 0, 'manage character funds.png'),
+(0, 0, 0, 0, 'modify.png'),
+(0, 0, 0, 0, 'platinum.png'),
+(0, 0, 0, 0, 'quality.png'),
+(0, 0, 0, 0, 'search 2.png'),
+(0, 0, 0, 0, 'silver.png'),
+(0, 0, 0, 0, 'size.png')
 
 /*All cost related values assumed to be gold*/
 CREATE TABLE Building

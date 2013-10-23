@@ -1482,13 +1482,12 @@ public class PlotQueryHandler {
         return false;
     }
     
-    public ArrayList<String[]> getAllOutstandingRequests(int plotID) {
+    public ArrayList<String[]> getAllOutstandingRequests() {
         ArrayList<String[]> result = null;
         String[] line = null;
         
         result = new ArrayList();
-        sql = "SELECT * FROM Request WHERE RequestPlotID = " + plotID
-                    + " AND RequestApproved = 0";
+        sql = "SELECT * FROM Request WHERE RequestApproved = 0";
         
         try {
             stmt = con.createStatement();

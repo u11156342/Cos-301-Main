@@ -380,4 +380,58 @@ public class PlotWrapper {
         }
         return "";
     }
+
+    @GET
+    @Path("addRequest/{plotID}/{text}")
+    @Produces("text/plain")
+    public String addRequest(@PathParam("plotID") int plotID, @PathParam("text") String text) {
+        try {
+            if (handler.getPlotQH().addRequest(plotID, text)) {
+                return "true";
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "false";
+    }
+
+    @GET
+    @Path("getAllOutstandingRequests")
+    @Produces("text/plain")
+    public String getAllOutstandingRequests() {
+        try {
+            return converter.ArrToUrl(handler.getPlotQH().getAllOutstandingRequests());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
+
+    @GET
+    @Path("approveRequest/{requestID}")
+    @Produces("text/plain")
+    public String approveRequest(@PathParam("requestID") int requestID) {
+        try {
+            handler.getPlotQH().approveRequest(requestID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
+
+    @GET
+    @Path("deleteRequest/{requestID}")
+    @Produces("text/plain")
+    public String deleteRequest(@PathParam("requestID") int requestID) {
+        try {
+            handler.getPlotQH().deleteRequest(requestID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return "";
+    }
 }
