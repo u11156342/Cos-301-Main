@@ -147,7 +147,7 @@ public class BuildingQueryHandler {
                     regions.add(rs.getString("BuildingAvailabilityID"));
                 }
 
-                sql = "SELECT BuildingID, BuildingTypeOfIndustry FROM Building WHERE BuildingTypeID"
+                sql = "SELECT BuildingID, BuildingTypeOfIndustry, BuildingAccess FROM Building WHERE BuildingTypeID"
                         + " = " + remember + " AND (BuildingAvailabilityID = " + regions.get(0);
 
                 if (regions.size() > 1) {
@@ -165,9 +165,10 @@ public class BuildingQueryHandler {
                 values = new ArrayList();
 
                 while (rs.next()) {
-                    line = new String[2];
+                    line = new String[3];
                     line[0] = rs.getString("BuildingID");
                     line[1] = rs.getString("BuildingTypeOfIndustry");
+                    line[2] = rs.getString("BuildingAccess");
                     values.add(line);
                 }
             } catch (Exception e) {
