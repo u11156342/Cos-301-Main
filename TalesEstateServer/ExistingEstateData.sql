@@ -31,14 +31,14 @@ PlotEstateName, PlotDescription, CountyID)
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Artisan (Weaver)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0),
-	(3, 5, 'Artisan (Tailor)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0),
-	(4, 5, 'Merchant (Silk)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(4, 5, 'Merchant (Tailor)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(4, 5, 'Merchant (Glass Art)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0),
-	(3, 5, 'Artisan (Glassblower)', 11, 10, 25, 50, 2, 5 ,1, 0.125, 2, 0)
+	(3, 5, 'Artisan (Weaver)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0),
+	(3, 5, 'Artisan (Tailor)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0),
+	(4, 5, 'Merchant (Silk)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(4, 5, 'Merchant (Tailor)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(4, 5, 'Merchant (Glass Art)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
+	(3, 5, 'Artisan (Glassblower)', 11, 10, 25, 50, 2, 5 ,1, 0.125, 2, 0, 0)
 
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -506,10 +506,10 @@ PlotEstateName, PlotDescription, CountyID)
 
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)
-	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0)*/
+	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)
+	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)*/
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -755,9 +755,9 @@ PlotEstateName, PlotDescription, CountyID)
 	
 INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, BuildingAvailabilityID,
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
-	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue)
+	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Artisan (Lithographer)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0)
+	(3, 5, 'Artisan (Lithographer)', 11, 10, 25, 50, 2, 5, 1, 0.125, 2, 0, 0)
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)

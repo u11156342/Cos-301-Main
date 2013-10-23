@@ -569,7 +569,7 @@ public class PlotQueryHandlerTest extends TestCase {
      * Test of getCurrentAmount method, of class PlotQueryHandler.
      */
     public void testGetCurrentAmount() {
-        System.out.println("Testomg getCurrentAmount()");
+        System.out.println("Testing getCurrentAmount()");
         
         int plotID = testPlotID;
         PlotQueryHandler instance = new PlotQueryHandler(con);
@@ -979,7 +979,7 @@ public class PlotQueryHandlerTest extends TestCase {
                 correct = true;
             
             stmt = con.createStatement();
-            stmt.executeQuery("UPDATE Plot SET PlotMonthlyIncome = 10.1, "
+            stmt.execute("UPDATE Plot SET PlotMonthlyIncome = 10.1, "
                     + "PlotWorkerMax = 20 WHERE PlotID = " + testPlotID);
         }
         catch(Exception e) {
@@ -1129,5 +1129,254 @@ public class PlotQueryHandlerTest extends TestCase {
             correct = true;
         
         assertTrue(correct);
+    }
+
+    /**
+     * Test of setName method, of class PlotQueryHandler.
+     */
+    public void testSetName() {
+        System.out.println("Testing setName()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        instance.setName(testPlotID, "test name");
+        String result = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Plot WHERE PlotID = " + testPlotID);
+            rs.next();
+            result = rs.getString("PlotEstateName");
+            
+            instance.setName(testPlotID, "test estate");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testSetName()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertEquals("test name", result);
+    }
+
+    /**
+     * Test of unPlaceBuilding method, of class PlotQueryHandler.
+     */
+    public void testUnPlaceBuilding() {
+        System.out.println("Testing unPlaceBuilding()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        int[][] buildings = instance.convertFromArray("-1,-1,2;3,-1,-1;-1,5,-1;");
+        String result = "";
+        
+        instance.unPlaceBuilding(testPlotID, buildings);
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT PlotBuildingArray FROM Plot WHERE "
+                    + "PlotID = " + testPlotID);
+            rs.next();
+            result = rs.getString("PlotBuildingArray");
+            
+            buildings = instance.convertFromArray("-1,-1,-1;-1,-1,-1;-1,-1,-1;");
+            instance.unPlaceBuilding(testPlotID, buildings);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testUnPlaceBuilding()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertEquals("-1,-1,2;3,-1,-1;-1,5,-1;", result);
+    }
+
+    /**
+     * Test of placeWater method, of class PlotQueryHandler.
+     */
+    public void testPlaceWater() {
+        System.out.println("Testing placeWater()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        int[][] ground = instance.convertFromArray("3,3,0;3,0,3;0,0,3;");
+        String result = "";
+        
+        instance.placeWater(testPlotID, ground);
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM PLOT WHERE PlotID = " + testPlotID);
+            rs.next();
+            result = rs.getString("PlotGroundArray");
+            
+            ground = instance.convertFromArray("0,0,0;0,0,0;0,0,0;");
+            instance.placeWater(testPlotID, ground);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testPlaceWater");
+            System.out.println(e.getMessage());
+        }
+        
+        assertEquals("3,3,0;3,0,3;0,0,3;", result);
+    }
+
+    /**
+     * Test of MarkBuildingsAsUnPlaced method, of class PlotQueryHandler.
+     */
+    public void testMarkBuildingsAsUnPlaced() {
+        System.out.println("Testing MarkBuildingsAsUnPlaced()");
+        
+        String buildingID = "";
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT BuildLogBuildingID FROM BuildLog "
+                    + "WHERE BuildLogPlotID = " + testPlotID);
+            rs.next();
+            buildingID = rs.getString("BuildLogBuildingID");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testMarkBuildingsAsUnPlaced()");
+            System.out.println(e.getMessage());
+        }
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        instance.MarkBuildingsAsUnPlaced(Integer.parseInt(buildingID), testPlotID);
+        String result = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM BuildLog WHERE BuildLogPlotID = " + testPlotID);
+            rs.next();
+            result = rs.getString("BuildLogPlaced");
+            
+            stmt.execute("UPDATE BuildLog SET BuildLogPlaced = 1 WHERE "
+                    + "BuildLogPlotID = " + testPlotID + " AND BuildLogBuildingID = " + buildingID);
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testMarkBuildingsAsUnPlaced()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertEquals("0", result);
+    }
+
+    /**
+     * Test of addRequest method, of class PlotQueryHandler.
+     */
+    public void testAddRequest() {
+        System.out.println("Testing addRequest()");
+
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        instance.addRequest(testPlotID, "test need wild land");
+        String result = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Request WHERE RequestPlotID = "
+                    + testPlotID);
+            rs.next();
+            result = rs.getString("RequestText");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testAddRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertEquals("test need wild land", result);
+    }
+
+    /**
+     * Test of getAllOutstandingRequests method, of class PlotQueryHandler.
+     */
+    public void testGetAllOutstandingRequests() {
+        System.out.println("Testing getAllOutstandingRequests()");
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        ArrayList<String[]> result = instance.getAllOutstandingRequests(testPlotID);
+        String[] one = result.get(0);
+        boolean correct = false;
+        
+        if(one[1].equals("test need wild land"))
+            correct = true;
+        
+        assertTrue(correct);
+    }
+
+    /**
+     * Test of approveRequest method, of class PlotQueryHandler.
+     */
+    public void testApproveRequest() {
+        System.out.println("Testing approveRequest()");
+        
+        String reqID = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Request WHERE RequestPlotID = "
+                    + testPlotID);
+            rs.next();
+            reqID = rs.getString("RequestID");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testApproveRequest()");
+            System.out.println(e.getMessage());
+        }
+
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+
+        instance.approveRequest(Integer.parseInt(reqID));
+        String result = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Request WHERE RequestPlotID = "
+                    + testPlotID);
+            rs.next();
+            result = rs.getString("RequestApproved");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testApproveRequest()");
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals("1", result);
+    }
+
+    /**
+     * Test of deleteRequest method, of class PlotQueryHandler.
+     * 
+     * **Note: This function will remain unimplemented as it interferes with
+     * other unit tests. This function has been tested and works
+     */
+    public void testDeleteRequest() {
+        System.out.println("Testing deleteRequest()");
+        
+        String reqID = "";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Request WHERE RequestPlotID = "
+                    + testPlotID);
+            rs.next();
+            reqID = rs.getString("RequestID");
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testApproveRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        PlotQueryHandler instance = new PlotQueryHandler(con);
+        instance.deleteRequest(Integer.parseInt(reqID));
+        boolean empty = false;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Request WHERE RequestID = "
+                    + reqID);
+            if(!rs.next())
+                empty = true;
+        }
+        catch(Exception e) {
+            System.out.println("Error in function testApproveRequest()");
+            System.out.println(e.getMessage());
+        }
+        
+        assertTrue(empty);
     }
 }

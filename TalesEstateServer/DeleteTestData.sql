@@ -26,6 +26,9 @@ SELECT @userid = UserCharacterID FROM UserCharacter
 
 SELECT @amountid = PlotAmount, @plotid = PlotID FROM Plot
 	WHERE PlotOwnedBy = @userid
+
+DELETE FROM Request WHERE
+	RequestPlotID = @plotid
 	
 DELETE FROM PlotAccess WHERE
 	PlotID = @plotid
