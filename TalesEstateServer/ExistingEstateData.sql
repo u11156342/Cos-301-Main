@@ -504,7 +504,7 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
 	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)
-	/*(3, 5, 'Scavenger camp', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)*/
+	(5, 5, 'Scavenger camp', 11, 1, 30, 0, 0, 0, 1, 1, -3, 0, 7)
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	BuildLogDateTimeBuilt, BuildLogTimeToComplete, BuildLogCompleted)
@@ -514,8 +514,8 @@ INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,
 	(@plotid, 30, '2013-04-01 00:00:00', 1, 1),
 	(@plotid, 36, '2013-06-01 00:00:00', 2, 1),
 	(@plotid, 83, '2013-07-01 00:00:00', 1, 1),
-	/*(@plotid, 4, '2013-06-01 00:00:00', , 1),*/
-	/*(@plotid, 4, '2013-10-01 00:00:00', , 1),*/
+	(@plotid, 4, '2013-06-01 00:00:00', 1, 1),
+	(@plotid, 4, '2013-10-01 00:00:00', 1, 1),
 	(@plotid, 36, '2013-10-01 00:00:00', 2, 1),
 	(@plotid, 52, '2013-10-01 00:00:00', 1, 1)
 	
