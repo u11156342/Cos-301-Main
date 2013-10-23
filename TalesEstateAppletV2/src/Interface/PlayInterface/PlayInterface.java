@@ -67,7 +67,7 @@ public class PlayInterface extends BasePanel {
         menu.init(t);
         menu.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT / 5-100, t.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane menuscroll = new JScrollPane(menu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        menuscroll.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT / 5, t.JFXPANEL_HEIGHT_INT - 100));
+       // menuscroll.setPreferredSize(new Dimension(t.JFXPANEL_WIDTH_INT / 5, t.JFXPANEL_HEIGHT_INT - 100));
         menuscroll.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
         add(menuscroll, BorderLayout.EAST);

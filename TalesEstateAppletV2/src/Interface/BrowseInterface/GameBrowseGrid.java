@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import talesestateappletv2.TransferContainer;
 
@@ -186,6 +187,14 @@ public class GameBrowseGrid extends JFXPanel {
         }
 
 
+
+
+
+
+
+    }
+
+    public void init(int size, TransferContainer tc, int pid) {
         this.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -262,24 +271,63 @@ public class GameBrowseGrid extends JFXPanel {
             public void mouseClicked(MouseEvent e) {
                 int clickedx = e.getX();
                 int clickedy = e.getY();
+
                 double move = 0;
                 double move2 = 0;
                 int xc = 0;
                 int yc = 0;
+
                 for (int x = 0; x < gridsize; x++) {
                     for (int y = 0; y < gridsize; y++) {
                         xc = -scroller.getHorizontalScrollBar().getValue() + ((y * (int) (wdOfcell)) / 2) + (int) move + globalwidth / 2;
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
+                            if (tain.lastAdminBrowse) {
 
-                            if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
-                                tileStates[x][y] = 3;
-                                //builds
+                                if (tileStates[x][y] != -1) {
+                                    String picked;
+                                    String[] choices = {"Water", "Wild land", "Poor land", "Fine land", "Exquisite land"};
 
-                                tain.rdb.placeWater(PlotID, tileStates);
+                                    picked = (String) JOptionPane.showInputDialog(tain.mainapplet, "Choose wat tile", "", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
 
-                                return;
+
+
+                                    if ("".equals(picked) || picked == null) {
+                                        return;
+                                    }
+                                    int num = 0;
+                                    switch (picked) {
+                                        case "Water":
+                                            num = 3;
+                                            break;
+                                        case "Wild land":
+                                            num = 0;
+                                            break;
+                                        case "Poor land":
+                                            num = 0;
+                                            break;
+                                        case "Fine land":
+                                            num = 1;
+                                            break;
+                                        case "Exquisite land":
+                                            num = 2;
+                                            break;
+
+                                    }
+
+
+                                    tileStates[x][y] = num;
+                                    //called place water but places anything really
+                                    tain.rdb.placeWater(PlotID, tileStates);
+                                    //builds
+//                                    BrowseInterface bi = tain.Cmanager.getBrowseInterfacesCard();
+//                                    bi.init(tain, PlotID, gridsize, tileStates, gridstates);
+//                                    tain.cardlayout.show(tain.contentpane, bi.getName());
+
+
+                                    return;
+                                }
                             }
 
 
@@ -309,10 +357,6 @@ public class GameBrowseGrid extends JFXPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
-
-
-
-
     }
 
     public void setScrollP(JScrollPane scrollPane) {

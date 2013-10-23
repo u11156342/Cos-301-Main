@@ -130,7 +130,8 @@ public class RightsInterface extends BasePanel {
         
 
         RightsSideMenu menu = new RightsSideMenu(textZone, tc,PlotID);
-        menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
+       // menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
+        menu.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(menu, BorderLayout.EAST);
 
 

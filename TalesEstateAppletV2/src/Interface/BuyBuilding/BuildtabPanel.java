@@ -9,6 +9,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -33,6 +34,7 @@ public class BuildtabPanel extends BasePanel {
     public BuildtabPanel(String build, TransferContainer tc) {
         super(build, tc);
         tain = tc;
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
     }
 
     public void init(int pId, String duchy_, MainPlaySideMenu tr) {
@@ -42,11 +44,11 @@ public class BuildtabPanel extends BasePanel {
         JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(50)));
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
-      //  add(Title, BorderLayout.NORTH);
+        //  add(Title, BorderLayout.NORTH);
         PlotID = pId;
         duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();
-
+        tabbedPane.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
         ArrayList<String[]> Agricultural = null;
         ArrayList<String[]> Mining = null;
         ArrayList<String[]> Manufacturing = null;
@@ -54,6 +56,7 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Improvements = null;
 
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural, tr);
+        
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
@@ -94,6 +97,7 @@ public class BuildtabPanel extends BasePanel {
 
         final JTextPane buildingIn = new JTextPane();
 
+        panel.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
 
         buildingIn.setPreferredSize(new Dimension(500, 300));
 //        c2.gridy = 0;
@@ -500,11 +504,17 @@ public class BuildtabPanel extends BasePanel {
                 }
             }
         });
+        JPanel temp = new JPanel();
+        temp.setLayout(new GridLayout(2, 1));
+
         panel.add(buildingIn, BorderLayout.CENTER);
         //  c2.gridy = 1;
-        panel.add(buildings, BorderLayout.EAST);
+
+        temp.add(buildings);
         //    c2.gridy = 2;
-        panel.add(bbutton, BorderLayout.SOUTH);
+        temp.add(bbutton);
+        temp.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
+        panel.add(temp, BorderLayout.EAST);
 
         return panel;
     }
