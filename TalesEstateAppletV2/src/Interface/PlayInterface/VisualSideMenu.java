@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -56,9 +57,9 @@ public class VisualSideMenu extends JPanel {
 
 
         buildingTokens = new JList(build);
-        buildingTokens.setFixedCellWidth(170);
+        //buildingTokens.setFixedCellWidth(170);
         buildingTokens.setFixedCellHeight(30);
-        buildingTokens.setSize(170, tc.JFXPANEL_HEIGHT_INT);
+        //buildingTokens.setSize(170, tc.JFXPANEL_HEIGHT_INT);
 
         //  buildingTokens.setPreferredSize(new Dimension(200, tc.JFXPANEL_HEIGHT_INT - 100));
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -73,7 +74,9 @@ public class VisualSideMenu extends JPanel {
         //  add(title, c);
         //  c.insets = new Insets(30, 0, 0, 0);
         // c.gridy = 1;
-        add(tokenscroll, BorderLayout.CENTER);
+
+        this.setLayout(new GridLayout(1, 1));
+        add(tokenscroll);
         buildingTokens.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

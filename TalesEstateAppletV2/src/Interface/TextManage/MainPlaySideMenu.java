@@ -41,6 +41,7 @@ public class MainPlaySideMenu extends JPanel {
 
     public MainPlaySideMenu(final JTextPane textZone, final TransferContainer tc, int p, boolean isowner) {
         pId = p;
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         Rename = new JButton("Rename Plot");
         Report = new JButton("Status Report");
         Deposite = new JButton("Deposit Funds");
@@ -197,7 +198,6 @@ public class MainPlaySideMenu extends JPanel {
         }
 
         Report.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -205,7 +205,6 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -261,7 +260,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -317,7 +315,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -421,7 +418,7 @@ public class MainPlaySideMenu extends JPanel {
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
 
-                        tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*exspanded*the*plot*with*a*" + picked + "*acre", tc.CharacterID);
+                        tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*expanded*the*plot*with*a*" + picked + "*acre", tc.CharacterID);
 
                         Report.doClick();
 
@@ -440,7 +437,6 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -544,7 +540,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         Rename.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -564,7 +559,6 @@ public class MainPlaySideMenu extends JPanel {
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -573,7 +567,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -584,7 +577,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         RightsManagement.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
@@ -594,7 +586,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         PropertyLog.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 

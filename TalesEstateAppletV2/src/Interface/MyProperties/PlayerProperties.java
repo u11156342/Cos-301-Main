@@ -2,6 +2,8 @@ package Interface.MyProperties;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -103,6 +105,8 @@ public class PlayerProperties extends JPanel {
         //  panel1.setPreferredSize(new Dimension(w, h));
         panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(panel1);
+        
+        
     }
 
     protected JComponent makePanel(String text, int type, int bound) {

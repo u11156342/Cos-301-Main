@@ -30,11 +30,11 @@ public class MainPlayInterface extends BasePanel {
     public int[][] buildings;
     public ArrayList<String[]> quality;
     public ArrayList<String> amount;
-    
     public boolean IsOwner;
 
-    public MainPlayInterface(String name,TransferContainer tc) {
-        super(name,tc);
+    public MainPlayInterface(String name, TransferContainer tc) {
+        super(name, tc);
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
     }
 
     public void init(final TransferContainer tc, int Pid) {
@@ -45,8 +45,8 @@ public class MainPlayInterface extends BasePanel {
 
         add(scrollText, BorderLayout.CENTER);
 
-        MainPlaySideMenu menu = new MainPlaySideMenu(textZone, tc, Pid,IsOwner);
-        menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
+        MainPlaySideMenu menu = new MainPlaySideMenu(textZone, tc, Pid, IsOwner);
+        // menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
         add(menu, BorderLayout.EAST);
 
         textZone.setContentType("text/html");

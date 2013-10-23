@@ -38,6 +38,7 @@ public class BrowseInterface extends BasePanel {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        playIn.init(size, tc,propertyID);
         playIn.gridstates = buildingsz;
         playIn.tileStates = tilesz;
 
