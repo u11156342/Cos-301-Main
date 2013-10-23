@@ -59,9 +59,6 @@ public class MainPlaySideMenu extends JPanel {
         size = tiles.length;
         duchy_ = retrievePlotDetails.get(3);
 
-
-
-
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -561,7 +558,6 @@ public class MainPlaySideMenu extends JPanel {
         addBuildings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 tc.Build.init(pId, duchy_, tr);
                 tc.cardlayout.show(tc.contentpane, "Build");
             }

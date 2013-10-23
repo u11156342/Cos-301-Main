@@ -34,8 +34,8 @@ public class PlayerPropertiesAdmin extends JPanel {
         }
 
         JComponent panel1 = makePanel("Panel #1", 1);
-        GridLayout experimentLayout = new GridLayout(0, 1);
-        panel1.setLayout(experimentLayout);
+
+
         panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         //  panel1.setPreferredSize(new Dimension(1000, h));
         add(panel1, BorderLayout.CENTER);
@@ -48,7 +48,8 @@ public class PlayerPropertiesAdmin extends JPanel {
 
         if (type == 1) {
             JPanel panel = new JPanel(false);
-
+            GridLayout experimentLayout = new GridLayout(0, 1);
+            panel.setLayout(experimentLayout);
             for (int a = 0; a < playersCurrentProperties.length; a++) {
                 //   playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(playersCurrentProperties[a]);

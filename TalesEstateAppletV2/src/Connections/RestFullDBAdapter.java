@@ -792,4 +792,52 @@ public class RestFullDBAdapter {
             System.out.println(ex.getMessage());
         }
     }
+
+    public boolean addRequest(int plotID, String text) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "addRequest/" + plotID + "/" + text);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if ("true".equals(temp)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ArrayList<String[]> getAllOutstandingRequests() {
+
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "getAllOutstandingRequests");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return this.Conv.ArrFromUrl(temp);
+    }
+
+    public void approveRequest(int requestID) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "approveRequest/" + requestID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+    }
+
+    public void deleteRequest(int requestID) {
+        String temp = "";
+        try {
+            temp = DoServerRequest(serverURL + ":" + serverPort + server + "PlotWrapper/" + "deleteRequest/" + requestID);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
 }

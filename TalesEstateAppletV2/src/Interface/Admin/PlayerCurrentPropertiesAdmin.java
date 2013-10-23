@@ -31,7 +31,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         //   statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         //   statusArea.setColumns(4);
         statusArea.setEditable(false);
-        //   statusArea.setPreferredSize(new Dimension(300, 250));
+        statusArea.setPreferredSize(new Dimension(300, 250));
         setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
         //init();
 
@@ -177,7 +177,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         html.append("<table>");
         html.append("<tr><td class=\"ssheading\">Owner</td><td>").append(retrievePlotDetails.get(1).substring(0, retrievePlotDetails.get(1).indexOf("&*&"))).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Estate Number</td><td> ").append(retrievePlotDetails.get(0)).append("</td></tr>");
-        html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18)).append("</td></tr>");
+        html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18).replace(".", " ")).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Duchy</td><td> ").append(retrievePlotDetails.get(3)).append("</td></tr>");
         try {
             html.append("<tr><td class=\"ssheading\">Countie</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
@@ -190,8 +190,8 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         html.append("</html>");
 
         statusArea.setText(html.toString());
-
-        add(statusArea, BorderLayout.NORTH);
+        JScrollPane scrollText = new JScrollPane(statusArea);
+        add(scrollText, BorderLayout.NORTH);
 //        c.gridheight = 1;
 //        c.gridwidth = 1;
 //

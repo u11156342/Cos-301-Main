@@ -7,6 +7,7 @@ package talesestateappletv2;
 import CardManager.CardManager;
 import Interface.Admin.AdminMenu;
 import Interface.Admin.GlobalStatus;
+import Interface.Admin.RequestInterface;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
@@ -49,8 +50,7 @@ public class TalesEstateAppletV2 extends JApplet {
             public void run() {
                 try {
                     //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-                     //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-                     
+                    //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
                 } catch (Exception e) {
                 }
 
@@ -73,11 +73,11 @@ public class TalesEstateAppletV2 extends JApplet {
 
     @Override
     public void init() {
-        
-        
+
+
         setBackground(java.awt.Color.WHITE);
-        
-        
+
+
         setLayout(tContain.cardlayout);
         tContain.contentpane = this.getContentPane();
         ActionListener buttonListener = new ActionListener() {
@@ -90,7 +90,7 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.CSelect = new CharSelectMenu("Char", tContain);
 
         tContain.MainMenu = new MainMenu("MainMenu", tContain, me);
-        
+
 
         tContain.CSelect.addNextActionListener(tContain, tContain.MainMenu);
 
@@ -98,7 +98,7 @@ public class TalesEstateAppletV2 extends JApplet {
         tContain.Buy = new BuyInterface("Buy", tContain);
         tContain.Buy.addNextActionListener(buttonListener);
 
-        tContain.search = new MainSearch("Search",tContain);
+        tContain.search = new MainSearch("Search", tContain);
         tContain.search.init(tContain);
 
         tContain.mProp = new MyPropertiesInterface("MyProp", tContain);
@@ -106,22 +106,22 @@ public class TalesEstateAppletV2 extends JApplet {
 
         tContain.am = new AdminMenu("AMain", tContain);
 
-        tContain.mp = new MainPlayInterface("MPlay",tContain);
+        tContain.mp = new MainPlayInterface("MPlay", tContain);
 
         tContain.visual = new PlayInterface("visual", tContain);
 
         tContain.Build = new BuildtabPanel("Build", tContain);
 
 
-        tContain.ri = new RightsInterface("right",tContain);
+        tContain.ri = new RightsInterface("right", tContain);
 
-        tContain.pmI = new PlayerManagementInterface("PlayerMan",tContain);
+        tContain.pmI = new PlayerManagementInterface("PlayerMan", tContain);
 
-        tContain.clog = new CharacterLog("cLog",tContain);
+        tContain.clog = new CharacterLog("cLog", tContain);
         tContain.clog.init(tContain);
 
 
-        tContain.gstatus = new GlobalStatus("gStatus",tContain);
+        tContain.gstatus = new GlobalStatus("gStatus", tContain);
 
         tContain.gstatus.init(tContain);
 
@@ -138,9 +138,6 @@ public class TalesEstateAppletV2 extends JApplet {
         add(tContain.pmI, tContain.pmI.getName());
         add(tContain.clog, tContain.clog.getName());
         add(tContain.gstatus, tContain.gstatus.getName());
-
-
-
 
         for (int c = 0; c < tContain.Cmanager.MyProperties.length; c++) {
             add(tContain.Cmanager.MyProperties[c], tContain.Cmanager.MyProperties[c].getName());
@@ -177,6 +174,9 @@ public class TalesEstateAppletV2 extends JApplet {
         }
         for (int c = 0; c < tContain.Cmanager.PlayInterfaces.length; c++) {
             add(tContain.Cmanager.PlayInterfaces[c], tContain.Cmanager.PlayInterfaces[c].getName());
+        }
+        for (int c = 0; c < tContain.Cmanager.RequestInterfaces.length; c++) {
+            add(tContain.Cmanager.RequestInterfaces[c], tContain.Cmanager.RequestInterfaces[c].getName());
         }
 
 

@@ -10,8 +10,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import talesestateappletv2.TransferContainer;
 
@@ -24,18 +25,36 @@ public class AdminMenuInterface extends JPanel {
     JButton search = new JButton("Search");
     JButton ManageCharacterGold = new JButton("Manage Character Gold");
     JButton GlobalStatus = new JButton("Global Status");
-    
+    JButton Requests = new JButton("Requests");
 
     public AdminMenuInterface(final TransferContainer tc) {
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-        search.setPreferredSize(new Dimension(150, 60));
-        ManageCharacterGold.setPreferredSize(new Dimension(150, 60));
+
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 MainAdminSearch admin = tc.Cmanager.getMainAdminSearchesCard();
                 admin.init(tc);
                 tc.cardlayout.show(tc.contentpane, admin.getName());
+            }
+        });
+        Requests.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                RequestInterface card = tc.Cmanager.getRequestInterfaceCard();
+
+
+                ArrayList<String[]> allRequests = tc.rdb.getAllOutstandingRequests();
+
+
+                if (allRequests.isEmpty()) {
+                    JOptionPane.showMessageDialog(Requests, "There are currently no requests.");
+                    return;
+                } else {
+                    card.init(tc, allRequests);
+                    tc.cardlayout.show(tc.contentpane, card.getName());
+                }
             }
         });
 
@@ -53,6 +72,7 @@ public class AdminMenuInterface extends JPanel {
 
         search.setPreferredSize(new Dimension(250, 60));
         ManageCharacterGold.setPreferredSize(new Dimension(250, 60));
+        Requests.setPreferredSize(new Dimension(250, 60));
 
 
 
@@ -72,5 +92,8 @@ public class AdminMenuInterface extends JPanel {
         });
         c.gridy = 3;
         add(GlobalStatus, c);
+
+        c.gridy = 4;
+        add(Requests, c);
     }
 }

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import talesestateappletv2.TransferContainer;
 
@@ -41,8 +41,9 @@ public class ResultUnit extends JPanel {
         statusArea.setEditable(false);
         c.gridx = 1;
         statusArea.setContentType("text/html");
-        // statusArea.setPreferredSize(new Dimension(300, 300));
-        add(statusArea, c);
+        statusArea.setPreferredSize(new Dimension(300, 250));
+        JScrollPane scrollText = new JScrollPane(statusArea);
+        add(scrollText, c);
         c.gridx = 2;
         // RestFullAdapter PicAdapter = new RestFullAdapter();
         //  Browse = new JButton(new ImageIcon(PicAdapter.ImageAdapter(20)));

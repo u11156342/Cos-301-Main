@@ -30,6 +30,7 @@ public class BuildtabPanel extends BasePanel {
     Container ContentPane;
     int PlotID;
     TransferContainer tain;
+    public String mess;
 
     public BuildtabPanel(String build, TransferContainer tc) {
         super(build, tc);
@@ -56,7 +57,7 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Improvements = null;
 
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural, tr);
-        
+
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
@@ -116,15 +117,16 @@ public class BuildtabPanel extends BasePanel {
         buildingsID = new int[results1.size()];
 
         for (int a = 0; a < results1.size(); a++) {
-            buildingsID[a] = Integer.parseInt(results1.get(a)[0]);
-            buildingsList[a] = results1.get(a)[1];
+            if ("0".equals(results1.get(a)[2])) {
+                buildingsID[a] = Integer.parseInt(results1.get(a)[0]);
+                buildingsList[a] = results1.get(a)[1];
+            } else {
+                if (tain.CharacterID == Integer.parseInt(results1.get(a)[2])) {
+                    buildingsID[a] = Integer.parseInt(results1.get(a)[0]);
+                    buildingsList[a] = results1.get(a)[1];
+                }
+            }
         }
-
-
-
-
-
-
 
 
 
@@ -285,7 +287,15 @@ public class BuildtabPanel extends BasePanel {
                 String checkBuildingPrerequisites = tain.rdb.checkBuildingPrerequisites(PlotID, id);
 
                 if (!"".equals(checkBuildingPrerequisites)) {
-                    JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites);
+                    if (checkBuildingPrerequisites.toLowerCase().contains("water")) {
+                        tain.rdb.addRequest(PlotID, "Player " + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + " requested that a water tile be build on the estate with the number " + PlotID);
+                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + " a request to have some water on your land has been placed");
+                    } else if (checkBuildingPrerequisites.toLowerCase().contains("wild")) {
+                        tain.rdb.addRequest(PlotID, "Player " + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + " requested that a wild tile be build on the estate with the number " + PlotID);
+                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + " a request to have some animals on your land has been placed");
+                    } else {
+                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites);
+                    }
                 } else {
 
                     boolean buySucess = true;

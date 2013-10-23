@@ -9,6 +9,7 @@ import Connections.RestFullAdapter;
 import Connections.RestFullDBAdapter;
 import Interface.Admin.AdminMenu;
 import Interface.Admin.GlobalStatus;
+import Interface.Admin.RequestInterface;
 import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.BuyInterface;
 import Interface.MainMenu.CharSelectMenu;
@@ -64,6 +65,7 @@ public class TransferContainer {
     public VisualSideMenu reference;
     public boolean lastAdminBrowse;
     public BufferedImage background;
+    public RequestInterface requests;
     public  float[] c1 = java.awt.Color.RGBtoHSB(142, 117, 92, null);
     public int clickorigin=0;
 

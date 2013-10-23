@@ -35,7 +35,7 @@ public class CardManager {
     public int currentDetailedStatusCard = -1;
     public AddEvent[] AddEvents = new AddEvent[100];
     public int currentAddEventCard = -1;
-    public BrowseInterface[] BrowseInterfaces = new BrowseInterface[50];
+    public BrowseInterface[] BrowseInterfaces = new BrowseInterface[200];
     public int currentBrowseInterfaceCard = -1;
     public MainPlayInterface[] MainPlayInterfaces = new MainPlayInterface[50];
     public int currentMainPlayInterfaceCard = -1;
@@ -45,6 +45,8 @@ public class CardManager {
     public int currentAddPlayerCard = -1;
     public PlayInterface[] PlayInterfaces = new PlayInterface[200];
     public int currentPlayInterfaceCard = -1;
+    public RequestInterface[] RequestInterfaces = new RequestInterface[500];
+    public int currentRequestInterfaceCard = -1;
 
     public CardManager(TransferContainer tc) {
         for (int c = 0; c < MyProperties.length; c++) {
@@ -82,6 +84,9 @@ public class CardManager {
         }
         for (int c = 0; c < PlayInterfaces.length; c++) {
             PlayInterfaces[c] = new PlayInterface("PlayInterfaces" + c, tc);
+        }
+        for (int c = 0; c < RequestInterfaces.length; c++) {
+            RequestInterfaces[c] = new RequestInterface("req" + c, tc);
         }
     }
 
@@ -143,5 +148,11 @@ public class CardManager {
     public PlayInterface getPlayInterfacesCard() {
         currentPlayInterfaceCard++;
         return PlayInterfaces[currentPlayInterfaceCard];
+    }
+    
+    public RequestInterface getRequestInterfaceCard()
+    {
+        currentRequestInterfaceCard++;
+        return RequestInterfaces[currentRequestInterfaceCard];
     }
 }
