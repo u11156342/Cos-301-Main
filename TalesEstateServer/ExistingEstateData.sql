@@ -388,11 +388,11 @@ INSERT INTO EventLog (PlotID, EventLogName, EventLogDescription, EventLogDateAdd
 	EventLogEffectPlatinum, EventLogEffectGold, EventLogEffectSilver, EventLogEffectHappiness, 
 	EventLogEffectIncome, EventLogEffectDefence)
 	VALUES
-	(@plotid, 'Peasants unhappy', 'Peasants desperatly unhappy after a hobling overseer speaks of slavery', '2013-07-01', 0, 0, 0, -8, 0),
+	(@plotid, 'Peasants unhappy', 'Peasants desperatly unhappy after a hobling overseer speaks of slavery', '2013-07-01', 0, 0, 0, -8, 0, 0),
 	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-08-01', 0, 0, 0, 0, 0, 2),
 	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-09-01', 0, 0, 0, 0, 0, 2),
 	(@plotid, 'Sarr raid', 'There is a Sarr raid, but your peasants are so happy with you, they fight it off and a few volunteer to be militia.  Gain a +2 to defense for 6 months', '2013-10-01', 0, 0, 0, 0, 0, 2),
-	(@plotid, 'Grumbling and rabble', 'There is a bit of grumbling and rabble rousing after the events in Svaertstein, but nothing comes of the matter', '2013-08-01', 0, 0, 0, -1, 0)
+	(@plotid, 'Grumbling and rabble', 'There is a bit of grumbling and rabble rousing after the events in Svaertstein, but nothing comes of the matter', '2013-08-01', 0, 0, 0, -1, 0, 0)
 	
 INSERT INTO IncomeLog (PlotID, IncomeValue, IncomeDateProcessed)
 	VALUES
