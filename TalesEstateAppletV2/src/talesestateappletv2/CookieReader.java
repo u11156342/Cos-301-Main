@@ -86,23 +86,29 @@ public class CookieReader {
             if (num == 1) {
                 File f = new File(path);
                 File[] listFiles = f.listFiles();
-                path = listFiles[0] + "\\cookies.sqlite";
-                System.out.println(path);
-                brFireFox = new BufferedReader(new FileReader(path));
-                while ((sCurrentLine = brFireFox.readLine()) != null) {
-                    if (sCurrentLine.contains("UserSettings")) {
+                for (int i = 0; i < listFiles.length; i++) {
+                    path = listFiles[i] + "\\cookies.sqlite";
+                    System.out.println(path);
+                    try {
+                        brFireFox = new BufferedReader(new FileReader(path));
+                        while ((sCurrentLine = brFireFox.readLine()) != null) {
+                            if (sCurrentLine.contains("UserSettings")) {
 
-                        int where = sCurrentLine.indexOf("UserID");
-                        if (where != -1) {
-                            String newS = sCurrentLine;
-                            newS = newS.substring(where, where + 43);
-                            StringTokenizer tokens = new StringTokenizer(newS, "=");
-                            tokens.nextToken();
-                            userID = tokens.nextToken();
-                            userIDs.add(userID);
+                                int where = sCurrentLine.indexOf("UserID");
+                                if (where != -1) {
+                                    String newS = sCurrentLine;
+                                    newS = newS.substring(where, where + 43);
+                                    StringTokenizer tokens = new StringTokenizer(newS, "=");
+                                    tokens.nextToken();
+                                    userID = tokens.nextToken();
+                                    userIDs.add(userID);
+                                }
+                            }
                         }
+                    } catch (Exception e) {
                     }
                 }
+
 
 
             }
@@ -160,7 +166,7 @@ public class CookieReader {
         } catch (Exception e) {
             System.out.println(path);
             System.out.println(e.getMessage());
-          //  JOptionPane.showMessageDialog(tain.mainapplet, e.getMessage());
+            //  JOptionPane.showMessageDialog(tain.mainapplet, e.getMessage());
         } finally {
             try {
                 if (brFireFox != null) {
