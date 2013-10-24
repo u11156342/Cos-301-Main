@@ -28,6 +28,9 @@ public class RightsSideMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
+                if ("".equals(attempt) || attempt == null) {
+                    return;
+                }
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
                 String[] characters;
                 characters = new String[retrieveCharacterIDExtra.size()];
@@ -58,6 +61,10 @@ public class RightsSideMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 String attempt = JOptionPane.showInputDialog("What is the characers name ? ");
+
+                if ("".equals(attempt) || attempt == null) {
+                    return;
+                }
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
                 String[] characters;
                 characters = new String[retrieveCharacterIDExtra.size()];

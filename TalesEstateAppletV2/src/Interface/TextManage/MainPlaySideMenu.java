@@ -181,7 +181,7 @@ public class MainPlaySideMenu extends JPanel {
                 try {
                     double amountz = 0;
                     String te = JOptionPane.showInputDialog(mes);
-                    if ("".equals(te)) {
+                    if ("".equals(te) || te == null) {
                         return;
                     }
                     amountz = Double.parseDouble(te);
@@ -238,7 +238,7 @@ public class MainPlaySideMenu extends JPanel {
                 try {
                     double amountz = 0;
                     String te = JOptionPane.showInputDialog(mes);
-                    if ("".equals(te)) {
+                    if ("".equals(te) || te == null) {
                         return;
                     }
                     amountz = Double.parseDouble(JOptionPane.showInputDialog(te));
