@@ -378,7 +378,8 @@ VALUES
 (0, 0, 0, 0, 'quality.png'),
 (0, 0, 0, 0, 'search 2.png'),
 (0, 0, 0, 0, 'silver.png'),
-(0, 0, 0, 0, 'size.png')
+(0, 0, 0, 0, 'size.png'),
+(0, 0, 0, 0, 'wild tile.png')
 
 /*All cost related values assumed to be gold*/
 CREATE TABLE Building
@@ -552,7 +553,8 @@ VALUES
 (1, 'Fine'),
 (2, 'Exquisite'),
 (3, 'Water'),
-(5, 'World map')
+(5, 'World map'),
+(133,'Wild tile')
 
 CREATE TABLE BuildLog
 (
