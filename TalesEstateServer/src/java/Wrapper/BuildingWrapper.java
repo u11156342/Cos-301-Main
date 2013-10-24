@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wrapper;
 
 import QueryHandlers.QueryHandler;
@@ -11,10 +7,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-/**
- *
- * @author NightFiyah
- */
 @Stateless
 @Path("/BuildingWrapper")
 public class BuildingWrapper {

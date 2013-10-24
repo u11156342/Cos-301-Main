@@ -9,14 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-/**
- * This class hosts the restfull web services that is used to connect to the
- * database
- *
- * @author NightFiyah
- * @version 1.0
- * @since 2013-07-26
- */
 @Stateless
 @Path("/Wrapper")
 public class Wrapper {

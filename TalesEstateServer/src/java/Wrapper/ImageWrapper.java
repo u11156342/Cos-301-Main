@@ -1,23 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wrapper;
 
 import QueryHandlers.QueryHandler;
 import java.io.ByteArrayOutputStream;
 import javax.ejb.Stateless;
-import javax.imageio.ImageIO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
-/**
- *
- * @author NightFiyah
- */
 @Stateless
 @Path("/ImageWrapper")
 public class ImageWrapper {

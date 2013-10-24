@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wrapper;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-/**
- *
- * @author NightFiyah
- */
 public class Converter {
 
     public ArrayList<String[]> ArrFromUrl(String link) {

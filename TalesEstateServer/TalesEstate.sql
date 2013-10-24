@@ -380,7 +380,11 @@ VALUES
 (0, 0, 0, 0, 'silver.png'),
 (0, 0, 0, 0, 'size.png'),
 (0, 0, 0, 0, 'wild tile.png'),
-(0, 0, 0, 0, 'Give Funds.png')
+(0, 0, 0, 0, 'Give Funds.png'),
+(0, 0, 0, 0, 'Add Player.png'),
+(0, 0, 0, 0, 'Rights Management.png')
+
+
 
 /*All cost related values assumed to be gold*/
 CREATE TABLE Building

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Security;
 
 import java.io.BufferedReader;
@@ -24,13 +20,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- *
- * @author Fiyah
- */
 @Stateless
 @Path("/SecurityWrapper")
 public class SecurityWrapper {
@@ -55,8 +46,6 @@ public class SecurityWrapper {
                 c++;
 
             }
-
-
 
             String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
             MessageDigest digest = MessageDigest.getInstance("SHA");
@@ -112,13 +101,14 @@ public class SecurityWrapper {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-            aes.init(Cipher.ENCRYPT_MODE, key);
-            byte[] ciphertext = aes.doFinal(temp.getBytes());
-            String enc = "";
-            for (int i = 0; i < ciphertext.length; i++) {
-                enc = enc + "`" + ciphertext[i];
-            }
-            return enc;
+//            aes.init(Cipher.ENCRYPT_MODE, key);
+//            byte[] ciphertext = aes.doFinal(temp.getBytes());
+//            String enc = "";
+//            for (int i = 0; i < ciphertext.length; i++) {
+//                enc = enc + "`" + ciphertext[i];
+//            }
+//            return enc;
+            return temp;
 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(SecurityWrapper.class.getName()).log(Level.SEVERE, null, ex);

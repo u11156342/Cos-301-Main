@@ -80,20 +80,6 @@ public class CharacterWrapper {
     }
 
     @GET
-    @Path("depositAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
-    @Produces("text/plain")
-    public boolean depositAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
-        return handler.getCharacterQH().depositAmount(characterName, amountPlatinum, amountGold, amountSilver);
-    }
-
-    @GET
-    @Path("withdrawAmount/{characterName}/{amountPlatinum}/{amountGold}/{amountSilver}")
-    @Produces("text/plain")
-    public boolean withdrawAmount(@PathParam("characterName") String characterName, @PathParam("amountPlatinum") int amountPlatinum, @PathParam("amountGold") int amountGold, @PathParam("amountSilver") int amountSilver) {
-        return handler.getCharacterQH().withdrawAmount(characterName, amountPlatinum, amountGold, amountSilver);
-    }
-
-    @GET
     @Path("retrieveCharacterName/{characterID}")
     @Produces("text/plain")
     public String retrieveCharacterName(@PathParam("characterID") int characterID) {
