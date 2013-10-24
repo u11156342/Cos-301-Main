@@ -19,7 +19,6 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
-
 //Interface used for adding events
 public class AddEventInterface extends JPanel {
 
@@ -45,7 +44,7 @@ public class AddEventInterface extends JPanel {
 
     public void init(final TransferContainer tc, final int PID, int CurrentDefence) {
 
-        add = new JButton(new ImageIcon(tc.ad.ImageAdapter(116)));
+        add = new JButton(new ImageIcon(tc.ad.ImageAdapter(117)));
         add.setContentAreaFilled(false);
         add.setBorderPainted(false);
         add.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -174,8 +173,6 @@ public class AddEventInterface extends JPanel {
             }
         });
 
-
-        add.setPreferredSize(new Dimension(150, 60));
         c.gridwidth = 2;
         add(add, c);
     }

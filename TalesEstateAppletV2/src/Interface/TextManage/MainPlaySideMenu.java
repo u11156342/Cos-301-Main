@@ -241,7 +241,7 @@ public class MainPlaySideMenu extends JPanel {
                     if ("".equals(te) || te == null) {
                         return;
                     }
-                    amountz = Double.parseDouble(JOptionPane.showInputDialog(te));
+                    amountz = Double.parseDouble(te);
                     if (amountz == 0) {
                         return;
                     }
