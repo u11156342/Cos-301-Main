@@ -16,7 +16,7 @@ public class CharacterQueryHandler {
     private ResultSetMetaData rsmd = null;
     private String sql = "";
 
-     /* Constructor
+    /* Constructor
      */
     public CharacterQueryHandler(Connection c) {
         super();
@@ -125,7 +125,7 @@ public class CharacterQueryHandler {
     public ArrayList<String[]> retrieveCharacterIDExtra(String characterName) {
         ArrayList<String[]> result = new ArrayList();
         String[] line = null;
-        
+
         try {
             sql = "SELECT UserCharacterID,UserCharacterName FROM UserCharacter WHERE "
                     + "UserCharacterName LIKE '%" + characterName + "%'";
@@ -234,7 +234,7 @@ public class CharacterQueryHandler {
         DatabaseConnection prod = null;
         Connection prodCon = null;
         UserQueryHandler uqh = null;
-        int currentSilver = 0, targetSilver = 0, difference = 0;
+        double currentSilver = 0, targetSilver = 0, difference = 0;
         String charID = "", userID = "";
 
         //Convert name to unique characterId
@@ -254,8 +254,9 @@ public class CharacterQueryHandler {
             uqh = new UserQueryHandler(prodCon);
 
             currentSilver = uqh.getCharacterSilver(charID);
-            targetSilver = (amountPlatinum * 100) + (amountGold * 10) + (amountSilver);
-
+            System.out.println("current silver " + currentSilver);
+            targetSilver = (amountPlatinum * 100.0) + (amountGold * 10.0) + (amountSilver);
+            System.out.println("target silver " + targetSilver);
             if (targetSilver == currentSilver) {
                 return true;  //success
             } else {
@@ -263,7 +264,7 @@ public class CharacterQueryHandler {
             }
 
             //insert difference into log table
-            uqh.setCharacterSilver(charID, userID, difference);
+            uqh.setCharacterSilver(charID, userID, (int) difference);
 
             return true;
 
@@ -328,7 +329,7 @@ public class CharacterQueryHandler {
             rs.next();
 
             String is = rs.getString("UserCharacterAdmin");
-            
+
             if (is == null) {
                 return false;
             } else if ("true".equals(is.toLowerCase()) || "1".equals(is)) {
