@@ -28,7 +28,6 @@ public class CharacterQueryHandler {
      * false if not.
      */
     public boolean registerEstateCharacter(String characterName, String userID) {
-        int amountID;
         try {
             //Check if character is already registered to the Estate system
             sql = "SELECT * FROM UserCharacter "
