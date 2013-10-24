@@ -15,6 +15,8 @@ public class PlotQueryHandler {
     private String sql = "";
     private ArrayList<String> duchyList, qualityList;
 
+    /* Constructor
+     */
     public PlotQueryHandler(Connection c) {
         super();
         con = c;
@@ -664,6 +666,9 @@ public class PlotQueryHandler {
         return false;
     }
 
+    /* This function returns a list of all existing plot entries in the estate
+     * database
+     */
     public ArrayList<String[]> retrieveAllPlots() {
         String sql = "";
         ArrayList<String[]> result = null;
@@ -1215,7 +1220,8 @@ public class PlotQueryHandler {
         return null;
     }
 
-// returns all acces rights for a plot
+    /* Returns all acces rights for a plot
+     */
     public ArrayList<String[]> getAllAccess(int plotID) {
         ArrayList<String[]> result = new ArrayList();
         String[] line;
@@ -1250,7 +1256,8 @@ public class PlotQueryHandler {
         return null;
     }
 
-    //removes a person from a plots access
+    /* Removes a person from a plots access
+     */
     public boolean removeAccess(int PlotID, int userID) {
 
         sql = "DELETE "
@@ -1271,7 +1278,8 @@ public class PlotQueryHandler {
         return false;
     }
 
-    //Returns all the plots that the userID has rights to
+    /* Returns all the plots that the userID has rights to
+     */
     public ArrayList<String[]> AllPlotsIHaveAccess(int userID) {
         ArrayList<String[]> result = new ArrayList();
         String[] line = null;
@@ -1308,7 +1316,9 @@ public class PlotQueryHandler {
         return null;
     }
 
-    //-----------------------------------------------------------------------//
+    /* This function updates the details that are added when a new acre is
+     * added to a certain estate.
+     */
     public void DoExspand(int pId, double Upkeep, int workerMax) {
 
         try {
@@ -1321,6 +1331,8 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function helps to "place" buildings in the visual interface.
+     */
     public void PlaceBuilding(int PlotID, int[][] buildings) {
         sql = "UPDATE Plot SET PlotBuildingArray='" + convertToArray(buildings) + "' WHERE PlotID=" + PlotID;
         try {
@@ -1333,6 +1345,10 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function marks a building token as "placed". Placing a building
+     * is a purely-visual funtion; and does not change any attributes - accept
+     * for the fact that it has already been placed visually.
+     */
     public void MarkBuildingAsPlaced(int BuildLogID) {
         sql = "UPDATE BuildLog SET BuildLogPlaced='1' WHERE BuildLogID=" + BuildLogID;
         try {
@@ -1345,6 +1361,8 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function sets the description of a certain plot.
+     */
     public void setDescription(String desc, int PlotID) {
         sql = "UPDATE Plot SET PlotDescription='" + desc + "' WHERE PlotID=" + PlotID;
         try {
@@ -1357,6 +1375,8 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function returns the description of a given plot.
+     */
     public String getDescription(int PlotID) {
 
         sql = "SELECT PlotDescription FROM Plot WHERE PlotID=" + PlotID;
@@ -1372,6 +1392,8 @@ public class PlotQueryHandler {
         return "";
     }
 
+    /* This function returns the effects of a given happiness number for plots.
+     */
     public ArrayList<String> getHappinessEffect(int happiness) {
         ArrayList<String> result = null;
 
@@ -1400,6 +1422,8 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function sets the name of the given plot.
+     */
     public void setName(int pId, String name) {
         sql = "UPDATE Plot SET PlotEstateName='" + name + "' WHERE PlotID=" + pId;
         try {
@@ -1411,6 +1435,9 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function removes a building from the visual interface so that it
+     * can be placed again/elsewhere.
+     */
     public void unPlaceBuilding(int PlotID, int[][] convertFromArray) {
         sql = "UPDATE Plot SET PlotBuildingArray='" + convertToArray(convertFromArray) + "' WHERE PlotID=" + PlotID;
         try {
@@ -1423,6 +1450,8 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function aids the placing of water tiles on a given plot.
+     */
     public void placeWater(int PlotID, int[][] convertFromArray) {
         sql = "UPDATE Plot SET PlotGroundArray='" + convertToArray(convertFromArray) + "' WHERE PlotID=" + PlotID;
         try {
@@ -1435,6 +1464,9 @@ public class PlotQueryHandler {
         }
     }
 
+    /* This function marks buildings as unplaced so that the building can be
+     * displayed, and thus can be selected, to be placed visually (again).
+     */
     public void MarkBuildingsAsUnPlaced(int buildingToGiveBack, int PlotID) {
 
         sql = "SELECT BuildingID FROM Building WHERE PictureID=" + buildingToGiveBack;
@@ -1465,6 +1497,10 @@ public class PlotQueryHandler {
         }
     }
     
+    /* This function adds a request to a certain plot that will be brought under
+     * the attention of an admin who can then either accept, or decline, the
+     * request.
+     */
     public boolean addRequest(int plotID, String text) {
         
         sql = "INSERT INTO Request VALUES ("
@@ -1482,6 +1518,9 @@ public class PlotQueryHandler {
         return false;
     }
     
+    /* This function returns all outstanding requests that have not been approved
+     * by an admin yet.
+     */
     public ArrayList<String[]> getAllOutstandingRequests() {
         ArrayList<String[]> result = null;
         String[] line = null;
@@ -1510,6 +1549,8 @@ public class PlotQueryHandler {
         return null;
     }
     
+    /* This function "approves" a request from a certain character/plot.
+     */
     public boolean approveRequest(int requestID) {
         
         sql = "UPDATE Request SET RequestApproved = 1 "
@@ -1529,6 +1570,8 @@ public class PlotQueryHandler {
         return false;
     }
     
+    /* This function deletes a request.
+     */
     public boolean deleteRequest(int requestID) {
         sql = "DELETE FROM Request WHERE RequestID = " + requestID;
         

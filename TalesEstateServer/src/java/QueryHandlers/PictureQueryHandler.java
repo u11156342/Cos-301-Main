@@ -21,6 +21,9 @@ public class PictureQueryHandler {
     public BufferedImage[] loadedPictures;
     String folderLocation;
 
+    /* Constructor
+     * Loads all images.
+     */
     public PictureQueryHandler(Connection c){
         super();
         
@@ -32,24 +35,18 @@ public class PictureQueryHandler {
             String line="";
             while((line=reader.readLine())!=null)
             {
-           //     System.out.println(line);
                 if(line.contains("imagepath"))
                 {
                   folderLocation = line.substring(line.indexOf("=")+1);  
                 }
             }
-            
-            //System.out.println(folderLocation);
         } catch (Exception ex) {
-          
             Logger.getLogger(PictureQueryHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-     //   System.out.println(folderLocation);
+        
         con = c;
         pictures = new ArrayList();
 
-        String temp;
-        
         try {
             sql = "SELECT PictureImageName FROM Picture";
             stmt = con.createStatement();
@@ -69,7 +66,6 @@ public class PictureQueryHandler {
         {
             try 
             {
-                //System.out.println("Loading picture " + folderLocation + "\\" + pictures.get(a));
                 loadedPictures[a] = ImageIO.read(new File(folderLocation + pictures.get(a)));
             } catch (IOException ex) {
                 System.out.println("Error when loading pictures in PictureQueryHandler constructor");

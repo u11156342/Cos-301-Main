@@ -11,7 +11,9 @@ public class EventQueryHandler {
     private Statement stmt = null;
     private ResultSet rs = null;
     private String sql = "";
-
+    
+    /* Constructor
+     */
     public EventQueryHandler(Connection c) {
         super();
         con = c;

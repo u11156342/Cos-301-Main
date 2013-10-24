@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class BuildingQueryHandler {
 
@@ -13,6 +14,8 @@ public class BuildingQueryHandler {
     private String sql = "";
     private ArrayList<String> duchyList, industryList, qualityList;
 
+    /* Constructor
+     */
     public BuildingQueryHandler(Connection c) {
         super();
         con = c;
@@ -294,6 +297,8 @@ public class BuildingQueryHandler {
         return null;
     }
 
+    /* This function returns all buildings owned by the provided character id.
+     */
     public ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter(int plotid) {
         ArrayList<String[]> results = new ArrayList();
         String[] line;
@@ -341,7 +346,10 @@ public class BuildingQueryHandler {
         ArrayList<String> plot = null;
         int prereq = 0;
         int workerCount = 0, buildingCount = 0, start = 0;
-
+        StringTokenizer st = null;
+        boolean found = false;
+        String line = "";
+        
         //Get the plot to be checked against
         sql = "SELECT PlotDuchy, PlotGroundArray, PlotBuildingArray, "
                 + "PlotWorkersUsed, PlotWorkerMax, PlotAcreExquisiteMax, "
@@ -480,11 +488,17 @@ public class BuildingQueryHandler {
                     break;
                 }
             case 6: //Water
-                if (plot.get(1).contains("3")) {
+                st = new StringTokenizer(plot.get(1), ",;");
+                found = false;
+                
+                while(((line = st.nextToken()) != null) && (found = false))
+                    if(line.equals("3"));
+                        found = true;
+                        
+                if (found == true)
                     break;
-                } else {
+                else
                     return "water";
-                }
             case 7: //Near water. This check must be done elsewhere as well - 
                 //when they building is placed. i.e. Shipyard.
                 //return values in both cases below; but distinguish between them
@@ -495,15 +509,23 @@ public class BuildingQueryHandler {
                     return "bad-near water";
                 }
             case 8:
-                return "wild land";
-            //break;
+                st = new StringTokenizer(plot.get(1), ",;");
+                found = false;
+                
+                while(((line = st.nextToken()) != null) && (found = false))
+                    if(line.equals("133"));
+                        found = true;
+                        
+                if(found == true)
+                    break;
+                else
+                    return "wild land";
             case 9:
                 if (plot.get(0).equals("Thegnheim")) {
                     break;
                 } else {
                     return "not on bay of maresco";
                 }
-            //break;
             case 10: //Check for suitable source
                 return "suitable source";
             case 11: //Iron mine on plot
