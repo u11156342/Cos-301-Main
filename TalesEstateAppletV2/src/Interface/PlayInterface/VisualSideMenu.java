@@ -47,6 +47,10 @@ public class VisualSideMenu extends JPanel {
         }
 
 
+        if (build.length == 0) {
+            JOptionPane.showMessageDialog(buildingTokens, "Buying a building will allow you to place tokens that will appear in the panel on the right hand side");
+        }
+        
         buildingTokens = new JList(build);
         buildingTokens.setFixedCellHeight(30);
         JScrollPane tokenscroll = new JScrollPane(buildingTokens, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
