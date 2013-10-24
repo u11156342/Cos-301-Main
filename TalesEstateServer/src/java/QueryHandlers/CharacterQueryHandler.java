@@ -207,12 +207,12 @@ public class CharacterQueryHandler {
 
         silver = uqh.getCharacterSilver(charID);
 
-        while (silver > 100) {
+        while (silver >= 100) {
             silver = silver - 100;
             amPlat += 1;
         }
 
-        while (silver > 10) {
+        while (silver >= 10) {
             silver = silver - 10;
             amGold += 1;
         }
