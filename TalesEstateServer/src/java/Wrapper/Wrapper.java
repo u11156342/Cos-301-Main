@@ -106,18 +106,15 @@ public class Wrapper {
 
         html.append("<br/>");
 
-        try
-        {
+        try {
             String replaceAll = handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " ");
-        if (!"".equals(handler.getPlotQH().getDescription(PropertyId))) {
-            html.append("<p class=\"sheading\">Plot Description</p>");
-            html.append(handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " "));
-            html.append("</p>");
-            html.append("<br/>");
-        }
-        }catch(Exception e)
-        {
-            
+            if (!"".equals(handler.getPlotQH().getDescription(PropertyId))) {
+                html.append("<p class=\"sheading\">Plot Description</p>");
+                html.append(handler.getPlotQH().getDescription(PropertyId).replaceAll("~", " "));
+                html.append("</p>");
+                html.append("<br/>");
+            }
+        } catch (Exception e) {
         }
         html.append("<table>");
         html.append("<tr>");
@@ -427,7 +424,7 @@ public class Wrapper {
 
                 for (int i = 0; i < event.size(); i++) {
                     html.append("<table>");
-                    html.append("<tr><td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2]).append("</td></tr>");
+                    html.append("<tr><td class=\"ssheading\">Name:</td><td>").append(event.get(i)[2].replace(".", " ")).append("</td></tr>");
                     html.append("<tr><td class=\"ssheading\">Description:</td><td>").append(event.get(i)[3].replace("~", " ")).append("</td></tr>");
 
                     html.append("<tr>");
@@ -448,6 +445,9 @@ public class Wrapper {
 
                     html.append("<tr>");
                     html.append("<td>Income Effect:</td><td>").append(event.get(i)[9]).append("%</td>");
+                    html.append("</tr>");
+                    html.append("<tr>");
+                    html.append("<td>Defence Effect:</td><td>").append(event.get(i)[10]).append("%</td>");
                     html.append("</tr>");
                     html.append("</table>");
                     html.append("<hr/>");
