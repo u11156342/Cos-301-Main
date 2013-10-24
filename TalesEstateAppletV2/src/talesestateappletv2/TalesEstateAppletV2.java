@@ -65,7 +65,7 @@ public class TalesEstateAppletV2 extends JApplet {
                 tContain.mainframe.pack();
                 tContain.mainframe.setLocationRelativeTo(null);
                 tContain.mainframe.setVisible(true);
-                JOptionPane.showMessageDialog(tContain.mainframe, "Loading, this could take awhile depending on internet connection");
+              //  JOptionPane.showMessageDialog(tContain.mainframe, "Loading, this could take awhile depending on internet connection");
                 tContain.mainapplet.start();
 
             }
