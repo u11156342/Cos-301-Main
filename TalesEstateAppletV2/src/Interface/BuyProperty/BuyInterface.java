@@ -9,12 +9,7 @@ import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author NightFiyah
- */
 public class BuyInterface extends BasePanel {
-
     TransferContainer tain;
 
     public BuyInterface(String name, TransferContainer tc) {
@@ -23,8 +18,6 @@ public class BuyInterface extends BasePanel {
     }
 
     public void init() {
-
-
         BuyMenuPicturePanel picmenu = new BuyMenuPicturePanel(tain.ad.ImageAdapter(4), tain.JFXPANEL_WIDTH_INT, tain.JFXPANEL_HEIGHT_INT);
         ((JPanel) picmenu).setPreferredSize(new Dimension(picmenu.w, picmenu.h));
         final JScrollPane PicMenuScrollPane = new JScrollPane(picmenu);
@@ -33,10 +26,8 @@ public class BuyInterface extends BasePanel {
         setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
         PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue() + 500);
         PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getMaximum() / 4);
-
         MouseListener buyPickClicked;
         buyPickClicked = new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 String duchy = "";
@@ -155,11 +146,8 @@ public class BuyInterface extends BasePanel {
                     abby = "Swardtoft";
                 }
 
-
-
                 String[] choices = {"Poor", "Fine", "Exquisite"};
                 String picked;
-
                 // firs check avail if thers is open show this
                 if (!"".equals(abby) && !"".equals(duchy)) {
                     picked = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Choose what quality : ", "Chose " + abby + " located in " + duchy, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
@@ -169,37 +157,27 @@ public class BuyInterface extends BasePanel {
                     }
                     result = tain.rdb.queryPlotPrice(duchy, picked);
                     int stat;
-                    //find out how much cash the dude has
                     String cname = tain.CharacterName;
                     System.out.println(cname);
                     ArrayList<String> characterAmounts = tain.rdb.getCharacterAmounts(tain.CharacterName);
-                    //user cash in silver
                     int userCash = Integer.parseInt(characterAmounts.get(0)) * 100 + Integer.parseInt(characterAmounts.get(1)) * 10 + Integer.parseInt(characterAmounts.get(2));
                     int buildingCost = Integer.parseInt(result.get(0)[0]) * 100 + Integer.parseInt(result.get(0)[1]) * 10 + Integer.parseInt(result.get(0)[2]);
                     stat = JOptionPane.showConfirmDialog(PicMenuScrollPane, "Will cost: Platinum thrones:" + result.get(0)[0] + " Gold crowns:" + result.get(0)[1] + " Silver shields:" + result.get(0)[2], "Purchase Confirmation", JOptionPane.YES_NO_OPTION);
 
 
                     if (stat == 0) {
-
-                        // System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
                         if (userCash >= buildingCost) {
                             int workerMax = 0;
                             double Upkeep = 0;
-                            System.out.println("CASH BEFORE = " + userCash);
-                            System.out.println("COST " + buildingCost);
-                            //update the bros cash
                             userCash = userCash - buildingCost;
                             int nplat = userCash / 100;
                             userCash = userCash - nplat * 100;
                             int ngold = userCash / 10;
                             userCash = userCash - ngold * 10;
                             int nsilver = userCash;
-                            System.out.println("CASH AFTER " + (nplat) + (ngold) + nsilver);
                             tain.rdb.modifyAmount(tain.CharacterName, nplat, ngold, nsilver);
-
                             Generator gen = new Generator(3);
                             int quality;
-
                             int[][] groundArray;
 
                             switch (picked) {
@@ -216,10 +194,8 @@ public class BuyInterface extends BasePanel {
                                     workerMax = 80;
                                     break;
                             }
-
                             groundArray = gen.generate(duchy, "", quality);
                             int[][] buildingArray = null;
-
                             buildingArray = new int[3][3];
 
                             for (int a = 0; a < 3; a++) {
@@ -231,9 +207,10 @@ public class BuyInterface extends BasePanel {
 
                             if ("".equals(plotName) || plotName == null) {
                                 JOptionPane.showMessageDialog(PicMenuScrollPane, "Please chose a name for your estate");
-                                return;
+                                while ("".equals(plotName) || plotName == null) {
+                                    plotName = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Wat is the name of your property?");
+                                }
                             }
-
                             plotName = plotName.replace(";", ".");
                             plotName = plotName.replace("/", ".");
                             plotName = plotName.replace(" ", ".");
@@ -267,7 +244,6 @@ public class BuyInterface extends BasePanel {
         };
 
         PicMenuScrollPane.addMouseMotionListener(new MouseMotionListener() {
-
             int tempx = 0;
             int tempy = 0;
 
@@ -400,26 +376,21 @@ public class BuyInterface extends BasePanel {
                     duchy = "Rotheim";
                     abby = "Swardtoft";
                 }
-
-
                 if (!"".equals(duchy)) {
                     setCursor(new Cursor(Cursor.HAND_CURSOR));
                 } else {
                     setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 }
-
             }
         });
 
         PicMenuScrollPane.addMouseListener(buyPickClicked);
         add(PicMenuScrollPane, BorderLayout.CENTER);
-
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, "MainMenu");

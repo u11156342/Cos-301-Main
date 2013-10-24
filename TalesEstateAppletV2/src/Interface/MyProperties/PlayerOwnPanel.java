@@ -45,8 +45,6 @@ public class PlayerOwnPanel extends JPanel {
         setLayout(new GridBagLayout());
         setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
         statusArea.setEditable(false);
-
-
     }
 
     public void init(final TransferContainer tc, final boolean own) {
@@ -92,7 +90,7 @@ public class PlayerOwnPanel extends JPanel {
         text.append("<table>");
         text.append("<tr><td class=\"sheading\">Estate Name:</td><td>").append(plotname).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Duchy:</td><td>").append(duchy).append("</td></tr>");
-        text.append("<tr><td class=\"sheading\">Countie:</td><td>").append(county).append("</td></tr>");
+        text.append("<tr><td class=\"sheading\">County:</td><td>").append(county).append("</td></tr>");
         text.append("<tr><td class=\"sheading\">Estate funds</td></tr>");
         text.append("<tr><td>Platinum throne:</td><td>").append(amount.get(0)).append("</td></tr>");
         text.append("<tr><td>Gold crown:</td><td>").append(amount.get(1)).append("</td></tr>");

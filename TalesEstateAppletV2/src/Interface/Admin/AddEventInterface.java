@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.*;
@@ -23,6 +19,8 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+
+//Interface used for adding events
 public class AddEventInterface extends JPanel {
 
     JTextPane description = new JTextPane();
@@ -59,23 +57,11 @@ public class AddEventInterface extends JPanel {
         defmod.setText("0          ");
         happinessmod.setSelectedIndex(5);
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
-
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
         descriptionPane = new JScrollPane(description, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         descriptionPane.setPreferredSize(new Dimension(400, 200));
         descriptionPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
-//        incomemod.setPreferredSize(new Dimension(100, 40));
-//        platmod.setPreferredSize(new Dimension(100, 40));
-//        goldmod.setPreferredSize(new Dimension(100, 40));
-//        silmod.setPreferredSize(new Dimension(100, 40));
-//        defmod.setPreferredSize(new Dimension(100, 40));
-//        add.setPreferredSize(new Dimension(100, 40));
-//        cansel.setPreferredSize(new Dimension(100, 40));
-
         JLabel def = new JLabel("Current defence : " + CurrentDefence);
 
         c.gridy = 0;
@@ -84,7 +70,6 @@ public class AddEventInterface extends JPanel {
         c.gridwidth = 2;
         c.gridy = 1;
         add(des, c);
-        //description.setPreferredSize(new Dimension(500, 300));
         c.gridwidth = 6;
         add(descriptionPane, c);
         c.gridy = 2;
@@ -108,17 +93,13 @@ public class AddEventInterface extends JPanel {
         c.gridy = 8;
         c.gridwidth = 2;
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 String ename = JOptionPane.showInputDialog("What is the events name? ");
-
                 try {
                     String desu = description.getText();
-
                     String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=";
-
                     String validurl = "";
                     for (int i = 0; i < desu.length(); i++) {
 
@@ -132,7 +113,6 @@ public class AddEventInterface extends JPanel {
                     if ("".equals(ename)) {
                         ename = "-";
                     }
-
                     if ("".equals(validurl)) {
                         validurl = "-";
                     }
@@ -142,7 +122,6 @@ public class AddEventInterface extends JPanel {
                     int h = 0;
                     int i = 0;
                     int d = 0;
-
 
                     boolean paramCheck = true;
                     try {
@@ -192,7 +171,6 @@ public class AddEventInterface extends JPanel {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(platmod, "An error has occured, please make sure all data types are correct");
                 }
-
             }
         });
 
@@ -200,9 +178,5 @@ public class AddEventInterface extends JPanel {
         add.setPreferredSize(new Dimension(150, 60));
         c.gridwidth = 2;
         add(add, c);
-
-
-
-
     }
 }

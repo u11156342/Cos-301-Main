@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 
+//Converts datastructures into the formats are needed for url transfering
+
 public class Converter {
 
     public ArrayList<String[]> ArrFromUrl(String link) {

@@ -20,37 +20,27 @@ public class CharSelectMenu extends BasePanel {
     JComboBox chars;
     String[] CharList = null;
     JButton btn;
-    // String UserId = "3b98e790-cc62-4ae4-97d0-4179e8089258";  //luke
-    ///  String UserId = "CFC3572A-ACE5-4C77-9481-5DE31FBA1C76";
     String UserId = "";
 
     public CharSelectMenu(String name, TransferContainer tc) {
         super(name, tc);
-
         CookieReader cr = new CookieReader(tc);
-
         while (cr.userIDs.isEmpty()) {
-            JOptionPane.showMessageDialog(btn, "You need to log into the site first");
+            JOptionPane.showMessageDialog(btn, "You need to log into the site first, or restart browser");
             return;
         }
-
-
         float[] c1 = java.awt.Color.RGBtoHSB(142, 117, 92, null);
         setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
         UserId = cr.userIDs.get(cr.userIDs.size() - 1);
-
         JPanel container = new JPanel();
         container.setBackground(java.awt.Color.getHSBColor(c1[0], c1[1], c1[2]));
-        //container.setBackground(java.awt.Color.WHITE);
         BufferedImage tobeIcon = tc.ad.ImageAdapter(6);
         ImageIcon ic = new ImageIcon(tobeIcon);
-
         btn = new JButton(ic);
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
         repaint();
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         btn.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -86,14 +76,12 @@ public class CharSelectMenu extends BasePanel {
                 CharList[a] = ch.get(a);
             }
         }
-
         c.gridy = 0;
         c.gridx = 1;
         JButton temp = new JButton(new ImageIcon(tc.ad.ImageAdapter(11)));
         temp.setContentAreaFilled(false);
         temp.setBorderPainted(false);
         container.add(temp, c);
-
         chars = new JComboBox(CharList);
         chars.setFont(new Font("Dialog", Font.HANGING_BASELINE, 24));
         c.gridy = 3;
@@ -111,13 +99,11 @@ public class CharSelectMenu extends BasePanel {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
                 tc.CharacterName = CharList[chars.getSelectedIndex()];
                 tc.rdb.registerEstateCharacter(tc.CharacterName, UserId);
                 tc.CharacterID = tc.rdb.retrieveCharacterID(tc.CharacterName);
                 tc.CharacterName = tc.rdb.retrieveCharacterName(tc.CharacterID);
                 System.out.println(tc.CharacterID);
-                //ref.showMenu(tc);
                 tc.MainMenu.init(tc);
                 tc.MainMenu.addNextActionListener(tc);
                 tc.cardlayout.show(tc.contentpane, "MainMenu");

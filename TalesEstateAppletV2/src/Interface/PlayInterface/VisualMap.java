@@ -119,8 +119,6 @@ public class VisualMap extends JFXPanel {
     @Override
     public void paint(final Graphics g) {
 
-
-
         globalwidth = wdOfcell * tileStates.length;
         globalheight = globalheight * tileStates.length;
         gridsize = tileStates.length;
@@ -128,8 +126,6 @@ public class VisualMap extends JFXPanel {
         if (tempplacinggrid == null) {
             tempplacinggrid = new int[tileStates.length][tileStates.length];
         }
-
-
         int xc = 0;
         int yc = 0;
         g2d = (Graphics2D) g.create();
@@ -197,16 +193,12 @@ public class VisualMap extends JFXPanel {
                 scroller.getVerticalScrollBar().setValue(scroller.getVerticalScrollBar().getValue() + (tempy - e.getY()) / 2);
                 tempy = e.getY();
             }
-            // some idea of how we can show placing
-            // bug grid draws over the it
-            // very bad performance
 
             @Override
             public void mouseMoved(MouseEvent e) {
                 placed = false;
                 tempx = e.getX();
                 tempy = e.getY();
-
 
                 int clickedx = e.getX();
                 int clickedy = e.getY();
@@ -221,7 +213,6 @@ public class VisualMap extends JFXPanel {
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
-
                             if (tc.BuildingRef != -1) {
                                 if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
 
@@ -234,8 +225,6 @@ public class VisualMap extends JFXPanel {
                                     tempplacinggrid[x][y] = tc.BuildingRef;
                                 }
                             }
-
-
 
                             valid = true;
                             break;
@@ -258,15 +247,12 @@ public class VisualMap extends JFXPanel {
 
                 }
                 repaint();
-
             }
         });
 
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
-
 
                 int clickedx = e.getX();
                 int clickedy = e.getY();
@@ -283,7 +269,6 @@ public class VisualMap extends JFXPanel {
                             if (e.getButton() == 1) {
 
                                 if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
-
                                     gridstates[x][y] = tc.BuildingRef;
                                     //builds
                                     if (!placed) {
@@ -299,12 +284,9 @@ public class VisualMap extends JFXPanel {
                                     }
                                     return;
                                 }
-
-
                                 repaint();
                             } else if (e.getButton() == 3) {
                                 //building unplacing
-
                                 if (gridstates[x][y] == -1 || gridstates[x][y] == 3) {
                                 } else {
 
@@ -314,7 +296,6 @@ public class VisualMap extends JFXPanel {
                                         gridstates[x][y] = 0;
                                         tc.rdb.unPlaceBuilding(PlotID, gridstates);
                                         tc.rdb.MarkBuildingsAsUnPlaced(PlotID, buildingToGiveBack);
-
                                         PlayInterface card = tc.Cmanager.getPlayInterfacesCard();
                                         card.init(tc, PlotID);
                                         tc.cardlayout.show(tc.contentpane, card.getName());
@@ -331,8 +312,6 @@ public class VisualMap extends JFXPanel {
                 }
 
                 found = false;
-
-
             }
 
             @Override
@@ -351,10 +330,6 @@ public class VisualMap extends JFXPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
-
-
-
-
     }
 
     void Build() {

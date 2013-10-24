@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -18,6 +13,8 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+
+// Adds an event
 public class AddEvent extends BasePanel {
 
     public AddEvent(String name,TransferContainer tc) {
@@ -25,7 +22,7 @@ public class AddEvent extends BasePanel {
     }
 
     public void init(final TransferContainer tc, final int PID,int def) {
-        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(45)));
+        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(116)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
 

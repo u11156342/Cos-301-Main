@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.*;
@@ -18,6 +14,7 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+// Admin menus interface
 public class AdminMenuInterface extends JPanel {
 
     JButton search = new JButton("Search");
@@ -44,9 +41,7 @@ public class AdminMenuInterface extends JPanel {
         Requests.setContentAreaFilled(false);
         Requests.setBorderPainted(false);
         Requests.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
         search.addActionListener(new ActionListener() {
 
             @Override
@@ -57,16 +52,10 @@ public class AdminMenuInterface extends JPanel {
             }
         });
         Requests.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 RequestInterface card = tc.Cmanager.getRequestInterfaceCard();
-
-
                 ArrayList<String[]> allRequests = tc.rdb.getAllOutstandingRequests();
-
-
                 if (allRequests.isEmpty()) {
                     JOptionPane.showMessageDialog(Requests, "There are currently no requests.");
                     return;
@@ -78,7 +67,6 @@ public class AdminMenuInterface extends JPanel {
         });
 
         ManageCharacterGold.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) {
                 ManageGold mg = tc.Cmanager.getManageGoldIntersCard();
@@ -89,16 +77,12 @@ public class AdminMenuInterface extends JPanel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
-
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 1;
         add(search, c);
         c.gridy = 2;
         add(ManageCharacterGold, c);
-
         GlobalStatus.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.gstatus.refresh(tc);
@@ -107,7 +91,6 @@ public class AdminMenuInterface extends JPanel {
         });
         c.gridy = 3;
         add(GlobalStatus, c);
-
         c.gridy = 4;
         add(Requests, c);
     }

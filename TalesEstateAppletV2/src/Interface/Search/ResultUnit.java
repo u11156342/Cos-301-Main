@@ -1,16 +1,11 @@
 package Interface.Search;
 
 import Interface.BrowseInterface.BrowseInterface;
-import Interface.BrowseInterface.GameBrowseGrid;
 import Interface.MyProperties.PlayerOwnPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,9 +26,6 @@ public class ResultUnit extends JPanel {
     public int[][] buildings;
 
     ResultUnit(int w, ResultProperties aThis) {
-
-        // setBorder(BorderFactory.createLineBorder(Color.black));
-
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -45,9 +37,6 @@ public class ResultUnit extends JPanel {
         JScrollPane scrollText = new JScrollPane(statusArea);
         add(scrollText, c);
         c.gridx = 2;
-        // RestFullAdapter PicAdapter = new RestFullAdapter();
-        //  Browse = new JButton(new ImageIcon(PicAdapter.ImageAdapter(20)));
-        // Browse.setContentAreaFilled(false);
         Browse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         add(Browse, c);
@@ -120,7 +109,7 @@ public class ResultUnit extends JPanel {
         html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18)).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Duchy</td><td> ").append(retrievePlotDetails.get(3)).append("</td></tr>");
         try {
-            html.append("<tr><td class=\"ssheading\">Countie</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
+            html.append("<tr><td class=\"ssheading\">County</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
         } catch (Exception e) {
         }
         html.append("<tr><td class=\"ssheading\">Description</td><td> ").append(tc.rdb.getDescription(propertyID)).append("</td></tr>");
@@ -129,21 +118,11 @@ public class ResultUnit extends JPanel {
         html.append("</html>");
 
         statusArea.setText(html.toString());
-
-
-
-
-
-        // statusArea.append("Plot Size : " + (Integer.parseInt(retrievePlotDetails.get(4)))+ "\n");
-
-
-
         Browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BrowseInterface bi = tc.Cmanager.getBrowseInterfacesCard();
                 tc.lastAdminBrowse = false;
-                //public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz)
                 bi.init(tc, propertyID, size, tiles, buildings);
                 tc.cardlayout.show(tc.contentpane, bi.getName());
 

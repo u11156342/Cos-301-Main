@@ -1,6 +1,5 @@
 package Interface.PlayInterface;
 
-import Connections.RestFullAdapter;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;

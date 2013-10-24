@@ -1,9 +1,7 @@
 package Interface.Search;
 
-import Connections.RestFullAdapter;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -40,7 +38,6 @@ public class SearchInterface extends BasePanel {
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "MainMenu");

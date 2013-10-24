@@ -6,6 +6,7 @@ package Interface.PlayInterface;
 
 import static junit.framework.Assert.assertFalse;
 import junit.framework.TestCase;
+import talesestateappletv2.TransferContainer;
 
 /**
  *
@@ -32,7 +33,8 @@ public class TileManagerTest extends TestCase {
      */
     public void testGet() throws Exception {
         System.out.println("get");
-        TileManager instance = new TileManager();
+        TransferContainer tc=new TransferContainer();
+        TileManager instance = new TileManager(tc);
         assertFalse(null==instance.get(1));
         assertFalse(null==instance.get(2));
         assertFalse(null==instance.get(3));

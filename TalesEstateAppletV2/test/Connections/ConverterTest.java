@@ -1,16 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Connections;
 
 import java.util.ArrayList;
 import junit.framework.TestCase;
 
-/**
- *
- * @author NightFiyah
- */
+
 public class ConverterTest extends TestCase {
     
     public ConverterTest(String testName) {
@@ -27,7 +20,7 @@ public class ConverterTest extends TestCase {
         super.tearDown();
     }
 
-       /**
+    /**
      * Test of ArrFromUrl method, of class Converter.
      */
     public void testArrFromUrl() {

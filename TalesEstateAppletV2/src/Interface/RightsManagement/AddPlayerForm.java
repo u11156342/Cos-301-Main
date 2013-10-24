@@ -1,26 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.RightsManagement;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author Fiyah
- */
 public class AddPlayerForm extends JPanel {
 
     JLabel pname = new JLabel("Players name : ");
@@ -39,75 +32,61 @@ public class AddPlayerForm extends JPanel {
     JCheckBox token_j = new JCheckBox();
 
     public AddPlayerForm(final String playerName, final TransferContainer tc, final int PlotID) {
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         name = new JLabel(playerName);
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
         c.gridy = 0;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(pname, c);
         c.gridx = 1;
         name.setPreferredSize(new Dimension(100, 40));
         add(name, c);
-
         c.gridy = 1;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(deposit, c);
         c.gridx = 1;
         add(deposit_j, c);
-
-
         c.gridy = 2;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(withdraw, c);
         c.gridx = 1;
         add(withdraw_j, c);
-
         c.gridy = 3;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(building, c);
         c.gridx = 1;
         add(building_j, c);
-
         c.gridy = 4;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(Plot_exspansion_rights, c);
         c.gridx = 1;
         add(Plot_exspansion_rights_j, c);
-
         c.gridy = 5;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(status, c);
         c.gridx = 1;
         add(status_j, c);
-
         c.gridy = 6;
-
         c.insets = new Insets(10, 10, 10, 10);
         c.gridx = 0;
         add(token, c);
         c.gridx = 1;
         add(token_j, c);
-
         c.gridy = 7;
         c.gridwidth = 2;
         c.gridx = 0;
-        JButton add = new JButton("Add");
+        JButton add = new JButton(new ImageIcon(tc.ad.ImageAdapter(119)));
+        add.setContentAreaFilled(false);
+        add.setBorderPainted(false);
+        add.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -146,20 +125,5 @@ public class AddPlayerForm extends JPanel {
         add(add, c);
 
         c.gridy = 8;
-        JButton Cansel = new JButton("Cansel");
-        Cansel.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tc.cardlayout.show(tc.contentpane,tc.Cmanager.RightsInterfaces[tc.Cmanager.currentRightsInterfaceCard].getName());
-            }
-        });
-        add(Cansel, c);
-
-
-
-
-
-
     }
 }

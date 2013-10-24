@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -17,6 +12,7 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+//Detailed status panel
 public class DetailedStatus extends BasePanel {
 
     public JTextPane textZone = new JTextPane();
@@ -30,12 +26,9 @@ public class DetailedStatus extends BasePanel {
 
         JScrollPane stats = new JScrollPane(textZone);
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
         stats.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
         textZone.setContentType("text/html");
         String t = tc.rdb.getSuperStatusReport(Pid);
-
         textZone.setText(t);
         textZone.setEditable(false);
 
@@ -45,16 +38,12 @@ public class DetailedStatus extends BasePanel {
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());
             }
         });
         add(back, BorderLayout.SOUTH);
-
-
-
 
     }
 }

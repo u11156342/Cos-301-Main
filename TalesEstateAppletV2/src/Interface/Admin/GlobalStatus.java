@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -21,12 +16,13 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+//Global status page
 public class GlobalStatus extends BasePanel {
 
     public JTextPane textZone = new JTextPane();
 
-    public GlobalStatus(String name,TransferContainer tc) {
-        super(name,tc);
+    public GlobalStatus(String name, TransferContainer tc) {
+        super(name, tc);
     }
 
     public void init(final TransferContainer tc) {
@@ -35,15 +31,11 @@ public class GlobalStatus extends BasePanel {
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
         add(Title, BorderLayout.NORTH);
-
         textZone.setEditable(false);
         JScrollPane scrollText = new JScrollPane(textZone);
         scrollText.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
         add(scrollText, BorderLayout.CENTER);
-
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);

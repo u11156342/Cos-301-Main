@@ -2,7 +2,6 @@ package Connections;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 import talesestateappletv2.TransferContainer;
 
 public class RestFullAdapter {
@@ -23,6 +21,7 @@ public class RestFullAdapter {
     ArrayList donePics = new ArrayList();
     TransferContainer tain;
 
+    //Used for managing pictures
     public RestFullAdapter(TransferContainer tc) {
         tain = tc;
     }
@@ -43,11 +42,9 @@ public class RestFullAdapter {
             donePics.add(id);
             URL url = new URL("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id);
             System.out.println("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id);
-            //  System.out.println(new String(ciphertext));
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String name = in.readLine();
             name = name.replaceAll(" ", "%20");
-            // System.out.println("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name);
             BufferedImage t;
             t = ImageIO.read(new URL("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name));
             Picture temp = new Picture();
@@ -63,7 +60,6 @@ public class RestFullAdapter {
         } catch (IOException ex) {
             Logger.getLogger(RestFullAdapter.class.getName()).log(Level.WARNING, null, ex);
         }
-//        JOptionPane.showMessageDialog(tain.mainapplet,"null ");
         return null;
     }
 }

@@ -11,10 +11,7 @@ import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author Fiyah
- */
+
 public class CharacterLog extends BasePanel {
 
     public JTextPane textZone = new JTextPane();

@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package talesestateappletv2;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author user
- */
 public class CookieReader {
 
     String User = System.getProperty("user.name");
@@ -30,17 +21,6 @@ public class CookieReader {
 
         String temp = "";
         int counter = 0;
-//        for (int i = 0; i < User.length(); i++) {
-//
-//            if (counter < 3) {
-//                temp = temp + User.charAt(i);
-//            }
-//
-//            if (User.charAt(i) == '\\') {
-//                counter++;
-//            }
-//        }
-        // System.out.println(temp);
         TryRead("C:\\Users\\" + User + temp + Ie, 0);
         TryRead("C:\\Users\\" + User + temp + FireFox, 1);
         TryRead("C:\\Users\\" + User + temp + Chrome, 2);
@@ -57,14 +37,9 @@ public class CookieReader {
         userID = "";
         BufferedReader brFireFox = null;
 
-
         try {
 
-
             String sCurrentLine;
-
-            //  brFireFox = new BufferedReader(new FileReader(path));
-
             if (num == 0) {
                 System.out.println(path);
                 brFireFox = new BufferedReader(new FileReader(path));
@@ -132,29 +107,14 @@ public class CookieReader {
                 brFireFox = new BufferedReader(new FileReader(path));
 
                 while ((sCurrentLine = brFireFox.readLine()) != null) {
-
-                    //  System.out.println(sCurrentLine); 
-                    //opera.
-
                     if (sCurrentLine.contains("UserSettings")) {
-                        // System.out.println(sCurrentLine);
                         String newS = sCurrentLine;
-
                         int pos = newS.indexOf("UserID");
                         newS = newS.substring(pos, pos + 43);
-                        //int pos2 = newS.indexOf("www.teana.co.za");
-
-                        // System.out.println(newS);
-                        //  newS = newS.substring(0, pos2);
-
-                        // System.out.println(newS);
-
                         StringTokenizer tokens = new StringTokenizer(newS, "=");
                         tokens.nextToken();
                         userID = tokens.nextToken();
                         userIDs.add(userID);
-
-
                     }
 
                 }
@@ -166,7 +126,6 @@ public class CookieReader {
         } catch (Exception e) {
             System.out.println(path);
             System.out.println(e.getMessage());
-            //  JOptionPane.showMessageDialog(tain.mainapplet, e.getMessage());
         } finally {
             try {
                 if (brFireFox != null) {

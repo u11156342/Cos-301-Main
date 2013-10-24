@@ -25,17 +25,13 @@ public class MainMenu extends BasePanel {
 
     public MainMenu(String name, TransferContainer tc, TalesEstateAppletV2 me) {
         super(name, tc);
-        applet = me;
-       
+        applet = me;       
         setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
-
     }
 
     public void init(TransferContainer tc) {
 
-
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(13)));
-
         pman = new JButton(new ImageIcon(tc.ad.ImageAdapter(44)));
         pman.setContentAreaFilled(false);
         pman.setBorderPainted(false);
@@ -57,60 +53,42 @@ public class MainMenu extends BasePanel {
         btn4.setBorderPainted(false);
         btn4.setCursor(new Cursor(Cursor.HAND_CURSOR));
         JPanel container = new JPanel();
-        container.setLayout(new GridBagLayout());
-
-        
+        container.setLayout(new GridBagLayout());        
         container.setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc.c1[1],tc.c1[2]));
         Font f = new Font("Dialog", Font.HANGING_BASELINE, 24);
-
-
         JScrollPane MainMenuScrollPane = new JScrollPane(container);
         MainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
         c.gridy = 0;
         c.insets = new Insets(0, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 4;
-
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
         container.add(Title, c);
-
-
-
         btn.setFont(f);
-
         c.gridy = 1;
         c.insets = new Insets(70, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
-
         container.add(pman, c);
-
         c.gridy = 2;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
-
         container.add(btn, c);
         btn2.setFont(f);
-
         c.gridy = 3;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
-
         container.add(btn2, c);
         btn3.setFont(f);
-
         c.gridy = 4;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
         c.gridwidth = 2;
         container.add(btn3, c);
-
         btn4.setFont(f);
-
         c.gridy = 5;
         c.insets = new Insets(20, 0, 0, 0);
         c.gridx = 1;
@@ -134,15 +112,12 @@ public class MainMenu extends BasePanel {
             public void actionPerformed(ActionEvent e) {
                 tc.pmI.init(tc);
                 tc.cardlayout.show(tc.contentpane, "PlayerMan");
-
             }
         });
 
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
-
                 MyPropertiesInterface card = tc.Cmanager.getMyPropertiesCard();
                 card.init();
                 tc.cardlayout.show(tc.contentpane, card.getName());

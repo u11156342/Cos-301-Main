@@ -45,7 +45,6 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Manufacturing = null;
         ArrayList<String[]> Services = null;
         ArrayList<String[]> Improvements = null;
-
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural, tr);
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -57,20 +56,17 @@ public class BuildtabPanel extends BasePanel {
         tabbedPane.addTab("Services", null, panel4);
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements, tr);
         tabbedPane.addTab("Improvements", null, panel5);
-
         add(tabbedPane, BorderLayout.CENTER);
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
             }
         });
-
         add(back, BorderLayout.SOUTH);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
@@ -82,7 +78,6 @@ public class BuildtabPanel extends BasePanel {
         panel.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
         buildingIn.setPreferredSize(new Dimension(500, 300));
         buildingIn.setContentType("text/html");
-
         String[] buildingsList;
         final int[] buildingsID;
         if (arr == null) {
@@ -91,7 +86,6 @@ public class BuildtabPanel extends BasePanel {
         results1 = arr;
         buildingsList = new String[results1.size()];
         buildingsID = new int[results1.size()];
-
         for (int a = 0; a < results1.size(); a++) {
             if ("0".equals(results1.get(a)[2])) {
                 buildingsID[a] = Integer.parseInt(results1.get(a)[0]);
@@ -106,7 +100,6 @@ public class BuildtabPanel extends BasePanel {
 
         final JComboBox buildings = new JComboBox(buildingsList);
         result2 = tain.rdb.retrieveBuildingDetailsById(buildingsID[0]);
-
         html.append("<html>");
         html.append("<head>");
         html.append("<style type=\"text/css\">");
@@ -151,7 +144,6 @@ public class BuildtabPanel extends BasePanel {
                 + "}");
         html.append("</style>");
         html.append("</head>");
-
         html.append("<body>");
         html.append("<table>");
         html.append("<tr><td>Building Cost : </td><td>").append(result2.get(0)[4]).append(" Gold crowns</td></tr>").append("<br>");
@@ -166,7 +158,6 @@ public class BuildtabPanel extends BasePanel {
         html.append("</table>");
         html.append("</body>");
         html.append("</html>");
-
 
         buildingIn.setText(html.toString());
         buildingIn.setEditable(false);
@@ -268,50 +259,29 @@ public class BuildtabPanel extends BasePanel {
                 } else {
 
                     boolean buySucess = true;
-
-                    //do the building need the following values
-                    //1 character iD
-                    int charsId = tain.CharacterID;
-                    //2 Building id
-
                     ArrayList<String[]> r2s = tain.rdb.retrieveBuildingDetailsById(id);
                     //3 Time Build (Prop gonna have to make the final value when the building will be completed
                     int WeeksToBuild = Integer.parseInt(r2s.get(0)[8]);
-
                     //now we need to do checks to see if the person can indeed build on the property;
                     // All the reqs the building has
                     double acresNeeded = Double.parseDouble(r2s.get(0)[9]);
-
                     int WorkersNeeded = Integer.parseInt(r2s.get(0)[7]);
-
                     double BuildingCost = Double.parseDouble(r2s.get(0)[4]);
-
                     double BuildingSetupCost = Double.parseDouble(r2s.get(0)[5]);
-
                     //the users current plot specs
-
                     // setupcost included in building cost
                     BuildingCost = BuildingCost + BuildingSetupCost;
-
                     ArrayList<String> retrievePlotDetails = wrapper.retrievePlotDetails(PlotID);
-
                     int PlotWorkerMax = Integer.parseInt(retrievePlotDetails.get(10));
                     int PlotWorkersUsed = Integer.parseInt(retrievePlotDetails.get(9));
-
-
                     int poormax = Integer.parseInt(retrievePlotDetails.get(16));
                     double poorused = Double.parseDouble(retrievePlotDetails.get(15));
-
                     int finemax = Integer.parseInt(retrievePlotDetails.get(14));
                     double fineused = Double.parseDouble(retrievePlotDetails.get(13));
-
                     int exmax = Integer.parseInt(retrievePlotDetails.get(12));
                     double exused = Double.parseDouble(retrievePlotDetails.get(11));
-
                     int checkCounter = 0;
-
                     String preReq = r2s.get(0)[3];
-
                     if ("Poor land".equals(preReq)) {
 
                         if (poorused == poormax) {
@@ -368,10 +338,8 @@ public class BuildtabPanel extends BasePanel {
 
                     //money check
                     ArrayList<String> currentAmount = tain.rdb.getCurrentAmount(PlotID);
-
                     // amount if money in the plot
                     int silver = Integer.parseInt(currentAmount.get(0)) * 100 + Integer.parseInt(currentAmount.get(1)) * 10 + Integer.parseInt(currentAmount.get(2));
-
                     // need to look at setup cost tho/// added it to buildcost
                     if ((BuildingCost * 10) > silver) {
                         JOptionPane.showMessageDialog(ContentPane, "You need more money to buy this building");
@@ -379,38 +347,26 @@ public class BuildtabPanel extends BasePanel {
                         checkCounter++;
                     }
                     //time check,need to use log see what is build and how much time is left
-
                     // all his current buildings in the log
                     ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter = tain.rdb.retrieveAllBuildingsOwnedByCharacter(tain.CharacterID, PlotID);
-
-                    //
-
                     int currentUsedTime = 0;
                     for (int i = 0; i < retrieveAllBuildingsOwnedByCharacter.size(); i++) {
                         if ("0".equals(retrieveAllBuildingsOwnedByCharacter.get(i)[2])) {
                             currentUsedTime = currentUsedTime + Integer.parseInt(retrieveAllBuildingsOwnedByCharacter.get(i)[1]);
                         }
                     }
-
-
                     if ((currentUsedTime + WeeksToBuild) > 4) {
                         JOptionPane.showMessageDialog(ContentPane, "No more construction time remains for this month");
                     } else {
                         checkCounter++;
                     }
-
-
-
                     if (buySucess && checkCounter == 4) {
                         //if this is reached then the person has all the req to build,need to update all the values
                         //log the building
                         tain.rdb.logBuildingBuilt(tain.rdb.retrieveCharacterID(retrievePlotDetails.get(1)), buildingsID[buildings.getSelectedIndex()], PlotID);
                         // now we need to consume the acres
-
                         // consume workers
-
                         int newworker = PlotWorkersUsed + WorkersNeeded;
-
                         if ("Poor land".equals(preReq)) {
                             System.out.println("Poor land");
                             //poor use
@@ -426,7 +382,6 @@ public class BuildtabPanel extends BasePanel {
                             tain.rdb.modifyPlot(PlotID, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), newfineused, Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
                             tain.rdb.useAcresOnPlot(PlotID, 0, acresNeeded, 0);
                         } else if ("Exquisite land".equals(preReq)) {
-
                             System.out.println("Exquisite land");
                             //ex use
                             double newexused = exused + acresNeeded;
@@ -442,13 +397,12 @@ public class BuildtabPanel extends BasePanel {
                                 //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                                 tain.rdb.modifyPlot(PlotID, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), newpoorused, Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
                                 tain.rdb.useAcresOnPlot(PlotID, 0, 0, acresNeeded);
-
                             } else if ((fineused + acresNeeded) <= finemax) {
                                 //fine use
                                 double newfineused = fineused + acresNeeded;
                                 //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                                 tain.rdb.modifyPlot(PlotID, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), newfineused, Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
-                                tain.rdb.useAcresOnPlot(PlotID, 0, acresNeeded, 0);
+                               tain.rdb.useAcresOnPlot(PlotID, 0, acresNeeded, 0);
 
                             } else if ((exused + acresNeeded) <= exmax) {
                                 //ex use
@@ -456,12 +410,8 @@ public class BuildtabPanel extends BasePanel {
                                 //int plotId, String characterName, String plotAmount, String duchyName, int sizeValue, int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome, int workersUsed, int workerMax, double exquisiteUsed, int exquisiteMax, double fineUsed, int fineMax, double poorUsed, int poorMax) {
                                 tain.rdb.modifyPlot(PlotID, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), Integer.parseInt(retrievePlotDetails.get(4)), tain.rdb.convertFromArray(retrievePlotDetails.get(5)), tain.rdb.convertFromArray(retrievePlotDetails.get(6)), Integer.parseInt(retrievePlotDetails.get(7)), Double.parseDouble(retrievePlotDetails.get(8)), newworker, Integer.parseInt(retrievePlotDetails.get(10)), newexused, Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
                                 tain.rdb.useAcresOnPlot(PlotID, acresNeeded, 0, 0);
-
                             }
                         }
-
-
-
                         //consume funds
                         ArrayList<String> amount2 = tain.rdb.getCurrentAmount(PlotID);
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
@@ -473,7 +423,6 @@ public class BuildtabPanel extends BasePanel {
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
                         tain.rdb.modifyAmount(PlotID, nplat, ngold, nsilver);
-
                         tain.rdb.LogPlot(PlotID, "Player*" + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + "*purchased*a*" + r2s.get(0)[1] + "*on*the*plot", tain.CharacterID);
                         tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
                         tr.listBuildings.doClick();
@@ -485,12 +434,8 @@ public class BuildtabPanel extends BasePanel {
         });
         JPanel temp = new JPanel();
         temp.setLayout(new GridLayout(2, 1));
-
         panel.add(buildingIn, BorderLayout.CENTER);
-        //  c2.gridy = 1;
-
         temp.add(buildings);
-        //    c2.gridy = 2;
         temp.add(bbutton);
         temp.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
         panel.add(temp, BorderLayout.EAST);

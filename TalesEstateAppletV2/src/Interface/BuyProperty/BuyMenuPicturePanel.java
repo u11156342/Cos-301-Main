@@ -15,7 +15,6 @@ public class BuyMenuPicturePanel extends JPanel {
         w = im.getWidth();
         h = im.getHeight();
     }
-
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(background,0, 0, w, h, null);

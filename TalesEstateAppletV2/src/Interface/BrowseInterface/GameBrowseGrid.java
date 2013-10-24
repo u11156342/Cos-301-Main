@@ -128,8 +128,6 @@ public class GameBrowseGrid extends JFXPanel {
             tempplacinggrid = new int[tileStates.length][tileStates.length];
         }
 
-        //   System.out.println("tileStates "+tileStates[0].length);
-
         int xc = 0;
         int yc = 0;
         g2d = (Graphics2D) g.create();
@@ -185,12 +183,6 @@ public class GameBrowseGrid extends JFXPanel {
             move2 = move2 + (htOfcell / 2);
         }
 
-
-
-
-
-
-
     }
 
     public void init(int size, TransferContainer tc, int pid) {
@@ -202,9 +194,6 @@ public class GameBrowseGrid extends JFXPanel {
                 scroller.getVerticalScrollBar().setValue(scroller.getVerticalScrollBar().getValue() + (tempy - e.getY()) / 2);
                 tempy = e.getY();
             }
-            // some idea of how we can show placing
-            // bug grid draws over the it
-            // very bad performance
 
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -225,8 +214,6 @@ public class GameBrowseGrid extends JFXPanel {
                         yc = -scroller.getVerticalScrollBar().getValue() + ((y * (int) (htOfcell)) / 2) + (int) move2 + topoffset;
                         if ((clickedx > (xc + wdOfcell / 2 - wdOfcell / 4) && clickedx < ((xc + wdOfcell / 2 - wdOfcell / 4) + wdOfcell / 2)) && (clickedy > (yc + htOfcell / 2 - htOfcell / 4) && clickedy < ((yc + htOfcell / 2 - htOfcell / 4) + htOfcell / 2))) {
 
-
-
                             if (tileStates[x][y] != -1 && tileStates[x][y] != 3) {
 
                                 for (int b = 0; b < tempplacinggrid.length; b++) {
@@ -235,11 +222,7 @@ public class GameBrowseGrid extends JFXPanel {
                                         tempplacinggrid[b][n] = 0;
                                     }
                                 }
-//                                tempplacinggrid[x][y] = tc.BuildingRef;
                             }
-
-
-
                             valid = true;
                             break;
                         }
@@ -261,7 +244,6 @@ public class GameBrowseGrid extends JFXPanel {
 
                 }
                 repaint();
-
             }
         });
 
@@ -301,7 +283,7 @@ public class GameBrowseGrid extends JFXPanel {
                                             num = 3;
                                             break;
                                         case "Wild land":
-                                            num = 0;
+                                            num = 133;
                                             break;
                                         case "Poor land":
                                             num = 0;
@@ -314,30 +296,17 @@ public class GameBrowseGrid extends JFXPanel {
                                             break;
 
                                     }
-
-
                                     tileStates[x][y] = num;
-                                    //called place water but places anything really
                                     tain.rdb.placeWater(PlotID, tileStates);
-                                    //builds
-//                                    BrowseInterface bi = tain.Cmanager.getBrowseInterfacesCard();
-//                                    bi.init(tain, PlotID, gridsize, tileStates, gridstates);
-//                                    tain.cardlayout.show(tain.contentpane, bi.getName());
-
-
                                     return;
                                 }
                             }
-
-
                             repaint();
                         }
                     }
                     move = move - (wdOfcell / 2);
                     move2 = move2 + (htOfcell / 2);
                 }
-
-
             }
 
             @Override

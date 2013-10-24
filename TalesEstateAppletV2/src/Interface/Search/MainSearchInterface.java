@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Search;
 
 import Connections.RestFullDBAdapter;
@@ -16,16 +12,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author Fiyah
- */
 public class MainSearchInterface extends JPanel {
 
     public MainSearchInterface() {
@@ -38,18 +29,14 @@ public class MainSearchInterface extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         final JTextField charc = new JTextField("Any");
         charc.setPreferredSize(new Dimension(100, 25));
-
         final String[] duchylist;
-
         ArrayList<String> result2 = tc.rdb.retrieveDuchyList();
-
         if (result2 == null) {
             return;
         }
         if (result2.isEmpty()) {
             return;
         }
-
         duchylist = new String[result2.size() + 1];
         duchylist[0] = "Any";
         for (int a = 1; a < result2.size() + 1; a++) {
@@ -66,7 +53,7 @@ public class MainSearchInterface extends JPanel {
         size.setPreferredSize(new Dimension(100, 25));
         quality.setPreferredSize(new Dimension(100, 25));
 
-        JButton clabe = new JButton("Character name");
+        JButton clabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(120)));
         clabe.setBorderPainted(false);
         clabe.setContentAreaFilled(false);
         JButton dlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(122)));
@@ -106,10 +93,8 @@ public class MainSearchInterface extends JPanel {
 
         JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // btn.setContentAreaFilled(false);
 
         btn.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -1,10 +1,7 @@
 package Interface.Search;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import talesestateappletv2.TransferContainer;
@@ -21,10 +18,8 @@ public class ResultProperties extends JPanel {
         w = i;
         h = i0;
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
         searchedProperties = new ResultUnit[result.size()];
         amount = result.size();
-
         for (int a = 0; a < searchedProperties.length; a++) {
             searchedProperties[a] = new ResultUnit(w, this);
             searchedProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
@@ -41,11 +36,9 @@ public class ResultProperties extends JPanel {
                     searchedProperties[a].quality = 3;
                     break;
             }
-
             searchedProperties[a].size = Integer.parseInt(result.get(a)[3]);
             searchedProperties[a].tiles = tc.rdb.convertFromArray(result.get(a)[5]);
             searchedProperties[a].buildings = tc.rdb.convertFromArray(result.get(a)[6]);
-
             searchedProperties[a].init(tc);
         }
 
@@ -53,9 +46,7 @@ public class ResultProperties extends JPanel {
         GridLayout experimentLayout = new GridLayout(0, 1);
         panel1.setLayout(experimentLayout);
         panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-        //panel1.setPreferredSize(new Dimension(600, h));
-        add(panel1);
-        
+        add(panel1);   
         
     }
 
@@ -66,7 +57,6 @@ public class ResultProperties extends JPanel {
 
             for (int a = 0; a < searchedProperties.length; a++) {
                 panel.add(searchedProperties[a]);
-                // searchedProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
             }
             return panel;
         }

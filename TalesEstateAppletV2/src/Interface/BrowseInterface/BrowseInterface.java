@@ -26,20 +26,14 @@ public class BrowseInterface extends BasePanel {
     }
 
     public void init(final TransferContainer tc, int propertyIDz, int sizes, int[][] tilesz, int[][] buildingsz) {
-
-        //  System.out.println(tilesz.length + " " + buildingsz.length);
-
         size = tilesz.length;
-
         propertyID = propertyIDz;
-
         GameBrowseGrid playIn = null;
         try {
             playIn = new GameBrowseGrid(size, tc, propertyID);
         } catch (IOException ex) {
             Logger.getLogger(PlayInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         playIn.init(size, tc, propertyID);
         playIn.gridstates = buildingsz;
         playIn.tileStates = tilesz;
@@ -50,15 +44,12 @@ public class BrowseInterface extends BasePanel {
         playMapScrollPane.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT, tc.JFXPANEL_HEIGHT_INT * 3 / 4));
         playMapScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         ((GameBrowseGrid) playIn).setScrollP(playMapScrollPane);
-
         add(playMapScrollPane, BorderLayout.CENTER);
-
         JButton back = new JButton(new ImageIcon(tc.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -67,8 +58,6 @@ public class BrowseInterface extends BasePanel {
                 } else {
                     tc.cardlayout.show(tc.contentpane, tc.Cmanager.SearchInterfaces[tc.Cmanager.currentSearchInterfaceCard].getName());
                 }
-                // tc.cardlayout.show(tc.contentpane, "MainMenu");
-                // 
             }
         });
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package talesestateappletv2;
 
 import CardManager.CardManager;
@@ -29,10 +25,6 @@ import javafx.embed.swing.JFXPanel;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
-/**
- *
- * @author NightFiyah
- */
 public class TransferContainer {
 
     public int JFXPANEL_WIDTH_INT = 1024;

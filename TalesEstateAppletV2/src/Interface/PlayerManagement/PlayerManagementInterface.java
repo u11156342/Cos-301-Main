@@ -9,10 +9,7 @@ import javax.swing.JButton;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author Fiyah
- */
+
 public class PlayerManagementInterface extends BasePanel {
 
     public PlayerManagementInterface(String name, TransferContainer tc) {
@@ -21,7 +18,6 @@ public class PlayerManagementInterface extends BasePanel {
     }
 
     public void init(final TransferContainer tc) {
-
         JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(49)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
@@ -32,9 +28,7 @@ public class PlayerManagementInterface extends BasePanel {
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, "MainMenu");
@@ -42,6 +36,5 @@ public class PlayerManagementInterface extends BasePanel {
         });
 
         add(back, BorderLayout.SOUTH);
-
     }
 }

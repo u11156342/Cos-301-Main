@@ -18,10 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author NightFiyah
- */
 public class MainPlaySideMenu extends JPanel {
 
     public JButton Rename, Report, Deposite, Withdraw, exspand, listBuildings, addBuildings, VisualInterface, RightsManagement, PropertyLog;
@@ -169,7 +165,6 @@ public class MainPlaySideMenu extends JPanel {
         }
 
         Report.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -177,7 +172,6 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -186,7 +180,11 @@ public class MainPlaySideMenu extends JPanel {
                 String mes = "How much Gold crowns do you wish to deposit, available Gold crowns " + gold;
                 try {
                     double amountz = 0;
-                    amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                    String te = JOptionPane.showInputDialog(mes);
+                    if ("".equals(te)) {
+                        return;
+                    }
+                    amountz = Double.parseDouble(te);
                     if (amountz == 0) {
                         return;
                     }
@@ -231,7 +229,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -240,7 +237,11 @@ public class MainPlaySideMenu extends JPanel {
                 String mes = "How much Gold crowns do you wish to Withdraw, available Gold crowns " + gold;
                 try {
                     double amountz = 0;
-                    amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
+                    String te = JOptionPane.showInputDialog(mes);
+                    if ("".equals(te)) {
+                        return;
+                    }
+                    amountz = Double.parseDouble(JOptionPane.showInputDialog(te));
                     if (amountz == 0) {
                         return;
                     }
@@ -287,7 +288,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -343,7 +343,6 @@ public class MainPlaySideMenu extends JPanel {
 
                         tc.rdb.expandPlot(pId, picked, tilesz, buildings);
 
-                        //ok so now the property is exspanded in terms of acres and stuff but I still need to edit max workers and income
 
                         int workerMax;
                         int quality;
@@ -390,7 +389,6 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -493,14 +491,13 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         Rename.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 String plotName = (String) JOptionPane.showInputDialog(Rename, "Wat is the name of your property?");
 
                 if ("".equals(plotName) || plotName == null) {
-                    JOptionPane.showMessageDialog(Rename, "Please chose a name for your estate");
+                    JOptionPane.showMessageDialog(Rename, "Please choose a name for your estate");
                     return;
                 }
                 tc.rdb.setPlotName(pId, plotName);
@@ -510,7 +507,6 @@ public class MainPlaySideMenu extends JPanel {
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.Build.init(pId, duchy_, tr);
@@ -518,7 +514,6 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -529,7 +524,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         RightsManagement.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
@@ -539,7 +533,6 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         PropertyLog.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -554,8 +547,5 @@ public class MainPlaySideMenu extends JPanel {
 
             }
         });
-
-
-
     }
 }

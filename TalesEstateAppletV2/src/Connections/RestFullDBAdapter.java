@@ -19,7 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class RestFullDBAdapter {
 
-     String serverURL = "216.172.99.153";
+    String serverURL = "216.172.99.153";
     //String serverURL = "localhost";
     int serverPort = 8080;
     String server = "/TalesEstateServer/resources/";
@@ -29,26 +29,10 @@ public class RestFullDBAdapter {
     BufferedReader reader = null;
     String ServerIP = "";
 
+    //Class used to connect to the server
     public RestFullDBAdapter() {
 
-
-
-//        try {
-//            reader = new BufferedReader(new FileReader("AppletConfig.txt"));
-//            String line = "";
-//            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-//                if (line.contains("serverIP")) {
-//                    ServerIP = line.substring(line.indexOf("=") + 1);
-//                }
-//            }
-//
-//            //System.out.println(folderLocation);
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, "Applet Config not found");
-//        }
         System.out.println(ServerIP);
-        // serverURL = ServerIP;
         try {
             aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
             String passphrase = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.";
@@ -69,14 +53,9 @@ public class RestFullDBAdapter {
         String temp = "";
 
         try {
-
             Calendar cal = Calendar.getInstance();
             DateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String ID = Format.format(cal.getTime());
-
-            System.out.println(ID + " " + path);
-
-
             //check for inconsistensies in the path
             String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=/";
 
@@ -86,8 +65,6 @@ public class RestFullDBAdapter {
                     path = path.replaceAll("" + path.charAt(i), ".");
                 }
             }
-
-            System.out.println(path);
             Random r = new Random(100000);
             path = r.nextInt() + "+" + ID + "+" + path;
 
@@ -98,27 +75,37 @@ public class RestFullDBAdapter {
                 enc = enc + "`" + ciphertext[i];
             }
 
-
             URL url = new URL("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
-            //  System.out.println("http://" + serverURL + ":" + serverPort + server + "SecurityWrapper/" + "ServerRequest" + "/" + enc);
-            //  System.out.println(new String(ciphertext));
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine = in.readLine();
-
-            aes.init(Cipher.DECRYPT_MODE, key);
-
-            StringTokenizer tokens = new StringTokenizer(inputLine, "`");
-            byte[] bt = new byte[tokens.countTokens()];
-            int c1 = 0;
-            while (tokens.hasMoreTokens()) {
-                String tok = tokens.nextToken();
-
-                bt[c1] = (byte) Integer.parseInt(tok);
-                c1++;
-
+            String inputLine;
+            int marker = 0;
+            temp = "";
+            while ((inputLine = in.readLine()) != null) {
+                if (!"null".equals(inputLine)) {
+                    if (marker == 0) {
+                        temp = inputLine;
+                        marker++;
+                    } else {
+                        temp = temp + "\n" + inputLine;
+                    }
+                }
             }
-            temp = new String(aes.doFinal(bt));
+
+
+            // aes.init(Cipher.DECRYPT_MODE, key);
+
+//            StringTokenizer tokens = new StringTokenizer(inputLine, "`");
+//            byte[] bt = new byte[tokens.countTokens()];
+//            int c1 = 0;
+//            while (tokens.hasMoreTokens()) {
+//                String tok = tokens.nextToken();
+//
+//                bt[c1] = (byte) Integer.parseInt(tok);
+//                c1++;
+//
+//            }
+//            temp = new String(aes.doFinal(bt));
+            // temp = inputLine;
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -308,6 +295,7 @@ public class RestFullDBAdapter {
     }
 
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
+        System.out.println(amountPlatinum + " " + amountGold + " " + amountSilver);
         String temp = "";
         try {
             characterName = characterName.replace(' ', '.');

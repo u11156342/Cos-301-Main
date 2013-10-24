@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.RightsManagement;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,15 +23,13 @@ public class RightsInterface extends BasePanel {
 
     public void init(final TransferContainer tc, int PlotID) {
 
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         JScrollPane scrollText = new JScrollPane(textZone);
         scrollText.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
         ArrayList<String[]> allAccess = tc.rdb.getAllAccess(PlotID);
-
         StringBuilder html = new StringBuilder();
         textZone.setContentType("text/html");
         textZone.setEditable(false);
-
         html.append("<html>");
         html.append("<head>");
 
@@ -112,7 +105,8 @@ public class RightsInterface extends BasePanel {
 
             for (int i = 0; i < allAccess.size(); i++) {
                 html.append("<tr>");
-                html.append("<td>").append(tc.rdb.retrieveCharacterName(Integer.parseInt(allAccess.get(i)[6]))).append("</td>");
+                String t=tc.rdb.retrieveCharacterName(Integer.parseInt(allAccess.get(i)[6]));
+                html.append("<td>").append(t.substring(0,t.indexOf("&*&"))).append("</td>");
                 html.append("<td>").append(allAccess.get(i)[0]).append("</td>");
                 html.append("<td>").append(allAccess.get(i)[1]).append("</td>");
                 html.append("<td>").append(allAccess.get(i)[2]).append("</td>");
@@ -124,14 +118,11 @@ public class RightsInterface extends BasePanel {
 
             html.append("</table>");
         }
-        textZone.setText(html.toString());
-        
+        textZone.setText(html.toString());       
 
         RightsSideMenu menu = new RightsSideMenu(textZone, tc,PlotID);
-       // menu.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT / 5, tc.JFXPANEL_HEIGHT_INT));
         menu.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(menu, BorderLayout.EAST);
-
 
         add(scrollText, BorderLayout.CENTER);
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));

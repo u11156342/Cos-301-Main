@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Connections;
 
 import java.awt.image.BufferedImage;
@@ -11,13 +7,10 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author NightFiyah
- */
 public class RestFullAdapterTest extends TestCase {
-    
+
     public RestFullAdapterTest(String testName) {
         super(testName);
     }
@@ -37,16 +30,17 @@ public class RestFullAdapterTest extends TestCase {
     @After
     public void tearDown() throws Exception {
     }
-    
-   /**
+
+    /**
      * Test of ImageAdapter method, of class RestFullAdapter.
      */
     public void testImageAdapter() {
         System.out.println("ImageAdapter");
         int id = 1;
-        RestFullAdapter instance = new RestFullAdapter();
+        TransferContainer tc = new TransferContainer();
+        RestFullAdapter instance = tc.ad;
         BufferedImage expResult = null;
         BufferedImage result = instance.ImageAdapter(id);
-        assertFalse(expResult==result);
+        assertFalse(expResult == result);
     }
 }

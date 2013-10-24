@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package talesestateappletv2;
 
 import Interface.Admin.AdminMenu;
@@ -24,13 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author NightFiyah
- */
 public class TalesEstateAppletV2 extends JApplet {
 
     public static final int JFXPANEL_WIDTH_INT = 1600;
@@ -44,7 +35,6 @@ public class TalesEstateAppletV2 extends JApplet {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 try {
@@ -65,7 +55,6 @@ public class TalesEstateAppletV2 extends JApplet {
                 tContain.mainframe.pack();
                 tContain.mainframe.setLocationRelativeTo(null);
                 tContain.mainframe.setVisible(true);
-              //  JOptionPane.showMessageDialog(tContain.mainframe, "Loading, this could take awhile depending on internet connection");
                 tContain.mainapplet.start();
 
             }
@@ -82,7 +71,6 @@ public class TalesEstateAppletV2 extends JApplet {
         setLayout(tContain.cardlayout);
         tContain.contentpane = this.getContentPane();
         ActionListener buttonListener = new ActionListener() {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 tContain.cardlayout.next(getContentPane());
@@ -131,12 +119,9 @@ public class TalesEstateAppletV2 extends JApplet {
         add(tContain.MainMenu, tContain.MainMenu.getName());
         add(tContain.Buy, tContain.Buy.getName());
         add(tContain.search, tContain.search.getName());
-        // add(tContain.mProp, tContain.mProp.getName());
         add(tContain.am, tContain.am.getName());
-        //  add(tContain.mp, tContain.mp.getName());
         add(tContain.Build, tContain.Build.getName());
         add(tContain.visual, tContain.visual.getName());
-        // add(tContain.ri, tContain.ri.getName());
         add(tContain.pmI, tContain.pmI.getName());
         add(tContain.clog, tContain.clog.getName());
         add(tContain.gstatus, tContain.gstatus.getName());
@@ -181,17 +166,11 @@ public class TalesEstateAppletV2 extends JApplet {
             add(tContain.Cmanager.RequestInterfaces[c], tContain.Cmanager.RequestInterfaces[c].getName());
         }
 
-
-
-
-
-
         revalidate();
         repaint();
 
         fxContainer = new JFXPanel();
         Platform.runLater(new Runnable() {
-
             @Override
             public void run() {
                 createScene();

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import talesestateappletv2.TransferContainer;
 
+//A single property that is returned by admins search
 public class PlayerCurrentPropertiesAdmin extends JPanel {
 
     public JTextPane statusArea = new JTextPane();
@@ -25,22 +26,13 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
     int[][] buildings;
 
     PlayerCurrentPropertiesAdmin(int w, PlayerPropertiesAdmin aThis, final TransferContainer t) {
-        //setLayout(new GridBagLayout());
-        // GridBagConstraints c = new GridBagConstraints();
-
-        //   statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        //   statusArea.setColumns(4);
         statusArea.setEditable(false);
         statusArea.setPreferredSize(new Dimension(300, 250));
         setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
-        //init();
-
-
         bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = commands.getSelectedIndex();
-
 
                 if (selectedIndex == 0) {
                     DetailedStatus ds = t.Cmanager.getDetailedStatusCard();
@@ -53,12 +45,10 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     t.cardlayout.show(t.contentpane, ev.getName());
                 } else if (selectedIndex == 2) {
                     System.out.println(propertyID);
-
                     final ArrayList<String> retrievePlotDetails = t.rdb.retrievePlotDetails(propertyID);
                     size = Integer.parseInt("" + retrievePlotDetails.get(4));
                     tiles = t.rdb.convertFromArray("" + retrievePlotDetails.get(5));
                     buildings = t.rdb.convertFromArray("" + retrievePlotDetails.get(6));
-
                     t.lastAdminBrowse = true;
                     BrowseInterface bi = t.Cmanager.getBrowseInterfacesCard();
                     bi.init(t, propertyID, size, tiles, buildings);
@@ -69,12 +59,8 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                     if ("".equals(showInputDialog)) {
                         JOptionPane.showMessageDialog(commands, "Please enter a description");
                     } else {
-
-
                         String desu = showInputDialog;
-
                         String valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:[]@!$&()*+,;=";
-
                         String validurl = "";
                         for (int i = 0; i < desu.length(); i++) {
 
@@ -84,7 +70,6 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
                                 validurl = validurl + "~";
                             }
                         }
-
                         try {
                             t.rdb.setDescription(validurl, propertyID);
                         } catch (Exception ex) {
@@ -96,24 +81,6 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
 
             }
         });
-
-
-
-
-
-
-
-//        c.gridx = 0;
-//        c.gridy = 0;
-//        c.gridheight = 2;
-//        c.gridwidth = 2;
-
-
-//        c.gridx = 2;
-//        c.gridy = 1;
-        //   add(bt, BorderLayout.SOUTH);
-
-
     }
 
     public void init(TransferContainer t) {
@@ -180,7 +147,7 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         html.append("<tr><td class=\"ssheading\">Estate Name</td><td> ").append(retrievePlotDetails.get(18).replace(".", " ")).append("</td></tr>");
         html.append("<tr><td class=\"ssheading\">Duchy</td><td> ").append(retrievePlotDetails.get(3)).append("</td></tr>");
         try {
-            html.append("<tr><td class=\"ssheading\">Countie</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
+            html.append("<tr><td class=\"ssheading\">County</td><td> ").append(retrievePlotDetails.get(19)).append("</td></tr>");
         } catch (Exception e) {
         }
         html.append("<tr><td class=\"ssheading\">Happiness</td><td>").append(retrievePlotDetails.get(7)).append("</td></tr>");
@@ -192,21 +159,12 @@ public class PlayerCurrentPropertiesAdmin extends JPanel {
         statusArea.setText(html.toString());
         JScrollPane scrollText = new JScrollPane(statusArea);
         add(scrollText, BorderLayout.NORTH);
-//        c.gridheight = 1;
-//        c.gridwidth = 1;
-//
-//        c.gridx = 2;
-//        c.gridy = 0;
-
         JPanel temp = new JPanel();
-
         GridLayout experimentLayout = new GridLayout(0, 1);
         temp.setLayout(experimentLayout);
         temp.add(commands);
         temp.add(bt);
         temp.setBackground(java.awt.Color.getHSBColor(t.c1[0], t.c1[1], t.c1[2]));
         add(temp, BorderLayout.SOUTH);
-
-
     }
 }

@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
-import Connections.RestFullAdapter;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -16,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,6 +20,8 @@ import talesestateappletv2.TransferContainer;
  *
  * @author Fiyah
  */
+
+//Main admin search container
 public class MainAdminSearchInterface extends JPanel {
 
     public MainAdminSearchInterface() {
@@ -37,35 +33,28 @@ public class MainAdminSearchInterface extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         final JTextField charc = new JTextField("Any");
         charc.setPreferredSize(new Dimension(100, 25));
-
         final String[] duchylist;
-
         ArrayList<String> result2 = tc.rdb.retrieveDuchyList();
-
         if (result2 == null) {
             return;
         }
         if (result2.isEmpty()) {
             return;
         }
-
         duchylist = new String[result2.size() + 1];
         duchylist[0] = "Any";
         for (int a = 1; a < result2.size() + 1; a++) {
             duchylist[a] = result2.get(a - 1);
         }
         final JComboBox duchy = new JComboBox(duchylist);
-
         final String[] qualitylist = {"Any", "Poor", "Fine", "Exquisite"};
         final JComboBox quality = new JComboBox(qualitylist);
         final JTextField size = new JTextField();
-
         charc.setPreferredSize(new Dimension(100, 25));
         duchy.setPreferredSize(new Dimension(100, 25));
         size.setPreferredSize(new Dimension(100, 25));
         quality.setPreferredSize(new Dimension(100, 25));
-
-        JButton clabe = new JButton("Character name");
+        JButton clabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(120)));
         clabe.setBorderPainted(false);
         clabe.setContentAreaFilled(false);
         JButton dlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(122)));
@@ -104,12 +93,9 @@ public class MainAdminSearchInterface extends JPanel {
 
         JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // btn.setContentAreaFilled(false);
         btn.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-
 
                 int s = 0;
                 if ("".equals(size.getText())) {
@@ -156,7 +142,5 @@ public class MainAdminSearchInterface extends JPanel {
         c.gridy = 5;
         c.gridwidth = 2;
         add(btn, c);
-
-
     }
 }

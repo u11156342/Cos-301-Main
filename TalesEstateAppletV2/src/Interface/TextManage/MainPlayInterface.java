@@ -9,10 +9,6 @@ import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author NightFiyah
- */
 public class MainPlayInterface extends BasePanel {
 
     public JTextPane textZone = new JTextPane();
@@ -32,16 +28,13 @@ public class MainPlayInterface extends BasePanel {
 
     public void init(final TransferContainer tc, int Pid) {
         textZone.setEditable(false);
-
         JScrollPane scrollText = new JScrollPane(textZone);
         scrollText.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         add(scrollText, BorderLayout.CENTER);
-
         MainPlaySideMenu menu = new MainPlaySideMenu(textZone, tc, Pid, IsOwner);
         add(menu, BorderLayout.EAST);
         textZone.setContentType("text/html");
         menu.Report.doClick();
-
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);

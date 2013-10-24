@@ -11,10 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import talesestateappletv2.TransferContainer;
 
-/**
- *
- * @author Fiyah
- */
 public class PlayerManagementMenu extends JPanel {
 
     JButton donateGoldToChar;
@@ -22,7 +18,11 @@ public class PlayerManagementMenu extends JPanel {
 
     public PlayerManagementMenu(final TransferContainer tc) {
 
-        donateGoldToChar = new JButton("Give funds to character");
+        donateGoldToChar = new JButton(new ImageIcon(tc.ad.ImageAdapter(134)));
+        donateGoldToChar.setContentAreaFilled(false);
+        donateGoldToChar.setBorderPainted(false);
+        donateGoldToChar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         donateGoldToPlayer = new JButton("Give gold to estate");
 
         setLayout(new GridBagLayout());
@@ -31,9 +31,7 @@ public class PlayerManagementMenu extends JPanel {
         c.gridx = 0;
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 0;
-        donateGoldToChar.setPreferredSize(new Dimension(250, 60));
         donateGoldToChar.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -48,15 +46,12 @@ public class PlayerManagementMenu extends JPanel {
                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
-
                 if (retrieveCharacterIDExtra.isEmpty()) {
                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
-
                 String[] characters;
                 String[] correctname;
-
                 characters = new String[retrieveCharacterIDExtra.size()];
                 correctname = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
@@ -64,15 +59,12 @@ public class PlayerManagementMenu extends JPanel {
                     StringTokenizer tokens = new StringTokenizer(retrieveCharacterIDExtra.get(i)[1], "&*&");
                     characters[i] = tokens.nextToken();
                 }
-
                 String picked = "";
                 if (characters.length > 0) {
                     picked = (String) JOptionPane.showInputDialog(donateGoldToChar, "Choose the character you are looking for : ", "", JOptionPane.QUESTION_MESSAGE, null, characters, characters[0]);
                 } else {
                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                 }
-
-
                 if (!"".equals(picked) && picked != null) {
                     int giver = tc.CharacterID;
                     int reciever = 0;
@@ -80,7 +72,6 @@ public class PlayerManagementMenu extends JPanel {
                         if (characters[i].equals(retrieveCharacterIDExtra.get(i)[1])) {
                             reciever = Integer.parseInt(retrieveCharacterIDExtra.get(i)[0]);
                         }
-
                     }
                     ArrayList<String> amount1 = tc.rdb.getCharacterAmounts(tc.rdb.retrieveCharacterName(tc.CharacterID));
 
@@ -141,20 +132,15 @@ public class PlayerManagementMenu extends JPanel {
                         }
                     } catch (Exception ex) {
                     }
-
                 }
-
-
             }
         });
-
 
         add(donateGoldToChar, c);
         c.gridx = 0;
         c.gridy = 1;
         donateGoldToPlayer.setPreferredSize(new Dimension(250, 60));
         donateGoldToPlayer.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
             }
@@ -165,13 +151,10 @@ public class PlayerManagementMenu extends JPanel {
         CharacterLog.setContentAreaFilled(false);
         CharacterLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
         CharacterLog.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 tc.clog.refres(tc);
                 tc.cardlayout.show(tc.contentpane, "cLog");
-
             }
         });
         c.gridx = 0;

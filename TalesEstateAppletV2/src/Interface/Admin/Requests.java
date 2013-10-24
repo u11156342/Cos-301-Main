@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.GridLayout;
@@ -17,10 +13,8 @@ public class Requests extends JPanel {
 
     public Requests(TransferContainer tc, ArrayList<String[]> ar) {
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-
         ArrayList<String[]> allRequests = ar;
         setLayout(new GridLayout(0, 1));
-
         for (int i = 0; i < allRequests.size(); i++) {
             RequestUnit temp = new RequestUnit(tc, ar);
             temp.RequestID = Integer.parseInt(allRequests.get(i)[0]);

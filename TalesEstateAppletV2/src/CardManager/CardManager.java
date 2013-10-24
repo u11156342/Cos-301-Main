@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package CardManager;
 
 import Interface.Admin.*;
@@ -20,7 +16,8 @@ import talesestateappletv2.TransferContainer;
  */
 public class CardManager {
 
-    //my properties cards
+    //Card Manager
+    //Managers all the different interface cards used in the card layout manager
     public MyPropertiesInterface[] MyProperties = new MyPropertiesInterface[50];
     public int currentMyPropertiesCard = -1;
     public SearchInterface[] SearchInterfaces = new SearchInterface[50];
@@ -149,9 +146,8 @@ public class CardManager {
         currentPlayInterfaceCard++;
         return PlayInterfaces[currentPlayInterfaceCard];
     }
-    
-    public RequestInterface getRequestInterfaceCard()
-    {
+
+    public RequestInterface getRequestInterfaceCard() {
         currentRequestInterfaceCard++;
         return RequestInterfaces[currentRequestInterfaceCard];
     }

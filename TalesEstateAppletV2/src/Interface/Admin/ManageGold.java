@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.Admin;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -18,6 +13,7 @@ import talesestateappletv2.TransferContainer;
  *
  * @author NightFiyah
  */
+//Admins use for managing cold of characters
 public class ManageGold extends BasePanel {
 
     public ManageGold(String name, TransferContainer tc) {
@@ -30,11 +26,9 @@ public class ManageGold extends BasePanel {
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
         add(Title, BorderLayout.NORTH);
-
         ManageGoldPanel mgp = new ManageGoldPanel(tc);
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(mgp, BorderLayout.CENTER);
-
         JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
         back.setContentAreaFilled(false);
         back.setBorderPainted(false);
@@ -45,7 +39,6 @@ public class ManageGold extends BasePanel {
                 tc.cardlayout.show(tc.contentpane, "AMain");
             }
         });
-
         add(back, BorderLayout.SOUTH);
     }
 }
