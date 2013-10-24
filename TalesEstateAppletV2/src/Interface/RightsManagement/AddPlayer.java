@@ -16,7 +16,7 @@ public class AddPlayer extends BasePanel {
     }
     public void init(final TransferContainer tc, String PlayerName, int PlotID) {
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
-        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(116)));
+        JButton Title = new JButton(new ImageIcon(tc.ad.ImageAdapter(136)));
         Title.setBorderPainted(false);
         Title.setContentAreaFilled(false);
         add(Title, BorderLayout.NORTH);

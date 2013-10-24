@@ -82,7 +82,7 @@ public class AddPlayerForm extends JPanel {
         c.gridy = 7;
         c.gridwidth = 2;
         c.gridx = 0;
-        JButton add = new JButton(new ImageIcon(tc.ad.ImageAdapter(119)));
+        JButton add = new JButton(new ImageIcon(tc.ad.ImageAdapter(135)));
         add.setContentAreaFilled(false);
         add.setBorderPainted(false);
         add.setCursor(new Cursor(Cursor.HAND_CURSOR));
