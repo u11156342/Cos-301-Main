@@ -503,7 +503,7 @@ INSERT INTO Building (BuildingTypeID, PictureID, BuildingTypeOfIndustry, Buildin
 	BuildingPrerequisiteID, BuildingCost, BuildingSetupCost, BuildingMonthlyIncome,
 	BuildingWorkersNeeded, BuildingTimeToBuild, BuildingSizeRequired, BuildingHappiness, BuildingDefenseValue, BuildingAccess)
 	VALUES
-	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0)
+	(3, 5, 'Merchant (Alchemy)', 11, 10, 25, 25, 3, 4, 1, 0.125, 0, 0, 0),
 	(5, 5, 'Scavenger camp', 11, 1, 30, 0, 0, 0, 1, 1, -3, 0, 7)
 	
 INSERT INTO BuildLog (BuildLogPlotID, BuildLogBuildingID,

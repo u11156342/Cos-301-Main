@@ -379,7 +379,8 @@ VALUES
 (0, 0, 0, 0, 'search 2.png'),
 (0, 0, 0, 0, 'silver.png'),
 (0, 0, 0, 0, 'size.png'),
-(0, 0, 0, 0, 'wild tile.png')
+(0, 0, 0, 0, 'wild tile.png'),
+(0, 0, 0, 0, 'Give Funds.png')
 
 /*All cost related values assumed to be gold*/
 CREATE TABLE Building
