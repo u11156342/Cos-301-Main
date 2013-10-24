@@ -16,6 +16,8 @@ public class CharacterQueryHandler {
     private ResultSetMetaData rsmd = null;
     private String sql = "";
 
+     /* Constructor
+     */
     public CharacterQueryHandler(Connection c) {
         super();
         con = c;
@@ -224,6 +226,11 @@ public class CharacterQueryHandler {
         return result;
     }
 
+    /* This function outright modifies the character's amount of silver.
+     * 
+     * WARNING: this function can be misused to give a character no silver. 
+     * Do not mistake this function for addition/subtraction.
+     */
     public boolean modifyAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
         DatabaseConnection prod = null;
         Connection prodCon = null;
@@ -270,90 +277,6 @@ public class CharacterQueryHandler {
         return false;
     }
 
-    public boolean depositAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
-        int amountID;
-        int curPlat, curGold, curSilv;
-
-        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
-                + "UserCharacterName = '" + characterName + "'";
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
-
-            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
-                    + "WHERE AmountID = " + amountID;
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
-            curGold = Integer.parseInt(rs.getString("AmountGold"));
-            curSilv = Integer.parseInt(rs.getString("AmountSilver"));
-
-            sql = "UPDATE Amount SET "
-                    + "AmountPlatinum = " + (curPlat + amountPlatinum)
-                    + " AmountGold = " + (curGold + amountGold)
-                    + " AmountSilver = " + (curSilv + amountSilver)
-                    + " WHERE AmountID = " + amountID;
-            stmt = con.createStatement();
-            stmt.execute(sql);
-
-            return true;
-        } catch (Exception e) {
-
-            System.out.println("Error in CharacterQueryHandler, function depositAmount()");
-
-        }
-
-        return false;
-    }
-
-    public boolean withdrawAmount(String characterName, int amountPlatinum, int amountGold, int amountSilver) {
-        int amountID;
-        int curPlat, curGold, curSilv;
-
-        sql = "SELECT UserCharacterAmount FROM UserCharacter WHERE "
-                + "UserCharacterName = '" + characterName + "'";
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            amountID = Integer.parseInt(rs.getString("UserCharacterAmount"));
-
-            sql = "SELECT AmountPlatinum, AmountGold, AmountSilver FROM Amount "
-                    + "WHERE AmountID = " + amountID;
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-            rs.next();
-            curPlat = Integer.parseInt(rs.getString("AmountPlatinum"));
-            curGold = Integer.parseInt(rs.getString("AmountGold"));
-            curSilv = Integer.parseInt(rs.getString("AmountSilver"));
-
-            if ((curPlat - amountPlatinum) < 0) {
-                System.out.println("Character does not have enough platinum.");
-            } else if ((curGold - amountGold) < 0) {
-                System.out.println("Character does not have enough gold.");
-            } else if ((curSilv - amountSilver) < 0) {
-                System.out.println("Character does not have enough silver.");
-            } else {
-                sql = "UPDATE Amount SET "
-                        + "AmountPlatinum = " + (curPlat - amountPlatinum)
-                        + " AmountGold = " + (curGold - amountGold)
-                        + " AmountSilver = " + (curSilv - amountSilver)
-                        + " WHERE AmountID = " + amountID;
-                stmt = con.createStatement();
-                stmt.execute(sql);
-
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("Error in CharacterQueryHandler, function modifyAmount()");
-        }
-
-        return false;
-    }
-
     /* Addd to, or removes from, the character's social status.
      * statusAmount can be positive, or negative depeding on whether
      * the amount must be increased, or decreased respectively.
@@ -393,6 +316,8 @@ public class CharacterQueryHandler {
         return false;
     }
 
+    /* This function checks if the provided character (ID) has admin rights
+     */
     public boolean isAdmin(String userID) {
 
         try {

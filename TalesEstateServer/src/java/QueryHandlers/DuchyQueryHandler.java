@@ -11,6 +11,8 @@ public class DuchyQueryHandler {
     private ResultSet rs = null;
     private String sql = "";
     
+    /* Constructor
+     */
     public DuchyQueryHandler(Connection c)
     {
         super();

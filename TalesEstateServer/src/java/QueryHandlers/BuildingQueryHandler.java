@@ -14,6 +14,8 @@ public class BuildingQueryHandler {
     private String sql = "";
     private ArrayList<String> duchyList, industryList, qualityList;
 
+    /* Constructor
+     */
     public BuildingQueryHandler(Connection c) {
         super();
         con = c;
@@ -295,6 +297,8 @@ public class BuildingQueryHandler {
         return null;
     }
 
+    /* This function returns all buildings owned by the provided character id.
+     */
     public ArrayList<String[]> retrieveAllBuildingsOwnedByCharacter(int plotid) {
         ArrayList<String[]> results = new ArrayList();
         String[] line;

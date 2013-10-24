@@ -13,7 +13,9 @@ public class LogQueryHandler {
     private Statement stmt = null;
     private ResultSet rs = null;
     private String sql = "";
-
+    
+    /* Constructor
+     */
     public LogQueryHandler(Connection c) {
         super();
         con = c;
@@ -151,6 +153,8 @@ public class LogQueryHandler {
             }
         }
 
+    /* This function returns all log data for a given plot/month.
+     */
     public ArrayList<String[]> getPlotLog(int number, int PlotID) {
 
         ArrayList<String[]> list = new ArrayList();
@@ -178,6 +182,8 @@ public class LogQueryHandler {
         return list;
     }
 
+    /* This function returns all log data for a given character/month.
+     */
     public ArrayList<String[]> getCharacterLog(int number, int CharaterID) {
         ArrayList<String[]> list = new ArrayList();
         String line[];
@@ -203,9 +209,9 @@ public class LogQueryHandler {
         return list;
     }
 
+    /* This function adds log data to a given character.
+     */
     public void CharacterLog(int characterID, String description) {
-
-      //  description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
             sql = "INSERT INTO CharacterLog(CharacterID,CharacterLogDateTime,CharacterLogMessage) VALUES (" + characterID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";
@@ -216,8 +222,9 @@ public class LogQueryHandler {
         }
     }
 
+    /* This function adds log data to a give plot.
+     */
     public void PlotLog(int plotID, String description) {
-       // description = description.replace(".", " ");
         try {
             stmt = con.createStatement();
             sql = "INSERT INTO PlotLog(PlotID,PlotLogDateTime,PlotLogMessage) VALUES (" + plotID + ",CONVERT (datetime, SYSDATETIME()),'" + description + "')";

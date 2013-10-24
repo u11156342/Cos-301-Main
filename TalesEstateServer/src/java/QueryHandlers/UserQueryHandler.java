@@ -15,6 +15,8 @@ public class UserQueryHandler {
     private String sql = "";
     private ArrayList<String> userList;
 
+    /* Constructor
+     */
     public UserQueryHandler(Connection c) {
         super();
         con = c;
@@ -192,6 +194,8 @@ public class UserQueryHandler {
         return -1;
     }
 
+    /* This function sets the character's amount of silver to the value provided.
+     */
     public boolean setCharacterSilver(String characterID, String userID, int silver) {
 
         System.out.println(characterID+" "+userID);
@@ -218,6 +222,8 @@ public class UserQueryHandler {
         return false;
     }
 
+    /* This function takes the character's ID, and returns the character's name.
+     */
     public String getCharacterName(String charID) {
         String result = "";
 

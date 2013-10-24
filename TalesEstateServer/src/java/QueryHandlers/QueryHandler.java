@@ -18,6 +18,8 @@ public class QueryHandler {
     private LogQueryHandler lqh;
     private EventQueryHandler eqh;
 
+    /* Constructor
+     */
     public QueryHandler(int type) {
         db = new DatabaseConnection();
         conEstate = db.openConnectionEstate();
