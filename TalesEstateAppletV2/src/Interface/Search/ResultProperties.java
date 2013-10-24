@@ -55,6 +55,8 @@ public class ResultProperties extends JPanel {
         panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         //panel1.setPreferredSize(new Dimension(600, h));
         add(panel1);
+        
+        
     }
 
     protected JComponent makePanel(String text, int type) {

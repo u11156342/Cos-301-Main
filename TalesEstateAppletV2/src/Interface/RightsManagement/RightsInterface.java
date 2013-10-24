@@ -5,14 +5,12 @@
 package Interface.RightsManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.JViewport;
+import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -136,8 +134,10 @@ public class RightsInterface extends BasePanel {
 
 
         add(scrollText, BorderLayout.CENTER);
-        JButton back = new JButton("Back");
-        back.setPreferredSize(new Dimension(150, 60));
+        JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

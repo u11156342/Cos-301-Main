@@ -59,14 +59,24 @@ public class MainAdminSearchInterface extends JPanel {
         final String[] qualitylist = {"Any", "Poor", "Fine", "Exquisite"};
         final JComboBox quality = new JComboBox(qualitylist);
         final JTextField size = new JTextField();
+
+        charc.setPreferredSize(new Dimension(100, 25));
+        duchy.setPreferredSize(new Dimension(100, 25));
         size.setPreferredSize(new Dimension(100, 25));
         quality.setPreferredSize(new Dimension(100, 25));
 
-        JLabel clabe = new JLabel("Character name");
-        JLabel dlabe = new JLabel("Duchy");
-        JLabel qlabe = new JLabel("Quality");
-        JLabel slabe = new JLabel("Size");
-
+        JButton clabe = new JButton("Character name");
+        clabe.setBorderPainted(false);
+        clabe.setContentAreaFilled(false);
+        JButton dlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(122)));
+        dlabe.setBorderPainted(false);
+        dlabe.setContentAreaFilled(false);
+        JButton qlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(129)));
+        qlabe.setBorderPainted(false);
+        qlabe.setContentAreaFilled(false);
+        JButton slabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(132)));
+        slabe.setBorderPainted(false);
+        slabe.setContentAreaFilled(false);
 
         c.gridy = 0;
         c.gridwidth = 2;
@@ -94,7 +104,7 @@ public class MainAdminSearchInterface extends JPanel {
 
         JButton btn = new JButton(new ImageIcon(tc.ad.ImageAdapter(19)));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-       // btn.setContentAreaFilled(false);
+        // btn.setContentAreaFilled(false);
         btn.addActionListener(new ActionListener() {
 
             @Override

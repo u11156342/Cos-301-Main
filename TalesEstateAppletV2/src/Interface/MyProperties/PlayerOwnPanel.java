@@ -1,18 +1,16 @@
+
 package Interface.MyProperties;
 
 import Interface.TextManage.MainPlayInterface;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import talesestateappletv2.TransferContainer;
 
@@ -46,9 +44,6 @@ public class PlayerOwnPanel extends JPanel {
         setBackground(java.awt.Color.WHITE);
         setLayout(new GridBagLayout());
         setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
-
-
-        //statusArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         statusArea.setEditable(false);
 
 
@@ -118,8 +113,6 @@ public class PlayerOwnPanel extends JPanel {
         statusArea.setContentType("text/html");
         statusArea.setText(text.toString());
 
-
-
         play.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -133,9 +126,6 @@ public class PlayerOwnPanel extends JPanel {
                 card.quality = quality;
                 card.IsOwner = own;
                 card.init(tain, propertyID);
-
-
-
                 tain.cardlayout.show(tain.contentpane, card.getName());
             }
 
@@ -155,8 +145,6 @@ public class PlayerOwnPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
-
-        //statusArea.setPreferredSize(new Dimension(400, 440));
         c.gridx = 0;
         c.gridy = 0;
         c.gridheight = 3;

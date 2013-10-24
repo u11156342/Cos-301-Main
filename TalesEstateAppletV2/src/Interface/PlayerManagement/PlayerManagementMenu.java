@@ -1,17 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.PlayerManagement;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,20 +17,23 @@ import talesestateappletv2.TransferContainer;
  */
 public class PlayerManagementMenu extends JPanel {
 
-    JButton donateGoldToChar = new JButton("Give funds to character");
-    JButton donateGoldToPlayer = new JButton("Give gold to estate");
+    JButton donateGoldToChar;
+    JButton donateGoldToPlayer;
 
     public PlayerManagementMenu(final TransferContainer tc) {
+
+        donateGoldToChar = new JButton("Give funds to character");
+        donateGoldToPlayer = new JButton("Give gold to estate");
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        setBackground(java.awt.Color.getHSBColor(tc.c1[0],tc. c1[1],tc. c1[2]));
-
+        setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         c.gridx = 0;
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 0;
         donateGoldToChar.setPreferredSize(new Dimension(250, 60));
-
         donateGoldToChar.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -47,21 +44,23 @@ public class PlayerManagementMenu extends JPanel {
                 }
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
 
-
                 if (retrieveCharacterIDExtra == null) {
-                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
+                    JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
 
                 if (retrieveCharacterIDExtra.isEmpty()) {
-                     JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
+                    JOptionPane.showMessageDialog(donateGoldToChar, "No characters found");
                     return;
                 }
 
                 String[] characters;
+                String[] correctname;
 
                 characters = new String[retrieveCharacterIDExtra.size()];
+                correctname = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
+                    correctname[i] = retrieveCharacterIDExtra.get(i)[1];
                     StringTokenizer tokens = new StringTokenizer(retrieveCharacterIDExtra.get(i)[1], "&*&");
                     characters[i] = tokens.nextToken();
                 }
@@ -83,17 +82,17 @@ public class PlayerManagementMenu extends JPanel {
                         }
 
                     }
-                    ArrayList<String> amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
+                    ArrayList<String> amount1 = tc.rdb.getCharacterAmounts(tc.rdb.retrieveCharacterName(tc.CharacterID));
+
                     double gold = Integer.parseInt(amount1.get(0)) * 10.0 + Integer.parseInt(amount1.get(1)) + (Integer.parseInt(amount1.get(2)) * 1.0 / 10);
                     String mes = "How much Gold crowns do you wish to give, available Gold crowns " + gold;
-
-                    System.out.println("g " + giver + " r " + reciever);
 
                     try {
                         double amountz = 0;
                         try {
                             amountz = Double.parseDouble(JOptionPane.showInputDialog(mes));
                         } catch (Exception ee) {
+                            JOptionPane.showMessageDialog(donateGoldToChar, "Please enter a valid number");
                             return;
                         }
                         if (amountz == 0) {
@@ -113,7 +112,13 @@ public class PlayerManagementMenu extends JPanel {
 
                             //ok now make other persons more
 
-                            ArrayList<String> amount2 = tc.rdb.getCharacterAmounts(picked);
+                            String corectUserName = "";
+                            for (int i = 0; i < characters.length; i++) {
+                                if (characters[i].contains(picked)) {
+                                    corectUserName = correctname[i];
+                                }
+                            }
+                            ArrayList<String> amount2 = tc.rdb.getCharacterAmounts(corectUserName);
 
                             tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                             tempa = tempa + (int) (amountz * 10);
@@ -122,12 +127,12 @@ public class PlayerManagementMenu extends JPanel {
                             ngold = tempa / 10;
                             tempa = tempa - ngold * 10;
                             nsilver = tempa;
-                            tc.rdb.modifyAmount(picked, nplat, ngold, nsilver);
+                            tc.rdb.modifyAmount(corectUserName, nplat, ngold, nsilver);
 
 
-                            StringTokenizer token=new StringTokenizer(tc.CharacterName,"&*&");
-                            String firstName=token.nextToken();
-                            
+                            StringTokenizer token = new StringTokenizer(tc.CharacterName, "&*&");
+                            String firstName = token.nextToken();
+
                             tc.rdb.LogChar(tc.CharacterID, firstName + "*gave*" + amountz + "*Gold*crowns*to*" + picked);
                             tc.rdb.LogChar(tc.rdb.retrieveCharacterID(picked), "Player*" + firstName + "*gave*you*" + amountz + "*Gold crowns");
 
@@ -149,17 +154,18 @@ public class PlayerManagementMenu extends JPanel {
         c.gridy = 1;
         donateGoldToPlayer.setPreferredSize(new Dimension(250, 60));
         donateGoldToPlayer.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
             }
         });
-        //maby later
-        // add(donateGoldToPlayer, c);
 
-        JButton CharacterLog = new JButton("Character Log");
-        CharacterLog.setPreferredSize(new Dimension(250, 60));
-
+        JButton CharacterLog = new JButton(new ImageIcon(tc.ad.ImageAdapter(121)));
+        CharacterLog.setBorderPainted(false);
+        CharacterLog.setContentAreaFilled(false);
+        CharacterLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
         CharacterLog.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -168,8 +174,6 @@ public class PlayerManagementMenu extends JPanel {
 
             }
         });
-
-
         c.gridx = 0;
         c.gridy = 1;
 

@@ -5,13 +5,11 @@
 package Interface.Admin;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.JViewport;
+import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -24,8 +22,8 @@ public class DetailedStatus extends BasePanel {
     public JTextPane textZone = new JTextPane();
     JButton back = new JButton("back");
 
-    public DetailedStatus(String name,TransferContainer tc) {
-        super(name,tc);
+    public DetailedStatus(String name, TransferContainer tc) {
+        super(name, tc);
     }
 
     public void init(int Pid, final TransferContainer tc) {
@@ -42,8 +40,12 @@ public class DetailedStatus extends BasePanel {
         textZone.setEditable(false);
 
         this.add(stats, BorderLayout.CENTER);
-        back.setPreferredSize(new Dimension(150, 60));
+        back = new JButton(new ImageIcon(tc.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.cardlayout.show(tc.contentpane, tc.Cmanager.AdminSearchInterfaces[tc.Cmanager.currentAdminSearchInterfaceCard].getName());

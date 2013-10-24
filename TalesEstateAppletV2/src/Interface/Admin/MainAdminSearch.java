@@ -29,8 +29,10 @@ public class MainAdminSearch extends BasePanel {
         masi.init(tc);
         add(masi, BorderLayout.CENTER);
 
-        JButton back = new JButton("Back");
-        back.setPreferredSize(new Dimension(150, 60));
+        JButton back = new JButton(new ImageIcon(tc.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(
                 new ActionListener() {
             @Override

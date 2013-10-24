@@ -1,6 +1,7 @@
 package Interface.Admin;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,12 +34,14 @@ public class AdminSearchInterface extends BasePanel {
         PlayerPropertiesAdmin mmenu = new PlayerPropertiesAdmin(t.JFXPANEL_WIDTH_INT - 500, properties.size() * 100, t, properties);
         JScrollPane mainMenuScrollPane = new JScrollPane(mmenu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-        mainMenuScrollPane.getHorizontalScrollBar().setValue(0);
+        mainMenuScrollPane.getVerticalScrollBar().setUnitIncrement(20);
         add(mainMenuScrollPane, BorderLayout.CENTER);
         add(title, BorderLayout.NORTH);
 
-        JButton back = new JButton("Back");
-        back.setPreferredSize(new Dimension(150, 60));
+        JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
 
             @Override

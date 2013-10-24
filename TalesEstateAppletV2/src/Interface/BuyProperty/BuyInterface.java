@@ -1,23 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.BuyProperty;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
+import javax.swing.*;
 import talesestateappletv2.BasePanel;
 import talesestateappletv2.TransferContainer;
 
@@ -30,9 +18,8 @@ public class BuyInterface extends BasePanel {
     TransferContainer tain;
 
     public BuyInterface(String name, TransferContainer tc) {
-        super(name,tc);
+        super(name, tc);
         tain = tc;
-        
     }
 
     public void init() {
@@ -43,13 +30,13 @@ public class BuyInterface extends BasePanel {
         final JScrollPane PicMenuScrollPane = new JScrollPane(picmenu);
         PicMenuScrollPane.setPreferredSize(new Dimension(tain.JFXPANEL_WIDTH_INT * 3 / 4, tain.JFXPANEL_HEIGHT_INT));
         PicMenuScrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-
-
+        setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
         PicMenuScrollPane.getHorizontalScrollBar().setValue(PicMenuScrollPane.getHorizontalScrollBar().getValue() + 500);
         PicMenuScrollPane.getVerticalScrollBar().setValue(PicMenuScrollPane.getVerticalScrollBar().getMaximum() / 4);
 
         MouseListener buyPickClicked;
         buyPickClicked = new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 String duchy = "";
@@ -177,14 +164,13 @@ public class BuyInterface extends BasePanel {
                 if (!"".equals(abby) && !"".equals(duchy)) {
                     picked = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Choose what quality : ", "Chose " + abby + " located in " + duchy, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
                     ArrayList<String[]> result;
-                    if("".equals(picked) || picked==null)
-                    {
+                    if ("".equals(picked) || picked == null) {
                         return;
                     }
                     result = tain.rdb.queryPlotPrice(duchy, picked);
                     int stat;
                     //find out how much cash the dude has
-                    String cname=tain.CharacterName;
+                    String cname = tain.CharacterName;
                     System.out.println(cname);
                     ArrayList<String> characterAmounts = tain.rdb.getCharacterAmounts(tain.CharacterName);
                     //user cash in silver
@@ -195,7 +181,7 @@ public class BuyInterface extends BasePanel {
 
                     if (stat == 0) {
 
-                       // System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
+                        // System.out.println("CASH =" + userCash + " B COST =" + buildingCost);
                         if (userCash >= buildingCost) {
                             int workerMax = 0;
                             double Upkeep = 0;
@@ -243,17 +229,16 @@ public class BuyInterface extends BasePanel {
                             }
                             String plotName = (String) JOptionPane.showInputDialog(PicMenuScrollPane, "Wat is the name of your property?");
 
-                            if("".equals(plotName) || plotName==null)
-                            {
-                                JOptionPane.showMessageDialog(PicMenuScrollPane,"Please chose a name for your estate");
+                            if ("".equals(plotName) || plotName == null) {
+                                JOptionPane.showMessageDialog(PicMenuScrollPane, "Please chose a name for your estate");
                                 return;
                             }
-                        
-                            plotName=plotName.replace(";",".");
-                            plotName=plotName.replace("/",".");
-                            plotName=plotName.replace(" ",".");
+
+                            plotName = plotName.replace(";", ".");
+                            plotName = plotName.replace("/", ".");
+                            plotName = plotName.replace(" ", ".");
                             Upkeep = 0 - ((Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(3)) * 10) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(4))) + (Double.parseDouble(tain.rdb.retrieveMonthlyUpkeep(duchy, picked).get(5)) / 10));
-                            tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby,plotName, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
+                            tain.rdb.addPlotToCharacter(tain.CharacterName, duchy, abby, plotName, picked, 3, groundArray, buildingArray, 0, Upkeep, 0, workerMax);
                             tain.mProp.init();
                             tain.cardlayout.show(tain.contentpane, "MainMenu");
 
@@ -281,10 +266,8 @@ public class BuyInterface extends BasePanel {
             }
         };
 
-
-
-
         PicMenuScrollPane.addMouseMotionListener(new MouseMotionListener() {
+
             int tempx = 0;
             int tempy = 0;
 
@@ -300,7 +283,6 @@ public class BuyInterface extends BasePanel {
             public void mouseMoved(MouseEvent e) {
                 tempx = e.getX();
                 tempy = e.getY();
-
 
                 String duchy = "";
                 String abby = "";
@@ -432,9 +414,12 @@ public class BuyInterface extends BasePanel {
         PicMenuScrollPane.addMouseListener(buyPickClicked);
         add(PicMenuScrollPane, BorderLayout.CENTER);
 
-        JButton back = new JButton("Back");
-        back.setPreferredSize(new Dimension(150, 60));
+        JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, "MainMenu");

@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 public class Picture {
     
     public String picName;
-    public BufferedImage pic;            
+    public BufferedImage pic; 
+    public int id;
     
 }

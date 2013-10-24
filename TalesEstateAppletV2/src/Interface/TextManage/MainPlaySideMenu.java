@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface.TextManage;
 
-import Interface.BuyBuilding.BuildtabPanel;
 import Interface.BuyProperty.Generator;
 import Interface.PlayInterface.PlayInterface;
 import Interface.RightsManagement.RightsInterface;
@@ -74,36 +69,28 @@ public class MainPlaySideMenu extends JPanel {
             add(Report, c);
             c.gridx = 2;
             c.gridy = 2;
-            // c.insets = new Insets(30, 0, 0, 0);
             Deposite.setPreferredSize(new Dimension(150, 53));
             add(Deposite, c);
             c.gridx = 2;
             c.gridy = 3;
-            //  c.insets = new Insets(30, 0, 0, 0);
             Withdraw.setPreferredSize(new Dimension(150, 53));
             add(Withdraw, c);
             c.gridx = 2;
             c.gridy = 4;
-            // c.insets = new Insets(30, 0, 0, 0);
             exspand.setPreferredSize(new Dimension(150, 53));
             add(exspand, c);
             c.gridy = 5;
-            //  c.insets = new Insets(30, 0, 0, 0);
             listBuildings.setPreferredSize(new Dimension(150, 53));
             add(listBuildings, c);
             c.gridy = 6;
-            //  c.insets = new Insets(30, 0, 0, 0);
             addBuildings.setPreferredSize(new Dimension(150, 53));
             add(addBuildings, c);
             c.gridy = 7;
-            //  c.insets = new Insets(30, 0, 0, 0);
             VisualInterface.setPreferredSize(new Dimension(150, 53));
             add(VisualInterface, c);
-
             c.gridy = 8;
             RightsManagement.setPreferredSize(new Dimension(150, 53));
             add(RightsManagement, c);
-
             c.gridy = 9;
             PropertyLog.setPreferredSize(new Dimension(150, 53));
             add(PropertyLog, c);
@@ -140,9 +127,6 @@ public class MainPlaySideMenu extends JPanel {
             if ("1".equals(plotAccess.get(5))) {
                 st = true;
             }
-
-            System.out.println(dep + " " + with + " " + buy + " " + pla + " " + ex + " " + st);
-
             c.gridx = 2;
             c.gridy = 0;
             Report.setPreferredSize(new Dimension(150, 60));
@@ -151,50 +135,41 @@ public class MainPlaySideMenu extends JPanel {
             }
             c.gridx = 2;
             c.gridy = 1;
-            // c.insets = new Insets(30, 0, 0, 0);
             Deposite.setPreferredSize(new Dimension(150, 60));
             if (dep) {
                 add(Deposite, c);
             }
             c.gridx = 2;
             c.gridy = 2;
-            //  c.insets = new Insets(30, 0, 0, 0);
             Withdraw.setPreferredSize(new Dimension(150, 60));
             if (with) {
                 add(Withdraw, c);
             }
             c.gridx = 2;
             c.gridy = 3;
-            // c.insets = new Insets(30, 0, 0, 0);
             exspand.setPreferredSize(new Dimension(150, 60));
             if (ex) {
                 add(exspand, c);
             }
             c.gridy = 4;
-            //  c.insets = new Insets(30, 0, 0, 0);
-
             listBuildings.setPreferredSize(new Dimension(150, 60));
             if (st || buy) {
                 add(listBuildings, c);
             }
             c.gridy = 5;
-            //  c.insets = new Insets(30, 0, 0, 0);
-
             addBuildings.setPreferredSize(new Dimension(150, 60));
             if (buy) {
                 add(addBuildings, c);
             }
             c.gridy = 6;
-            //  c.insets = new Insets(30, 0, 0, 0);
-
             VisualInterface.setPreferredSize(new Dimension(150, 60));
             if (pla) {
                 add(VisualInterface, c);
             }
-
         }
 
         Report.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 textZone.setText(tc.rdb.getStatus(pId));
@@ -202,6 +177,7 @@ public class MainPlaySideMenu extends JPanel {
         });
         Report.doClick();
         Deposite.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -219,7 +195,6 @@ public class MainPlaySideMenu extends JPanel {
                         int tempa = Integer.parseInt(amount2.get(0)) * 100 + Integer.parseInt(amount2.get(1)) * 10 + Integer.parseInt(amount2.get(2));
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
                         //plots gold so it becomes more
-                        // System.out.println(amountz);
                         tempa = tempa + (int) (amountz * 10);
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
@@ -227,7 +202,6 @@ public class MainPlaySideMenu extends JPanel {
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
                         //plot 
-
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
                         amount2 = tc.rdb.getCurrentAmount(pId);
                         System.out.println(Integer.parseInt(amount2.get(0)) + " " + Integer.parseInt(amount2.get(1)) + " " + Integer.parseInt(amount2.get(2)));
@@ -257,6 +231,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         Withdraw.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount1 = tc.rdb.getCharacterAmounts(tc.CharacterName);
@@ -312,6 +287,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         exspand.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -337,18 +313,14 @@ public class MainPlaySideMenu extends JPanel {
 
                     // the amoun the plot will cost
                     int costr = 100 * Integer.parseInt(cost.get(0)[0]) + 10 * Integer.parseInt(cost.get(0)[1]) + Integer.parseInt(cost.get(0)[2]);
-                    System.out.println(tempa + " " + costr);
                     if (tempa >= costr) {
 
                         tempa = tempa - costr;
-
                         int nplat = tempa / 100;
                         tempa = tempa - nplat * 100;
                         int ngold = tempa / 10;
                         tempa = tempa - ngold * 10;
                         int nsilver = tempa;
-
-
 
                         Generator gen = new Generator(3);
 
@@ -356,14 +328,8 @@ public class MainPlaySideMenu extends JPanel {
                         buildings = tc.rdb.convertFromArray(retrievePlotDetails.get(6));
 
                         int old = tiles.length;
-                        System.out.println("SIZE BEFORE EXSPAND " + old);
                         int[][] tilesz = gen.ExspandGenerate(retrievePlotDetails.get(3), picked, size, tiles);
                         size = tilesz.length;
-                        System.out.println("SIZE AFTER EXSPAND " + size);
-
-                        //   if (old != size) {
-                        //      buildings = gen.ArrayCopy(buildings, old, size);
-                        //   }
 
                         int[][] temp = new int[buildings.length][buildings.length];
                         for (int a = 0; a < buildings.length; a++) {
@@ -374,8 +340,6 @@ public class MainPlaySideMenu extends JPanel {
                         for (int a = 0; a < temp.length; a++) {
                             System.arraycopy(temp[a], 0, buildings[a], 0, temp.length);
                         }
-
-
 
                         tc.rdb.expandPlot(pId, picked, tilesz, buildings);
 
@@ -404,27 +368,19 @@ public class MainPlaySideMenu extends JPanel {
                         pc = retrieveMonthlyUpkeep.get(3);
                         String gc = retrieveMonthlyUpkeep.get(4);
                         String sc = retrieveMonthlyUpkeep.get(5);
-
                         Upkeep = Double.parseDouble(retrievePlotDetails.get(8)) - (10 * Double.parseDouble(pc) + Double.parseDouble(gc) + Double.parseDouble(sc) / 10);
 
                         workerMax = workerMax + Integer.parseInt(retrievePlotDetails.get(10));
                         System.out.println(pc + " " + gc + " " + sc + " " + Upkeep);
-                        // modifyPlot(int plotId, String characterName,int plotAmount, String duchyName, int sizeValue,int[][] groundArray, int[][] buildingArray, int happiness, double monthlyIncome,int workersUsed, int workerMax, double exquisiteUsed,int exquisiteMax,double fineUsed,int fineMax,double poorUsed,int poorMax
-                        //tc.rdb.modifyPlot(pId, retrievePlotDetails.get(1), retrievePlotDetails.get(2), retrievePlotDetails.get(3), tilesz.length, tilesz, buildings, Integer.parseInt(retrievePlotDetails.get(7)), Upkeep, Integer.parseInt(retrievePlotDetails.get(9)), workerMax, Double.parseDouble(retrievePlotDetails.get(11)), Integer.parseInt(retrievePlotDetails.get(12)), Double.parseDouble(retrievePlotDetails.get(13)), Integer.parseInt(retrievePlotDetails.get(14)), Double.parseDouble(retrievePlotDetails.get(15)), Integer.parseInt(retrievePlotDetails.get(16)), Double.parseDouble(retrievePlotDetails.get(17)));
                         tc.rdb.DoExspand(pId, Upkeep, workerMax);
 
                         tc.rdb.modifyAmount(pId, nplat, ngold, nsilver);
-
                         tc.rdb.LogPlot(pId, "Player*" + tc.CharacterName.substring(0, tc.CharacterName.indexOf("&*&")) + "*expanded*the*plot*with*a*" + picked + "*acre", tc.CharacterID);
-
                         Report.doClick();
 
                     } else {
                         JOptionPane.showMessageDialog(textZone, "There is not enough funds in the property");
                     }
-
-
-
 
                 }
 
@@ -434,6 +390,7 @@ public class MainPlaySideMenu extends JPanel {
         //use the property to get the info,then list all the buildins that are build on it
 
         listBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -445,7 +402,6 @@ public class MainPlaySideMenu extends JPanel {
 
                 html.append("<html>");
                 html.append("<head>");
-
                 /*
                  * CSS for page
                  */
@@ -537,6 +493,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         Rename.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -547,15 +504,13 @@ public class MainPlaySideMenu extends JPanel {
                     return;
                 }
                 tc.rdb.setPlotName(pId, plotName);
-
-
-
             }
         });
 
 
         final MainPlaySideMenu tr = this;
         addBuildings.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tc.Build.init(pId, duchy_, tr);
@@ -563,6 +518,7 @@ public class MainPlaySideMenu extends JPanel {
             }
         });
         VisualInterface.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -573,6 +529,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         RightsManagement.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 RightsInterface card = tc.Cmanager.getRightsInterfacesCard();
@@ -582,6 +539,7 @@ public class MainPlaySideMenu extends JPanel {
         });
 
         PropertyLog.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -2,14 +2,7 @@ package Interface.BuyBuilding;
 
 import Connections.RestFullDBAdapter;
 import Interface.TextManage.MainPlaySideMenu;
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -40,12 +33,9 @@ public class BuildtabPanel extends BasePanel {
 
     public void init(int pId, String duchy_, MainPlaySideMenu tr) {
 
-
-
         JButton Title = new JButton(new ImageIcon(tain.ad.ImageAdapter(50)));
         Title.setContentAreaFilled(false);
         Title.setBorderPainted(false);
-        //  add(Title, BorderLayout.NORTH);
         PlotID = pId;
         duc = duchy_;
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -57,28 +47,24 @@ public class BuildtabPanel extends BasePanel {
         ArrayList<String[]> Improvements = null;
 
         JComponent panel1 = makeTextPanel("Agricultural", 0, Agricultural, tr);
-
         tabbedPane.addTab("Agricultural", null, panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-
         JComponent panel2 = makeTextPanel("Mining", 1, Mining, tr);
         tabbedPane.addTab("Mining", null, panel2);
-
         JComponent panel3 = makeTextPanel("Manufacturing", 2, Manufacturing, tr);
         tabbedPane.addTab("Manufacturing", null, panel3);
-
         JComponent panel4 = makeTextPanel("Services", 3, Services, tr);
         tabbedPane.addTab("Services", null, panel4);
-
         JComponent panel5 = makeTextPanel("Improvements", 4, Improvements, tr);
         tabbedPane.addTab("Improvements", null, panel5);
 
-
-
         add(tabbedPane, BorderLayout.CENTER);
-        JButton back = new JButton("Back");
-        back.setPreferredSize(new Dimension(150, 60));
+        JButton back = new JButton(new ImageIcon(tain.ad.ImageAdapter(119)));
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 tain.cardlayout.show(tain.contentpane, tain.Cmanager.MainPlayInterfaces[tain.Cmanager.currentMainPlayInterfaceCard].getName());
@@ -91,20 +77,10 @@ public class BuildtabPanel extends BasePanel {
 
     protected JComponent makeTextPanel(String text, int type, ArrayList<String[]> arr, final MainPlaySideMenu tr) {
         JPanel panel = new JPanel(false);
-        //  panel.setLayout(new GridBagLayout());
-        //  GridBagConstraints c2 = new GridBagConstraints();
-
         StringBuilder html = new StringBuilder();
-
         final JTextPane buildingIn = new JTextPane();
-
         panel.setBackground(java.awt.Color.getHSBColor(tain.c1[0], tain.c1[1], tain.c1[2]));
-
         buildingIn.setPreferredSize(new Dimension(500, 300));
-//        c2.gridy = 0;
-//        c2.gridwidth = 5;
-
-
         buildingIn.setContentType("text/html");
 
         String[] buildingsList;
@@ -127,8 +103,6 @@ public class BuildtabPanel extends BasePanel {
                 }
             }
         }
-
-
 
         final JComboBox buildings = new JComboBox(buildingsList);
         result2 = tain.rdb.retrieveBuildingDetailsById(buildingsID[0]);
@@ -189,7 +163,6 @@ public class BuildtabPanel extends BasePanel {
         html.append("<tr><td>Building Size Required : </td><td>").append(result2.get(0)[9]).append("</td></tr>").append("<br>");
         html.append("<tr><td>Building Happiness : </td><td>").append(result2.get(0)[10]).append("</td></tr>").append("<br>");
         html.append("<tr><td>Building Defence Value : </td><td>").append(result2.get(0)[11]).append("</td></tr>").append("<br>");
-
         html.append("</table>");
         html.append("</body>");
         html.append("</html>");
@@ -198,6 +171,7 @@ public class BuildtabPanel extends BasePanel {
         buildingIn.setText(html.toString());
         buildingIn.setEditable(false);
         buildings.addItemListener(new ItemListener() {
+
             @Override
             public void itemStateChanged(ItemEvent e) {
 
@@ -267,32 +241,27 @@ public class BuildtabPanel extends BasePanel {
                 buildingIn.setText(html2.toString());
             }
         });
-//        Object comp = buildings.getUI().getAccessibleChild(buildings, 0);
-//        JPopupMenu popup = (JPopupMenu) comp;
-//        JScrollPane scrollPane = (JScrollPane) popup.getComponent(0);
-//        scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         buildings.setPreferredSize(new Dimension(500, 50));
-        Button bbutton = new Button("Build");
-
-
+        JButton bbutton = new JButton(new ImageIcon(tain.ad.ImageAdapter(115)));
+        bbutton.setContentAreaFilled(false);
+        bbutton.setBorderPainted(false);
+        bbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bbutton.setPreferredSize(new Dimension(150, 60));
 
         bbutton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 int id = buildingsID[buildings.getSelectedIndex()];
-
                 String checkBuildingPrerequisites = tain.rdb.checkBuildingPrerequisites(PlotID, id);
-
                 if (!"".equals(checkBuildingPrerequisites)) {
                     if (checkBuildingPrerequisites.toLowerCase().contains("water")) {
                         tain.rdb.addRequest(PlotID, "Player " + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + " requested that a water tile be build on the estate with the number " + PlotID);
-                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + " a request to have some water on your land has been placed");
+                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + ", a request to have some water on your land has been placed");
                     } else if (checkBuildingPrerequisites.toLowerCase().contains("wild")) {
                         tain.rdb.addRequest(PlotID, "Player " + tain.CharacterName.substring(0, tain.CharacterName.indexOf("&*&")) + " requested that a wild tile be build on the estate with the number " + PlotID);
-                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + " a request to have some animals on your land has been placed");
+                        JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites + ", a request to have some animals on your land has been placed");
                     } else {
                         JOptionPane.showMessageDialog(ContentPane, "Prerequisites not met, requires " + checkBuildingPrerequisites);
                     }

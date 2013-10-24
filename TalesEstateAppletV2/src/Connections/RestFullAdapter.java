@@ -17,7 +17,7 @@ import talesestateappletv2.TransferContainer;
 public class RestFullAdapter {
 
     String serverURL = "216.172.99.153";
-   // String serverURL = "localhost";
+    // String serverURL = "localhost";
     int serverPort = 8080;
     ArrayList<Picture> pics = new ArrayList();
     ArrayList donePics = new ArrayList();
@@ -31,7 +31,14 @@ public class RestFullAdapter {
 
 
         try {
+            synchronized (this) {
+                for (int i = 0; i < pics.size(); i++) {
 
+                    if (pics.get(i).id == id) {
+                        return pics.get(i).pic;
+                    }
+                }
+            }
             System.out.println("getting " + id);
             donePics.add(id);
             URL url = new URL("http://" + serverURL + ":" + serverPort + "/TalesEstateServer/resources/ImageWrapper/getImageByID/" + id);
@@ -40,23 +47,14 @@ public class RestFullAdapter {
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String name = in.readLine();
             name = name.replaceAll(" ", "%20");
-           // System.out.println("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name);
-
+            // System.out.println("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name);
             BufferedImage t;
-            synchronized (this) {
-
-                for (int i = 0; i < pics.size(); i++) {
-
-                    if (pics.get(i).picName.equals(name)) {
-                        return pics.get(i).pic;
-                    }
-                }
-                t = ImageIO.read(new URL("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name));
-                Picture temp = new Picture();
-                temp.pic = t;
-                temp.picName = name;
-                pics.add(temp);
-            }
+            t = ImageIO.read(new URL("http://" + "216.172.99.153" + "/estatesystem/pictures/" + name));
+            Picture temp = new Picture();
+            temp.pic = t;
+            temp.picName = name;
+            temp.id=id;
+            pics.add(temp);
 
             return t;
 

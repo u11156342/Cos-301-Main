@@ -4,18 +4,11 @@
  */
 package Interface.Admin;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Panel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import talesestateappletv2.TransferContainer;
 
 /**
@@ -30,15 +23,36 @@ public class ManageGoldPanel extends Panel {
     JTextField platmod = new JTextField();
     JTextField goldmod = new JTextField();
     JTextField silmod = new JTextField();
-    JLabel l4 = new JLabel("Platinum thrones : ");
-    JLabel l5 = new JLabel("Gold crowns : ");
-    JLabel l6 = new JLabel("Silver shields : ");
+    JButton l4 = new JButton("Platinum thrones : ");
+    JButton l5 = new JButton("Gold crowns : ");
+    JButton l6 = new JButton("Silver shields : ");
     JLabel character = new JLabel("");
     String username;
     boolean found = false;
 
     public ManageGoldPanel(final TransferContainer tc) {
         tain = tc;
+        findPlayer = new JButton(new ImageIcon(tc.ad.ImageAdapter(123)));
+        findPlayer.setContentAreaFilled(false);
+        findPlayer.setBorderPainted(false);
+        findPlayer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        setLayout(new GridBagLayout());
+        //l4 = new JButton(new ImageIcon(tc.ad.ImageAdapter(128)));
+        l4.setContentAreaFilled(false);
+        l4.setBorderPainted(false);
+        l4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // l5 = new JButton(new ImageIcon(tc.ad.ImageAdapter(125)));
+        l5.setContentAreaFilled(false);
+        l5.setBorderPainted(false);
+        l5.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // l6 = new JButton(new ImageIcon(tc.ad.ImageAdapter(131)));
+        l6.setContentAreaFilled(false);
+        l6.setBorderPainted(false);
+        l6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+
+
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -49,8 +63,8 @@ public class ManageGoldPanel extends Panel {
         setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         playername.setPreferredSize(new Dimension(100, 40));
 
-        findPlayer.setPreferredSize(new Dimension(150, 60));
         findPlayer.addActionListener(new ActionListener() {
+
             ArrayList<String> characterAmounts;
             int platAmount = 0;
             int goldAmount = 0;
@@ -65,9 +79,12 @@ public class ManageGoldPanel extends Panel {
                 ArrayList<String[]> retrieveCharacterIDExtra = tc.rdb.retrieveCharacterIDExtra(attempt);
 
                 String[] characters;
+                String[] org;
 
                 characters = new String[retrieveCharacterIDExtra.size()];
+                org = new String[retrieveCharacterIDExtra.size()];
                 for (int i = 0; i < retrieveCharacterIDExtra.size(); i++) {
+                    org[i] = retrieveCharacterIDExtra.get(i)[1];
                     characters[i] = retrieveCharacterIDExtra.get(i)[1].substring(0, retrieveCharacterIDExtra.get(i)[1].indexOf("&*&"));
                 }
 
@@ -82,9 +99,17 @@ public class ManageGoldPanel extends Panel {
                     username = picked;
 
                     try {
-                        characterAmounts = tc.rdb.getCharacterAmounts(picked);
+                        for (int i = 0; i < characters.length; i++) {
+                            if (characters[i].contains(picked)) {
+                                username = org[i];
+
+                            }
+                        }
+
                     } catch (Exception ex) {
                     }
+                    characterAmounts = tc.rdb.getCharacterAmounts(username);
+                    
                     if (characterAmounts != null && !characterAmounts.isEmpty()) {
 
                         //  JOptionPane.showMessageDialog(ref, "Player found");
@@ -153,9 +178,14 @@ public class ManageGoldPanel extends Panel {
 
         add(silmod, c);
 
-        JButton modify = new JButton("Modify");
-        modify.setPreferredSize(new Dimension(150, 60));
+        JButton modify = new JButton(new ImageIcon(tc.ad.ImageAdapter(127)));
+        modify.setContentAreaFilled(false);
+        modify.setBorderPainted(false);
+        modify.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+
         modify.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (!found) {

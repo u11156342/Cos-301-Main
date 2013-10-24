@@ -4,10 +4,7 @@
  */
 package Interface.Admin;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -49,6 +46,12 @@ public class AddEventInterface extends JPanel {
     JLabel l6 = new JLabel("Defense Modifier");
 
     public void init(final TransferContainer tc, final int PID, int CurrentDefence) {
+
+        add = new JButton(new ImageIcon(tc.ad.ImageAdapter(116)));
+        add.setContentAreaFilled(false);
+        add.setBorderPainted(false);
+        add.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         incomemod.setText("0          ");
         platmod.setText("0          ");
         goldmod.setText("0          ");
@@ -76,9 +79,9 @@ public class AddEventInterface extends JPanel {
         JLabel def = new JLabel("Current defence : " + CurrentDefence);
 
         c.gridy = 0;
-        c.gridwidth=2;
+        c.gridwidth = 2;
         add(def, c);
-        c.gridwidth=2;
+        c.gridwidth = 2;
         c.gridy = 1;
         add(des, c);
         //description.setPreferredSize(new Dimension(500, 300));
@@ -105,6 +108,7 @@ public class AddEventInterface extends JPanel {
         c.gridy = 8;
         c.gridwidth = 2;
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -194,7 +198,7 @@ public class AddEventInterface extends JPanel {
 
 
         add.setPreferredSize(new Dimension(150, 60));
-        c.gridwidth=2;
+        c.gridwidth = 2;
         add(add, c);
 
 

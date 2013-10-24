@@ -66,10 +66,18 @@ public class MainSearchInterface extends JPanel {
         size.setPreferredSize(new Dimension(100, 25));
         quality.setPreferredSize(new Dimension(100, 25));
 
-        JLabel clabe = new JLabel("Character name:   ");
-        JLabel dlabe = new JLabel("Duchy:");
-        JLabel qlabe = new JLabel("Quality:");
-        JLabel slabe = new JLabel("Size:");
+        JButton clabe = new JButton("Character name");
+        clabe.setBorderPainted(false);
+        clabe.setContentAreaFilled(false);
+        JButton dlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(122)));
+        dlabe.setBorderPainted(false);
+        dlabe.setContentAreaFilled(false);
+        JButton qlabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(129)));
+        qlabe.setBorderPainted(false);
+        qlabe.setContentAreaFilled(false);
+        JButton slabe = new JButton(new ImageIcon(tc.ad.ImageAdapter(132)));
+        slabe.setBorderPainted(false);
+        slabe.setContentAreaFilled(false);
 
 
         c.gridy = 0;
@@ -135,7 +143,7 @@ public class MainSearchInterface extends JPanel {
 
                 ArrayList<String[]> result = wrap.searchPlotBy(selectedChar, selectedDuchy, s, selectedQuality);
 
-                System.out.println("SIZE "+result.size());
+                System.out.println("SIZE " + result.size());
                 if (result == null) {
                     return;
                 }

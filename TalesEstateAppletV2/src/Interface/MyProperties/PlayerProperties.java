@@ -1,9 +1,6 @@
 package Interface.MyProperties;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -22,17 +19,12 @@ public class PlayerProperties extends JPanel {
 
         ArrayList<String[]> result = tc.rdb.retrievePlotsOwnedByCharacter(tc.CharacterID);
         ArrayList<String[]> AllPlotsIHaveAccess = tc.rdb.AllPlotsIHaveAccess(tc.CharacterID);
-
-        // this.setPreferredSize(new Dimension(tc.JFXPANEL_WIDTH_INT,300*result.size()));
-
-        System.out.println("retrieving plots " + (result.size() + AllPlotsIHaveAccess.size()));
         playersCurrentProperties = new PlayerOwnPanel[(result.size() + AllPlotsIHaveAccess.size())];
         int amount = result.size() + AllPlotsIHaveAccess.size();
         h = amount * 600;
 
         for (int a = 0; a < result.size(); a++) {
             playersCurrentProperties[a] = new PlayerOwnPanel(tc);
-            //  playersCurrentProperties[a].setPreferredSize(new Dimension(300, 500));
             playersCurrentProperties[a].propertyID = Integer.parseInt(result.get(a)[0]);
             playersCurrentProperties[a].duchy = result.get(a)[3];
             playersCurrentProperties[a].amount = tc.rdb.getCurrentAmount(playersCurrentProperties[a].propertyID);
@@ -51,7 +43,6 @@ public class PlayerProperties extends JPanel {
             list.add(t3);
 
             playersCurrentProperties[a].quality = list;
-            System.out.println(playersCurrentProperties[a].amount);
             playersCurrentProperties[a].size = Integer.parseInt(result.get(a)[4]);
             playersCurrentProperties[a].tiles = tc.rdb.convertFromArray(result.get(a)[5]);
             playersCurrentProperties[a].buildings = tc.rdb.convertFromArray(result.get(a)[6]);
@@ -66,11 +57,7 @@ public class PlayerProperties extends JPanel {
         for (int i = result.size(); i < (result.size() + AllPlotsIHaveAccess.size()); i++) {
             System.out.println("adding right prop");
             playersCurrentProperties[i] = new PlayerOwnPanel(tc);
-
-            //  playersCurrentProperties[i].setPreferredSize(new Dimension(300, 510));
-
             ArrayList<String> retrievePlotDetails = tc.rdb.retrievePlotDetails(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
-
             playersCurrentProperties[i].propertyID = Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]);
             System.out.println(Integer.parseInt(AllPlotsIHaveAccess.get(i - result.size())[0]));
             playersCurrentProperties[i].duchy = retrievePlotDetails.get(3);
@@ -102,7 +89,6 @@ public class PlayerProperties extends JPanel {
 
 
         JComponent panel1 = makePanel("Panel #1", 1, result.size());
-        //  panel1.setPreferredSize(new Dimension(w, h));
         panel1.setBackground(java.awt.Color.getHSBColor(tc.c1[0], tc.c1[1], tc.c1[2]));
         add(panel1);
         
@@ -119,7 +105,6 @@ public class PlayerProperties extends JPanel {
                     playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.BLUE));
                     panel.add(playersCurrentProperties[a]);
                 } else {
-                    //     playersCurrentProperties[a].setBorder(BorderFactory.createLineBorder(Color.black));
                     panel.add(playersCurrentProperties[a]);
                 }
             }
