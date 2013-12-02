@@ -16,7 +16,7 @@ public class DatabaseConnection {
     private Driver d = null;
     private String connectionURL = "";
     private BufferedReader reader;
-    private String ServerIP;
+    private String ServerIP="localhost";
 
     public DatabaseConnection() {
         try {
