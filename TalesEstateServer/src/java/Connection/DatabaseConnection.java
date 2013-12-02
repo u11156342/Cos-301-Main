@@ -51,7 +51,7 @@ public class DatabaseConnection {
     public Connection openConnectionEstate() {
 
         try {
-            connectionURL = "jdbc:sqlserver://" + ServerIP + ":1433;databaseName=TalesEstate;integratedSecurity=true";
+            connectionURL = "jdbc:sqlserver://" + ServerIP + ":1433;databaseName=MarieEstate;integratedSecurity=true";
             d = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             con = d.connect(connectionURL, new Properties());
         } catch (Exception e) {
